@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerceptFolio: NorthBridge's Quantitative Trading Terminal</title>
+<meta name="description" content="PerceptFolio is the NorthBridge quantitative trading terminal: systematic strategy research, vectorised backtesting with real transaction costs, live signal monitoring and portfolio risk analytics in one workspace. Research software, not investment advice.">
+<meta name="keywords" content="quant trading terminal, quantitative research platform, backtesting software, systematic trading, portfolio risk analytics, signal monitoring, PerceptFolio, terminal de trading cuantitativo, backtesting">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PerceptFolio",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "https://perceptfolio.com",
+  "description": "PerceptFolio is the quantitative trading terminal built by NorthBridge: systematic strategy research, vectorised backtesting with transaction costs and slippage, live signal monitoring, and portfolio risk and drawdown analytics in a single workspace. Research and analytics software; it does not provide investment advice or execute trades.",
+  "publisher": {"@type": "ProfessionalService", "name": "NorthBridge", "email": "northbridgeai1@gmail.com", "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressCountry": "EC"}},
+  "availableLanguage": ["English", "Spanish"],
+  "disambiguatingDescription": "PerceptFolio is research and analytics software. It is not a broker, does not execute trades, and does not provide personalised investment advice."
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  :root{--mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+        --pf:#4ea8ff; --pf-soft:#a8ccf5; --pf-deep:#0b1017;
+        --up:#25c07f; --down:#e5644f;}
+
+  /* ---- hero ---- */
+  .pf-hero{position:relative;background:var(--pf-deep);color:#fff;padding:78px 0 84px;overflow:hidden}
+  .pf-hero canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+  .pf-hero .wrap{position:relative;z-index:2}
+  .pf-hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(760px 420px at 78% 18%, rgba(78,168,255,.16), transparent 62%),
+               linear-gradient(180deg, transparent 55%, var(--pf-deep) 100%);
+  }
+  .pf-kicker{
+    font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--pf-soft);margin-bottom:20px;display:flex;align-items:center;gap:12px;
+  }
+  .pf-kicker::before{content:"";width:34px;height:1px;background:var(--pf)}
+  .pf-hero h1{max-width:20ch}
+  .pf-hero .lede{margin:26px 0 0;font-size:1.14rem;color:rgba(255,255,255,.76);max-width:58ch}
+  .pf-domain{
+    display:inline-flex;align-items:center;gap:9px;margin-top:26px;
+    font-family:var(--mono);font-size:.9rem;font-weight:500;color:var(--pf-soft);
+    border:1px solid rgba(78,168,255,.32);border-radius:var(--r-full);padding:7px 16px;
+    background:rgba(78,168,255,.07);text-decoration:none;
+    transition:border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease-out);
+  }
+  .pf-domain:hover{border-color:var(--pf);color:#fff;transform:translateY(-1px)}
+  .pf-domain .pf-dot{width:7px;height:7px;border-radius:50%;background:var(--up);box-shadow:0 0 0 3px rgba(37,192,127,.2)}
+  @media (prefers-reduced-motion: no-preference){
+    .pf-domain .pf-dot{animation:pf-pulse 2.4s var(--ease) infinite}
+  }
+  @keyframes pf-pulse{0%,100%{box-shadow:0 0 0 3px rgba(37,192,127,.2)}50%{box-shadow:0 0 0 7px rgba(37,192,127,0)}}
+  .pf-hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn.pf{background:var(--pf);border-color:var(--pf);color:#04101f}
+  .btn.pf:hover{background:#6db8ff;box-shadow:0 10px 24px -10px rgba(78,168,255,.6)}
+
+  /* ---- stat strip ---- */
+  .pf-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);overflow:hidden;margin-top:48px;
+  }
+  .pf-stat{background:rgba(255,255,255,.03);padding:20px 22px}
+  .pf-stat b{display:block;font-family:var(--mono);font-size:1.55rem;font-weight:700;color:#fff;letter-spacing:-.02em}
+  .pf-stat > span{display:block;font-size:.78rem;color:rgba(255,255,255,.55);margin-top:5px;line-height:1.4}
+  @media(max-width:760px){.pf-stats{grid-template-columns:1fr 1fr}}
+
+  /* ---- feature cards ---- */
+  .pf-what{padding:var(--s-sec) 0;background:var(--paper)}
+  .pf-feat{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:var(--s-xl);
+    transition:transform .28s var(--ease-out),box-shadow .28s var(--ease),border-color .28s var(--ease);
+  }
+  .pf-feat:hover{transform:translateY(-4px);box-shadow:var(--e-3);border-color:var(--pf-soft)}
+  .pf-feat-ico{
+    width:40px;height:40px;border-radius:var(--r-md);display:grid;place-items:center;
+    background:rgba(78,168,255,.12);color:var(--pf);margin-bottom:var(--s-md);
+  }
+  .pf-feat-ico svg{width:20px;height:20px}
+  .pf-feat h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .pf-feat p{font-size:.92rem;color:var(--ink-soft);line-height:1.6}
+
+  /* ---- market ---- */
+  .pf-market{padding:var(--s-sec) 0 var(--s-sec-lg);background:var(--paper-dark)}
+  .pf-market-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-lg);flex-wrap:wrap;margin-bottom:var(--s-lg)}
+  .pf-tabs{
+    display:inline-flex;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-full);padding:4px;gap:2px;position:relative;flex-wrap:wrap;
+  }
+  .nb-tab{
+    font:inherit;font-size:.85rem;font-weight:650;cursor:pointer;border:0;background:transparent;
+    color:var(--ink-soft);padding:8px 17px;border-radius:var(--r-full);white-space:nowrap;
+    transition:color .2s var(--ease),background .2s var(--ease);
+  }
+  .nb-tab:hover{color:var(--ink)}
+  .nb-tab[aria-selected="true"]{background:var(--navy);color:var(--paper)}
+  html[data-theme="dark"] .nb-tab[aria-selected="true"]{background:var(--pf);color:#04101f}
+
+  .pf-notice{
+    display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);color:var(--warn);
+    border:1px solid rgba(154,100,0,.3);border-radius:var(--r-lg);padding:13px 16px;
+    font-size:.83rem;line-height:1.55;margin-bottom:var(--s-md);
+  }
+  html[data-theme="dark"] .pf-notice{background:rgba(154,100,0,.16);color:#e6b45f}
+  .pf-notice svg{flex:0 0 16px;width:16px;height:16px;margin-top:2px}
+  .pf-notice strong{font-weight:800}
+
+  .pf-table-wrap{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+  }
+  table.pf-table{width:100%;border-collapse:collapse;min-width:620px}
+  .pf-table th{
+    text-align:left;font-size:var(--t-micro-up);font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-soft);padding:14px 18px;
+    border-bottom:1px solid var(--line);white-space:nowrap;background:var(--paper-dark);
+  }
+  .pf-table th.num,.pf-table td.num{text-align:right}
+  .pf-table td{padding:14px 18px;border-bottom:1px solid var(--line);font-size:.93rem;vertical-align:middle}
+  .pf-table tbody tr{transition:background .18s var(--ease)}
+  .pf-table tbody tr:hover{background:var(--paper-dark)}
+  .pf-table tbody tr:last-child td{border-bottom:0}
+  .pf-rank{font-family:var(--mono);font-size:.82rem;color:var(--ink-soft);width:38px}
+  .pf-tick{font-family:var(--mono);font-weight:700;color:var(--navy);letter-spacing:-.02em}
+  .pf-name{display:block;font-size:.8rem;color:var(--ink-soft);font-weight:400;margin-top:1px}
+  .pf-sector{font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+  .pf-ret{font-family:var(--mono);font-weight:700;font-size:.95rem;white-space:nowrap}
+  .pf-ret.up{color:var(--up)} .pf-ret.down{color:var(--down)}
+  .pf-spark{width:88px;height:26px;display:block;margin-left:auto}
+  .pf-spark path{fill:none;stroke:var(--up);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  @media (prefers-reduced-motion: no-preference){
+    .pf-spark path{stroke-dasharray:220;stroke-dashoffset:220;animation:pf-draw .85s var(--ease-out) forwards}
+  }
+  @keyframes pf-draw{to{stroke-dashoffset:0}}
+  @media(max-width:640px){
+    .pf-sector,.pf-table th.pf-sector-h{display:none}
+    .pf-spark{width:60px}
+  }
+  /* rows fade in as they replace the skeleton */
+  .pf-table tbody tr[data-in]{animation:pf-row .34s var(--ease-out) backwards}
+  .pf-table tbody tr[data-in="0"]{animation-delay:0s}
+  .pf-table tbody tr[data-in="1"]{animation-delay:.04s}
+  .pf-table tbody tr[data-in="2"]{animation-delay:.08s}
+  .pf-table tbody tr[data-in="3"]{animation-delay:.12s}
+  .pf-table tbody tr[data-in="4"]{animation-delay:.16s}
+  .pf-table tbody tr[data-in="5"]{animation-delay:.20s}
+  .pf-table tbody tr[data-in="6"]{animation-delay:.24s}
+  .pf-table tbody tr[data-in="7"]{animation-delay:.28s}
+  @keyframes pf-row{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .pf-disclaimer{
+    margin-top:var(--s-md);font-size:.8rem;color:var(--ink-soft);line-height:1.6;
+    border-left:3px solid var(--line);padding-left:14px;max-width:76ch;
+  }
+  .pf-disclaimer strong{color:var(--ink)}
+
+  /* ---- who ---- */
+  .pf-who{padding:var(--s-sec) 0;background:var(--paper)}
+  .pf-list{list-style:none;display:grid;gap:var(--s-sm);margin-top:var(--s-lg)}
+  .pf-list li{position:relative;padding-left:30px;color:var(--ink-soft);font-size:.97rem;line-height:1.6}
+  .pf-list li::before{
+    content:"";position:absolute;left:2px;top:9px;width:13px;height:8px;
+    border-left:2.4px solid var(--pf);border-bottom:2.4px solid var(--pf);transform:rotate(-45deg);
+  }
+  .pf-list li strong{color:var(--ink)}
+
+  /* ---- cta ---- */
+  .pf-cta{padding:var(--s-sec) 0;background:var(--pf-deep);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .pf-cta::after{
+    content:"";position:absolute;inset:-30%;pointer-events:none;
+    background:radial-gradient(620px 340px at 30% 40%, rgba(78,168,255,.16), transparent 60%);
+  }
+  .pf-cta .wrap{position:relative;z-index:2}
+  .pf-cta h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:600;margin-bottom:14px;color:#fff;max-width:22ch;margin-inline:auto}
+  .pf-cta p{color:rgba(255,255,255,.72);max-width:54ch;margin:0 auto var(--s-xl)}
+  .pf-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+</style>
+<!-- nb-shared-layer -->
+<meta name="theme-color" content="#fbfaf6">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<link rel="stylesheet" href="nb.css">
+<script>
+/* Theme applied before first paint so dark-mode visitors never see a white flash. */
+(function(){try{var s=localStorage.getItem('nb-theme');
+var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+document.documentElement.setAttribute('data-theme',m);
+if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
+}catch(e){}})();
+</script>
+<script defer src="search-index.js"></script>
+<script defer src="nb.js"></script>
+</head>
+<body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="NorthBridge home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="nbg" x1="8" y1="52" x2="56" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#c1572f"/>
+            <stop offset=".55" stop-color="#1f9e8c"/>
+            <stop offset="1" stop-color="#25d193"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 10 C34.5 22 42 29.5 54 32 C42 34.5 34.5 42 32 54 C29.5 42 22 34.5 10 32 C22 29.5 29.5 22 32 10 Z" fill="url(#nbg)"/>
+        <circle cx="32" cy="8" r="6" fill="url(#nbg)"/>
+        <circle cx="32" cy="56" r="6" fill="url(#nbg)"/>
+        <circle cx="8" cy="32" r="6" fill="url(#nbg)"/>
+        <circle cx="56" cy="32" r="6" fill="url(#nbg)"/>
+        <path d="M32 20 L35 30 L32 44 L29 30 Z" fill="#1a1a1a" opacity=".85"/>
+      </svg>
+      <span class="brand-name">North<br>bridge</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+      </div>
+      <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
+      <a class="btn" href="contact.html?branch=perceptfolio">
+        <span class="en">Contact us</span><span class="es">Contáctanos</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ======= HERO ======= -->
+<section class="pf-hero">
+  <canvas id="pfCanvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">← NorthBridge</a></p>
+    <p class="pf-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></p>
+    <h1>
+      <span class="en">PerceptFolio turns a hunch into a tested strategy.</span>
+      <span class="es">PerceptFolio convierte una corazonada en una estrategia probada.</span>
+    </h1>
+    <p class="lede">
+      <span class="en">The NorthBridge quant terminal. Research an idea, backtest it against real transaction costs, watch its signals live, and see exactly how much risk it is taking, in one workspace instead of six spreadsheets.</span>
+      <span class="es">La terminal cuantitativa de NorthBridge. Investiga una idea, pruébala contra costos de transacción reales, observa sus señales en vivo, y ve exactamente cuánto riesgo está tomando, en un solo lugar en vez de seis hojas de cálculo.</span>
+    </p>
+    <a class="pf-domain" href="https://perceptfolio.com" rel="noopener">
+      <span class="pf-dot" aria-hidden="true"></span>perceptfolio.com
+    </a>
+
+    <div class="pf-hero-cta">
+      <a class="btn pf big" href="https://perceptfolio.com" rel="noopener">
+        <span class="en">Open the terminal</span><span class="es">Abrir la terminal</span>
+      </a>
+      <a class="btn big ghost" href="contact.html?branch=perceptfolio">
+        <span class="en">Talk to the team</span><span class="es">Habla con el equipo</span>
+      </a>
+    </div>
+
+    <div class="pf-stats">
+      <div class="pf-stat">
+        <b>1</b>
+        <span><span class="en">Workspace instead of six spreadsheets</span><span class="es">Un espacio en vez de seis hojas de cálculo</span></span>
+      </div>
+      <div class="pf-stat">
+        <b>0</b>
+        <span><span class="en">Trades executed — research only, never a broker</span><span class="es">Órdenes ejecutadas: solo investigación, nunca un bróker</span></span>
+      </div>
+      <div class="pf-stat">
+        <b>2</b>
+        <span><span class="en">Languages: English and Spanish</span><span class="es">Idiomas: inglés y español</span></span>
+      </div>
+      <div class="pf-stat">
+        <b>&lt;1<span style="font-size:1rem">d</span></b>
+        <span><span class="en">Reply time on any question</span><span class="es">Tiempo de respuesta a cualquier pregunta</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= WHAT IT DOES ======= -->
+<section class="pf-what" id="terminal">
+  <div class="wrap">
+    <p class="step-label rv"><span class="en">Inside the terminal</span><span class="es">Dentro de la terminal</span></p>
+    <h2 class="h2 rv">
+      <span class="en">Four things, done properly, instead of forty done roughly.</span>
+      <span class="es">Cuatro cosas, bien hechas, en vez de cuarenta a medias.</span>
+    </h2>
+    <p class="sub rv" style="margin-bottom:var(--s-2xl)">
+      <span class="en">PerceptFolio is research and analytics software. It does not place orders, hold your money, or tell you what to buy.</span>
+      <span class="es">PerceptFolio es software de investigación y analítica. No coloca órdenes, no guarda tu dinero, y no te dice qué comprar.</span>
+    </p>
+
+    <div class="nb-grid nb-grid--2">
+      <div class="pf-feat rv">
+        <div class="pf-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 3.5-4.5 3 3L20 6"/></svg></div>
+        <h3><span class="en">Strategy research</span><span class="es">Investigación de estrategias</span></h3>
+        <p>
+          <span class="en">Build a rule from factors, price action or your own data, and see how it would have behaved. Every assumption is written down and re-runnable, so a result you got in March still reproduces in November.</span>
+          <span class="es">Construye una regla a partir de factores, movimientos de precio o tus propios datos, y observa cómo se habría comportado. Cada supuesto queda escrito y se puede volver a ejecutar, así que un resultado de marzo sigue reproduciéndose en noviembre.</span>
+        </p>
+      </div>
+      <div class="pf-feat rv d1">
+        <div class="pf-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><rect x="7" y="7" width="10" height="6" rx="1.5"/><path d="M4.5 10h2.5M17 10h2.5"/></svg></div>
+        <h3><span class="en">Honest backtesting</span><span class="es">Backtesting honesto</span></h3>
+        <p>
+          <span class="en">Commissions, slippage and spread are in the model by default, not bolted on afterwards. A backtest that ignores costs is a marketing chart, and it is the fastest way to lose real money.</span>
+          <span class="es">Comisiones, slippage y spread están en el modelo por defecto, no añadidos después. Un backtest que ignora los costos es un gráfico de marketing, y es la forma más rápida de perder dinero real.</span>
+        </p>
+      </div>
+      <div class="pf-feat rv d2">
+        <div class="pf-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 5 12L17 12h4"/></svg></div>
+        <h3><span class="en">Live signal monitoring</span><span class="es">Monitoreo de señales en vivo</span></h3>
+        <p>
+          <span class="en">Once a strategy is defined, the terminal watches it and tells you when it fires, when it goes quiet, and when it starts behaving unlike its own backtest. That last one is the alert that matters.</span>
+          <span class="es">Una vez definida una estrategia, la terminal la vigila y te avisa cuándo se activa, cuándo se queda en silencio, y cuándo empieza a comportarse distinto a su propio backtest. Esa última alerta es la que importa.</span>
+        </p>
+      </div>
+      <div class="pf-feat rv d3">
+        <div class="pf-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 0-9-9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <h3><span class="en">Risk and drawdown analytics</span><span class="es">Analítica de riesgo y drawdown</span></h3>
+        <p>
+          <span class="en">Exposure, concentration, worst drawdown and how long recovery took. The return number is the easy half; this is the half that decides whether you can actually hold the position.</span>
+          <span class="es">Exposición, concentración, peor drawdown y cuánto tardó la recuperación. El número de retorno es la mitad fácil; esta es la mitad que decide si de verdad puedes sostener la posición.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MARKET ======= -->
+<section class="pf-market" id="market">
+  <div class="wrap">
+    <div class="pf-market-head">
+      <div>
+        <p class="step-label"><span class="en">Market</span><span class="es">Mercado</span></p>
+        <h2 class="h2" style="margin-bottom:6px">
+          <span class="en">Who actually led, and over what stretch.</span>
+          <span class="es">Quién realmente lideró, y en qué periodo.</span>
+        </h2>
+        <p class="nb-meta">
+          <span class="en">Top performers by total return. Ranked within PerceptFolio's tracked universe of large-cap US listings.</span>
+          <span class="es">Mejores rendimientos por retorno total. Ordenados dentro del universo de grandes capitalizaciones de EE. UU. que sigue PerceptFolio.</span>
+        </p>
+      </div>
+      <div class="pf-tabs" role="tablist" aria-label="Period">
+        <button class="nb-tab" role="tab" id="tab-1m" aria-controls="panel-market" aria-selected="true"  data-period="1m"><span class="en">Last month</span><span class="es">Último mes</span></button>
+        <button class="nb-tab" role="tab" id="tab-1y" aria-controls="panel-market" aria-selected="false" data-period="1y"><span class="en">Last year</span><span class="es">Último año</span></button>
+        <button class="nb-tab" role="tab" id="tab-5y" aria-controls="panel-market" aria-selected="false" data-period="5y"><span class="en">Last 5 years</span><span class="es">Últimos 5 años</span></button>
+      </div>
+    </div>
+
+    <!-- Shown only while the table is running on the bundled sample payload. -->
+    <div class="pf-notice" id="pfSample">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 8.5v5M12 17h.01"/><circle cx="12" cy="12" r="9.2"/></svg>
+      <span>
+        <span class="en"><strong>Sample data.</strong> These are illustrative figures showing the shape of the table, not real market returns. Connect the PerceptFolio feed (one line in <code>perceptfolio.html</code>) and this replaces itself with live rankings.</span>
+        <span class="es"><strong>Datos de ejemplo.</strong> Estas cifras son ilustrativas y muestran la forma de la tabla; no son retornos reales del mercado. Conecta el feed de PerceptFolio (una línea en <code>perceptfolio.html</code>) y esto se reemplaza con rankings en vivo.</span>
+      </span>
+    </div>
+
+    <div class="pf-table-wrap" id="panel-market" role="tabpanel" aria-labelledby="tab-1m">
+      <table class="pf-table">
+        <thead>
+          <tr>
+            <th class="pf-rank">#</th>
+            <th><span class="en">Company</span><span class="es">Empresa</span></th>
+            <th class="pf-sector-h"><span class="en">Sector</span><span class="es">Sector</span></th>
+            <th class="num"><span class="en">Total return</span><span class="es">Retorno total</span></th>
+            <th class="num"><span class="en">Trend</span><span class="es">Tendencia</span></th>
+          </tr>
+        </thead>
+        <!-- Ships with skeleton rows already in the HTML: the table has its
+             final height from the first paint, so nothing jumps and there is
+             never an empty panel or a spinner. -->
+        <tbody id="pfBody">
+          <tr><td class="pf-rank">1</td><td><span class="nb-sk" style="width:120px;height:14px"></span><span class="nb-sk" style="width:86px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:70px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:56px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">2</td><td><span class="nb-sk" style="width:104px;height:14px"></span><span class="nb-sk" style="width:96px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:64px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:52px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">3</td><td><span class="nb-sk" style="width:132px;height:14px"></span><span class="nb-sk" style="width:78px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:74px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:58px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">4</td><td><span class="nb-sk" style="width:112px;height:14px"></span><span class="nb-sk" style="width:90px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:60px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:50px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">5</td><td><span class="nb-sk" style="width:124px;height:14px"></span><span class="nb-sk" style="width:82px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:68px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:54px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">6</td><td><span class="nb-sk" style="width:108px;height:14px"></span><span class="nb-sk" style="width:94px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:72px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:56px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">7</td><td><span class="nb-sk" style="width:118px;height:14px"></span><span class="nb-sk" style="width:88px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:66px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:52px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+          <tr><td class="pf-rank">8</td><td><span class="nb-sk" style="width:128px;height:14px"></span><span class="nb-sk" style="width:80px;height:10px;margin-top:6px"></span></td><td class="pf-sector"><span class="nb-sk" style="width:70px;height:11px"></span></td><td class="num"><span class="nb-sk" style="width:58px;height:14px;margin-left:auto"></span></td><td class="num"><span class="nb-sk" style="width:88px;height:22px;margin-left:auto"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="pf-disclaimer">
+      <span class="en"><strong>Past performance does not predict future returns.</strong> This table is a factual ranking of historical total return over a fixed window, published for research context only. It is not a recommendation, not a solicitation, and not personalised investment advice. PerceptFolio is research software: it does not execute trades and does not hold client funds. Figures last refreshed <span class="pf-updated">—</span>.</span>
+      <span class="es"><strong>El rendimiento pasado no predice retornos futuros.</strong> Esta tabla es un ranking factual de retorno total histórico en una ventana fija, publicado solo como contexto de investigación. No es una recomendación, ni una oferta, ni asesoría de inversión personalizada. PerceptFolio es software de investigación: no ejecuta órdenes ni custodia fondos de clientes. Cifras actualizadas por última vez el <span class="pf-updated">—</span>.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======= WHO IT'S FOR ======= -->
+<section class="pf-who">
+  <div class="wrap">
+    <p class="step-label rv"><span class="en">Who it's for</span><span class="es">Para quién es</span></p>
+    <h2 class="h2 rv">
+      <span class="en">Built for people who want the evidence before the position.</span>
+      <span class="es">Hecho para quien quiere la evidencia antes de la posición.</span>
+    </h2>
+    <ul class="pf-list rv">
+      <li><span class="en"><strong>Systematic traders</strong> who are tired of a backtest in one notebook, a risk model in another, and monitoring in a group chat.</span><span class="es"><strong>Traders sistemáticos</strong> cansados de tener el backtest en un cuaderno, el modelo de riesgo en otro, y el monitoreo en un chat grupal.</span></li>
+      <li><span class="en"><strong>Small funds and family offices</strong> that need reproducible research they can hand to a committee, an auditor, or their future selves.</span><span class="es"><strong>Fondos pequeños y family offices</strong> que necesitan investigación reproducible para entregar a un comité, a un auditor, o a sí mismos en el futuro.</span></li>
+      <li><span class="en"><strong>Analysts</strong> who can already reason about markets but do not want to maintain a data pipeline to prove it.</span><span class="es"><strong>Analistas</strong> que ya saben razonar sobre mercados pero no quieren mantener un pipeline de datos para demostrarlo.</span></li>
+      <li><span class="en"><strong>NorthBridge clients</strong> whose automation work reaches into pricing, treasury or exposure, and who need the numbers to hold up.</span><span class="es"><strong>Clientes de NorthBridge</strong> cuya automatización toca precios, tesorería o exposición, y necesitan que los números resistan.</span></li>
+    </ul>
+    <p class="nb-meta" style="margin-top:var(--s-xl);max-width:64ch">
+      <span class="en">Not sure it fits? Say what you are trying to test and we will tell you honestly whether the terminal helps, or whether a spreadsheet is still the right answer.</span>
+      <span class="es">¿No sabes si te sirve? Cuéntanos qué quieres probar y te diremos honestamente si la terminal ayuda, o si una hoja de cálculo sigue siendo la respuesta correcta.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======= CTA ======= -->
+<section class="pf-cta">
+  <div class="wrap">
+    <h2>
+      <span class="en">Bring the idea. We'll help you find out if it survives contact with the data.</span>
+      <span class="es">Trae la idea. Te ayudamos a saber si sobrevive el contacto con los datos.</span>
+    </h2>
+    <p>
+      <span class="en">Tell us what you're trying to test and in what market. You get a straight answer within one business day, including "this doesn't need us" when that's the truth.</span>
+      <span class="es">Cuéntanos qué quieres probar y en qué mercado. Recibes una respuesta directa en un día hábil, incluida "esto no nos necesita" cuando esa sea la verdad.</span>
+    </p>
+    <div class="pf-cta-row">
+      <a class="btn pf big" href="contact.html?branch=perceptfolio">
+        <span class="en">Contact PerceptFolio</span><span class="es">Contactar a PerceptFolio</span>
+      </a>
+      <a class="btn big ghost" href="https://perceptfolio.com" rel="noopener">
+        <span class="en">Visit perceptfolio.com</span><span class="es">Visitar perceptfolio.com</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="nb-foot-grid">
+      <div class="nb-foot-col">
+        <h4>NorthBridge</h4>
+        <p class="nb-foot-blurb">
+          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+        </p>
+        <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
+          <button data-copy="northbridgeai1@gmail.com" data-copy-label="Copy"></button>
+        </p>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Practices</span><span class="es">Prácticas</span></h4>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+        <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Legal</span><span class="es">Legal</span></h4>
+        <a href="terms.html"><span class="en">Terms of use</span><span class="es">Términos de uso</span></a>
+        <a href="privacy.html"><span class="en">Privacy</span><span class="es">Privacidad</span></a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+        <a href="#" data-nb-delete role="button"><span class="en">Delete my data</span><span class="es">Borrar mis datos</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 NorthBridge · Quito, Ecuador</span>
+      <span>
+        <span class="en">Automation that pays for itself.</span>
+        <span class="es">Automatización que se paga sola.</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ==================================================================
+     MARKET DATA
+     ------------------------------------------------------------------
+     Set PF_MARKET_ENDPOINT to a URL returning the same JSON shape as
+     PF_SAMPLE below, and the table switches to live data and the yellow
+     "sample data" notice disappears automatically.
+
+     Expected shape:
+       { updated: "YYYY-MM-DD",
+         periods: { "1m": [row, ...], "1y": [...], "5y": [...] } }
+       row = { ticker, name, sector, ret (percent number), spark: [numbers] }
+     ================================================================== */
+  var PF_MARKET_ENDPOINT = '';
+
+  /* Illustrative only. Real tickers, invented returns — the page labels this
+     clearly on screen. Never present these as actual market performance. */
+  var PF_SAMPLE = {
+    updated: '2026-09-05',
+    sample: true,
+    periods: {
+      '1m': [
+        {ticker:'NVDA', name:'NVIDIA',            sector:'Semiconductors', ret: 18.4, spark:[100,101,104,103,108,112,111,116,118]},
+        {ticker:'AVGO', name:'Broadcom',          sector:'Semiconductors', ret: 15.2, spark:[100,102,101,105,107,106,111,113,115]},
+        {ticker:'PLTR', name:'Palantir',          sector:'Software',       ret: 13.9, spark:[100, 99,103,106,105,109,110,112,114]},
+        {ticker:'LLY',  name:'Eli Lilly',         sector:'Healthcare',     ret: 11.6, spark:[100,103,102,104,107,108,110,109,112]},
+        {ticker:'NFLX', name:'Netflix',           sector:'Media',          ret:  9.8, spark:[100,101,103,102,105,106,108,109,110]},
+        {ticker:'CRWD', name:'CrowdStrike',       sector:'Software',       ret:  8.7, spark:[100,102,104,103,105,107,106,108,109]},
+        {ticker:'GE',   name:'GE Aerospace',      sector:'Industrials',    ret:  7.5, spark:[100, 98,101,103,104,105,106,107,108]},
+        {ticker:'AXP',  name:'American Express',  sector:'Financials',     ret:  6.9, spark:[100,101,100,103,104,103,105,106,107]}
+      ],
+      '1y': [
+        {ticker:'PLTR', name:'Palantir',          sector:'Software',       ret:112.7, spark:[100,108,121,118,135,148,162,188,213]},
+        {ticker:'NVDA', name:'NVIDIA',            sector:'Semiconductors', ret: 84.3, spark:[100,112,109,124,131,145,152,168,184]},
+        {ticker:'AVGO', name:'Broadcom',          sector:'Semiconductors', ret: 61.5, spark:[100,106,114,111,124,133,141,152,162]},
+        {ticker:'GE',   name:'GE Aerospace',      sector:'Industrials',    ret: 48.9, spark:[100,105,109,116,113,124,131,142,149]},
+        {ticker:'LLY',  name:'Eli Lilly',         sector:'Healthcare',     ret: 41.2, spark:[100,107,112,109,118,124,129,136,141]},
+        {ticker:'NFLX', name:'Netflix',           sector:'Media',          ret: 37.8, spark:[100,104,111,108,116,122,127,133,138]},
+        {ticker:'AXP',  name:'American Express',  sector:'Financials',     ret: 29.4, spark:[100,103,107,105,112,117,121,126,129]},
+        {ticker:'COST', name:'Costco',            sector:'Retail',         ret: 24.6, spark:[100,104,106,109,108,114,117,121,125]}
+      ],
+      '5y': [
+        {ticker:'NVDA', name:'NVIDIA',            sector:'Semiconductors', ret:812.4, spark:[100,168,241,196,342,468,571,724,912]},
+        {ticker:'PLTR', name:'Palantir',          sector:'Software',       ret:604.1, spark:[100,132,118,164,238,317,412,548,704]},
+        {ticker:'AVGO', name:'Broadcom',          sector:'Semiconductors', ret:428.7, spark:[100,141,178,162,231,289,344,406,529]},
+        {ticker:'LLY',  name:'Eli Lilly',         sector:'Healthcare',     ret:352.3, spark:[100,128,161,184,212,268,301,388,452]},
+        {ticker:'GE',   name:'GE Aerospace',      sector:'Industrials',    ret:271.8, spark:[100,118,142,136,181,214,246,308,372]},
+        {ticker:'COST', name:'Costco',            sector:'Retail',         ret:186.5, spark:[100,121,138,132,158,181,204,242,286]},
+        {ticker:'AXP',  name:'American Express',  sector:'Financials',     ret:174.2, spark:[100,124,133,129,152,168,191,231,274]},
+        {ticker:'NFLX', name:'Netflix',           sector:'Media',          ret:158.9, spark:[100, 92,114,108,131,148,172,214,259]}
+      ]
+    }
+  };
+
+  var body    = document.getElementById('pfBody');
+  var tabs    = Array.prototype.slice.call(document.querySelectorAll('.nb-tab[data-period]'));
+  var notice  = document.getElementById('pfSample');
+  var panel   = document.getElementById('panel-market');
+  var DATA    = null;
+  var period  = '1m';
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function isES(){ return document.documentElement.getAttribute('data-lang') === 'es'; }
+
+  function sparkPath(v){
+    if(!v || v.length < 2) return '';
+    var w = 88, h = 26, pad = 3;
+    var min = Math.min.apply(null, v), max = Math.max.apply(null, v);
+    var span = (max - min) || 1;
+    return v.map(function(n, i){
+      var x = pad + (i / (v.length - 1)) * (w - pad * 2);
+      var y = h - pad - ((n - min) / span) * (h - pad * 2);
+      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }).join(' ');
+  }
+
+  function fmtPct(n){
+    var s = (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+    return isES() ? s.replace('.', ',') : s;
+  }
+
+  function render(){
+    if(!DATA || !body) return;
+    var rows = (DATA.periods && DATA.periods[period]) || [];
+
+    if(!rows.length){
+      body.innerHTML = '<tr><td colspan="5" style="padding:34px;text-align:center;color:var(--ink-soft)">' +
+        esc(isES() ? 'Sin datos para este periodo.' : 'No data for this period.') + '</td></tr>';
+      return;
+    }
+
+    body.innerHTML = rows.map(function(r, i){
+      var dir = r.ret >= 0 ? 'up' : 'down';
+      return '<tr data-in="' + i + '">' +
+        '<td class="pf-rank">' + (i + 1) + '</td>' +
+        '<td><span class="pf-tick">' + esc(r.ticker) + '</span>' +
+            '<span class="pf-name">' + esc(r.name) + '</span></td>' +
+        '<td class="pf-sector">' + esc(r.sector || '') + '</td>' +
+        '<td class="num"><span class="pf-ret ' + dir + '">' + esc(fmtPct(r.ret)) + '</span></td>' +
+        '<td class="num"><svg class="pf-spark" viewBox="0 0 88 26" aria-hidden="true">' +
+          '<path d="' + sparkPath(r.spark) + '" style="stroke:var(--' + dir + ')"/></svg></td>' +
+      '</tr>';
+    }).join('');
+
+    /* mark the panel loaded so any remaining skeletons stand down */
+    if(panel) panel.setAttribute('data-nb-loaded', 'true');
+
+    Array.prototype.forEach.call(document.querySelectorAll('.pf-updated'), function(n){
+      var d = new Date((DATA.updated || '') + 'T00:00:00Z');
+      n.textContent = isNaN(d) ? '—' :
+        d.toLocaleDateString(isES() ? 'es' : 'en', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'});
+    });
+
+    if(notice) notice.style.display = DATA.sample ? '' : 'none';
+  }
+
+  function setPeriod(p, btn){
+    period = p;
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t === btn ? 'true' : 'false'); });
+    if(panel && btn) panel.setAttribute('aria-labelledby', btn.id);
+    render();
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ setPeriod(t.getAttribute('data-period'), t); });
+    t.addEventListener('keydown', function(e){
+      var i = tabs.indexOf(t), n = null;
+      if(e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+      if(e.key === 'ArrowLeft')  n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if(n){ e.preventDefault(); n.focus(); setPeriod(n.getAttribute('data-period'), n); }
+    });
+  });
+
+  /* Load. The skeleton is already on screen, so there is no empty state and
+     no spinner at any point — it swaps straight to rows. */
+  if(PF_MARKET_ENDPOINT){
+    fetch(PF_MARKET_ENDPOINT, {credentials:'omit'})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(j){ DATA = j; DATA.sample = false; render(); })
+      .catch(function(){ DATA = PF_SAMPLE; render(); });   /* never leave the panel empty */
+  } else {
+    DATA = PF_SAMPLE;
+    render();
+  }
+
+  /* re-render on language switch so numbers and dates localise */
+  var lang = document.getElementById('langBtn');
+  if(lang) lang.addEventListener('click', function(){ setTimeout(render, 0); });
+
+  /* ---- hero: equity-curve canvas ---------------------------------- */
+  var cv = document.getElementById('pfCanvas');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(cv && cv.getContext && !reduced){
+    var ctx = cv.getContext('2d'), W, H, series = [], tick = 0, raf;
+
+    function build(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.offsetWidth; H = cv.offsetHeight;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      /* three random walks with different drift — reads as an equity curve,
+         which is what this product is actually about */
+      series = [
+        {pts:[], drift:.34, amp:.62, col:'rgba(78,168,255,.85)',  w:1.8},
+        {pts:[], drift:.20, amp:.78, col:'rgba(37,192,127,.55)',  w:1.4},
+        {pts:[], drift:.09, amp:.95, col:'rgba(255,255,255,.18)', w:1.2}
+      ];
+      var n = Math.max(40, Math.floor(W / 11));
+      series.forEach(function(s){
+        var v = 0;
+        for(var i = 0; i < n; i++){
+          v += (Math.random() - .5) * s.amp * 10 + s.drift * 1.9;
+          s.pts.push(v);
+        }
+      });
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+
+      /* faint grid */
+      ctx.strokeStyle = 'rgba(255,255,255,.05)';
+      ctx.lineWidth = 1;
+      for(var g = 1; g < 5; g++){
+        var y = (H / 5) * g;
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      series.forEach(function(s, si){
+        var n = s.pts.length;
+        var lo = Math.min.apply(null, s.pts), hi = Math.max.apply(null, s.pts);
+        var span = (hi - lo) || 1;
+        var wob = Math.sin(tick / 90 + si) * 5;
+
+        ctx.beginPath();
+        for(var i = 0; i < n; i++){
+          var x = (i / (n - 1)) * W;
+          var y = H * .9 - ((s.pts[i] - lo) / span) * (H * .62) + wob;
+          i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        ctx.strokeStyle = s.col;
+        ctx.lineWidth = s.w;
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+      });
+
+      /* the walk creeps forward so the curve is alive but never distracting */
+      tick++;
+      if(tick % 26 === 0){
+        series.forEach(function(s){
+          s.pts.shift();
+          var last = s.pts[s.pts.length - 1];
+          s.pts.push(last + (Math.random() - .5) * s.amp * 10 + s.drift * 1.9);
+        });
+      }
+      raf = requestAnimationFrame(draw);
+    }
+
+    build();
+    draw();
+    window.addEventListener('resize', function(){ build(); });
+    /* stop burning frames when the tab is hidden */
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ cancelAnimationFrame(raf); }
+      else { raf = requestAnimationFrame(draw); }
+    });
+  }
+})();
+</script>
+</body>
+</html>

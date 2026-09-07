@@ -1,0 +1,7 @@
+# Reference material fetched for design work — not part of the published site.
+# GitHub Pages would otherwise serve this at meetnorthbridge.com/DESIGN.md
+DESIGN.md
+
+# Local tooling
+node_modules/
+.DS_Store

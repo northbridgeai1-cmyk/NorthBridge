@@ -34,8 +34,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
+<!-- nb-shared-layer -->
+<meta name="theme-color" content="#fbfaf6">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<link rel="stylesheet" href="nb.css">
+<script>
+/* Theme applied before first paint so dark-mode visitors never see a white flash. */
+(function(){try{var s=localStorage.getItem('nb-theme');
+var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+document.documentElement.setAttribute('data-theme',m);
+if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
+}catch(e){}})();
+</script>
+<script defer src="search-index.js"></script>
+<script defer src="nb.js"></script>
 </head>
 <body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
 
 <header>
   <nav class="nav">
@@ -59,6 +76,7 @@
     </a>
     <div class="nav-right">
       <div class="nav-links">
+        <a href="perceptfolio.html">PerceptFolio</a>
         <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
         <a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
         <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
@@ -66,14 +84,14 @@
         <a href="index.html#faq"><span class="en">FAQ</span><span class="es">Preguntas</span></a>
       </div>
       <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
-      <a class="btn" href="mailto:northbridgeai1@gmail.com?subject=Socrates">
+      <a class="btn" href="contact.html?branch=socrates">
         <span class="en">Contact us</span><span class="es">Contáctanos</span>
       </a>
     </div>
   </nav>
 </header>
 
-<main>
+<main id="top">
 
 <section class="hero">
   <div class="wrap">
@@ -88,7 +106,7 @@
       <span class="es">Las empresas compran las suscripciones, reenvían un tutorial, y esperan. Seis meses después las herramientas están sin usar. Socrates enseña a la gente a usar IA en su trabajo diario real (facturas, correos, cotizaciones, reportes) hasta que sea simplemente su forma de trabajar. Para empresas, escuelas y eventos por igual.</span>
     </p>
     <div class="hero-cta">
-      <a class="btn big" href="mailto:northbridgeai1@gmail.com?subject=Socrates">
+      <a class="btn big" href="contact.html?branch=socrates">
         <span class="en">Contact us</span><span class="es">Contáctanos</span>
       </a>
       <a class="btn big ghost" href="#plans">
@@ -242,7 +260,7 @@
       <span class="en">Email us your team size and what they spend their days on. We'll propose the right depth (a single workshop, a plan, or a full curriculum) and you pick.</span>
       <span class="es">Escríbenos el tamaño de tu equipo y en qué se les van los días. Te proponemos la profundidad correcta (un taller suelto, un plan, o un plan de estudios completo) y tú eliges.</span>
     </p>
-    <a class="btn navy big rv" href="mailto:northbridgeai1@gmail.com?subject=Socrates">
+    <a class="btn navy big rv" href="contact.html?branch=socrates">
       <span class="en">Contact us</span><span class="es">Contáctanos</span>
     </a>
     <p class="mail rv">
@@ -255,9 +273,50 @@
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <span>© 2026 NorthBridge · Quito, Ecuador</span>
-    <span><span class="en">Automation that pays for itself.</span><span class="es">Automatización que se paga sola.</span></span>
+  <div class="wrap">
+    <div class="nb-foot-grid">
+      <div class="nb-foot-col">
+        <h4>NorthBridge</h4>
+        <p class="nb-foot-blurb">
+          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+        </p>
+        <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
+          <button data-copy="northbridgeai1@gmail.com" data-copy-label="Copy"></button>
+        </p>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Practices</span><span class="es">Prácticas</span></h4>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+        <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Legal</span><span class="es">Legal</span></h4>
+        <a href="terms.html"><span class="en">Terms of use</span><span class="es">Términos de uso</span></a>
+        <a href="privacy.html"><span class="en">Privacy</span><span class="es">Privacidad</span></a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+        <a href="#" data-nb-delete role="button"><span class="en">Delete my data</span><span class="es">Borrar mis datos</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 NorthBridge · Quito, Ecuador</span>
+      <span>
+        <span class="en">Automation that pays for itself.</span>
+        <span class="es">Automatización que se paga sola.</span>
+      </span>
+    </div>
   </div>
 </footer>
 

@@ -61,7 +61,7 @@ header{
   font:inherit;font-size:.78rem;font-weight:700;padding:5px 12px;cursor:pointer;color:var(--ink-soft);
 }
 .lang-toggle:hover{border-color:var(--teal);color:var(--ink)}
-@media(max-width:760px){.nav-links{display:none}}
+@media(max-width:1024px){.nav-links{display:none}}
 
 /* buttons */
 .btn{

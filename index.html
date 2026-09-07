@@ -149,7 +149,7 @@
   .btn.navy:hover{background:#0f2d24;box-shadow:0 10px 24px -12px rgba(16,45,36,.6)}
   .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
   .btn.ghost:hover{border-color:#fff;box-shadow:none;background:rgba(255,255,255,.06)}
-  @media(max-width:760px){.nav-links{display:none}}
+  @media(max-width:1024px){.nav-links{display:none}}
 
   /* ---------- hero ---------- */
   .hero{
@@ -506,7 +506,18 @@
   .divisions .sub{margin-bottom:12px}
   .door-hint{font-size:.9rem;font-weight:700;color:var(--teal-dark);margin-bottom:34px}
   .div-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:38px;align-items:stretch;padding-top:10px}
-  @media(max-width:920px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+  @media(max-width:1100px){.div-grid{grid-template-columns:repeat(2,1fr);gap:28px}}
+  @media(max-width:760px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+  /* the branch not yet open reads as a door still under construction */
+  .door-card.soon .door{cursor:default;opacity:.92}
+  .door-card.soon .door::after{
+    content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background:repeating-linear-gradient(-45deg,transparent 0 13px,rgba(217,163,68,.07) 13px 26px);
+  }
+  .door-soon-tag{
+    display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:2px 9px;margin-bottom:10px;
+  }
   .door-card{position:relative;perspective:1600px}
   /* wooden door frame around the arch */
   .door-card::after{
@@ -623,8 +634,25 @@
     text-align:center;margin-top:26px;font-size:.9rem;color:var(--ink-soft);
   }
 </style>
+<!-- nb-shared-layer -->
+<meta name="theme-color" content="#fbfaf6">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<link rel="stylesheet" href="nb.css">
+<script>
+/* Theme applied before first paint so dark-mode visitors never see a white flash. */
+(function(){try{var s=localStorage.getItem('nb-theme');
+var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+document.documentElement.setAttribute('data-theme',m);
+if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
+}catch(e){}})();
+</script>
+<script defer src="search-index.js"></script>
+<script defer src="nb.js"></script>
 </head>
 <body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
 
 <!-- ======= NAV ======= -->
 <header>
@@ -653,10 +681,11 @@
         <a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
         <a href="#process"><span class="en">Process</span><span class="es">Proceso</span></a>
         <a href="socrates.html"><span class="en">Training &amp; events</span><span class="es">Capacitación y eventos</span></a>
+        <a href="perceptfolio.html">PerceptFolio</a>
         <a href="#faq"><span class="en">FAQ</span><span class="es">Preguntas</span></a>
       </div>
       <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
-      <a class="btn" href="mailto:northbridgeai1@gmail.com?subject=Working%20with%20NorthBridge">
+      <a class="btn" href="contact.html">
         <span class="en">Contact us</span><span class="es">Contáctanos</span>
       </a>
     </div>
@@ -683,7 +712,7 @@
       <span class="rotator"><span id="rotWord">payment chasing</span></span>
     </p>
     <div class="hero-cta">
-      <a class="btn big" href="mailto:northbridgeai1@gmail.com?subject=Working%20with%20NorthBridge">
+      <a class="btn big" href="contact.html">
         <span class="en">Contact us</span><span class="es">Contáctanos</span>
       </a>
       <a class="btn big ghost" href="#plans">
@@ -811,9 +840,11 @@
       <div class="demo-bar"><span></span><span></span><span></span>
         <em><span class="en">payment-chaser · live run</span><span class="es">cobrador de facturas · ejecución en vivo</span></em>
       </div>
-      <video id="demoVid" controls preload="metadata" playsinline>
-        <source src="demo.mp4" type="video/mp4">
-      </video>
+      <!-- The src is attached by script only once a video actually exists,
+           so an unrecorded demo costs no failed request and no console error.
+           To publish the walkthrough: drop demo.mp4 in the repo root and set
+           NB_DEMO_SRC in the page script below. -->
+      <video id="demoVid" controls preload="metadata" playsinline></video>
       <div class="demo-placeholder" id="demoPh">
         <p class="ph-big"><span class="en">Live demo, on demand.</span><span class="es">Demo en vivo, cuando quieras.</span></p>
         <p class="ph-sub">
@@ -833,12 +864,12 @@
   <div class="wrap">
     <p class="step-label rv"><span class="en">What we do</span><span class="es">Qué hacemos</span></p>
     <h2 class="h2 rv">
-      <span class="en">Three doors. Walk through the one that sounds like your week.</span>
-      <span class="es">Tres puertas. Entra por la que suene a tu semana.</span>
+      <span class="en">Four doors open, one being built. Walk through the one that sounds like your week.</span>
+      <span class="es">Cuatro puertas abiertas, una en construcción. Entra por la que suene a tu semana.</span>
     </h2>
     <p class="sub rv">
-      <span class="en">NorthBridge is built of three specialized practices. You don't need to know which one you need (that's our job in the first meeting), but here's the map.</span>
-      <span class="es">NorthBridge se compone de tres prácticas especializadas. No necesitas saber cuál te toca (ese es nuestro trabajo en la primera reunión), pero aquí está el mapa.</span>
+      <span class="en">NorthBridge is built of specialized practices, from back-office automation to quantitative research. You don't need to know which one you need (that's our job in the first meeting), but here's the map.</span>
+      <span class="es">NorthBridge se compone de prácticas especializadas, desde la automatización administrativa hasta la investigación cuantitativa. No necesitas saber cuál te toca (ese es nuestro trabajo en la primera reunión), pero aquí está el mapa.</span>
     </p>
     <p class="door-hint rv"><span class="en">Click a door to open it.</span><span class="es">Haz clic en una puerta para abrirla.</span></p>
     <div class="div-grid">
@@ -948,6 +979,70 @@
         </div>
       </div>
 
+      <div class="door-card rv d3">
+        <div class="door-room">
+          <span class="div-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></span>
+          <h3>PerceptFolio</h3>
+          <p class="blurb">
+            <span class="en">For people whose decisions move real money. Research a strategy, backtest it against real costs, watch its signals, and see the risk it is actually taking. Research software, never advice.</span>
+            <span class="es">Para quienes toman decisiones que mueven dinero real. Investiga una estrategia, pruébala contra costos reales, observa sus señales, y ve el riesgo que realmente toma. Software de investigación, nunca asesoría.</span>
+          </p>
+          <ul>
+            <li><span class="en">Strategy research you can reproduce months later</span><span class="es">Investigación de estrategias reproducible meses después</span></li>
+            <li><span class="en">Backtests with commissions, slippage and spread included</span><span class="es">Backtests con comisiones, slippage y spread incluidos</span></li>
+            <li><span class="en">Live signal monitoring and drift alerts</span><span class="es">Monitoreo de señales en vivo y alertas de desviación</span></li>
+            <li><span class="en">Risk, exposure and drawdown analytics</span><span class="es">Analítica de riesgo, exposición y drawdown</span></li>
+          </ul>
+          <a class="btn navy" href="perceptfolio.html">
+            <span class="en">Open PerceptFolio →</span><span class="es">Abrir PerceptFolio →</span>
+          </a>
+          <br>
+          <a class="door-close" href="#brands"><span class="en">Close the door</span><span class="es">Cerrar la puerta</span></a>
+        </div>
+        <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open PerceptFolio">
+          <span class="knob"></span>
+          <span class="div-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></span>
+          <span class="door-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 3.5-4.5 3 3L20 6" stroke="#25d193"/></svg>
+          </span>
+          <h3>PerceptFolio</h3>
+          <p class="door-tease">
+            <span class="en">Test the idea before it costs you money.</span>
+            <span class="es">Prueba la idea antes de que te cueste dinero.</span>
+          </p>
+          <span class="door-open-hint"><span class="en">Open</span><span class="es">Abrir</span></span>
+        </div>
+      </div>
+
+      <div class="door-card soon rv d3">
+        <div class="door-room">
+          <span class="div-kicker"><span class="en">Real estate</span><span class="es">Bienes raíces</span></span>
+          <h3><span class="en">NorthBridge Real Estate</span><span class="es">NorthBridge Bienes Raíces</span></h3>
+          <p class="blurb">
+            <span class="en">Our next practice, currently being built. If property is your business, tell us what eats your week and it will shape what we open with.</span>
+            <span class="es">Nuestra próxima práctica, actualmente en construcción. Si tu negocio son los inmuebles, cuéntanos qué se come tu semana y eso definirá con qué abrimos.</span>
+          </p>
+          <a class="btn navy" href="contact.html?branch=realestate">
+            <span class="en">Get told when it opens →</span><span class="es">Avísenme cuando abra →</span>
+          </a>
+          <br>
+          <a class="door-close" href="#brands"><span class="en">Close the door</span><span class="es">Cerrar la puerta</span></a>
+        </div>
+        <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Real Estate">
+          <span class="knob"></span>
+          <span class="door-soon-tag"><span class="en">Opening soon</span><span class="es">Abre pronto</span></span>
+          <span class="door-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/><path d="M9.5 21v-6h5v6" stroke="#25d193"/></svg>
+          </span>
+          <h3><span class="en">Real estate</span><span class="es">Bienes raíces</span></h3>
+          <p class="door-tease">
+            <span class="en">Being built now. Help us decide what it does.</span>
+            <span class="es">En construcción. Ayúdanos a decidir qué hace.</span>
+          </p>
+          <span class="door-open-hint"><span class="en">Peek in</span><span class="es">Asómate</span></span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -982,7 +1077,7 @@
         <div class="big-num" id="calcOut">$10,400</div>
         <div class="per"><span class="en">quietly, every year</span><span class="es">en silencio, cada año</span></div>
         <div style="margin-top:22px">
-          <a class="btn big" href="mailto:northbridgeai1@gmail.com?subject=Working%20with%20NorthBridge">
+          <a class="btn big" href="contact.html">
             <span class="en">Get those hours back</span><span class="es">Recupera esas horas</span>
           </a>
         </div>
@@ -1270,7 +1365,7 @@
       <span class="en">Send us a short email: what your business does and what eats your hours. We'll reply with a live demo of the payment chaser and an honest read on what's worth automating first.</span>
       <span class="es">Envíanos un correo corto: a qué se dedica tu negocio y qué se come tus horas. Te respondemos con una demo en vivo del cobrador de facturas y una opinión honesta de qué vale la pena automatizar primero.</span>
     </p>
-    <a class="btn navy big rv" href="mailto:northbridgeai1@gmail.com?subject=Working%20with%20NorthBridge">
+    <a class="btn navy big rv" href="contact.html">
       <span class="en">Contact us</span><span class="es">Contáctanos</span>
     </a>
     <p class="mail rv">
@@ -1283,12 +1378,50 @@
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <span>© 2026 NorthBridge · Quito, Ecuador</span>
-    <span>
-      <span class="en">Automation that pays for itself.</span>
-      <span class="es">Automatización que se paga sola.</span>
-    </span>
+  <div class="wrap">
+    <div class="nb-foot-grid">
+      <div class="nb-foot-col">
+        <h4>NorthBridge</h4>
+        <p class="nb-foot-blurb">
+          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+        </p>
+        <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
+          <button data-copy="northbridgeai1@gmail.com" data-copy-label="Copy"></button>
+        </p>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Practices</span><span class="es">Prácticas</span></h4>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+        <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Legal</span><span class="es">Legal</span></h4>
+        <a href="terms.html"><span class="en">Terms of use</span><span class="es">Términos de uso</span></a>
+        <a href="privacy.html"><span class="en">Privacy</span><span class="es">Privacidad</span></a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+        <a href="#" data-nb-delete role="button"><span class="en">Delete my data</span><span class="es">Borrar mis datos</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 NorthBridge · Quito, Ecuador</span>
+      <span>
+        <span class="en">Automation that pays for itself.</span>
+        <span class="es">Automatización que se paga sola.</span>
+      </span>
+    </div>
   </div>
 </footer>
 
@@ -1388,13 +1521,18 @@
     });
   });
 
-  /* ---- demo video: show player only if demo.mp4 exists ---- */
+  /* ---- demo video ----
+     Set NB_DEMO_SRC to the filename once the walkthrough is recorded; the
+     player then appears in place of the "book a live demo" panel. Empty means
+     no request is made at all. */
+  var NB_DEMO_SRC = '';
   var dv = document.getElementById('demoVid');
-  if(dv){
+  if(dv && NB_DEMO_SRC){
     dv.addEventListener('loadedmetadata', function(){
       var frame = dv.closest('.demo-frame');
       if(frame && dv.duration > 0) frame.classList.add('has-video');
     });
+    dv.src = NB_DEMO_SRC;
   }
 
   /* ---- scroll progress bar ---- */
@@ -1443,12 +1581,16 @@
   var rateOut = document.getElementById('rateOut');
   var calcOut = document.getElementById('calcOut');
   var shownVal = 0;
+  var calcRAF = null;
   function fmt(n){ return '$' + n.toLocaleString('en-US'); }
   function calc(animate){
     if(!hoursIn || !rateIn || !calcOut) return;
     var target = parseInt(hoursIn.value,10) * parseInt(rateIn.value,10) * 52;
     hoursOut.textContent = hoursIn.value;
     rateOut.textContent = rateIn.value;
+    /* one animation at a time: a second loop racing the first can leave the
+       figure showing the previous target */
+    if(calcRAF){ cancelAnimationFrame(calcRAF); calcRAF = null; }
     if(!animate || reducedMotion){
       shownVal = target;
       calcOut.textContent = fmt(target);
@@ -1463,9 +1605,10 @@
       var eased = 1 - Math.pow(1 - p, 3);
       shownVal = Math.round(start + (target - start) * eased);
       calcOut.textContent = fmt(shownVal);
-      if(p < 1) requestAnimationFrame(step);
+      if(p < 1){ calcRAF = requestAnimationFrame(step); }
+      else { calcRAF = null; shownVal = target; calcOut.textContent = fmt(target); }
     }
-    requestAnimationFrame(step);
+    calcRAF = requestAnimationFrame(step);
   }
   if(hoursIn && rateIn){
     hoursIn.addEventListener('input', function(){ calc(true); });

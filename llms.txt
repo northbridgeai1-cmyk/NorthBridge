@@ -8,6 +8,8 @@
 - Cinderella (data & workflows): cleans data, automates back-office workflows in the client's own n8n account.
 - Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents.
 - Socrates (AI training): team workshops and custom curricula so businesses actually adopt AI tools.
+- PerceptFolio (perceptfolio.com): the NorthBridge quantitative trading terminal. Strategy research, backtesting with real transaction costs, live signal monitoring, and risk/drawdown analytics. Research and analytics software only: it is not a broker, does not execute trades, does not hold client funds, and does not give investment advice.
+- Real estate: a fifth practice in preparation, not yet launched.
 
 ## How it works
 
@@ -22,6 +24,12 @@ The NorthBridge Cycle: Diagnose (2–3 days) → Build (3–7 days) → Educate 
 
 ## Contact
 
+- Contact form: https://meetnorthbridge.com/contact.html (pick the branch: NorthBridge, Cinderella, Hermes, Socrates, PerceptFolio, or real estate)
 - Email: northbridgeai1@gmail.com
 - Founder: Pierce Tyrrell
 - Languages: English, Spanish
+
+## Legal
+
+- Terms of use: https://meetnorthbridge.com/terms.html
+- Privacy: https://meetnorthbridge.com/privacy.html. The site sets no cookies of its own, has no accounts and no database; preferences are stored only in the visitor's browser and can be deleted from the privacy page.

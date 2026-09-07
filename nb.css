@@ -1,0 +1,563 @@
+/* ==========================================================================
+   NorthBridge shared layer  ·  nb.css
+   Loaded AFTER the page's own styles on every page.
+
+   Structure (type scale, 4px spacing system, component patterns) follows the
+   Notion DESIGN.md analysis. Colours and brand identity stay NorthBridge:
+   Fraunces + Public Sans on paper-and-ink with teal/gold accents.
+   ========================================================================== */
+
+/* ---------- 1. TOKENS ---------------------------------------------------- */
+:root{
+  /* spacing — 4px base, per DESIGN.md */
+  --s-xxs:4px;  --s-xs:8px;   --s-sm:12px;  --s-md:16px;
+  --s-lg:20px;  --s-xl:24px;  --s-2xl:32px; --s-3xl:40px;
+  --s-sec-sm:48px; --s-sec:64px; --s-sec-lg:96px; --s-hero:120px;
+
+  /* radii */
+  --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px;
+  --r-xl:16px; --r-2xl:20px; --r-3xl:24px; --r-full:9999px;
+
+  /* type scale */
+  --t-display:clamp(2.6rem,6vw,5rem);
+  --t-h1:clamp(2.1rem,5vw,3.5rem);
+  --t-h2:clamp(1.7rem,3.6vw,2.25rem);
+  --t-h3:1.75rem;  --t-h4:1.375rem; --t-h5:1.125rem;
+  --t-body:1rem;   --t-sm:.875rem;  --t-caption:.8125rem;
+  --t-micro:.75rem; --t-micro-up:.6875rem;
+
+  /* elevation */
+  --e-1:0 1px 2px rgba(16,24,20,.06);
+  --e-2:0 4px 12px -4px rgba(16,24,20,.12);
+  --e-3:0 12px 32px -12px rgba(16,24,20,.22);
+  --e-4:0 24px 56px -20px rgba(16,24,20,.34);
+
+  /* motion */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --dur-1:.15s; --dur-2:.28s; --dur-3:.5s;
+
+  /* semantic */
+  --ok:#1f7a4d;  --ok-bg:#e8f6ee;
+  --err:#b3261e; --err-bg:#fdeceb;
+  --warn:#9a6400; --warn-bg:#fdf3e0;
+
+  --surface:#ffffff;
+  --surface-2:var(--paper-dark);
+  --header-bg:rgba(251,249,244,.92);
+  --z-nav:50; --z-progress:1000; --z-float:1010;
+  --z-menu:1100; --z-banner:1200; --z-modal:1300; --z-toast:1400;
+}
+
+/* ---------- 2. DARK MODE ------------------------------------------------- */
+/* Overrides the brand tokens the existing stylesheets already consume, so the
+   whole site inverts without rewriting any page-level CSS. */
+html[data-theme="dark"]{
+  --ink:#e8ece9;
+  --ink-soft:#a3b0a8;
+  --paper:#121614;
+  --paper-dark:#171d1a;
+  --navy:#e8ece9;
+  --deep:#0d100f;
+  --deep-2:#141917;
+  --teal:#3ecf8e;
+  --teal-dark:#7fdcb0;
+  --teal-soft:#a8d9bb;
+  --gold:#e2b65c;
+  --line:#28322d;
+  --surface:#171d1a;
+  --surface-2:#121614;
+  --header-bg:rgba(18,22,20,.92);
+  --e-1:0 1px 2px rgba(0,0,0,.4);
+  --e-2:0 4px 12px -4px rgba(0,0,0,.5);
+  --e-3:0 12px 32px -12px rgba(0,0,0,.6);
+  --e-4:0 24px 56px -20px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+html[data-theme="dark"] body::before{opacity:.18}
+
+/* surfaces that were hardcoded white in the original sheets */
+html[data-theme="dark"] .tier,
+html[data-theme="dark"] .fit-card,
+html[data-theme="dark"] .nb-card,
+html[data-theme="dark"] .plan{background:var(--surface);border-color:var(--line)}
+html[data-theme="dark"] .tier.best{
+  background:linear-gradient(180deg,#1a2320 0%,#141d19 100%);
+  box-shadow:0 26px 56px -22px rgba(62,207,142,.25);
+}
+html[data-theme="dark"] header{background:var(--header-bg);border-bottom-color:var(--line)}
+html[data-theme="dark"] .btn.navy{background:#e8ece9;border-color:#e8ece9;color:#0d100f}
+html[data-theme="dark"] .btn.navy:hover{background:#fff}
+html[data-theme="dark"] .btn:not(.ghost){color:#06251a}
+html[data-theme="dark"] .btn.ghost{color:#fff}
+html[data-theme="dark"] details,
+html[data-theme="dark"] .faq details{border-color:var(--line)}
+
+/* smooth the flip, but never fight reduced-motion */
+html.nb-theme-ready body,
+html.nb-theme-ready header,
+html.nb-theme-ready .tier,
+html.nb-theme-ready .fit-card{
+  transition:background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+
+
+/* ---------- 2b. LANGUAGE VISIBILITY GUARD -------------------------------
+   `.es{display:none}` in the base sheets is only specificity (0,1,0), so any
+   component rule such as `.card span{display:block}` silently out-ranks it and
+   both languages render at once. This guard makes language visibility win
+   everywhere, whatever a component declares. */
+html:not([data-lang="es"]) .es{display:none !important}
+html[data-lang="es"] .en{display:none !important}
+
+/* ---------- 3. ACCESSIBILITY -------------------------------------------- */
+.nb-skip{
+  position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);
+  background:var(--teal);color:#06251a;font-weight:700;font-size:var(--t-sm);
+  padding:var(--s-sm) var(--s-lg);border-radius:var(--r-md);text-decoration:none;
+  transition:top var(--dur-2) var(--ease-out);
+}
+.nb-skip:focus{top:var(--s-sm);outline:2px solid var(--ink);outline-offset:2px}
+
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--teal);outline-offset:2px;border-radius:var(--r-xs);
+}
+.nb-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Anchor targets must clear the sticky header, or a jump from search or the
+   nav lands with the section heading hidden behind the bar. */
+:target,section[id],main[id],[id^="t"],[id^="p"]{scroll-margin-top:92px}
+@media(max-width:1024px){:target,section[id],main[id]{scroll-margin-top:76px}}
+
+/* ---------- 4. TAP / PRESS FEEDBACK ------------------------------------- */
+/* Every control gets a physical press. Pointer-coarse gets a slightly bigger
+   dip because there is no hover state to telegraph interactivity. */
+.btn,.nb-btn,.lang-toggle,.nb-icon-btn,.nb-chip,.door,.tier,.nb-tab{
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.btn:active,.nb-btn:active,.nb-icon-btn:active,.nb-chip:active,.lang-toggle:active{
+  transform:scale(.965) translateY(0);transition-duration:.06s;
+}
+@media (pointer:coarse){
+  .btn:active,.nb-btn:active{transform:scale(.94)}
+  .btn:hover{transform:none;box-shadow:none} /* no sticky hover on touch */
+}
+
+/* ripple */
+.nb-ripple{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:currentColor;opacity:.22;transform:scale(0);
+  animation:nb-ripple var(--dur-3) var(--ease-out) forwards;
+}
+@keyframes nb-ripple{to{transform:scale(2.6);opacity:0}}
+
+/* ---------- 5. HEADER ADDITIONS ----------------------------------------- */
+.nav-right{gap:var(--s-sm)}
+.nb-icon-btn{
+  display:inline-grid;place-items:center;width:36px;height:36px;flex:0 0 36px;
+  border:1px solid var(--line);background:transparent;border-radius:var(--r-full);
+  cursor:pointer;color:var(--ink-soft);position:relative;overflow:hidden;
+  transition:color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease);
+}
+.nb-icon-btn:hover{color:var(--ink);border-color:var(--teal)}
+.nb-icon-btn svg{width:17px;height:17px;display:block}
+.nb-icon-btn .nb-sun{display:none}
+html[data-theme="dark"] .nb-icon-btn .nb-sun{display:block}
+html[data-theme="dark"] .nb-icon-btn .nb-moon{display:none}
+
+/* header shrinks on scroll */
+header{transition:box-shadow var(--dur-2) var(--ease),padding var(--dur-2) var(--ease)}
+header.nb-stuck{box-shadow:var(--e-2)}
+header.nb-stuck .nav{padding-top:9px;padding-bottom:9px}
+
+/* ---------- 6. MOBILE MENU ---------------------------------------------- */
+.nb-burger{display:none}
+@media(max-width:1024px){
+  .nb-burger{display:inline-grid}
+  /* the header CTA is duplicated in the drawer footer and the floating
+     button, so drop it here rather than let the bar overflow */
+  .nav-right > .btn{display:none}
+  .nav-right{gap:8px}
+}
+@media(max-width:400px){
+  /* tightest phones: language moves into the drawer */
+  .nav-right > .lang-toggle{display:none}
+}
+.nb-burger span{
+  display:block;width:17px;height:1.8px;background:currentColor;border-radius:2px;
+  transition:transform var(--dur-2) var(--ease-out),opacity var(--dur-1) var(--ease);
+}
+.nb-burger span + span{margin-top:4px}
+.nb-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.8px) rotate(45deg)}
+.nb-burger[aria-expanded="true"] span:nth-child(2){opacity:0;transform:scaleX(.3)}
+.nb-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.8px) rotate(-45deg)}
+
+.nb-drawer{
+  position:fixed;inset:0;z-index:var(--z-menu);
+  visibility:hidden;pointer-events:none;
+}
+.nb-drawer[data-open="true"]{visibility:visible;pointer-events:auto}
+.nb-drawer-scrim{
+  position:absolute;inset:0;background:rgba(10,14,12,.5);backdrop-filter:blur(3px);
+  opacity:0;transition:opacity var(--dur-2) var(--ease);
+}
+.nb-drawer[data-open="true"] .nb-drawer-scrim{opacity:1}
+.nb-drawer-panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(86vw,330px);
+  background:var(--paper);border-left:1px solid var(--line);
+  padding:var(--s-lg) var(--s-xl) var(--s-2xl);
+  display:flex;flex-direction:column;gap:var(--s-xs);
+  transform:translateX(100%);transition:transform var(--dur-3) var(--ease-out);
+  overflow-y:auto;overscroll-behavior:contain;box-shadow:var(--e-4);
+}
+.nb-drawer[data-open="true"] .nb-drawer-panel{transform:none}
+.nb-drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s-md)}
+.nb-drawer-title{font-size:var(--t-micro-up);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.nb-drawer a.nb-drawer-link{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-sm);
+  text-decoration:none;color:var(--ink);font-weight:600;font-size:1.02rem;
+  padding:var(--s-sm) var(--s-xs);border-radius:var(--r-md);
+  border-bottom:1px solid var(--line);
+  opacity:0;transform:translateX(14px);
+}
+.nb-drawer[data-open="true"] a.nb-drawer-link{
+  animation:nb-slide-in var(--dur-3) var(--ease-out) forwards;
+}
+.nb-drawer a.nb-drawer-link:hover{background:var(--paper-dark);color:var(--teal-dark)}
+.nb-drawer a.nb-drawer-link::after{content:"→";color:var(--teal);opacity:.5;font-size:.9rem}
+@keyframes nb-slide-in{to{opacity:1;transform:none}}
+.nb-drawer a.nb-drawer-link:nth-child(1){animation-delay:.04s}
+.nb-drawer a.nb-drawer-link:nth-child(2){animation-delay:.08s}
+.nb-drawer a.nb-drawer-link:nth-child(3){animation-delay:.12s}
+.nb-drawer a.nb-drawer-link:nth-child(4){animation-delay:.16s}
+.nb-drawer a.nb-drawer-link:nth-child(5){animation-delay:.20s}
+.nb-drawer a.nb-drawer-link:nth-child(6){animation-delay:.24s}
+.nb-drawer a.nb-drawer-link:nth-child(7){animation-delay:.28s}
+.nb-drawer a.nb-drawer-link:nth-child(8){animation-delay:.32s}
+.nb-drawer-foot{margin-top:auto;padding-top:var(--s-lg);display:flex;gap:var(--s-xs);flex-wrap:wrap}
+.nb-drawer-lang{flex:0 0 auto}
+@media(min-width:401px){.nb-drawer-lang{display:none}}
+
+/* ---------- 7. SITE SEARCH ---------------------------------------------- */
+.nb-search{
+  position:fixed;inset:0;z-index:var(--z-modal);
+  display:none;padding:clamp(var(--s-lg),9vh,110px) var(--s-md) var(--s-md);
+}
+.nb-search[data-open="true"]{display:block}
+.nb-search-scrim{position:absolute;inset:0;background:rgba(10,14,12,.55);backdrop-filter:blur(4px);animation:nb-fade var(--dur-2) var(--ease)}
+@keyframes nb-fade{from{opacity:0}to{opacity:1}}
+.nb-search-box{
+  position:relative;max-width:620px;margin:0 auto;background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--e-4);
+  overflow:hidden;animation:nb-pop var(--dur-3) var(--ease-out);
+  display:flex;flex-direction:column;max-height:min(70vh,560px);
+}
+@keyframes nb-pop{from{opacity:0;transform:translateY(-12px) scale(.98)}to{opacity:1;transform:none}}
+.nb-search-field{display:flex;align-items:center;gap:var(--s-sm);padding:var(--s-md) var(--s-lg);border-bottom:1px solid var(--line);flex:0 0 auto}
+.nb-search-field svg{width:18px;height:18px;color:var(--ink-soft);flex:0 0 18px}
+.nb-search-field input{
+  flex:1;border:0;background:transparent;font:inherit;font-size:1.05rem;color:var(--ink);outline:none;min-width:0;
+}
+.nb-search-field kbd{
+  font:inherit;font-size:var(--t-micro);font-weight:700;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:2px 7px;background:var(--paper-dark);
+}
+.nb-search-results{overflow-y:auto;overscroll-behavior:contain;padding:var(--s-xs)}
+.nb-search-item{
+  display:block;text-decoration:none;color:var(--ink);
+  padding:var(--s-sm) var(--s-md);border-radius:var(--r-md);
+}
+.nb-search-item:hover,.nb-search-item[data-active="true"]{background:var(--paper-dark)}
+.nb-search-item strong{display:block;font-size:.98rem;font-weight:650;margin-bottom:2px}
+.nb-search-item mark{background:rgba(62,207,142,.28);color:inherit;border-radius:2px;padding:0 1px}
+.nb-search-item span{display:block;font-size:var(--t-caption);color:var(--ink-soft);line-height:1.45}
+.nb-search-item em{font-style:normal;font-size:var(--t-micro-up);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dark)}
+.nb-search-empty{padding:var(--s-2xl) var(--s-md);text-align:center;color:var(--ink-soft);font-size:var(--t-sm)}
+
+/* ---------- 8. FLOATING CONTROLS ---------------------------------------- */
+.nb-float{
+  position:fixed;right:clamp(var(--s-md),3vw,var(--s-xl));bottom:clamp(var(--s-md),3vw,var(--s-xl));
+  z-index:var(--z-float);display:flex;flex-direction:column;align-items:flex-end;gap:var(--s-sm);
+}
+.nb-top{
+  width:42px;height:42px;border-radius:var(--r-full);border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);cursor:pointer;display:grid;place-items:center;
+  box-shadow:var(--e-2);opacity:0;transform:translateY(10px) scale(.9);pointer-events:none;
+  transition:opacity var(--dur-2) var(--ease),transform var(--dur-2) var(--ease-out);
+}
+.nb-top[data-show="true"]{opacity:1;transform:none;pointer-events:auto}
+.nb-top:hover{border-color:var(--teal);color:var(--teal-dark)}
+.nb-top svg{width:16px;height:16px}
+
+.nb-fab{
+  display:inline-flex;align-items:center;gap:var(--s-xs);text-decoration:none;
+  background:var(--teal);color:#06251a;font-weight:700;font-size:var(--t-sm);
+  padding:12px 18px;border-radius:var(--r-full);box-shadow:var(--e-3);
+  border:1px solid var(--teal);
+  transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease);
+}
+.nb-fab:hover{transform:translateY(-2px);box-shadow:var(--e-4)}
+.nb-fab svg{width:16px;height:16px}
+/* pulse once when the page settles, then stop — a nudge, not a nag */
+.nb-fab.nb-nudge{animation:nb-nudge 1.6s var(--ease) 2}
+@keyframes nb-nudge{0%,100%{box-shadow:var(--e-3)}50%{box-shadow:0 0 0 10px rgba(62,207,142,.18),var(--e-3)}}
+@media(max-width:520px){
+  .nb-fab span{display:none}
+  .nb-fab{padding:13px;border-radius:var(--r-full)}
+}
+
+/* ---------- 9. COOKIE BANNER -------------------------------------------- */
+.nb-cookie{
+  position:fixed;left:var(--s-md);right:var(--s-md);bottom:var(--s-md);z-index:var(--z-banner);
+  max-width:520px;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-xl);box-shadow:var(--e-4);padding:var(--s-lg);
+  display:none;
+}
+.nb-cookie[data-open="true"]{display:block;animation:nb-rise var(--dur-3) var(--ease-out)}
+@keyframes nb-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.nb-cookie h3{font-family:var(--serif);font-size:1.05rem;font-weight:600;margin-bottom:var(--s-xs)}
+.nb-cookie p{font-size:var(--t-caption);color:var(--ink-soft);line-height:1.55;margin-bottom:var(--s-md)}
+.nb-cookie p a{color:var(--teal-dark);font-weight:600}
+.nb-cookie-row{display:flex;gap:var(--s-xs);flex-wrap:wrap}
+.nb-btn{
+  font:inherit;font-weight:700;font-size:var(--t-sm);cursor:pointer;
+  padding:10px 18px;border-radius:var(--r-md);border:1px solid var(--line);
+  background:transparent;color:var(--ink);position:relative;overflow:hidden;
+  transition:transform var(--dur-1) var(--ease),background var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease);
+  text-decoration:none;display:inline-flex;align-items:center;gap:var(--s-xs);
+}
+.nb-btn:hover{border-color:var(--ink-soft)}
+.nb-btn--primary{background:var(--teal);border-color:var(--teal);color:#06251a}
+.nb-btn--primary:hover{background:#22cf8e;border-color:#22cf8e}
+.nb-btn--danger{background:transparent;border-color:var(--err);color:var(--err)}
+.nb-btn--danger:hover{background:var(--err);color:#fff}
+.nb-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+
+/* ---------- 10. MODAL ---------------------------------------------------- */
+.nb-modal{position:fixed;inset:0;z-index:var(--z-modal);display:none;place-items:center;padding:var(--s-md)}
+.nb-modal[data-open="true"]{display:grid}
+.nb-modal-scrim{position:absolute;inset:0;background:rgba(10,14,12,.55);backdrop-filter:blur(3px);animation:nb-fade var(--dur-2) var(--ease)}
+.nb-modal-box{
+  position:relative;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-xl);box-shadow:var(--e-4);padding:var(--s-2xl);
+  max-width:440px;width:100%;animation:nb-pop var(--dur-3) var(--ease-out);
+}
+.nb-modal-box h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:var(--s-xs)}
+.nb-modal-box p{font-size:var(--t-sm);color:var(--ink-soft);line-height:1.6;margin-bottom:var(--s-lg)}
+.nb-modal-row{display:flex;gap:var(--s-xs);justify-content:flex-end;flex-wrap:wrap}
+
+/* ---------- 11. TOAST ---------------------------------------------------- */
+.nb-toasts{position:fixed;left:50%;bottom:var(--s-lg);transform:translateX(-50%);z-index:var(--z-toast);display:flex;flex-direction:column;gap:var(--s-xs);pointer-events:none;width:max-content;max-width:calc(100vw - var(--s-2xl))}
+.nb-toast{
+  background:var(--deep);color:#fff;font-size:var(--t-sm);font-weight:600;
+  padding:11px 18px;border-radius:var(--r-full);box-shadow:var(--e-3);
+  animation:nb-rise var(--dur-2) var(--ease-out);display:flex;align-items:center;gap:var(--s-xs);
+}
+html[data-theme="dark"] .nb-toast{background:#e8ece9;color:#0d100f}
+.nb-toast[data-leaving="true"]{animation:nb-fade var(--dur-2) var(--ease) reverse forwards}
+
+/* ---------- 12. SKELETONS ------------------------------------------------ */
+/* Never a spinner: a skeleton the same shape as the content that replaces it. */
+.nb-sk{
+  background:linear-gradient(90deg,var(--paper-dark) 0%,rgba(255,255,255,.55) 50%,var(--paper-dark) 100%);
+  background-size:220% 100%;border-radius:var(--r-sm);
+  animation:nb-shimmer 1.25s linear infinite;
+  display:block;
+}
+html[data-theme="dark"] .nb-sk{
+  background:linear-gradient(90deg,#1b2320 0%,#25302b 50%,#1b2320 100%);
+  background-size:220% 100%;
+}
+@keyframes nb-shimmer{from{background-position:120% 0}to{background-position:-120% 0}}
+.nb-sk--text{height:.85em;margin:.35em 0}
+.nb-sk--line{height:12px}
+[data-nb-loaded="true"] .nb-sk{display:none}
+
+/* ---------- 13. FORMS ---------------------------------------------------- */
+.nb-form{display:grid;gap:var(--s-lg)}
+.nb-field{display:grid;gap:var(--s-xxs)}
+.nb-field > label{font-size:var(--t-sm);font-weight:650;color:var(--ink)}
+.nb-field .nb-hint{font-size:var(--t-caption);color:var(--ink-soft)}
+.nb-field input,.nb-field select,.nb-field textarea{
+  font:inherit;font-size:1rem;color:var(--ink);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;
+  width:100%;transition:border-color var(--dur-1) var(--ease),box-shadow var(--dur-1) var(--ease);
+}
+.nb-field textarea{min-height:130px;resize:vertical}
+.nb-field input:focus,.nb-field select:focus,.nb-field textarea:focus{
+  outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(62,207,142,.18);
+}
+.nb-field[data-invalid="true"] input,
+.nb-field[data-invalid="true"] select,
+.nb-field[data-invalid="true"] textarea{
+  border-color:var(--err);box-shadow:0 0 0 3px rgba(179,38,30,.14);
+}
+.nb-field[data-invalid="true"]{animation:nb-shake .32s var(--ease)}
+@keyframes nb-shake{0%,100%{transform:translateX(0)}22%{transform:translateX(-5px)}55%{transform:translateX(4px)}80%{transform:translateX(-2px)}}
+.nb-error{
+  font-size:var(--t-caption);color:var(--err);font-weight:600;
+  display:none;align-items:center;gap:5px;
+}
+.nb-field[data-invalid="true"] .nb-error{display:flex}
+.nb-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+
+.nb-form-note{
+  font-size:var(--t-caption);color:var(--ink-soft);line-height:1.55;
+}
+.nb-form-note a{color:var(--teal-dark);font-weight:600}
+
+/* form-level states */
+.nb-alert{
+  border-radius:var(--r-lg);padding:var(--s-md) var(--s-lg);font-size:var(--t-sm);
+  line-height:1.55;display:none;gap:var(--s-sm);align-items:flex-start;
+  animation:nb-rise var(--dur-2) var(--ease-out);
+}
+.nb-alert[data-show="true"]{display:flex}
+.nb-alert--ok{background:var(--ok-bg);color:var(--ok);border:1px solid rgba(31,122,77,.28)}
+.nb-alert--err{background:var(--err-bg);color:var(--err);border:1px solid rgba(179,38,30,.24)}
+html[data-theme="dark"] .nb-alert--ok{background:rgba(31,122,77,.16);color:#7fdcb0}
+html[data-theme="dark"] .nb-alert--err{background:rgba(179,38,30,.18);color:#ff9a92}
+.nb-alert svg{flex:0 0 18px;width:18px;height:18px;margin-top:1px}
+.nb-alert strong{display:block;margin-bottom:2px}
+
+/* success panel replaces the form outright */
+.nb-success{display:none;text-align:center;padding:var(--s-sec-sm) var(--s-lg)}
+.nb-success[data-show="true"]{display:block;animation:nb-pop var(--dur-3) var(--ease-out)}
+.nb-success-tick{
+  width:62px;height:62px;margin:0 auto var(--s-lg);border-radius:var(--r-full);
+  background:var(--ok-bg);display:grid;place-items:center;
+}
+.nb-success-tick svg{width:30px;height:30px;color:var(--ok)}
+.nb-success-tick svg path{stroke-dasharray:32;stroke-dashoffset:32;animation:nb-draw .5s var(--ease-out) .12s forwards}
+@keyframes nb-draw{to{stroke-dashoffset:0}}
+.nb-success h3{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:var(--s-xs)}
+.nb-success p{color:var(--ink-soft);font-size:var(--t-sm);max-width:44ch;margin:0 auto var(--s-lg)}
+
+/* submit button busy state — the label swaps, the button never disappears */
+.nb-submit{position:relative;min-width:172px;justify-content:center}
+.nb-submit .nb-busy{display:none}
+.nb-submit[data-busy="true"] .nb-idle{display:none}
+.nb-submit[data-busy="true"] .nb-busy{display:inline-flex;align-items:center;gap:var(--s-xs)}
+.nb-dots{display:inline-flex;gap:3px}
+.nb-dots i{width:4px;height:4px;border-radius:50%;background:currentColor;animation:nb-bounce .9s var(--ease) infinite}
+.nb-dots i:nth-child(2){animation-delay:.12s}
+.nb-dots i:nth-child(3){animation-delay:.24s}
+@keyframes nb-bounce{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+/* ---------- 14. COPY BUTTON ---------------------------------------------- */
+.nb-copy{
+  display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:var(--t-caption);
+  font-weight:650;cursor:pointer;background:transparent;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:var(--r-full);padding:5px 12px;
+  transition:color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease);
+}
+.nb-copy:hover{color:var(--teal-dark);border-color:var(--teal)}
+.nb-copy svg{width:13px;height:13px}
+.nb-copy .nb-copy-done{display:none}
+.nb-copy[data-done="true"]{color:var(--ok);border-color:var(--ok)}
+.nb-copy[data-done="true"] .nb-copy-idle{display:none}
+.nb-copy[data-done="true"] .nb-copy-done{display:inline-flex;align-items:center;gap:6px}
+
+/* ---------- 15. GENERIC CARD / SECTION PATTERNS ------------------------- */
+.nb-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:var(--s-xl);transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease),border-color var(--dur-2) var(--ease);
+}
+.nb-card--hover:hover{transform:translateY(-4px);box-shadow:var(--e-3);border-color:var(--teal-soft)}
+.nb-sec{padding:var(--s-sec) 0}
+.nb-sec--lg{padding:var(--s-sec-lg) 0}
+.nb-grid{display:grid;gap:var(--s-lg)}
+.nb-grid--3{grid-template-columns:repeat(3,1fr)}
+.nb-grid--2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.nb-grid--3{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.nb-grid--3,.nb-grid--2{grid-template-columns:1fr}}
+
+.nb-meta{font-size:var(--t-caption);color:var(--ink-soft)}
+.nb-updated{
+  display:inline-flex;align-items:center;gap:6px;font-size:var(--t-caption);
+  color:var(--ink-soft);border:1px solid var(--line);border-radius:var(--r-full);
+  padding:4px 12px;background:var(--paper-dark);
+}
+.nb-updated svg{width:12px;height:12px}
+
+/* ---------- 16. LEGAL / PROSE PAGES ------------------------------------- */
+.nb-prose{max-width:72ch;margin:0 auto}
+.nb-prose h2{
+  font-family:var(--serif);font-size:1.5rem;font-weight:600;
+  margin:var(--s-3xl) 0 var(--s-sm);scroll-margin-top:90px;
+}
+.nb-prose h3{font-size:1.08rem;font-weight:700;margin:var(--s-xl) 0 var(--s-xs)}
+.nb-prose p,.nb-prose li{color:var(--ink-soft);line-height:1.72;font-size:.98rem}
+.nb-prose p{margin-bottom:var(--s-sm)}
+.nb-prose ul,.nb-prose ol{margin:0 0 var(--s-md) var(--s-lg);display:grid;gap:var(--s-xxs)}
+.nb-prose strong{color:var(--ink)}
+.nb-prose a{color:var(--teal-dark);font-weight:600}
+.nb-toc{
+  background:var(--paper-dark);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:var(--s-lg);margin-bottom:var(--s-2xl);
+}
+.nb-toc ol{margin:0 0 0 var(--s-md);display:grid;gap:var(--s-xxs)}
+.nb-toc a{color:var(--ink-soft);text-decoration:none;font-size:var(--t-sm)}
+.nb-toc a:hover{color:var(--teal-dark);text-decoration:underline}
+
+/* ---------- 17. FOOTER --------------------------------------------------- */
+.nb-foot-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--s-2xl);
+  padding-bottom:var(--s-xl);margin-bottom:var(--s-lg);border-bottom:1px solid var(--line);
+}
+@media(max-width:820px){.nb-foot-grid{grid-template-columns:1fr 1fr;gap:var(--s-xl)}}
+@media(max-width:480px){.nb-foot-grid{grid-template-columns:1fr}}
+.nb-foot-col h4{
+  font-size:var(--t-micro-up);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:var(--s-sm);
+}
+.nb-foot-col a{display:block;text-decoration:none;color:var(--ink-soft);font-size:var(--t-sm);padding:3px 0;transition:color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease)}
+.nb-foot-col a:hover{color:var(--teal-dark);transform:translateX(2px)}
+.nb-foot-blurb{font-size:var(--t-caption);color:var(--ink-soft);line-height:1.6;max-width:34ch}
+
+/* ---------- 18. OFFLINE BADGE -------------------------------------------- */
+.nb-offline{
+  position:fixed;left:50%;top:var(--s-sm);transform:translateX(-50%) translateY(-140%);
+  z-index:var(--z-toast);background:var(--warn-bg);color:var(--warn);
+  border:1px solid rgba(154,100,0,.3);border-radius:var(--r-full);
+  padding:7px 16px;font-size:var(--t-caption);font-weight:700;
+  transition:transform var(--dur-3) var(--ease-out);display:flex;align-items:center;gap:6px;
+}
+.nb-offline[data-show="true"]{transform:translateX(-50%)}
+
+/* ---------- 19. REDUCED MOTION ------------------------------------------ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .nb-sk{animation:none;background:var(--paper-dark)}
+  .nb-drawer a.nb-drawer-link{opacity:1;transform:none}
+  .nb-btn:active,.btn:active{transform:none}
+}
+
+/* ---------- 20. PRINT ---------------------------------------------------- */
+@media print{
+  :root{--paper:#fff;--ink:#000;--ink-soft:#333;--line:#ccc}
+  html[data-theme="dark"]{--paper:#fff;--ink:#000;--ink-soft:#333;--line:#ccc}
+  body{background:#fff!important;color:#000!important;font-size:11.5pt;line-height:1.45}
+  body::before{display:none!important}
+  header,footer,.nb-float,.nb-cookie,.nb-drawer,.nb-search,.nb-modal,.nb-toasts,
+  .nb-offline,#progress,.marquee,.hero canvas,.nb-icon-btn,.lang-toggle,
+  .nb-copy,.nb-burger,.nb-skip,.bill-toggle,video,iframe,.demo{display:none!important}
+  main{padding:0!important}
+  .rv{opacity:1!important;transform:none!important}
+  .es{display:none!important}
+  a{text-decoration:none;color:#000}
+  /* expose link targets — a printed page has no hrefs otherwise */
+  .nb-prose a[href^="http"]::after,.nb-prose a[href^="mailto"]::after{
+    content:" (" attr(href) ")";font-size:9pt;color:#555;word-break:break-all;
+  }
+  details{border:0!important}
+  details > summary{font-weight:700;list-style:none}
+  details:not([open]) > *:not(summary){display:block!important} /* print answers too */
+  section,.nb-card,.tier,.nb-prose h2{break-inside:avoid;page-break-inside:avoid}
+  h1,h2,h3{break-after:avoid;page-break-after:avoid;color:#000!important}
+  .tier,.nb-card{box-shadow:none!important;border:1px solid #ccc!important}
+  @page{margin:16mm}
+}

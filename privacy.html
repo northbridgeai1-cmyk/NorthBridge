@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy &amp; your data · NorthBridge</title>
+<meta name="description" content="What the NorthBridge website stores in your browser, what happens to a message you send us, how cookies and analytics work here, and how to delete everything held on your device in one click.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  .lg-hero{background:var(--deep);color:#fff;padding:52px 0 58px}
+  .lg-hero h1{font-size:clamp(1.9rem,4.2vw,2.8rem);max-width:20ch}
+  .lg-hero p{margin-top:16px;color:rgba(255,255,255,.72);max-width:56ch;font-size:1.02rem}
+  .lg-hero .nb-updated{margin-top:20px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.8)}
+  .lg-body{padding:var(--s-sec) 0 var(--s-sec-lg);background:var(--paper)}
+  .pv-table{width:100%;border-collapse:collapse;margin:var(--s-md) 0 var(--s-lg);font-size:.9rem}
+  .pv-table th{
+    text-align:left;font-size:var(--t-micro-up);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);padding:10px 12px;border-bottom:1px solid var(--line);
+  }
+  .pv-table td{padding:11px 12px;border-bottom:1px solid var(--line);color:var(--ink-soft);vertical-align:top;line-height:1.55}
+  .pv-table td:first-child{color:var(--ink);font-weight:650;white-space:nowrap}
+  .pv-wrap{overflow-x:auto}
+  .pv-delete{
+    background:var(--surface);border:1px solid var(--err);border-radius:var(--r-xl);
+    padding:var(--s-xl);margin:var(--s-2xl) 0;
+  }
+  .pv-delete h3{font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:8px;color:var(--ink)}
+  .pv-delete p{font-size:.9rem;color:var(--ink-soft);line-height:1.6;margin-bottom:var(--s-md)}
+</style>
+<!-- nb-shared-layer -->
+<meta name="theme-color" content="#fbfaf6">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<link rel="stylesheet" href="nb.css">
+<script>
+/* Theme applied before first paint so dark-mode visitors never see a white flash. */
+(function(){try{var s=localStorage.getItem('nb-theme');
+var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+document.documentElement.setAttribute('data-theme',m);
+if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
+}catch(e){}})();
+</script>
+<script defer src="search-index.js"></script>
+<script defer src="nb.js"></script>
+</head>
+<body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="NorthBridge home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><linearGradient id="nbg" x1="8" y1="52" x2="56" y2="12" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#c1572f"/><stop offset=".55" stop-color="#1f9e8c"/><stop offset="1" stop-color="#25d193"/>
+        </linearGradient></defs>
+        <path d="M32 10 C34.5 22 42 29.5 54 32 C42 34.5 34.5 42 32 54 C29.5 42 22 34.5 10 32 C22 29.5 29.5 22 32 10 Z" fill="url(#nbg)"/>
+        <circle cx="32" cy="8" r="6" fill="url(#nbg)"/><circle cx="32" cy="56" r="6" fill="url(#nbg)"/>
+        <circle cx="8" cy="32" r="6" fill="url(#nbg)"/><circle cx="56" cy="32" r="6" fill="url(#nbg)"/>
+        <path d="M32 20 L35 30 L32 44 L29 30 Z" fill="#1a1a1a" opacity=".85"/>
+      </svg>
+      <span class="brand-name">North<br>bridge</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="terms.html"><span class="en">Terms</span><span class="es">Términos</span></a>
+      </div>
+      <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
+      <a class="btn" href="contact.html"><span class="en">Contact us</span><span class="es">Contáctanos</span></a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="lg-hero">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">← NorthBridge</a></p>
+    <h1><span class="en">Privacy, and what we actually store</span><span class="es">Privacidad, y qué guardamos realmente</span></h1>
+    <p>
+      <span class="en">Short version: this site has no accounts, no database and no tracking pixels. Almost everything it remembers lives in your own browser, and you can wipe all of it from this page.</span>
+      <span class="es">Versión corta: este sitio no tiene cuentas, ni base de datos, ni píxeles de rastreo. Casi todo lo que recuerda vive en tu propio navegador, y puedes borrarlo todo desde esta página.</span>
+    </p>
+    <span class="nb-updated" data-nb-updated="2026-09-07">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>
+      <span class="en">Last updated</span><span class="es">Última actualización</span>&nbsp;<span class="nb-updated-date">7 September 2026</span>
+    </span>
+  </div>
+</section>
+
+<section class="lg-body">
+  <div class="wrap">
+    <div class="nb-prose">
+
+      <h2 id="p1"><span class="en">What this site stores on your device</span><span class="es">Qué guarda este sitio en tu dispositivo</span></h2>
+      <p>
+        <span class="en">All of the following is stored locally in your browser. None of it is sent to us, and none of it identifies you.</span>
+        <span class="es">Todo lo siguiente se guarda localmente en tu navegador. Nada se nos envía, y nada te identifica.</span>
+      </p>
+      <div class="pv-wrap">
+        <table class="pv-table">
+          <thead><tr>
+            <th><span class="en">What</span><span class="es">Qué</span></th>
+            <th><span class="en">Why</span><span class="es">Para qué</span></th>
+            <th><span class="en">How long</span><span class="es">Cuánto dura</span></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>nb-lang</td>
+              <td><span class="en">Remembers whether you read the site in English or Spanish.</span><span class="es">Recuerda si lees el sitio en inglés o español.</span></td>
+              <td><span class="en">Until you clear it</span><span class="es">Hasta que lo borres</span></td>
+            </tr>
+            <tr>
+              <td>nb-theme</td>
+              <td><span class="en">Remembers light or dark mode.</span><span class="es">Recuerda el modo claro u oscuro.</span></td>
+              <td><span class="en">Until you clear it</span><span class="es">Hasta que lo borres</span></td>
+            </tr>
+            <tr>
+              <td>nb-consent</td>
+              <td><span class="en">Remembers your answer to the analytics question, so we stop asking.</span><span class="es">Recuerda tu respuesta sobre analítica, para dejar de preguntar.</span></td>
+              <td><span class="en">Until you clear it</span><span class="es">Hasta que lo borres</span></td>
+            </tr>
+            <tr>
+              <td>nb-utm</td>
+              <td><span class="en">If you arrived from a campaign link, the campaign name, so that if you later send us a message we know which channel worked.</span><span class="es">Si llegaste desde un enlace de campaña, el nombre de la campaña, para saber qué canal funcionó si luego nos escribes.</span></td>
+              <td><span class="en">Until you close the tab</span><span class="es">Hasta que cierres la pestaña</span></td>
+            </tr>
+            <tr>
+              <td><span class="en">Offline cache</span><span class="es">Caché sin conexión</span></td>
+              <td><span class="en">A copy of the pages so the site still opens with no connection.</span><span class="es">Una copia de las páginas para que el sitio abra sin conexión.</span></td>
+              <td><span class="en">Until you clear it</span><span class="es">Hasta que lo borres</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="p2"><span class="en">Cookies</span><span class="es">Cookies</span></h2>
+      <p>
+        <span class="en">This site sets no cookies of its own. If we enable Google Analytics in future, you will be asked first, nothing will load unless you say yes, and declining is one click and is remembered. We do not use advertising cookies, we do not run tracking pixels, and we do not sell or share anything with data brokers.</span>
+        <span class="es">Este sitio no coloca cookies propias. Si en el futuro activamos Google Analytics, se te preguntará primero, no se cargará nada a menos que aceptes, y rechazar es un clic y se recuerda. No usamos cookies publicitarias, no ejecutamos píxeles de rastreo, y no vendemos ni compartimos nada con corredores de datos.</span>
+      </p>
+
+      <h2 id="p3"><span class="en">Fonts and other outside requests</span><span class="es">Fuentes y otras solicitudes externas</span></h2>
+      <p>
+        <span class="en">Typefaces are loaded from Google Fonts, which means Google receives the request and, with it, your IP address, as with any font on any site. Apart from that, and analytics if you have opted in, this site makes no third-party requests.</span>
+        <span class="es">Las tipografías se cargan desde Google Fonts, lo que significa que Google recibe la solicitud y, con ella, tu dirección IP, como con cualquier fuente en cualquier sitio. Aparte de eso, y de la analítica si la aceptaste, este sitio no hace solicitudes a terceros.</span>
+      </p>
+
+      <h2 id="p4"><span class="en">When you send us a message</span><span class="es">Cuando nos envías un mensaje</span></h2>
+      <p>
+        <span class="en">If you use the contact form or email us, we receive what you typed: your name, email address, business name if you gave one, your message, and the campaign name if you arrived from a campaign link. We use it to reply to you and to keep track of the conversation. We do not add you to a mailing list, and we do not pass it to anyone else.</span>
+        <span class="es">Si usas el formulario de contacto o nos escribes, recibimos lo que escribiste: tu nombre, correo, nombre del negocio si lo diste, tu mensaje, y el nombre de la campaña si llegaste por un enlace de campaña. Lo usamos para responderte y llevar el hilo de la conversación. No te agregamos a ninguna lista de correo, y no se lo pasamos a nadie más.</span>
+      </p>
+      <p>
+        <span class="en">Messages sent through the form are delivered by a form service and then land in our email inbox; email is handled by our mail provider. We keep enquiries for as long as the conversation is useful, and you can ask us to delete yours at any time by writing to </span>
+        <span class="es">Los mensajes enviados por el formulario los entrega un servicio de formularios y luego llegan a nuestro buzón de correo; el correo lo maneja nuestro proveedor. Guardamos las consultas mientras la conversación sea útil, y puedes pedirnos que borremos la tuya cuando quieras escribiendo a </span>
+        <a href="mailto:northbridgeai1@gmail.com?subject=Delete%20my%20enquiry">northbridgeai1@gmail.com</a>.
+      </p>
+
+      <h2 id="p5"><span class="en">Client data, if you work with us</span><span class="es">Datos de clientes, si trabajas con nosotros</span></h2>
+      <p>
+        <span class="en">This is worth saying clearly because it is unusual: the automations we build run in accounts <strong>you</strong> own. Your business data stays in your systems. We access it only while building or maintaining something for you, only as much as that job needs, and we do not copy it into systems of ours.</span>
+        <span class="es">Vale la pena decirlo claro porque es poco común: las automatizaciones que construimos corren en cuentas que <strong>tú</strong> posees. Los datos de tu negocio se quedan en tus sistemas. Accedemos a ellos solo mientras construimos o mantenemos algo para ti, solo lo necesario para ese trabajo, y no los copiamos a sistemas nuestros.</span>
+      </p>
+
+      <h2 id="p6"><span class="en">Your rights</span><span class="es">Tus derechos</span></h2>
+      <p>
+        <span class="en">You can ask what we hold about you, ask for a copy, ask us to correct it, or ask us to delete it. Write to us and we will do it — no forms, no fee, no arguing. If you are in a place with specific data-protection law, such as the EU or the UK, those rights apply and this is how you exercise them.</span>
+        <span class="es">Puedes preguntar qué tenemos sobre ti, pedir una copia, pedir que lo corrijamos, o pedir que lo borremos. Escríbenos y lo hacemos: sin formularios, sin costo, sin discusión. Si estás en un lugar con ley específica de protección de datos, como la UE o el Reino Unido, esos derechos aplican y así se ejercen.</span>
+      </p>
+
+      <div class="pv-delete">
+        <h3><span class="en">Delete everything stored on this device</span><span class="es">Borrar todo lo guardado en este dispositivo</span></h3>
+        <p>
+          <span class="en">This clears your language and theme choice, your answer to the analytics question, any campaign attribution, and the offline copy of the site — immediately, from this browser. It asks you to confirm first, and it cannot be undone.</span>
+          <span class="es">Esto borra tu idioma y tema, tu respuesta sobre analítica, cualquier atribución de campaña, y la copia sin conexión del sitio, de inmediato y desde este navegador. Te pide confirmación primero, y no se puede deshacer.</span>
+        </p>
+        <button type="button" class="nb-btn nb-btn--danger" data-nb-delete>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9.5 7V5.2A1.2 1.2 0 0 1 10.7 4h2.6a1.2 1.2 0 0 1 1.2 1.2V7M6.5 7l.8 12a1.6 1.6 0 0 0 1.6 1.5h6.2a1.6 1.6 0 0 0 1.6-1.5l.8-12"/><path d="M10.5 11v6M13.5 11v6"/></svg>
+          <span class="en">Delete my data</span><span class="es">Borrar mis datos</span>
+        </button>
+      </div>
+
+      <h2 id="p7"><span class="en">Children</span><span class="es">Menores</span></h2>
+      <p>
+        <span class="en">This is a business site and is not directed at children. Where Socrates runs programmes in schools, the school is our client, and any handling of student information is agreed with the school and governed by that agreement, not by this page.</span>
+        <span class="es">Este es un sitio de negocios y no está dirigido a menores. Cuando Socrates realiza programas en escuelas, la escuela es nuestro cliente, y cualquier manejo de información de estudiantes se acuerda con la escuela y se rige por ese acuerdo, no por esta página.</span>
+      </p>
+
+      <h2 id="p8"><span class="en">Changes and contact</span><span class="es">Cambios y contacto</span></h2>
+      <p>
+        <span class="en">If this policy changes, the date at the top changes with it. Anything at all about your data goes to </span>
+        <span class="es">Si esta política cambia, la fecha de arriba cambia con ella. Cualquier cosa sobre tus datos va a </span>
+        <a href="mailto:northbridgeai1@gmail.com?subject=Privacy%20question">northbridgeai1@gmail.com</a>.
+        <span class="en"> A person reads it.</span><span class="es"> Lo lee una persona.</span>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="nb-foot-grid">
+      <div class="nb-foot-col">
+        <h4>NorthBridge</h4>
+        <p class="nb-foot-blurb">
+          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+        </p>
+        <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
+          <button data-copy="northbridgeai1@gmail.com" data-copy-label="Copy"></button>
+        </p>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Practices</span><span class="es">Prácticas</span></h4>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+        <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Legal</span><span class="es">Legal</span></h4>
+        <a href="terms.html"><span class="en">Terms of use</span><span class="es">Términos de uso</span></a>
+        <a href="privacy.html"><span class="en">Privacy</span><span class="es">Privacidad</span></a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+        <a href="#" data-nb-delete role="button"><span class="en">Delete my data</span><span class="es">Borrar mis datos</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 NorthBridge · Quito, Ecuador</span>
+      <span>
+        <span class="en">Automation that pays for itself.</span>
+        <span class="es">Automatización que se paga sola.</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

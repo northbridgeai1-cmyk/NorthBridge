@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact NorthBridge, or one of its branches</title>
+<meta name="description" content="Contact NorthBridge or a specific branch: Cinderella for data and workflow automation, Hermes for client communication, Socrates for AI training, PerceptFolio for quantitative research, or the real estate branch. Replies within one business day, in English or Spanish.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  .ct-hero{background:var(--deep);color:#fff;padding:60px 0 66px;position:relative;overflow:hidden}
+  .ct-hero::after{
+    content:"";position:absolute;inset:-40%;pointer-events:none;
+    background:radial-gradient(620px 340px at 25% 30%, rgba(46,125,79,.18), transparent 60%),
+               radial-gradient(680px 400px at 82% 78%, rgba(193,87,47,.13), transparent 60%);
+    animation:drift 16s ease-in-out infinite alternate;
+  }
+  .ct-hero .wrap{position:relative;z-index:2}
+  .ct-hero h1{max-width:18ch}
+  .ct-hero p{margin-top:20px;color:rgba(255,255,255,.78);max-width:56ch;font-size:1.08rem}
+
+  .ct-body{padding:var(--s-sec) 0 var(--s-sec-lg);background:var(--paper)}
+  .ct-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:var(--s-3xl);align-items:start}
+  @media(max-width:900px){.ct-grid{grid-template-columns:1fr;gap:var(--s-2xl)}}
+
+  .ct-panel{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--r-2xl);padding:var(--s-2xl);box-shadow:var(--e-1);
+  }
+  @media(max-width:520px){.ct-panel{padding:var(--s-lg);border-radius:var(--r-xl)}}
+
+  /* branch picker */
+  .ct-branches{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-xs)}
+  @media(max-width:520px){.ct-branches{grid-template-columns:1fr}}
+  .ct-branch{
+    display:flex;gap:11px;align-items:flex-start;cursor:pointer;
+    border:1px solid var(--line);border-radius:var(--r-lg);padding:13px 14px;
+    transition:border-color .2s var(--ease),background .2s var(--ease),transform .12s var(--ease);
+    background:var(--paper);
+  }
+  .ct-branch:hover{border-color:var(--teal-soft);background:var(--paper-dark)}
+  .ct-branch:active{transform:scale(.985)}
+  .ct-branch input{margin-top:3px;accent-color:var(--teal);flex:0 0 auto;width:15px;height:15px}
+  .ct-branch b{display:block;font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.3}
+  .ct-branch > span{display:block;font-size:.78rem;color:var(--ink-soft);line-height:1.45;margin-top:2px}
+  .ct-branch:has(input:checked){border-color:var(--teal);background:rgba(46,125,79,.06);box-shadow:0 0 0 1px var(--teal)}
+  .ct-branch:has(input:focus-visible){outline:2px solid var(--teal);outline-offset:2px}
+  .ct-soon{
+    display:inline-block;font-size:var(--t-micro-up);font-weight:800;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);
+    border-radius:var(--r-full);padding:1px 7px;margin-left:6px;vertical-align:1px;
+  }
+
+  .ct-count{font-size:var(--t-micro);color:var(--ink-soft);text-align:right;font-variant-numeric:tabular-nums}
+  .ct-count[data-over="true"]{color:var(--err);font-weight:700}
+
+  /* side rail */
+  .ct-side{display:grid;gap:var(--s-md);position:sticky;top:88px}
+  @media(max-width:900px){.ct-side{position:static}}
+  .ct-side-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);padding:var(--s-lg);
+  }
+  .ct-side-card h3{font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+  .ct-side-card p{font-size:.86rem;color:var(--ink-soft);line-height:1.6}
+  .ct-side-card a{color:var(--teal-dark);font-weight:600}
+  .ct-mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .ct-mail a{font-size:.88rem;text-decoration:none;font-weight:700}
+  .ct-steps{list-style:none;display:grid;gap:11px;counter-reset:s}
+  .ct-steps li{
+    position:relative;padding-left:31px;font-size:.86rem;color:var(--ink-soft);line-height:1.55;counter-increment:s;
+  }
+  .ct-steps li::before{
+    content:counter(s);position:absolute;left:0;top:0;width:21px;height:21px;border-radius:50%;
+    background:var(--teal);color:#06251a;font-size:.7rem;font-weight:800;display:grid;place-items:center;
+  }
+  .ct-steps li strong{color:var(--ink)}
+</style>
+<!-- nb-shared-layer -->
+<meta name="theme-color" content="#fbfaf6">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<link rel="stylesheet" href="nb.css">
+<script>
+/* Theme applied before first paint so dark-mode visitors never see a white flash. */
+(function(){try{var s=localStorage.getItem('nb-theme');
+var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
+document.documentElement.setAttribute('data-theme',m);
+if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
+}catch(e){}})();
+</script>
+<script defer src="search-index.js"></script>
+<script defer src="nb.js"></script>
+</head>
+<body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="NorthBridge home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="nbg" x1="8" y1="52" x2="56" y2="12" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#c1572f"/>
+            <stop offset=".55" stop-color="#1f9e8c"/>
+            <stop offset="1" stop-color="#25d193"/>
+          </linearGradient>
+        </defs>
+        <path d="M32 10 C34.5 22 42 29.5 54 32 C42 34.5 34.5 42 32 54 C29.5 42 22 34.5 10 32 C22 29.5 29.5 22 32 10 Z" fill="url(#nbg)"/>
+        <circle cx="32" cy="8" r="6" fill="url(#nbg)"/>
+        <circle cx="32" cy="56" r="6" fill="url(#nbg)"/>
+        <circle cx="8" cy="32" r="6" fill="url(#nbg)"/>
+        <circle cx="56" cy="32" r="6" fill="url(#nbg)"/>
+        <path d="M32 20 L35 30 L32 44 L29 30 Z" fill="#1a1a1a" opacity=".85"/>
+      </svg>
+      <span class="brand-name">North<br>bridge</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+      </div>
+      <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
+      <a class="btn" href="book.html">
+        <span class="en">Book a meeting</span><span class="es">Agendar reunión</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<section class="ct-hero">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">← NorthBridge</a></p>
+    <h1>
+      <span class="en">Tell us what eats your hours.</span>
+      <span class="es">Cuéntanos qué se come tus horas.</span>
+    </h1>
+    <p>
+      <span class="en">One short message is enough. Pick the branch if you already know which one you need; if you don't, leave it on NorthBridge and we'll point you to the right door.</span>
+      <span class="es">Con un mensaje corto basta. Elige la rama si ya sabes cuál necesitas; si no, déjalo en NorthBridge y nosotros te señalamos la puerta correcta.</span>
+    </p>
+  </div>
+</section>
+
+<section class="ct-body">
+  <div class="wrap">
+    <div class="ct-grid">
+
+      <!-- ============ FORM ============ -->
+      <div class="ct-panel">
+
+        <!-- error banner: shown only when a submit actually fails -->
+        <div class="nb-alert nb-alert--err" id="ctError" role="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.5M12 16.5h.01"/></svg>
+          <span>
+            <strong><span class="en">That didn't send.</span><span class="es">No se pudo enviar.</span></strong>
+            <span class="ct-error-detail"></span>
+          </span>
+        </div>
+
+        <form class="nb-form" id="ctForm" novalidate>
+
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend style="font-size:var(--t-sm);font-weight:650;margin-bottom:10px;padding:0">
+              <span class="en">Who should read this?</span><span class="es">¿Quién debería leer esto?</span>
+            </legend>
+            <div class="ct-branches">
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="NorthBridge (not sure yet)" checked>
+                <span><b>NorthBridge</b><span class="en">Not sure which one — help me pick</span><span class="es">No sé cuál — ayúdenme a elegir</span></span>
+              </label>
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="Cinderella — data &amp; workflows">
+                <span><b>Cinderella</b><span class="en">Invoices, reports, data, paperwork</span><span class="es">Facturas, reportes, datos, papeleo</span></span>
+              </label>
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="Hermes — client communication">
+                <span><b>Hermes</b><span class="en">Follow-ups, messaging, voice agents</span><span class="es">Seguimientos, mensajería, agentes de voz</span></span>
+              </label>
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="Socrates — AI training">
+                <span><b>Socrates</b><span class="en">Team training, schools, events</span><span class="es">Capacitación, escuelas, eventos</span></span>
+              </label>
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="PerceptFolio — quant terminal">
+                <span><b>PerceptFolio</b><span class="en">Quant research and backtesting</span><span class="es">Investigación cuantitativa y backtesting</span></span>
+              </label>
+              <label class="ct-branch">
+                <input type="radio" name="branch" value="Real estate branch (pre-launch)">
+                <span><b><span class="en">Real estate</span><span class="es">Bienes raíces</span><span class="ct-soon"><span class="en">Soon</span><span class="es">Pronto</span></span></b><span class="en">Join the list for the launch</span><span class="es">Anótate para el lanzamiento</span></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="nb-field" id="f-name">
+            <label for="ct-name"><span class="en">Your name</span><span class="es">Tu nombre</span></label>
+            <input type="text" id="ct-name" name="name" autocomplete="name" maxlength="80" required
+                   aria-describedby="e-name">
+            <span class="nb-error" id="e-name" role="alert">
+              <span class="en">Please tell us your name.</span><span class="es">Dinos tu nombre, por favor.</span>
+            </span>
+          </div>
+
+          <div class="nb-field" id="f-email">
+            <label for="ct-email"><span class="en">Email</span><span class="es">Correo</span></label>
+            <input type="email" id="ct-email" name="email" autocomplete="email" maxlength="140" required
+                   inputmode="email" aria-describedby="e-email">
+            <span class="nb-error" id="e-email" role="alert">
+              <span class="en">That doesn't look like a working email address.</span>
+              <span class="es">Eso no parece una dirección de correo válida.</span>
+            </span>
+          </div>
+
+          <div class="nb-field">
+            <label for="ct-company">
+              <span class="en">Business name</span><span class="es">Nombre del negocio</span>
+              <span style="font-weight:400;color:var(--ink-soft)"> · <span class="en">optional</span><span class="es">opcional</span></span>
+            </label>
+            <input type="text" id="ct-company" name="company" autocomplete="organization" maxlength="100">
+          </div>
+
+          <div class="nb-field" id="f-msg">
+            <label for="ct-msg"><span class="en">What's eating your hours?</span><span class="es">¿Qué se come tus horas?</span></label>
+            <span class="nb-hint">
+              <span class="en">A couple of sentences is plenty. What your business does, and the task you're tired of.</span>
+              <span class="es">Con un par de frases basta. A qué se dedica tu negocio, y la tarea de la que ya te cansaste.</span>
+            </span>
+            <textarea id="ct-msg" name="message" maxlength="2000" required aria-describedby="e-msg ct-count"></textarea>
+            <div class="ct-count" id="ct-count"><span>0</span>/2000</div>
+            <span class="nb-error" id="e-msg" role="alert">
+              <span class="en">Please add at least a sentence so we can give you a useful answer.</span>
+              <span class="es">Escribe al menos una frase para poder darte una respuesta útil.</span>
+            </span>
+          </div>
+
+          <div class="nb-field">
+            <label for="ct-lang"><span class="en">Reply in</span><span class="es">Respondan en</span></label>
+            <select id="ct-lang" name="reply_language">
+              <option value="English">English</option>
+              <option value="Español">Español</option>
+              <option value="Either"><span>Either / Cualquiera</span></option>
+            </select>
+          </div>
+
+          <!-- Spam trap. Real people never see this; bots fill it in and the
+               submit is dropped silently. -->
+          <div class="nb-hp" aria-hidden="true">
+            <label for="ct-website">Leave this field empty</label>
+            <input type="text" id="ct-website" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- Attribution, filled from the UTM captured on landing. -->
+          <input type="hidden" name="source" id="ct-source" value="">
+          <input type="hidden" name="_subject" id="ct-subject" value="NorthBridge website enquiry">
+
+          <button type="submit" class="nb-btn nb-btn--primary nb-submit" id="ctSubmit">
+            <span class="nb-idle"><span class="en">Send message</span><span class="es">Enviar mensaje</span></span>
+            <span class="nb-busy"><span class="en">Sending</span><span class="es">Enviando</span><span class="nb-dots"><i></i><i></i><i></i></span></span>
+          </button>
+
+          <p class="nb-form-note">
+            <span class="en">We reply within one business day. No list, no newsletter, no sharing your details with anyone — see <a href="privacy.html">Privacy</a> and <a href="terms.html">Terms</a>.</span>
+            <span class="es">Respondemos en un día hábil. Sin listas, sin boletines, y no compartimos tus datos con nadie; consulta <a href="privacy.html">Privacidad</a> y <a href="terms.html">Términos</a>.</span>
+          </p>
+        </form>
+
+        <!-- success state: replaces the form entirely -->
+        <div class="nb-success" id="ctSuccess" role="status">
+          <div class="nb-success-tick">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5.2 5.2L20 7"/></svg>
+          </div>
+          <h3><span class="en">Message sent.</span><span class="es">Mensaje enviado.</span></h3>
+          <p>
+            <span class="en">It's with us. You'll get a real reply from a person within one business day — including an honest "you don't need us for this" if that's the truth.</span>
+            <span class="es">Ya lo tenemos. Recibirás una respuesta real de una persona en un día hábil, incluida una honesta "para esto no nos necesitas" si esa es la verdad.</span>
+          </p>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <a class="nb-btn nb-btn--primary" href="book.html"><span class="en">Book a time too</span><span class="es">Agenda también un horario</span></a>
+            <a class="nb-btn" href="index.html"><span class="en">Back to the site</span><span class="es">Volver al sitio</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SIDE ============ -->
+      <aside class="ct-side">
+        <div class="ct-side-card">
+          <h3><span class="en">Rather just email?</span><span class="es">¿Prefieres solo escribir?</span></h3>
+          <p><span class="en">Completely fine. Same inbox, same reply time.</span><span class="es">Perfecto. El mismo buzón, el mismo tiempo de respuesta.</span></p>
+          <div class="ct-mail">
+            <a href="mailto:northbridgeai1@gmail.com?subject=Working%20with%20NorthBridge">northbridgeai1@gmail.com</a>
+            <button data-copy="northbridgeai1@gmail.com"></button>
+          </div>
+        </div>
+
+        <div class="ct-side-card">
+          <h3><span class="en">What happens next</span><span class="es">Qué pasa después</span></h3>
+          <ol class="ct-steps">
+            <li><strong><span class="en">We read it properly.</span><span class="es">Lo leemos de verdad.</span></strong> <span class="en">A person, not an autoresponder.</span><span class="es">Una persona, no una respuesta automática.</span></li>
+            <li><strong><span class="en">You get a demo.</span><span class="es">Recibes una demo.</span></strong> <span class="en">A working system, relevant to what you described.</span><span class="es">Un sistema funcionando, relacionado con lo que describiste.</span></li>
+            <li><strong><span class="en">And an honest read.</span><span class="es">Y una opinión honesta.</span></strong> <span class="en">Sometimes the answer is "not yet". We'd rather say it.</span><span class="es">A veces la respuesta es "todavía no". Preferimos decirlo.</span></li>
+          </ol>
+        </div>
+
+        <div class="ct-side-card">
+          <h3><span class="en">Prefer to talk?</span><span class="es">¿Prefieres hablar?</span></h3>
+          <p>
+            <span class="en">Pick a slot for a free 30-minute first meeting instead. Zoom or Google Meet, English or Spanish.</span>
+            <span class="es">Elige un horario para una primera reunión gratuita de 30 minutos. Zoom o Google Meet, en inglés o español.</span>
+          </p>
+          <p style="margin-top:12px"><a href="book.html"><span class="en">Book a meeting →</span><span class="es">Agendar reunión →</span></a></p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="nb-foot-grid">
+      <div class="nb-foot-col">
+        <h4>NorthBridge</h4>
+        <p class="nb-foot-blurb">
+          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+        </p>
+        <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
+          <button data-copy="northbridgeai1@gmail.com" data-copy-label="Copy"></button>
+        </p>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Practices</span><span class="es">Prácticas</span></h4>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
+        <a href="index.html#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
+        <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
+        <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
+      </div>
+      <div class="nb-foot-col">
+        <h4><span class="en">Legal</span><span class="es">Legal</span></h4>
+        <a href="terms.html"><span class="en">Terms of use</span><span class="es">Términos de uso</span></a>
+        <a href="privacy.html"><span class="en">Privacy</span><span class="es">Privacidad</span></a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+        <a href="#" data-nb-delete role="button"><span class="en">Delete my data</span><span class="es">Borrar mis datos</span></a>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 NorthBridge · Quito, Ecuador</span>
+      <span>
+        <span class="en">Automation that pays for itself.</span>
+        <span class="es">Automatización que se paga sola.</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ==================================================================
+     WHERE THE FORM SENDS
+     ------------------------------------------------------------------
+     1. Create a free form at https://formspree.io (takes about two minutes)
+     2. Paste the endpoint it gives you between the quotes below
+     3. Done — the form posts straight to your inbox.
+
+     Left empty, the form still validates fully and then hands off to a
+     pre-filled email instead, so it is never a dead end.
+     ================================================================== */
+  var FORM_ENDPOINT = '';
+
+  var form    = document.getElementById('ctForm');
+  var okPanel = document.getElementById('ctSuccess');
+  var errBox  = document.getElementById('ctError');
+  var submit  = document.getElementById('ctSubmit');
+  if(!form) return;
+
+  function isES(){ return document.documentElement.getAttribute('data-lang') === 'es'; }
+  function t(en, es){ return isES() ? es : en; }
+
+  /* ---- preselect the branch from ?branch= ------------------------ */
+  var MAP = {
+    cinderella:  'Cinderella',
+    hermes:      'Hermes',
+    socrates:    'Socrates',
+    perceptfolio:'PerceptFolio',
+    realestate:  'Real estate'
+  };
+  try{
+    var want = (new URLSearchParams(location.search).get('branch') || '').toLowerCase();
+    if(MAP[want]){
+      Array.prototype.forEach.call(form.elements.branch, function(r){
+        if(r.value.indexOf(MAP[want]) === 0) r.checked = true;
+      });
+    }
+  }catch(e){}
+
+  /* ---- character counter ----------------------------------------- */
+  var msg = document.getElementById('ct-msg');
+  var count = document.getElementById('ct-count');
+  if(msg && count){
+    var num = count.querySelector('span');
+    var tick = function(){
+      num.textContent = msg.value.length;
+      count.setAttribute('data-over', msg.value.length > 1900 ? 'true' : 'false');
+    };
+    msg.addEventListener('input', tick);
+    tick();
+  }
+
+  /* ---- validation ------------------------------------------------- */
+  /* Trimmed, length-capped, and re-checked on the way out. The server side
+     (Formspree) validates again; this is for the human, not for security. */
+  var RULES = [
+    { field:'f-name',  input:'ct-name',  test:function(v){ return v.length >= 2 && v.length <= 80; } },
+    { field:'f-email', input:'ct-email', test:function(v){ return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v) && v.length <= 140; } },
+    { field:'f-msg',   input:'ct-msg',   test:function(v){ return v.length >= 10 && v.length <= 2000; } }
+  ];
+
+  function check(rule, showIt){
+    var wrap = document.getElementById(rule.field);
+    var input = document.getElementById(rule.input);
+    var ok = rule.test((input.value || '').trim());
+    if(showIt) wrap.setAttribute('data-invalid', ok ? 'false' : 'true');
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    return ok;
+  }
+
+  RULES.forEach(function(r){
+    var input = document.getElementById(r.input);
+    /* validate on blur, then live once it has been flagged — so nobody is
+       told they're wrong while still typing the first character */
+    input.addEventListener('blur', function(){ check(r, true); });
+    input.addEventListener('input', function(){
+      if(document.getElementById(r.field).getAttribute('data-invalid') === 'true') check(r, true);
+    });
+  });
+
+  function showError(detail){
+    var d = errBox.querySelector('.ct-error-detail');
+    d.textContent = ' ' + detail;
+    errBox.setAttribute('data-show', 'true');
+    errBox.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  /* ---- submit ------------------------------------------------------ */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errBox.setAttribute('data-show', 'false');
+
+    /* honeypot: a bot filled the hidden field — pretend it worked */
+    if(form.elements._gotcha && form.elements._gotcha.value){
+      form.style.display = 'none';
+      okPanel.setAttribute('data-show', 'true');
+      return;
+    }
+
+    var bad = RULES.filter(function(r){ return !check(r, true); });
+    if(bad.length){
+      var first = document.getElementById(bad[0].input);
+      first.focus();
+      first.scrollIntoView({behavior:'smooth', block:'center'});
+      if(window.nbToast) window.nbToast(t('Check the highlighted fields', 'Revisa los campos marcados'));
+      return;
+    }
+
+    /* attach the UTM captured when they first landed */
+    var utm = (window.nbGetUTM && window.nbGetUTM()) || {};
+    var src = Object.keys(utm).map(function(k){ return k + '=' + utm[k]; }).join(' | ');
+    document.getElementById('ct-source').value = src || '(direct)';
+
+    var branch = form.elements.branch.value || 'NorthBridge';
+    document.getElementById('ct-subject').value = 'Website enquiry · ' + branch;
+
+    submit.setAttribute('data-busy', 'true');
+    submit.disabled = true;
+
+    var done = function(){ submit.removeAttribute('data-busy'); submit.disabled = false; };
+
+    /* No endpoint configured → fall back to a pre-filled email so the
+       visitor is never stranded. */
+    if(!FORM_ENDPOINT){
+      var body =
+        t('Branch: ', 'Rama: ') + branch + '\n' +
+        t('Name: ', 'Nombre: ') + form.elements.name.value + '\n' +
+        t('Email: ', 'Correo: ') + form.elements.email.value + '\n' +
+        (form.elements.company.value ? t('Business: ', 'Negocio: ') + form.elements.company.value + '\n' : '') +
+        t('Reply in: ', 'Responder en: ') + form.elements.reply_language.value + '\n\n' +
+        form.elements.message.value + '\n\n---\n' + src;
+      window.location.href = 'mailto:northbridgeai1@gmail.com?subject=' +
+        encodeURIComponent('Website enquiry · ' + branch) + '&body=' + encodeURIComponent(body);
+      setTimeout(function(){
+        done();
+        form.style.display = 'none';
+        okPanel.setAttribute('data-show', 'true');
+      }, 600);
+      return;
+    }
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json().catch(function(){ return {}; });
+    }).then(function(){
+      done();
+      form.style.display = 'none';
+      okPanel.setAttribute('data-show', 'true');
+      okPanel.scrollIntoView({behavior:'smooth', block:'center'});
+      if(window.gtag) window.gtag('event', 'generate_lead', {branch: branch});
+    }).catch(function(err){
+      done();
+      showError(t(
+        'Please try again, or email northbridgeai1@gmail.com directly — that always works.',
+        'Inténtalo de nuevo, o escribe directo a northbridgeai1@gmail.com, eso siempre funciona.'
+      ));
+      if(window.console) console.warn('Contact form:', err.message);
+    });
+  });
+})();
+</script>
+</body>
+</html>

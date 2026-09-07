@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found · NorthBridge</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+  .off{min-height:78vh;display:grid;place-items:center;text-align:center;padding:var(--s-2xl) var(--s-md)}
+  .off-in{max-width:44ch}
+  .off-ico{
+    width:70px;height:70px;margin:0 auto var(--s-lg);border-radius:50%;
+    background:var(--paper-dark);display:grid;place-items:center;color:var(--ink-soft);
+  }
+  .off-ico svg{width:32px;height:32px}
+  .off h1{font-family:var(--serif);font-size:1.9rem;font-weight:600;color:var(--ink);margin-bottom:12px;max-width:none}
+  .off p{color:var(--ink-soft);line-height:1.65;margin-bottom:var(--s-lg)}
+  .off-links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:var(--s-lg)}
+  .off-links a{
+    font-size:.85rem;text-decoration:none;color:var(--ink-soft);font-weight:600;
+    border:1px solid var(--line);border-radius:var(--r-full);padding:7px 15px;
+  }
+  .off-links a:hover{border-color:var(--teal);color:var(--teal-dark)}
+</style>
+</head>
+<body>
+<a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
+
+<header>
+  <nav class="nav">
+    <a class="brand" href="index.html" aria-label="NorthBridge home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><linearGradient id="nbg" x1="8" y1="52" x2="56" y2="12" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#c1572f"/><stop offset=".55" stop-color="#1f9e8c"/><stop offset="1" stop-color="#25d193"/>
+        </linearGradient></defs>
+        <path d="M32 10 C34.5 22 42 29.5 54 32 C42 34.5 34.5 42 32 54 C29.5 42 22 34.5 10 32 C22 29.5 29.5 22 32 10 Z" fill="url(#nbg)"/>
+        <circle cx="32" cy="8" r="6" fill="url(#nbg)"/><circle cx="32" cy="56" r="6" fill="url(#nbg)"/>
+        <circle cx="8" cy="32" r="6" fill="url(#nbg)"/><circle cx="56" cy="32" r="6" fill="url(#nbg)"/>
+        <path d="M32 20 L35 30 L32 44 L29 30 Z" fill="#1a1a1a" opacity=".85"/>
+      </svg>
+      <span class="brand-name">North<br>bridge</span>
+    </a>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="off">
+    <div class="off-in">
+      <div class="off-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.2 8.8 13.4 13.4 8.8 15.2l1.8-4.6z"/></svg>
+      </div>
+      <h1><span class="en">That page isn't here</span><span class="es">Esa página no está aquí</span></h1>
+      <p>
+        <span class="en">The link is wrong, or the page moved. Nothing is broken on your end. Here is everywhere worth going instead.</span>
+        <span class="es">El enlace está mal, o la página se movió. No es culpa tuya. Aquí está todo lo que vale la pena visitar en su lugar.</span>
+      </p>
+      <a class="nb-btn nb-btn--primary" href="index.html">
+        <span class="en">Back to the home page</span><span class="es">Volver al inicio</span>
+      </a>
+      <div class="off-links">
+        <a href="index.html"><span class="en">Home</span><span class="es">Inicio</span></a>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
+        <a href="perceptfolio.html">PerceptFolio</a>
+        <a href="contact.html"><span class="en">Contact</span><span class="es">Contacto</span></a>
+      </div>
+      <p style="margin-top:26px;font-size:.85rem">
+        <span class="en">Looking for something specific? Press <kbd style="border:1px solid var(--line);border-radius:4px;padding:1px 5px;font:inherit;font-size:.8em">/</kbd> to search, or email </span><span class="es">¿Buscas algo puntual? Presiona <kbd style="border:1px solid var(--line);border-radius:4px;padding:1px 5px;font:inherit;font-size:.8em">/</kbd> para buscar, o escribe a </span>
+        <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600">northbridgeai1@gmail.com</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<script src="site.js"></script>
+</body>
+</html>
