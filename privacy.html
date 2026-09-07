@@ -43,7 +43,11 @@
 var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
 document.documentElement.setAttribute('data-theme',m);
 if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
-}catch(e){}})();
+}catch(e){}
+/* Set before first paint so hero content animates in from hidden instead of
+   flashing visible and then moving. Purely additive: without it the CSS
+   simply never fires and everything renders in its final state. */
+try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 </script>
 <script defer src="search-index.js"></script>
 <script defer src="nb.js"></script>

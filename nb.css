@@ -110,6 +110,108 @@ html.nb-theme-ready .fit-card{
 html:not([data-lang="es"]) .es{display:none !important}
 html[data-lang="es"] .en{display:none !important}
 
+/* ---------- 2c. MOTION SYSTEM -------------------------------------------
+   Everything here is additive: if a feature is unsupported, or the visitor
+   asks for reduced motion, the page still renders in its final state. No
+   animation is ever load-bearing. */
+
+/* Cross-document page transitions. Same-origin navigations cross-fade and
+   the header stays put, so moving between branches feels like one app
+   rather than seven separate documents. */
+@view-transition{ navigation: auto }
+
+::view-transition-old(root){ animation: nb-vt-out .22s var(--ease) both }
+::view-transition-new(root){ animation: nb-vt-in .32s var(--ease-out) both }
+@keyframes nb-vt-out{ to{ opacity:0; transform:translateY(-6px) } }
+@keyframes nb-vt-in{ from{ opacity:0; transform:translateY(10px) } }
+
+/* The header and the floating controls are continuous across pages, so name
+   them and let the browser carry them through instead of cross-fading. */
+header{ view-transition-name: nb-header }
+.nb-float{ view-transition-name: nb-float }
+
+/* ---- hero entrance ----
+   The `nb-anim` class is set by the inline head script, before first paint,
+   so content animates in from hidden rather than flashing visible first.
+   `both` fill means the end state survives even at zero duration. */
+html.nb-anim .hero .wrap > *,
+html.nb-anim .pf-hero .wrap > *,
+html.nb-anim .ct-hero .wrap > *,
+html.nb-anim .lg-hero .wrap > *{
+  /* `backwards`, never `both`: the hidden state applies only during the delay
+     and the animation itself. The element's resting style stays fully visible,
+     so if the animation is dropped, throttled, or never finishes, the hero is
+     still there. `both` would leave the hero blank on a stalled frame. */
+  animation: nb-hero-in .72s var(--ease-out) backwards;
+}
+@keyframes nb-hero-in{
+  from{ opacity:0; transform:translateY(16px) }
+  to{ opacity:1; transform:none }
+}
+html.nb-anim .hero .wrap > *:nth-child(1),
+html.nb-anim .pf-hero .wrap > *:nth-child(1),
+html.nb-anim .ct-hero .wrap > *:nth-child(1),
+html.nb-anim .lg-hero .wrap > *:nth-child(1){ animation-delay:.04s }
+html.nb-anim .hero .wrap > *:nth-child(2),
+html.nb-anim .pf-hero .wrap > *:nth-child(2),
+html.nb-anim .ct-hero .wrap > *:nth-child(2),
+html.nb-anim .lg-hero .wrap > *:nth-child(2){ animation-delay:.10s }
+html.nb-anim .hero .wrap > *:nth-child(3),
+html.nb-anim .pf-hero .wrap > *:nth-child(3),
+html.nb-anim .ct-hero .wrap > *:nth-child(3),
+html.nb-anim .lg-hero .wrap > *:nth-child(3){ animation-delay:.16s }
+html.nb-anim .hero .wrap > *:nth-child(4),
+html.nb-anim .pf-hero .wrap > *:nth-child(4),
+html.nb-anim .ct-hero .wrap > *:nth-child(4),
+html.nb-anim .lg-hero .wrap > *:nth-child(4){ animation-delay:.22s }
+html.nb-anim .hero .wrap > *:nth-child(n+5),
+html.nb-anim .pf-hero .wrap > *:nth-child(n+5),
+html.nb-anim .ct-hero .wrap > *:nth-child(n+5),
+html.nb-anim .lg-hero .wrap > *:nth-child(n+5){ animation-delay:.28s }
+
+/* ---- link underlines that draw rather than blink ---- */
+.nav-links a,.nb-foot-col a,.crumb a{position:relative}
+.nav-links a::after,.nb-foot-col a::after,.crumb a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:1.5px;
+  background:currentColor;border-radius:2px;
+  transform:scaleX(0);transform-origin:right;
+  transition:transform var(--dur-2) var(--ease-out);
+}
+.nav-links a:hover::after,.nav-links a:focus-visible::after,
+.nb-foot-col a:hover::after,.nb-foot-col a:focus-visible::after,
+.crumb a:hover::after,.crumb a:focus-visible::after{
+  transform:scaleX(1);transform-origin:left;
+}
+.nb-foot-col a:hover{transform:none} /* the underline replaces the nudge */
+
+/* ---- the ticker is decoration; let people stop it to read ---- */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track{ animation-play-state:paused }
+
+/* ---- door knob turns as the door is about to open ---- */
+.door .knob{ transition:transform var(--dur-2) var(--ease-out) }
+.door-card:not(.open) .door:hover .knob,
+.door-card:not(.open) .door:focus-visible .knob{ transform:rotate(-28deg) scale(1.12) }
+
+/* ---- section reveals get a touch of scale so they arrive, not just fade -- */
+.rv{will-change:opacity,transform}
+.rv.in{will-change:auto}
+
+/* ---- pricing tiers lift in sequence when the row is hovered ---- */
+.tier{transition:transform .25s var(--ease-out),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+
+/* ---- respect the setting, everywhere, including page transitions ---- */
+@media (prefers-reduced-motion: reduce){
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){ animation:none !important }
+  html.nb-anim .hero .wrap > *,
+  html.nb-anim .pf-hero .wrap > *,
+  html.nb-anim .ct-hero .wrap > *,
+  html.nb-anim .lg-hero .wrap > *{ animation:none !important; opacity:1; transform:none }
+  .nav-links a::after,.nb-foot-col a::after,.crumb a::after{transition:none}
+}
+
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
   position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);
