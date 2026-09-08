@@ -200,8 +200,84 @@ html.nb-anim .lg-hero .wrap > *:nth-child(n+5){ animation-delay:.28s }
 /* ---- pricing tiers lift in sequence when the row is hovered ---- */
 .tier{transition:transform .25s var(--ease-out),box-shadow .25s var(--ease),border-color .25s var(--ease)}
 
+/* ---- FAQ accordion ----
+   <details> snaps open with no transition by default. `interpolate-size`
+   lets height animate to `auto`; browsers without ::details-content simply
+   get the old instant open, which is still correct. */
+:root{ interpolate-size: allow-keywords }
+.faq details,
+details.rv{
+  border:1px solid var(--line);border-radius:var(--r-lg);
+  margin-bottom:var(--s-sm);background:var(--surface);
+  transition:border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+.faq details[open]{border-color:var(--teal-soft);box-shadow:var(--e-2)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:var(--s-md) var(--s-lg);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-md);
+  font-weight:650;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";flex:0 0 10px;width:10px;height:10px;
+  border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);
+  transform:rotate(45deg) translateY(-2px);
+  transition:transform var(--dur-2) var(--ease-out);
+}
+.faq details[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.faq details > .a{padding:0 var(--s-lg) var(--s-md)}
+@supports selector(::details-content){
+  .faq details::details-content{
+    block-size:0;overflow:hidden;opacity:0;
+    transition:block-size var(--dur-3) var(--ease-out),
+               opacity var(--dur-2) var(--ease),
+               content-visibility var(--dur-3) allow-discrete;
+    transition-behavior:allow-discrete;
+  }
+  .faq details[open]::details-content{block-size:auto;opacity:1}
+}
+
+/* ---- the process timeline draws itself as you scroll past ---- */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .timeline::before{
+      animation:nb-draw-line linear both;
+      animation-timeline:view();
+      animation-range:entry 22% cover 62%;
+      transform-origin:top;
+    }
+    @keyframes nb-draw-line{ from{ transform:scaleY(0) } to{ transform:scaleY(1) } }
+  }
+}
+
+/* ---- cards arrive in sequence rather than all at once ----
+   nth-child stagger so a grid reveals as a wave. Uses the existing .rv
+   mechanism, so it inherits the no-JS and reduced-motion fallbacks. */
+.tiers .rv:nth-child(1),.div-grid .rv:nth-child(1),.nb-grid .rv:nth-child(1){transition-delay:.04s}
+.tiers .rv:nth-child(2),.div-grid .rv:nth-child(2),.nb-grid .rv:nth-child(2){transition-delay:.12s}
+.tiers .rv:nth-child(3),.div-grid .rv:nth-child(3),.nb-grid .rv:nth-child(3){transition-delay:.20s}
+.tiers .rv:nth-child(4),.div-grid .rv:nth-child(4),.nb-grid .rv:nth-child(4){transition-delay:.28s}
+.tiers .rv:nth-child(5),.div-grid .rv:nth-child(5),.nb-grid .rv:nth-child(5){transition-delay:.36s}
+
+/* ---- hover: cards lift toward the pointer ---- */
+.tier,.pf-feat,.fit-card,.nb-card,.ct-side-card,.expect-item{
+  transition:transform .28s var(--ease-out), box-shadow .28s var(--ease),
+             border-color .28s var(--ease);
+}
+.fit-card:hover,.ct-side-card:hover,.expect-item:hover{
+  transform:translateY(-3px);box-shadow:var(--e-2);border-color:var(--teal-soft);
+}
+
+/* ---- counting numbers get tabular figures so they do not jitter ---- */
+.big-num,.tprice .n,.pf-stat b,#calcOut{font-variant-numeric:tabular-nums}
+.big-num.bump{animation:nb-bump .22s var(--ease-out)}
+@keyframes nb-bump{50%{transform:scale(1.045)}}
+
 /* ---- respect the setting, everywhere, including page transitions ---- */
 @media (prefers-reduced-motion: reduce){
+  .faq details::details-content{transition:none}
+  .timeline::before{animation:none;transform:none}
+  .tiers .rv,.div-grid .rv,.nb-grid .rv{transition-delay:0s!important}
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*){ animation:none !important }
@@ -211,6 +287,83 @@ html.nb-anim .lg-hero .wrap > *:nth-child(n+5){ animation-delay:.28s }
   html.nb-anim .lg-hero .wrap > *{ animation:none !important; opacity:1; transform:none }
   .nav-links a::after,.nb-foot-col a::after,.crumb a::after{transition:none}
 }
+
+
+/* ---------- 2d. SURFACE + CONTRAST CORRECTIONS ---------------------------
+   Two failure modes, both found by auditing every text/background pair on
+   every page in both themes:
+
+   1. Dark mode flips the text tokens (--ink, --navy) but any component with
+      a hardcoded light background keeps it, so light text lands on a white
+      card. Every such surface is given a dark counterpart below.
+   2. In light mode the brand green carries near-black text at only 3.23:1.
+      White on the same green is 5.05:1, so the palette is untouched and only
+      the label colour changes. Dark mode keeps dark-on-bright, which is
+      already correct there.
+   ------------------------------------------------------------------------ */
+
+/* --- 1. light-mode button labels --- */
+html:not([data-theme="dark"]) .btn:not(.ghost),
+html:not([data-theme="dark"]) .nb-skip,
+html:not([data-theme="dark"]) .nb-fab,
+html:not([data-theme="dark"]) .nb-btn--primary{color:#fff}
+html:not([data-theme="dark"]) .tier li::before{border-color:var(--teal-dark)}
+/* the plan badge sits on the same green as the buttons */
+html:not([data-theme="dark"]) .tier .badge{color:#fff}
+
+/* "Soon" pill: brand gold is only 2.17:1 on paper, so light mode gets a
+   deeper gold of the same hue and dark mode keeps the bright one. */
+html:not([data-theme="dark"]) .ct-soon,
+html:not([data-theme="dark"]) .door-soon-tag{color:#96691a;border-color:#96691a}
+html[data-theme="dark"] .ct-soon,
+html[data-theme="dark"] .door-soon-tag{color:#e2b65c;border-color:#e2b65c}
+/* The rotating hero word is brand teal on the near-black hero: 3.45:1.
+   The hero is dark in both themes, so it always wants the bright green. */
+.hero .rotator, .rotator #rotWord{color:#3ecf8e}
+/* Chat timestamps were mid-grey on white and on the mint reply bubble. */
+.msg .time{color:#5f6672}
+html[data-theme="dark"] .msg .time{color:#8b968f}
+
+html:not([data-theme="dark"]) .hook-tag{color:#96691a}
+html[data-theme="dark"] .hook-tag{color:#e2b65c}
+
+/* PerceptFolio's blue CTA: white on #4ea8ff is 2.51:1, a dark label is 7.6:1.
+   Scoped tighter than the generic light-mode button rule above, which would
+   otherwise force white back on. */
+html:not([data-theme="dark"]) .btn.pf,
+html:not([data-theme="dark"]) .btn.pf:hover,
+html[data-theme="dark"] .btn.pf{color:#04101f}
+
+/* --- 2. hardcoded light surfaces, given dark counterparts --- */
+html[data-theme="dark"] .hook-strip,
+html[data-theme="dark"] .builder,
+html[data-theme="dark"] .bill-toggle,
+html[data-theme="dark"] .counter button,
+html[data-theme="dark"] .sched-card,
+html[data-theme="dark"] .t-step .t-num,
+html[data-theme="dark"] .expect-item{
+  background:var(--surface);border-color:var(--line);color:var(--ink);
+}
+html[data-theme="dark"] .counter button{color:var(--ink)}
+html[data-theme="dark"] .bill-toggle button{color:var(--ink-soft)}
+html[data-theme="dark"] .bill-toggle button.on{background:var(--teal);color:#06251a}
+
+/* the "doors" interior */
+html[data-theme="dark"] .door-room{
+  background:linear-gradient(180deg,#1b2320 0%,#141a17 100%);
+  border-color:var(--line);
+}
+
+/* the phone / chat mock-up: keep it reading as a messaging app, in the dark */
+html[data-theme="dark"] .phone{background:#0f1512;border-color:var(--line)}
+html[data-theme="dark"] .msg{background:#1e2723;color:var(--ink);box-shadow:none}
+html[data-theme="dark"] .msg .time{color:#8b968f}
+html[data-theme="dark"] .msg.internal{background:#16302a;border-color:var(--teal)}
+
+/* destructive action needs a red that survives a dark ground */
+html[data-theme="dark"] .nb-btn--danger{color:#ff8a80;border-color:#ff8a80}
+html[data-theme="dark"] .nb-btn--danger:hover{background:#ff8a80;color:#1a0f0e}
+html[data-theme="dark"] .pv-delete{border-color:#ff8a80}
 
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{

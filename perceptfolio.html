@@ -28,7 +28,10 @@
 <style>
   :root{--mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
         --pf:#4ea8ff; --pf-soft:#a8ccf5; --pf-deep:#0b1017;
-        --up:#25c07f; --down:#e5644f;}
+        --up:#25c07f; --down:#e5644f;
+        /* text-legible variants: the bright pair is only 2.35:1 on the white
+           table surface. Sparklines keep --up/--down; figures use these. */
+        --up-text:#127a49; --down-text:#c8442f;}
 
   /* ---- hero ---- */
   .pf-hero{position:relative;background:var(--pf-deep);color:#fff;padding:78px 0 84px;overflow:hidden}
@@ -133,7 +136,7 @@
   .pf-name{display:block;font-size:.8rem;color:var(--ink-soft);font-weight:400;margin-top:1px}
   .pf-sector{font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
   .pf-ret{font-family:var(--mono);font-weight:700;font-size:.95rem;white-space:nowrap}
-  .pf-ret.up{color:var(--up)} .pf-ret.down{color:var(--down)}
+  .pf-ret.up{color:var(--up-text)} .pf-ret.down{color:var(--down-text)}
   .pf-spark{width:88px;height:26px;display:block;margin-left:auto}
   .pf-spark path{fill:none;stroke:var(--up);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   @media (prefers-reduced-motion: no-preference){
@@ -155,6 +158,13 @@
   .pf-table tbody tr[data-in="6"]{animation-delay:.24s}
   .pf-table tbody tr[data-in="7"]{animation-delay:.28s}
   @keyframes pf-row{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  html[data-theme="dark"] .pf-ret.up{color:var(--up)}
+  html[data-theme="dark"] .pf-ret.down{color:var(--down)}
+
+  /* the blue CTA carries a dark label: white on #4ea8ff is only 2.51:1 */
+  .btn.pf{color:#04101f}
+  .btn.pf:hover{color:#04101f}
 
   .pf-disclaimer{
     margin-top:var(--s-md);font-size:.8rem;color:var(--ink-soft);line-height:1.6;
