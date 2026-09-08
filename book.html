@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book your first meeting: NorthBridge</title>
-<meta name="description" content="Pick a time for your free 30-minute first meeting with NorthBridge. Choose Zoom or Google Meet; the invite lands on both calendars automatically.">
+<meta name="description" content="Book a free 30-minute first meeting with NorthBridge. Send two or three times that suit you and whether you prefer Zoom or Google Meet, and we confirm within one business day. English or Spanish.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +43,13 @@
     content:"";position:absolute;left:2px;top:6px;width:13px;height:8px;
     border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg);
   }
+  /* The page describes the flow that is actually connected. `.sched-on`
+     copy stays hidden until NB_SCHEDULER_URL is set, at which point the
+     script flips one class and every promise on the page becomes true.
+     Defaulting to the email flow means the page can never over-promise. */
+  .sched-on{display:none}
+  html.sched-live .sched-off{display:none}
+  html.sched-live .sched-on{display:revert}
 </style>
 <!-- nb-shared-layer -->
 <meta name="theme-color" content="#fbfaf6">
@@ -124,12 +131,24 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <p class="step-label"><span class="en">What to expect</span><span class="es">Qué esperar</span></p>
       <div class="expect">
         <div class="expect-item">
-          <h3><span class="en">Pick your time and your app</span><span class="es">Elige tu hora y tu aplicación</span></h3>
-          <p><span class="en">Choose a slot that suits you and whether we meet on Zoom or Google Meet. Enter your email, that's all we need.</span><span class="es">Elige el horario que te convenga y si nos vemos por Zoom o Google Meet. Escribe tu correo, es todo lo que necesitamos.</span></p>
+          <h3>
+            <span class="sched-off"><span class="en">Send two or three times</span><span class="es">Envía dos o tres horarios</span></span>
+            <span class="sched-on"><span class="en">Pick your time and your app</span><span class="es">Elige tu hora y tu aplicación</span></span>
+          </h3>
+          <p>
+            <span class="sched-off"><span class="en">Tell us a few slots that suit you and whether you prefer Zoom or Google Meet. One short email, no form to fill in.</span><span class="es">Dinos algunos horarios que te sirvan y si prefieres Zoom o Google Meet. Un correo corto, sin formularios.</span></span>
+            <span class="sched-on"><span class="en">Choose a slot that suits you and whether we meet on Zoom or Google Meet. Enter your email, that's all we need.</span><span class="es">Elige el horario que te convenga y si nos vemos por Zoom o Google Meet. Escribe tu correo, es todo lo que necesitamos.</span></span>
+          </p>
         </div>
         <div class="expect-item">
-          <h3><span class="en">The invite arrives instantly</span><span class="es">La invitación llega al instante</span></h3>
-          <p><span class="en">You get an email with the meeting link, and the event lands on your calendar and ours automatically, with reminders before we start.</span><span class="es">Recibes un correo con el enlace de la reunión, y el evento aparece en tu calendario y en el nuestro automáticamente, con recordatorios antes de empezar.</span></p>
+          <h3>
+            <span class="sched-off"><span class="en">We confirm within a business day</span><span class="es">Confirmamos en un día hábil</span></span>
+            <span class="sched-on"><span class="en">The invite arrives instantly</span><span class="es">La invitación llega al instante</span></span>
+          </h3>
+          <p>
+            <span class="sched-off"><span class="en">A person picks one of your times, sends the calendar invite with the meeting link, and that is the booking done.</span><span class="es">Una persona elige uno de tus horarios, envía la invitación con el enlace de la reunión, y con eso queda agendado.</span></span>
+            <span class="sched-on"><span class="en">You get an email with the meeting link, and the event lands on your calendar and ours automatically, with reminders before we start.</span><span class="es">Recibes un correo con el enlace de la reunión, y el evento aparece en tu calendario y en el nuestro automáticamente, con recordatorios antes de empezar.</span></span>
+          </p>
         </div>
         <div class="expect-item">
           <h3><span class="en">We come prepared</span><span class="es">Llegamos preparados</span></h3>
@@ -138,7 +157,10 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       </div>
     </div>
     <div class="sched-card">
-      <h2><span class="en">Choose your slot</span><span class="es">Elige tu horario</span></h2>
+      <h2>
+        <span class="sched-off"><span class="en">Book by email</span><span class="es">Reserva por correo</span></span>
+        <span class="sched-on"><span class="en">Choose your slot</span><span class="es">Elige tu horario</span></span>
+      </h2>
       <p id="schedReady" style="display:none">
         <span class="en">Times shown are ones we're actually free: the calendar blocks overlaps and keeps a 15-minute gap between meetings, so we're never late to yours.</span>
         <span class="es">Los horarios que ves son los que realmente tenemos libres: el calendario bloquea cruces y deja 15 minutos entre reuniones, así que nunca llegaremos tarde a la tuya.</span>
@@ -241,6 +263,8 @@ var NB_SCHEDULER_URL = "REPLACE_ME";
 
   /* activate the scheduler once the URL is set */
   if(NB_SCHEDULER_URL && NB_SCHEDULER_URL.indexOf('REPLACE_ME') === -1){
+    /* one flag switches the mechanism AND the copy describing it */
+    document.documentElement.classList.add('sched-live');
     var open = document.getElementById('schedOpen');
     var frame = document.getElementById('schedFrame');
     var ready = document.getElementById('schedReady');

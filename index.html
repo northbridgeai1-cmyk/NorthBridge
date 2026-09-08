@@ -184,6 +184,17 @@
   .hero-note{font-size:.88rem;color:rgba(255,255,255,.65)}
   .hero-note strong{color:#fff}
 
+  .calc-formula{
+    margin-top:18px;font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.62);
+    border-left:2px solid rgba(255,255,255,.2);padding-left:13px;max-width:60ch;
+  }
+  .calc-formula strong{color:rgba(255,255,255,.9)}
+  .calc-released{
+    margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);
+    font-size:.87rem;line-height:1.55;color:rgba(255,255,255,.72);
+  }
+  .calc-released strong{color:var(--teal-soft);font-weight:700}
+
   /* ---------- marquee ---------- */
   .marquee{
     background:var(--paper-dark);color:var(--ink-soft);
@@ -988,14 +999,14 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <span class="div-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></span>
           <h3>PerceptFolio</h3>
           <p class="blurb">
-            <span class="en">For people whose decisions move real money. Research a strategy, backtest it against real costs, watch its signals, and see the risk it is actually taking. Research software, never advice.</span>
-            <span class="es">Para quienes toman decisiones que mueven dinero real. Investiga una estrategia, pruébala contra costos reales, observa sus señales, y ve el riesgo que realmente toma. Software de investigación, nunca asesoría.</span>
+            <span class="en">For people whose decisions move real money. Every position needs a thesis, a stop and a deadline, and every call gets scored against the index. It tells you whether your judgement holds up. It never tells you what to buy.</span>
+            <span class="es">Para quienes toman decisiones que mueven dinero real. Cada posición necesita una tesis, un stop y una fecha límite, y cada decisión se califica contra el índice. Te dice si tu criterio resiste. Nunca te dice qué comprar.</span>
           </p>
           <ul>
-            <li><span class="en">Strategy research you can reproduce months later</span><span class="es">Investigación de estrategias reproducible meses después</span></li>
-            <li><span class="en">Backtests with commissions, slippage and spread included</span><span class="es">Backtests con comisiones, slippage y spread incluidos</span></li>
-            <li><span class="en">Live signal monitoring and drift alerts</span><span class="es">Monitoreo de señales en vivo y alertas de desviación</span></li>
-            <li><span class="en">Risk, exposure and drawdown analytics</span><span class="es">Analítica de riesgo, exposición y drawdown</span></li>
+            <li><span class="en">A thesis, a stop and a deadline on every position</span><span class="es">Tesis, stop y fecha límite en cada posición</span></li>
+            <li><span class="en">Calibration on real history with the ticker hidden</span><span class="es">Calibración con historia real y el ticker oculto</span></li>
+            <li><span class="en">One screen for what actually needs you today</span><span class="es">Una pantalla con lo que hoy realmente te necesita</span></li>
+            <li><span class="en">Expectancy scored against the index, not win rate</span><span class="es">Expectativa calificada contra el índice, no aciertos</span></li>
           </ul>
           <a class="btn navy" href="perceptfolio.html">
             <span class="en">Open PerceptFolio →</span><span class="es">Abrir PerceptFolio →</span>
@@ -1011,8 +1022,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           </span>
           <h3>PerceptFolio</h3>
           <p class="door-tease">
-            <span class="en">Test the idea before it costs you money.</span>
-            <span class="es">Prueba la idea antes de que te cueste dinero.</span>
+            <span class="en">Find out if your judgement is any good.</span>
+            <span class="es">Descubre si tu criterio realmente sirve.</span>
           </p>
           <span class="door-open-hint"><span class="en">Open</span><span class="es">Abrir</span></span>
         </div>
@@ -1051,41 +1062,67 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   </div>
 </section>
 
-<!-- ======= COST OF DOING NOTHING ======= -->
+<!-- ======= CASH TRAPPED IN RECEIVABLES ======= -->
+<!-- This computes an arithmetic fact about the visitor's own invoices: how
+     much of their money is sitting in unpaid invoices right now. It does NOT
+     forecast what NorthBridge would recover. The recovery slider starts at
+     zero and is driven entirely by the visitor, and the formula is printed on
+     screen so an accountant can check it. -->
 <section class="pilot">
   <div class="wrap">
     <div class="pilot-card rv">
       <div>
         <p class="step-label" style="color:var(--teal-soft)"><span class="en">Do the math</span><span class="es">Haz la cuenta</span></p>
         <h2 class="h2">
-          <span class="en">Doing nothing has a price too.</span>
-          <span class="es">No hacer nada también tiene un precio.</span>
+          <span class="en">Work out what late invoices are costing you.</span>
+          <span class="es">Calcula cuánto te cuestan las facturas atrasadas.</span>
         </h2>
         <p>
-          <span class="en">Repetitive admin work doesn't show up on any invoice, so it feels free. It isn't. Slide to roughly how many hours a week your business spends on it, and what an hour of that time is worth.</span>
-          <span class="es">El trabajo administrativo repetitivo no aparece en ninguna factura, así que se siente gratis. No lo es. Desliza a las horas semanales que tu negocio le dedica, y cuánto vale una hora de ese tiempo.</span>
+          <span class="en">Money you have earned but not been paid is still your money, just not in your account. Three numbers you already know are enough to size it.</span>
+          <span class="es">El dinero que ya ganaste pero no te han pagado sigue siendo tuyo, solo que no está en tu cuenta. Con tres números que ya conoces alcanza para medirlo.</span>
         </p>
         <div class="calc-controls">
           <label class="calc-row">
-            <span class="calc-lbl"><span class="en">Hours per week on repetitive tasks</span><span class="es">Horas por semana en tareas repetitivas</span>: <strong id="hoursOut">8</strong>h</span>
-            <input type="range" id="hoursIn" min="1" max="30" value="8" step="1">
+            <span class="calc-lbl"><span class="en">Invoices you send a month</span><span class="es">Facturas que envías al mes</span>: <strong id="invOut">30</strong></span>
+            <input type="range" id="invIn" min="2" max="300" value="30" step="1">
           </label>
           <label class="calc-row">
-            <span class="calc-lbl"><span class="en">What an hour is worth</span><span class="es">Cuánto vale una hora</span>: <strong>$<span id="rateOut">25</span></strong></span>
-            <input type="range" id="rateIn" min="5" max="100" value="25" step="5">
+            <span class="calc-lbl"><span class="en">Average invoice</span><span class="es">Factura promedio</span>: <strong>$<span id="valOut">400</span></strong></span>
+            <input type="range" id="valIn" min="50" max="5000" value="400" step="50">
+          </label>
+          <label class="calc-row">
+            <span class="calc-lbl"><span class="en">Typical days late</span><span class="es">Días de atraso habituales</span>: <strong id="lateOut">21</strong></span>
+            <input type="range" id="lateIn" min="0" max="90" value="21" step="1">
+          </label>
+          <label class="calc-row">
+            <span class="calc-lbl">
+              <span class="en">If reminders pulled that in by</span><span class="es">Si los recordatorios lo redujeran en</span>:
+              <strong id="cutOut">0</strong> <span class="en">days</span><span class="es">días</span>
+            </span>
+            <input type="range" id="cutIn" min="0" max="90" value="0" step="1">
           </label>
         </div>
+        <p class="calc-formula">
+          <span class="en"><strong>Estimate.</strong> Cash trapped = (invoices &times; average invoice) &times; (days late &divide; 30). Your own numbers, your own arithmetic. We have not multiplied anything by a number we made up, and the recovery slider is yours to move: we publish no recovery figure we have not measured on a real client.</span>
+          <span class="es"><strong>Estimación.</strong> Dinero atrapado = (facturas &times; factura promedio) &times; (días de atraso &divide; 30). Tus números, tu aritmética. No multiplicamos por ninguna cifra inventada, y el deslizador de recuperación es tuyo: no publicamos ninguna cifra de recuperación que no hayamos medido con un cliente real.</span>
+        </p>
       </div>
       <div class="pilot-price">
-        <div class="calc-cap"><span class="en">Cost per year of leaving it manual</span><span class="es">Costo por año de dejarlo manual</span></div>
-        <div class="big-num" id="calcOut">$10,400</div>
-        <div class="per"><span class="en">quietly, every year</span><span class="es">en silencio, cada año</span></div>
+        <div class="calc-cap"><span class="en">Your cash sitting in unpaid invoices</span><span class="es">Tu dinero en facturas sin cobrar</span></div>
+        <div class="big-num" id="calcOut">$8,400</div>
+        <div class="per"><span class="en">earned, not banked</span><span class="es">ganado, no cobrado</span></div>
+        <div class="calc-released" id="releasedWrap" hidden>
+          <span class="en">Pulling that in by <strong id="cutEcho">0</strong> days would put</span>
+          <span class="es">Reducirlo en <strong class="cut-echo-es">0</strong> días liberaría</span>
+          <strong id="releasedOut">$0</strong>
+          <span class="en">back in your account.</span><span class="es">de vuelta en tu cuenta.</span>
+        </div>
         <div style="margin-top:22px">
           <a class="btn big" href="contact.html">
-            <span class="en">Get those hours back</span><span class="es">Recupera esas horas</span>
+            <span class="en">Get it chased automatically</span><span class="es">Que se cobre automáticamente</span>
           </a>
         </div>
-        <p class="g"><span class="en">Rough math on purpose: your reply email gets the precise version.</span><span class="es">Cuenta aproximada a propósito: en el correo de respuesta va la versión precisa.</span></p>
+        <p class="g"><span class="en">Rough on purpose: send us your real ageing report and we'll do it properly.</span><span class="es">Aproximado a propósito: mándanos tu reporte de antigüedad real y lo hacemos bien.</span></p>
       </div>
     </div>
   </div>
@@ -1152,7 +1189,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       </div>
 
       <div class="tier best rv d2">
-        <span class="badge"><span class="en">Popular</span><span class="es">Popular</span></span>
+        <span class="badge"><span class="en">Recommended</span><span class="es">Recomendado</span></span>
         <h3><span class="en">Scale</span><span class="es">Escala</span></h3>
         <p class="for"><span class="en">The top plan of every practice. Automation as your way of working.</span><span class="es">El plan máximo de cada práctica. La automatización como tu forma de trabajar.</span></p>
         <div class="tprice"><span class="n"><span class="bm">$699</span><span class="by">$583</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
@@ -1578,22 +1615,58 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     }, 2600);
   }
 
-  /* ---- cost-of-nothing calculator ---- */
-  var hoursIn = document.getElementById('hoursIn');
-  var rateIn = document.getElementById('rateIn');
-  var hoursOut = document.getElementById('hoursOut');
-  var rateOut = document.getElementById('rateOut');
+  /* ---- receivables calculator ----
+     Computes cash the visitor already has trapped in unpaid invoices, from
+     their own three inputs. The "released" figure only appears once the
+     visitor moves the recovery slider themselves, and it is their number,
+     not a NorthBridge promise. */
+  var invIn  = document.getElementById('invIn');
+  var valIn  = document.getElementById('valIn');
+  var lateIn = document.getElementById('lateIn');
+  var cutIn  = document.getElementById('cutIn');
   var calcOut = document.getElementById('calcOut');
+  var releasedWrap = document.getElementById('releasedWrap');
+  var releasedOut  = document.getElementById('releasedOut');
   var shownVal = 0;
   var calcRAF = null;
-  function fmt(n){ return '$' + n.toLocaleString('en-US'); }
+
+  function fmt(n){
+    var es = root.getAttribute('data-lang') === 'es';
+    return '$' + Math.round(n).toLocaleString(es ? 'es-ES' : 'en-US');
+  }
+
+  function trapped(){
+    var monthly = parseInt(invIn.value, 10) * parseInt(valIn.value, 10);
+    return monthly * (parseInt(lateIn.value, 10) / 30);
+  }
+
   function calc(animate){
-    if(!hoursIn || !rateIn || !calcOut) return;
-    var target = parseInt(hoursIn.value,10) * parseInt(rateIn.value,10) * 52;
-    hoursOut.textContent = hoursIn.value;
-    rateOut.textContent = rateIn.value;
-    /* one animation at a time: a second loop racing the first can leave the
-       figure showing the previous target */
+    if(!invIn || !valIn || !lateIn || !calcOut) return;
+
+    document.getElementById('invOut').textContent  = invIn.value;
+    document.getElementById('valOut').textContent  = parseInt(valIn.value,10).toLocaleString('en-US');
+    document.getElementById('lateOut').textContent = lateIn.value;
+
+    /* recovery can never exceed the lateness it is recovering from */
+    if(parseInt(cutIn.value,10) > parseInt(lateIn.value,10)) cutIn.value = lateIn.value;
+    cutIn.max = lateIn.value;
+    var cut = parseInt(cutIn.value, 10);
+    document.getElementById('cutOut').textContent = cut;
+
+    var target = trapped();
+
+    if(cut > 0){
+      var monthly = parseInt(invIn.value,10) * parseInt(valIn.value,10);
+      var released = monthly * (cut / 30);
+      releasedWrap.hidden = false;
+      document.getElementById('cutEcho').textContent = cut;
+      var esEcho = document.querySelector('.cut-echo-es');
+      if(esEcho) esEcho.textContent = cut;
+      releasedOut.textContent = fmt(released);
+    } else {
+      releasedWrap.hidden = true;
+    }
+
     if(calcRAF){ cancelAnimationFrame(calcRAF); calcRAF = null; }
     if(!animate || reducedMotion){
       shownVal = target;
@@ -1607,16 +1680,19 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       if(t0 === null) t0 = ts;
       var p = Math.min(1, (ts - t0) / 350);
       var eased = 1 - Math.pow(1 - p, 3);
-      shownVal = Math.round(start + (target - start) * eased);
+      shownVal = start + (target - start) * eased;
       calcOut.textContent = fmt(shownVal);
       if(p < 1){ calcRAF = requestAnimationFrame(step); }
       else { calcRAF = null; shownVal = target; calcOut.textContent = fmt(target); }
     }
     calcRAF = requestAnimationFrame(step);
   }
-  if(hoursIn && rateIn){
-    hoursIn.addEventListener('input', function(){ calc(true); });
-    rateIn.addEventListener('input', function(){ calc(true); });
+
+  if(invIn && valIn && lateIn && cutIn){
+    [invIn, valIn, lateIn, cutIn].forEach(function(el){
+      el.addEventListener('input', function(){ calc(true); });
+    });
+    btn.addEventListener('click', function(){ setTimeout(function(){ calc(false); }, 0); });
     calc(false);
   }
 
