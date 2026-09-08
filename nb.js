@@ -640,59 +640,6 @@
     });
   }
 
-  /* ====== 17. COUNT-UP ON SCROLL ======================================
-     Prices and headline figures count up the first time they scroll into
-     view. The original string is captured before anything is touched and
-     written back verbatim at the end, so a parse failure or an interrupted
-     animation can never leave a wrong number on screen. */
-  function wireCountUp() {
-    if (reduced || !('IntersectionObserver' in window)) return;
-
-    var targets = $$('.tprice .n, .big-num').filter(function (el) {
-      return /\d/.test(el.textContent);
-    });
-    if (!targets.length) return;
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        io.unobserve(e.target);
-        countUp(e.target);
-      });
-    }, { threshold: 0.55 });
-
-    targets.forEach(function (el) { io.observe(el); });
-
-    function countUp(el) {
-      var leaves = el.querySelectorAll('span');
-      var nodes = leaves.length ? Array.prototype.slice.call(leaves) : [el];
-
-      nodes.forEach(function (n) {
-        if (n.querySelector && n.querySelector('span')) return;   /* not a leaf */
-        var original = n.textContent;
-        var m = original.match(/^(\D*?)([\d,]+)(.*)$/);
-        if (!m) return;
-        var target = parseInt(m[2].replace(/,/g, ''), 10);
-        if (!isFinite(target) || target < 10) return;             /* not worth animating */
-
-        var t0 = null, dur = 700;
-        function step(ts) {
-          if (t0 === null) t0 = ts;
-          var p = Math.min(1, (ts - t0) / dur);
-          var eased = 1 - Math.pow(1 - p, 3);
-          if (p < 1) {
-            n.textContent = m[1] + Math.round(target * eased).toLocaleString('en-US') + m[3];
-            requestAnimationFrame(step);
-          } else {
-            n.textContent = original;   /* exact original string, always */
-          }
-        }
-        n.textContent = m[1] + '0' + m[3];
-        requestAnimationFrame(step);
-      });
-    }
-  }
-
   /* ====== BOOT ======================================================== */
   function boot() {
     captureUTM();
@@ -709,7 +656,6 @@
     wireKeys();
     wireLang();
     wireUpdated();
-    wireCountUp();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

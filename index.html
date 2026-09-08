@@ -323,7 +323,11 @@
   }
 
   /* billing toggle */
-  .bill-toggle{display:inline-flex;gap:0;border:1px solid var(--line);border-radius:999px;background:#fff;padding:4px;margin-bottom:34px}
+  .bill-toggle{
+    display:inline-flex;gap:0;border:1px solid var(--line);border-radius:999px;
+    background:#fff;padding:4px;margin-bottom:34px;box-shadow:var(--e-1);
+  }
+  .bill-toggle button{position:relative;overflow:hidden}
   .bill-toggle button{
     border:0;background:transparent;border-radius:999px;cursor:pointer;
     font:inherit;font-size:.88rem;font-weight:700;padding:8px 18px;color:var(--ink-soft);
@@ -334,7 +338,46 @@
   .bill-toggle button.on .save-tag{color:var(--teal-soft)}
   .plans[data-bill="m"] .by, .plans[data-bill="m"] .ytotal{display:none}
   .plans[data-bill="y"] .bm{display:none}
-  .ytotal{font-size:.82rem;color:var(--teal-dark);font-weight:600;margin-top:2px}
+  /* ---- annual pricing ----
+     The saving is the reason to choose yearly, so it is shown as a real
+     price comparison rather than a footnote. The strike is drawn with a
+     pseudo-element so it can animate across the old figure when the visitor
+     switches to yearly, instead of just appearing. */
+  .ytotal{
+    display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+    margin:12px 0 2px;padding:13px 15px;border-radius:14px;
+    background:linear-gradient(135deg, rgba(46,125,79,.09), rgba(217,163,68,.07));
+    border:1px solid var(--teal-soft);
+  }
+  .yt-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .yt-was{
+    position:relative;text-decoration:none;font-size:1rem;font-weight:600;
+    color:var(--ink-soft);opacity:.85;
+  }
+  .yt-was::after{
+    content:"";position:absolute;left:-3px;right:-3px;top:52%;height:2px;
+    background:var(--down-strike, #b3261e);border-radius:2px;
+    transform:scaleX(0);transform-origin:left;
+  }
+  .plans[data-bill="y"] .yt-was::after{animation:nb-strike .5s var(--ease-out) .18s forwards}
+  @keyframes nb-strike{to{transform:scaleX(1)}}
+  .yt-now{
+    font-family:var(--serif);font-size:1.5rem;font-weight:700;
+    color:var(--navy);letter-spacing:-.02em;line-height:1;
+  }
+  .yt-per{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .yt-save{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--teal);color:#fff;border-radius:999px;
+    padding:4px 12px;font-size:.72rem;font-weight:800;letter-spacing:.02em;
+  }
+  /* the whole block arrives when yearly is selected */
+  .plans[data-bill="y"] .ytotal{animation:nb-yt-in .42s var(--ease-out) backwards}
+  @keyframes nb-yt-in{from{opacity:0;transform:translateY(-6px)}}
+  @media (prefers-reduced-motion: reduce){
+    .yt-was::after{animation:none!important;transform:scaleX(1)}
+    .plans[data-bill="y"] .ytotal{animation:none}
+  }
 
   /* hook strip: the $99 foot in the door */
   .hook-strip{
@@ -693,11 +736,11 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     <div class="nav-right">
       <div class="nav-links">
         <a href="#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
-        <a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
-        <a href="#process"><span class="en">Process</span><span class="es">Proceso</span></a>
-        <a href="socrates.html"><span class="en">Training &amp; events</span><span class="es">Capacitación y eventos</span></a>
+        <a href="cinderella.html">Cinderella</a>
+        <a href="hermes.html">Hermes</a>
+        <a href="socrates.html">Socrates</a>
         <a href="perceptfolio.html">PerceptFolio</a>
-        <a href="#faq"><span class="en">FAQ</span><span class="es">Preguntas</span></a>
+        <a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
       </div>
       <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
       <a class="btn" href="contact.html">
@@ -1155,7 +1198,17 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <h3><span class="en">Starter</span><span class="es">Inicial</span></h3>
         <p class="for"><span class="en">Clean data + no lost leads. The essentials.</span><span class="es">Datos ordenados + cero prospectos perdidos. Lo esencial.</span></p>
         <div class="tprice"><span class="n"><span class="bm">$299</span><span class="by">$249</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
-        <p class="ytotal"><span class="en">$2,990 billed yearly · 2 months free</span><span class="es">$2,990 facturado al año · 2 meses gratis</span></p>
+        <div class="ytotal">
+          <span class="yt-row">
+            <s class="yt-was" aria-label="was $3,588 per year">$3,588</s>
+            <b class="yt-now">$2,988</b>
+            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
+          </span>
+          <span class="yt-save">
+            <span class="en">Save $600 &middot; 17% off &middot; 2 months free</span>
+            <span class="es">Ahorras $600 &middot; 17% de descuento &middot; 2 meses gratis</span>
+          </span>
+        </div>
         <ul>
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Sweep</strong></a>: <span class="en">2 workflows + monthly report</span><span class="es">2 flujos + reporte mensual</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Courier</strong></a>: <span class="en">follow-up sequences on 1 channel</span><span class="es">secuencias de seguimiento en 1 canal</span></li>
@@ -1173,7 +1226,17 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <h3><span class="en">Growth</span><span class="es">Crecimiento</span></h3>
         <p class="for"><span class="en">The full back office, plus communication and monthly training.</span><span class="es">Toda la oficina de atrás, más comunicación y capacitación mensual.</span></p>
         <div class="tprice"><span class="n"><span class="bm">$649</span><span class="by">$541</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
-        <p class="ytotal"><span class="en">$6,490 billed yearly · 2 months free</span><span class="es">$6,490 facturado al año · 2 meses gratis</span></p>
+        <div class="ytotal">
+          <span class="yt-row">
+            <s class="yt-was" aria-label="was $7,788 per year">$7,788</s>
+            <b class="yt-now">$6,492</b>
+            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
+          </span>
+          <span class="yt-save">
+            <span class="en">Save $1,296 &middot; 17% off &middot; 2 months free</span>
+            <span class="es">Ahorras $1,296 &middot; 17% de descuento &middot; 2 meses gratis</span>
+          </span>
+        </div>
         <ul>
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Herald</strong></a>: <span class="en">2 channels + instant AI messaging</span><span class="es">2 canales + mensajería IA instantánea</span></li>
@@ -1193,7 +1256,17 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <h3><span class="en">Scale</span><span class="es">Escala</span></h3>
         <p class="for"><span class="en">The top plan of every practice. Automation as your way of working.</span><span class="es">El plan máximo de cada práctica. La automatización como tu forma de trabajar.</span></p>
         <div class="tprice"><span class="n"><span class="bm">$699</span><span class="by">$583</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
-        <p class="ytotal"><span class="en">$6,990 billed yearly · 2 months free</span><span class="es">$6,990 facturado al año · 2 meses gratis</span></p>
+        <div class="ytotal">
+          <span class="yt-row">
+            <s class="yt-was" aria-label="was $8,388 per year">$8,388</s>
+            <b class="yt-now">$6,996</b>
+            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
+          </span>
+          <span class="yt-save">
+            <span class="en">Save $1,392 &middot; 17% off &middot; 2 months free</span>
+            <span class="es">Ahorras $1,392 &middot; 17% de descuento &middot; 2 meses gratis</span>
+          </span>
+        </div>
         <ul>
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Wings</strong></a>: <span class="en">3 channels + AI voice agent, weekly tuning</span><span class="es">3 canales + agente de voz IA, ajuste semanal</span></li>
@@ -1694,6 +1767,24 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     });
     btn.addEventListener('click', function(){ setTimeout(function(){ calc(false); }, 0); });
     calc(false);
+
+    /* Count the figure in the first time the section is seen. Driven through
+       the same calc() as everything else, so there is only ever one animator
+       writing to this node. */
+    /* Observe the figure itself, not the section: the section is taller than
+       a laptop viewport, so a 40% threshold on it never fires. */
+    var pilot = calcOut;
+    if(pilot && 'IntersectionObserver' in window && !reducedMotion){
+      var pio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting) return;
+          pio.disconnect();
+          shownVal = 0;
+          calc(true);
+        });
+      }, {threshold:.85});
+      pio.observe(pilot);
+    }
   }
 
   /* ---- hero network canvas ---- */

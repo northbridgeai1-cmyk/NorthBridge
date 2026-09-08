@@ -324,6 +324,18 @@ html[data-theme="dark"] .door-soon-tag{color:#e2b65c;border-color:#e2b65c}
 .msg .time{color:#5f6672}
 html[data-theme="dark"] .msg .time{color:#8b968f}
 
+/* Annual pricing block. The savings pill sits on brand green, so it follows
+   the same rule as every other green surface: white label in light mode, dark
+   label on the bright dark-mode green. The strike needs a red that reads on
+   each ground. */
+:root{ --down-strike:#b3261e }
+html[data-theme="dark"]{ --down-strike:#ff8a80 }
+html[data-theme="dark"] .yt-save{color:#06251a}
+html[data-theme="dark"] .ytotal{
+  background:linear-gradient(135deg, rgba(62,207,142,.10), rgba(226,182,92,.07));
+  border-color:rgba(62,207,142,.34);
+}
+
 html:not([data-theme="dark"]) .hook-tag{color:#96691a}
 html[data-theme="dark"] .hook-tag{color:#e2b65c}
 
