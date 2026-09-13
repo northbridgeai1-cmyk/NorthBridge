@@ -6,3 +6,4 @@ DESIGN.md
 node_modules/
 .DS_Store
 tests/shots/
+.claude/settings.local.json
