@@ -31,8 +31,8 @@
       "slogan": "Automation that pays for itself",
       "makesOffer": [
         {"@type": "Offer", "name": "Starter Bundle", "description": "Cinderella Sweep (2 automation workflows, built and maintained, plus monthly report) and Hermes Courier (follow-up sequences on 1 communication channel). For small businesses starting with automation.", "price": "299", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "299", "priceCurrency": "USD", "unitText": "per month"}},
-        {"@type": "Offer", "name": "Growth Bundle", "description": "Cinderella Spotless (5 workflows with priority builds), Hermes Herald (2 channels with instant AI messaging), and Socrates Academy (1 team workshop per month).", "price": "649", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "649", "priceCurrency": "USD", "unitText": "per month"}},
-        {"@type": "Offer", "name": "Scale Bundle", "description": "Top plan of all three practices: Cinderella Spotless (5 workflows, priority builds), Hermes Wings (3 channels plus AI voice agent, weekly tuning), and Socrates Agora (2 workshops per month with custom curriculum).", "price": "699", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "699", "priceCurrency": "USD", "unitText": "per month"}}
+        {"@type": "Offer", "name": "Growth Bundle", "description": "Cinderella Spotless (5 workflows with priority builds), Hermes Herald (2 channels with instant AI messaging), Socrates Academy (1 team workshop per month), and one month of the PerceptFolio terminal free.", "price": "649", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "649", "priceCurrency": "USD", "unitText": "per month"}},
+        {"@type": "Offer", "name": "Scale Bundle", "description": "Top plan of all three practices: Cinderella Spotless (5 workflows, priority builds), Hermes Wings (3 channels plus AI voice agent, weekly tuning), Socrates Agora (2 workshops per month with custom curriculum), and one month of the PerceptFolio terminal free.", "price": "699", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "699", "priceCurrency": "USD", "unitText": "per month"}}
       ]
     },
     {"@type": "Service", "name": "NorthBridge Cinderella", "serviceType": "Data and workflow automation", "url": "cinderella.html", "provider": {"@id": "#northbridge"}, "description": "AI workflow building on n8n for small businesses: payment chasing, invoice reminders, automatic report generation, data moved between apps, client onboarding. Plans: Sweep $199/mo (2 workflows), Shine $329/mo (3 workflows), Spotless $349/mo (5 workflows, priority builds)."},
@@ -154,7 +154,9 @@
 
   /* ---------- hero ---------- */
   .hero{
-    position:relative;background:var(--paper);color:var(--ink);
+    position:relative;color:var(--ink);
+    /* warmth, not a colour blob: the paper is lit from the top-left */
+    background:radial-gradient(120% 80% at 12% -10%, #fffdf6 0%, var(--paper) 55%, #f6f2e8 100%);
     padding:clamp(72px,11vw,148px) 0 clamp(56px,8vw,104px);
     border-bottom:1px solid var(--line);
   }
@@ -225,6 +227,63 @@
     .how,.divisions,.plans,.final{padding-top:72px;padding-bottom:64px}
     .process{padding:64px 0}
   }
+
+
+  /* ---- hero: two columns on wide screens; facts sit as a ledger, not cards ---- */
+  @media(min-width:1000px){
+    .hero .wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);column-gap:64px;align-items:end}
+    .hero h1,.hero p.lede,.hero-cta,.hero-note{grid-column:1}
+    .hero-facts{grid-column:2;grid-row:1 / span 4;align-self:end;margin-bottom:6px}
+  }
+  html[data-theme="dark"] .hero{background:radial-gradient(120% 80% at 12% -10%, #182019 0%, var(--paper) 55%, #0f1311 100%)}
+  .hero-facts{margin:32px 0 0;border-top:2px solid var(--gold)}
+  .hero-facts > div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+  .hero-facts dt{color:var(--ink-soft)}
+  .hero-facts dd{margin:0;color:var(--ink);font-weight:600;text-align:right;max-width:20ch}
+  /* each fact arrives a beat after the last: entrance, not decoration */
+  html.nb-anim .hero-facts > div{animation:nb-hero-in .6s cubic-bezier(.16,1,.3,1) backwards}
+  html.nb-anim .hero-facts > div:nth-child(1){animation-delay:.34s}
+  html.nb-anim .hero-facts > div:nth-child(2){animation-delay:.42s}
+  html.nb-anim .hero-facts > div:nth-child(3){animation-delay:.50s}
+  html.nb-anim .hero-facts > div:nth-child(4){animation-delay:.58s}
+
+  /* ---- problem: three statements land one after another ---- */
+  .problem .rv:nth-child(2){transition-delay:.14s}
+  .problem .rv:nth-child(3){transition-delay:.28s}
+
+  /* ---- reactions ---- */
+  /* tier: hovering the card fills its button, so the whole card reads as one target */
+  .tier .cta .btn{transition:background .18s ease,color .18s ease,border-color .18s ease}
+  .tier:hover .cta .btn.navy{background:var(--teal);border-color:var(--teal);color:#06251a}
+  html[data-theme="dark"] .tier:hover .cta .btn.navy{color:#06251a}
+  /* the PerceptFolio perk line is marked as such */
+  .tier li.perk{background:rgba(78,168,255,.07);margin:6px -8px 0;padding-left:38px;padding-right:8px;border-radius:3px;border-bottom:0}
+  .tier li.perk::before{left:10px}
+  html[data-theme="dark"] .tier li.perk{background:rgba(78,168,255,.10)}
+  /* sliders: the thumb grows under the finger */
+  .calc-row input[type=range]{cursor:grab}
+  .calc-row input[type=range]:active{cursor:grabbing}
+  .calc-row input[type=range]::-webkit-slider-thumb{transition:transform .15s ease,box-shadow .15s ease}
+  .calc-row input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.18)}
+  .calc-row input[type=range]:active::-webkit-slider-thumb{transform:scale(1.32);box-shadow:0 0 0 6px rgba(62,207,142,.18)}
+  .calc-row .calc-lbl strong{transition:color .15s ease}
+  .calc-row:hover .calc-lbl strong{color:var(--teal-soft)}
+  @media (prefers-reduced-motion: reduce){
+    html.nb-anim .hero-facts > div{animation:none}
+    .calc-row input[type=range]::-webkit-slider-thumb{transition:none;transform:none!important}
+  }
+
+
+  /* ---- life: a hand-drawn ring, one organic divider, sunlit paper ---- */
+  .ring{position:relative;display:inline-block;padding:0 .12em;white-space:nowrap}
+  .ring svg{position:absolute;left:-6%;top:-18%;width:112%;height:140%;overflow:visible;pointer-events:none}
+  .ring svg path{stroke-dasharray:640;stroke-dashoffset:640;animation:nb-ring 1.1s cubic-bezier(.16,1,.3,1) 1.15s forwards}
+  @keyframes nb-ring{to{stroke-dashoffset:0}}
+  .wave{line-height:0;margin-top:-1px;background:var(--paper)}
+  .wave svg{display:block;width:100%;height:clamp(36px,6vw,90px)}
+  .wave svg path{fill:var(--paper-dark)}
+  .problem{background:var(--paper-dark)}
+  @media (prefers-reduced-motion: reduce){.ring svg path{animation:none;stroke-dashoffset:0}}
 
   /* ---------- marquee ---------- */
   .marquee{
@@ -780,8 +839,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <span class="es">El trabajo que mantiene tu negocio no debería <span class="u">agotarte.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9 C 40 3, 80 11, 120 6 S 180 4, 198 8" stroke="#1f9d78" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span></span>
     </h1>
     <p class="lede">
-      <span class="en">NorthBridge builds and keeps running the back-office automation a small business can't staff for: chasing invoices, moving data between apps, following up with clients, and training your team to run it. For small and medium businesses in the United States and Latin America. English or Spanish, from $99 a month.</span>
-      <span class="es">NorthBridge construye y mantiene funcionando la automatización administrativa que un negocio pequeño no puede contratar: cobrar facturas, mover datos entre aplicaciones, dar seguimiento a clientes, y capacitar a tu equipo para operarla. Para pequeñas y medianas empresas en Estados Unidos y Latinoamérica. En inglés o español, desde $99 al mes.</span>
+      <span class="en">NorthBridge builds and keeps running the back-office automation a small business can't staff for: chasing invoices, moving data between apps, following up with clients, and training your team to run it. For small and medium businesses in the United States and Latin America. English or Spanish, from <span class="ring">$99 a month<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M12 30 C 20 8, 170 4, 190 26 S 150 58, 40 54 S 4 40, 14 26" fill="none" stroke="#d9a344" stroke-width="3" stroke-linecap="round"/></svg></span>.</span>
+      <span class="es">NorthBridge construye y mantiene funcionando la automatización administrativa que un negocio pequeño no puede contratar: cobrar facturas, mover datos entre aplicaciones, dar seguimiento a clientes, y capacitar a tu equipo para operarla. Para pequeñas y medianas empresas en Estados Unidos y Latinoamérica. En inglés o español, desde <span class="ring">$99 al mes<svg viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M12 30 C 20 8, 170 4, 190 26 S 150 58, 40 54 S 4 40, 14 26" fill="none" stroke="#d9a344" stroke-width="3" stroke-linecap="round"/></svg></span>.</span>
     </p>
     <div class="hero-cta">
       <a class="btn big" href="contact.html">
@@ -791,6 +850,12 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <span class="en">See the plans</span><span class="es">Ver los planes</span>
       </a>
     </div>
+    <dl class="hero-facts" aria-label="What you get">
+      <div><dt><span class="en">Built in</span><span class="es">Construido en</span></dt><dd>3–7 <span class="en">days</span><span class="es">días</span></dd></div>
+      <div><dt><span class="en">Runs in</span><span class="es">Corre en</span></dt><dd><span class="en">your own n8n account</span><span class="es">tu propia cuenta de n8n</span></dd></div>
+      <div><dt><span class="en">If it isn't for you</span><span class="es">Si no es para ti</span></dt><dd><span class="en">first month refunded, 30 days</span><span class="es">primer mes devuelto, 30 días</span></dd></div>
+      <div><dt><span class="en">New clients</span><span class="es">Clientes nuevos</span></dt><dd><span class="en">3 a month, so builds aren't rushed</span><span class="es">3 al mes, para no apurar las entregas</span></dd></div>
+    </dl>
     <p class="hero-note" style="margin-top:18px">
       <span class="en"><strong>30-day money-back guarantee</strong> on your first month, any plan. Replies within one business day.</span>
       <span class="es"><strong>Garantía de devolución de 30 días</strong> en tu primer mes, en cualquier plan. Respondemos en un día hábil.</span>
@@ -798,7 +863,9 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   </div>
 </section>
 
-<!-- ======= MARQUEE ======= -->
+<div class="wave" aria-hidden="true">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 46 C 240 92, 420 0, 720 40 S 1200 96, 1440 30 L1440 90 L0 90 Z"/></svg>
+</div>
 
 <!-- ======= PROBLEM ======= -->
 <section class="problem">
@@ -1212,6 +1279,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Herald</strong></a>: <span class="en">2 channels + instant AI messaging</span><span class="es">2 canales + mensajería IA instantánea</span></li>
           <li><a href="socrates.html" style="text-decoration:none"><strong>Socrates · Academy</strong></a>: <span class="en">1 team workshop / month</span><span class="es">1 taller de equipo / mes</span></li>
+          <li class="perk"><a href="perceptfolio.html" style="text-decoration:none"><strong>PerceptFolio</strong></a>: <span class="en">1 month of the terminal, free</span><span class="es">1 mes de la terminal, gratis</span></li>
         </ul>
         <a class="btn navy cta book" style="text-align:center" href="book.html?plan=Growth+bundle">
           <span class="en">Choose Growth</span><span class="es">Elegir Crecimiento</span>
@@ -1242,6 +1310,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Wings</strong></a>: <span class="en">3 channels + AI voice agent, weekly tuning</span><span class="es">3 canales + agente de voz IA, ajuste semanal</span></li>
           <li><a href="socrates.html" style="text-decoration:none"><strong>Socrates · Agora</strong></a>: <span class="en">2 workshops / month + custom curriculum</span><span class="es">2 talleres / mes + plan de estudios a medida</span></li>
+          <li class="perk"><a href="perceptfolio.html" style="text-decoration:none"><strong>PerceptFolio</strong></a>: <span class="en">1 month of the terminal, free</span><span class="es">1 mes de la terminal, gratis</span></li>
         </ul>
         <a class="btn cta book" style="text-align:center" href="book.html?plan=Scale+bundle">
           <span class="en">Choose Scale</span><span class="es">Elegir Escala</span>

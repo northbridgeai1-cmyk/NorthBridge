@@ -399,17 +399,20 @@ table,.tprice,.big-num,.pf-ret{font-variant-numeric:tabular-nums}
    Higher specificity on purpose: these must beat the page sheets. */
 
 /* radii: rectangles with a small ease, not pills */
-html .btn,html .nb-btn,html .nb-submit,html .lang-toggle,html .nb-icon-btn,html .nb-chip,
-html .nb-tab,html .nb-copy,html .nb-updated,html .yt-save,html .badge,html .tier .badge,
-html .ct-soon,html .door-soon-tag,html .pf-domain{border-radius:3px}
+html .btn,html .nb-btn,html .nb-submit,html .nb-chip{border-radius:7px}
+html .lang-toggle,html .nb-icon-btn{border-radius:999px}
+/* small tags read as tags: a rounded pill is right at this size */
+html .badge,html .tier .badge,html .yt-save,html .ct-soon,html .door-soon-tag,html .nb-updated,html .nb-copy,html .nb-toast{border-radius:999px}
 html .tier,html .nb-card,html .pf-feat,html .fit-card,html .hook-strip,html .builder,
 html .pilot-card,html .sched-card,html .ct-panel,html .ct-side-card,html .ct-branch,
-html .expect-item,html .nb-toc,html .pv-delete,html .ytotal,html .pf-table-wrap,
-html .nb-modal-box,html .nb-search-box,html .nb-cookie,html .faq details,html .nb-alert,
-html .nb-field input,html .nb-field select,html .nb-field textarea,html .bill-toggle,
-html .pf-tabs,html .phone,html .msg,html .demo-frame,html .calc-released{border-radius:4px}
-html .bill-toggle button,html .nb-search-item,html .nb-drawer a.nb-drawer-link{border-radius:3px}
-html .nb-toast,html .nb-offline{border-radius:4px}
+html .expect-item,html .nb-toc,html .pv-delete,html .ytotal,html .pf-table-wrap,html .msg,
+html .nb-modal-box,html .nb-search-box,html .nb-cookie,html .faq details,html .nb-alert,html .pilot-card,
+html .nb-field input,html .nb-field select,html .nb-field textarea{border-radius:8px}
+html .phone,html .demo-frame,html .calc-released{border-radius:14px}
+html .bill-toggle,html .pf-tabs{border-radius:999px}
+html .bill-toggle button,html .nb-tab{border-radius:999px}
+html .nb-search-item,html .nb-drawer a.nb-drawer-link{border-radius:8px}
+html .nb-toast,html .nb-offline{border-radius:999px}
 
 /* shadows: a hairline and a whisper of depth, never a blur cloud */
 html .tier,html .nb-card,html .pf-feat,html .fit-card,html .ct-panel,html .ct-side-card,
@@ -417,7 +420,7 @@ html .sched-card,html .nb-search-box,html .nb-modal-box,html .nb-cookie,html .ph
   box-shadow:0 1px 0 rgba(16,24,20,.04);
 }
 html .tier:hover,html .nb-card--hover:hover,html .pf-feat:hover,html .fit-card:hover,
-html .ct-side-card:hover,html .expect-item:hover{transform:none;box-shadow:0 1px 0 rgba(16,24,20,.04);border-color:var(--ink)}
+html .ct-side-card:hover,html .expect-item:hover{transform:translateY(-2px);box-shadow:0 10px 22px -16px rgba(16,24,20,.28);border-color:var(--ink)}
 html .tier.best{background:var(--surface);border:2px solid var(--ink);box-shadow:none}
 html[data-theme="dark"] .tier.best{background:var(--surface);border-color:var(--ink);box-shadow:none}
 html .tier .badge{background:var(--ink);color:var(--paper);letter-spacing:.08em}
@@ -428,14 +431,14 @@ html .hero::after,html .pf-hero::after,html .ct-hero::after,html .pf-cta::after,
 html .bundle-strip::after,html .pilot-card::before,html .pilot-card::after{display:none}
 
 /* buttons: flat, decisive, no lift */
-html .btn:hover,html .nb-btn:hover,html .nb-fab:hover{transform:none;box-shadow:none}
+html .btn:hover,html .nb-btn:hover,html .nb-fab:hover{transform:translateY(-1px);box-shadow:0 6px 14px -10px rgba(16,24,20,.35)}
 html .btn{font-weight:600}
 
 /* floating controls: a corner tab, not a pill with an icon */
-html .nb-fab{border-radius:3px;padding:11px 16px;box-shadow:0 1px 0 rgba(16,24,20,.08)}
+html .nb-fab{border-radius:999px;padding:12px 18px;box-shadow:0 6px 16px -10px rgba(16,24,20,.35)}
 html .nb-fab svg{display:none}
 @media(max-width:520px){html .nb-fab span{display:inline}html .nb-fab{padding:11px 14px}}
-html .nb-top{border-radius:3px;box-shadow:0 1px 0 rgba(16,24,20,.08)}
+html .nb-top{border-radius:999px;box-shadow:0 6px 16px -10px rgba(16,24,20,.35)}
 
 /* type: bigger headings, tighter tracking, a real measure on body copy */
 html .h2{font-size:clamp(2rem,4.6vw,3.25rem);letter-spacing:-.03em;line-height:1.02;max-width:20ch}
@@ -444,6 +447,13 @@ html .problem h2{letter-spacing:-.03em}
 
 /* offline badge: dot is drawn, not a glyph */
 html .nb-offline > span:first-child{font-size:0;width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+
+/* form: the label answers the focus, so the visitor always knows which field is live */
+.nb-field > label{transition:color .15s ease}
+.nb-field:focus-within > label{color:var(--teal-dark)}
+html[data-theme="dark"] .nb-field:focus-within > label{color:var(--teal)}
+.ct-branch{transition:border-color .18s ease,background .18s ease,transform .12s ease}
+.ct-branch:hover{transform:translateY(-1px)}
 
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
