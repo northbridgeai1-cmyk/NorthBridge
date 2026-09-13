@@ -154,19 +154,23 @@
 
   /* ---------- hero ---------- */
   .hero{
-    position:relative;background:var(--deep);color:#fff;
-    padding:84px 0 96px;overflow:hidden;
+    position:relative;background:var(--paper);color:var(--ink);
+    padding:clamp(72px,11vw,148px) 0 clamp(56px,8vw,104px);
+    border-bottom:1px solid var(--line);
   }
-  #net{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
-  .hero::after{ /* aurora glow */
-    content:"";position:absolute;inset:-40%;pointer-events:none;
-    background:
-      radial-gradient(600px 340px at 22% 30%, rgba(46,125,79,.16), transparent 60%),
-      radial-gradient(700px 420px at 82% 75%, rgba(193,87,47,.14), transparent 60%);
-    animation:drift 16s ease-in-out infinite alternate;
+  .hero h1{
+    color:var(--ink);font-size:clamp(2.75rem,7.2vw,6rem);line-height:.98;
+    letter-spacing:-.035em;max-width:14ch;font-weight:600;
   }
-  @keyframes drift{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,2%,0)}}
-  @media (prefers-reduced-motion: reduce){.hero::after{animation:none}}
+  /* selectors match the originals' specificity so the light values win */
+  .hero p.hero-note{color:var(--ink-soft)}
+  .hero p.hero-note strong{color:var(--ink)}
+  .hero .btn.ghost{color:var(--ink);border-color:var(--ink)}
+  .hero .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  /* the underline is the page's one authored moment */
+  .hero .u svg path{stroke-dasharray:240;stroke-dashoffset:240;animation:nb-underline .9s cubic-bezier(.16,1,.3,1) .55s forwards}
+  @keyframes nb-underline{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion: reduce){.hero .u svg path{animation:none;stroke-dashoffset:0}}
   .hero .wrap{position:relative;z-index:2}
   .kicker{
     font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -180,7 +184,7 @@
   }
   h1 .u{position:relative;white-space:nowrap}
   h1 .u svg{position:absolute;left:0;bottom:-6px;width:100%;height:12px}
-  .hero p.lede{margin:28px 0 8px;font-size:1.16rem;color:rgba(255,255,255,.78);max-width:56ch}
+  .hero p.lede{margin:36px 0 8px;font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--ink-soft);max-width:58ch;line-height:1.55}
   .hero-cta{margin-top:36px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .hero-note{font-size:.88rem;color:rgba(255,255,255,.65)}
   .hero-note strong{color:#fff}
@@ -522,13 +526,6 @@
 
   /* ---------- button shine ---------- */
   .btn{position:relative;overflow:hidden}
-  .btn::after{
-    content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
-    background:linear-gradient(105deg, transparent, rgba(255,255,255,.35), transparent);
-    transform:skewX(-20deg);transition:left .5s ease;
-  }
-  .btn:hover::after{left:130%}
-  @media (prefers-reduced-motion: reduce){.btn::after{display:none}}
 
   /* ---------- badge float ---------- */
   .tier .badge{animation:none}
@@ -777,7 +774,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
 <!-- ======= HERO ======= -->
 <section class="hero">
-  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <h1>
       <span class="en">The work that runs your business shouldn't <span class="u">run you.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9 C 40 3, 80 11, 120 6 S 180 4, 198 8" stroke="#1f9d78" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span></span>
@@ -785,11 +781,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     </h1>
     <p class="lede">
       <span class="en">NorthBridge builds and keeps running the back-office automation a small business can't staff for: chasing invoices, moving data between apps, following up with clients, and training your team to run it. For small and medium businesses in the United States and Latin America. English or Spanish, from $99 a month.</span>
-      <span class="es">Cobrar facturas. Copiar datos entre aplicaciones. Responder la misma pregunta cuarenta veces. NorthBridge construye sistemas que te quitan ese trabajo de encima, y después le enseña a tu equipo a manejarlos.</span>
-    </p>
-    <p class="rotator-line">
-      <span class="en">This week, you could stop doing</span><span class="es">Esta semana, podrías dejar de hacer</span>
-      <span class="rotator"><span id="rotWord">payment chasing</span></span>
+      <span class="es">NorthBridge construye y mantiene funcionando la automatización administrativa que un negocio pequeño no puede contratar: cobrar facturas, mover datos entre aplicaciones, dar seguimiento a clientes, y capacitar a tu equipo para operarla. Para pequeñas y medianas empresas en Estados Unidos y Latinoamérica. En inglés o español, desde $99 al mes.</span>
     </p>
     <div class="hero-cta">
       <a class="btn big" href="contact.html">
@@ -807,19 +799,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 </section>
 
 <!-- ======= MARQUEE ======= -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track" id="mtrack">
-    <span class="item"><span class="en">Payment chasing</span><span class="es">Cobro de facturas</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Invoice reminders</span><span class="es">Recordatorios de pago</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Lead lists</span><span class="es">Listas de prospectos</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Client onboarding</span><span class="es">Alta de clientes</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Report generation</span><span class="es">Generación de reportes</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Data entry</span><span class="es">Entrada de datos</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Team notifications</span><span class="es">Notificaciones al equipo</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">Follow-up sequences</span><span class="es">Secuencias de seguimiento</span></span><span class="dot">◆</span>
-    <span class="item"><span class="en">AI training for your team</span><span class="es">Capacitación en IA para tu equipo</span></span><span class="dot">◆</span>
-  </div>
-</div>
 
 <!-- ======= PROBLEM ======= -->
 <section class="problem">
