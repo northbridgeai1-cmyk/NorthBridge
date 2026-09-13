@@ -5,3 +5,4 @@ DESIGN.md
 # Local tooling
 node_modules/
 .DS_Store
+tests/shots/

@@ -195,6 +195,32 @@
   }
   .calc-released strong{color:var(--teal-soft);font-weight:700}
 
+
+  /* ---- reshape: icon sits with the heading; no tile, no eyebrow ---- */
+  .door h3{display:flex;align-items:center;gap:10px;justify-content:center}
+  /* specificity must beat the original `.door .door-icon` tile rule below */
+  .door h3 .door-icon,.door-card .door h3 .door-icon{width:auto;height:auto;background:none;border:0;padding:0;margin:0;border-radius:0;box-shadow:none;display:inline-flex;flex:0 0 auto}
+  .door h3 .door-icon svg{width:22px;height:22px}
+  .door-room h3{display:flex;align-items:center;gap:10px;justify-content:center}
+  .door-room .door-icon{display:none}
+  /* the sub-heading above each section now leads; give it room above, less below */
+  .h2{margin-top:0;margin-bottom:12px}
+  .sub{margin-bottom:0}
+  /* ---- spacing rhythm: tight where the section is a punch, generous where it asks the reader to stay ---- */
+  .problem{padding:56px 0}
+  .how{padding:104px 0 96px}
+  .demo{padding:72px 0}
+  .divisions{padding:112px 0 104px}
+  .pilot{padding:64px 0}
+  .plans{padding:112px 0 96px}
+  .process{padding:88px 0}
+  .faq{padding:72px 0}
+  .final{padding:112px 0 120px}
+  @media(max-width:760px){
+    .how,.divisions,.plans,.final{padding-top:72px;padding-bottom:64px}
+    .process{padding:64px 0}
+  }
+
   /* ---------- marquee ---------- */
   .marquee{
     background:var(--paper-dark);color:var(--ink-soft);
@@ -319,7 +345,7 @@
   .tier .cta{margin-top:auto}
   .tier .value-note{
     margin-top:14px;font-size:.83rem;color:var(--teal-dark);font-weight:600;
-    border-left:3px solid var(--teal);padding-left:12px;
+    padding-left:0;font-style:italic;
   }
 
   /* billing toggle */
@@ -382,7 +408,7 @@
   /* hook strip: the $99 foot in the door */
   .hook-strip{
     margin-top:34px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    background:#fff;border:1px solid var(--line);border-left:5px solid var(--gold);
+    background:#fff;border:1px solid var(--line);
     border-radius:14px;padding:26px 30px;
   }
   .hook-strip .hook-tag{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
@@ -504,7 +530,7 @@
   @media (prefers-reduced-motion: reduce){.btn::after{display:none}}
 
   /* ---------- badge float ---------- */
-  .tier .badge{animation:floaty 3.2s ease-in-out infinite}
+  .tier .badge{animation:none}
   @keyframes floaty{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
   @media (prefers-reduced-motion: reduce){.tier .badge{animation:none}}
 
@@ -564,10 +590,6 @@
   @media(max-width:760px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
   /* the branch not yet open reads as a door still under construction */
   .door-card.soon .door{cursor:default;opacity:.92}
-  .door-card.soon .door::after{
-    content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-    background:repeating-linear-gradient(-45deg,transparent 0 13px,rgba(217,163,68,.07) 13px 26px);
-  }
   .door-soon-tag{
     display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
     color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:2px 9px;margin-bottom:10px;
@@ -585,7 +607,7 @@
     position:relative;min-height:560px;border-radius:172px 172px 6px 6px;
     background:linear-gradient(180deg, #fffdf8 0%, #f6efe2 100%);
     border:1px solid var(--line);padding:82px 22px 26px;
-    box-shadow:inset 0 0 60px rgba(232,184,75,.16);
+    box-shadow:none;
     overflow:hidden;
   }
   .door-room .div-kicker{display:block;text-align:center;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dark)}
@@ -681,7 +703,7 @@
 
   /* ---------- scarcity + tier note ---------- */
   .scarcity{
-    margin-top:18px;border-left:3px solid var(--gold);padding-left:14px;font-size:.95rem;
+    margin-top:18px;padding-left:0;font-size:.95rem;
   }
   .scarcity strong{color:var(--navy)}
   .tiers-note{
@@ -756,13 +778,12 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <section class="hero">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="kicker"><span class="en">NorthBridge · Business automation</span><span class="es">NorthBridge · Automatización de negocios</span></p>
     <h1>
       <span class="en">The work that runs your business shouldn't <span class="u">run you.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9 C 40 3, 80 11, 120 6 S 180 4, 198 8" stroke="#1f9d78" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span></span>
       <span class="es">El trabajo que mantiene tu negocio no debería <span class="u">agotarte.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9 C 40 3, 80 11, 120 6 S 180 4, 198 8" stroke="#1f9d78" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span></span>
     </h1>
     <p class="lede">
-      <span class="en">Chasing payments. Copying data between apps. Answering the same question forty times. NorthBridge builds systems that take this work off your hands, then teaches your team to run them.</span>
+      <span class="en">NorthBridge builds and keeps running the back-office automation a small business can't staff for: chasing invoices, moving data between apps, following up with clients, and training your team to run it. For small and medium businesses in the United States and Latin America. English or Spanish, from $99 a month.</span>
       <span class="es">Cobrar facturas. Copiar datos entre aplicaciones. Responder la misma pregunta cuarenta veces. NorthBridge construye sistemas que te quitan ese trabajo de encima, y después le enseña a tu equipo a manejarlos.</span>
     </p>
     <p class="rotator-line">
@@ -802,7 +823,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= PROBLEM ======= -->
 <section class="problem">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">The part nobody talks about</span><span class="es">La parte de la que nadie habla</span></p>
     <h2 class="rv">
       <span class="en">You didn't start your business to spend Tuesday night writing "just a friendly reminder" emails.</span>
       <span class="es">No empezaste tu negocio para pasar el martes por la noche escribiendo correos de "solo un recordatorio amistoso".</span>
@@ -821,7 +841,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= HOW IT WORKS ======= -->
 <section class="how" id="how">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">How it works</span><span class="es">Cómo funciona</span></p>
     <h2 class="h2 rv">
       <span class="en">See it working before you believe a word.</span>
       <span class="es">Míralo funcionando antes de creernos una palabra.</span>
@@ -885,7 +904,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= DEMO VIDEO ======= -->
 <section class="demo" id="demo">
   <div class="wrap">
-    <p class="step-label rv" style="color:var(--teal-soft)"><span class="en">Watch it run</span><span class="es">Míralo funcionar</span></p>
     <h2 class="h2 rv" style="color:#fff">
       <span class="en">Don't take our word for it. Watch the system work.</span>
       <span class="es">No nos creas a nosotros. Mira al sistema trabajar.</span>
@@ -920,7 +938,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= SUB-BRANDS ======= -->
 <section class="divisions" id="brands">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">What we do</span><span class="es">Qué hacemos</span></p>
     <h2 class="h2 rv">
       <span class="en">Four doors open, one being built. Walk through the one that sounds like your week.</span>
       <span class="es">Cuatro puertas abiertas, una en construcción. Entra por la que suene a tu semana.</span>
@@ -934,7 +951,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
       <div class="door-card rv">
         <div class="door-room">
-          <span class="div-kicker"><span class="en">Data &amp; workflows</span><span class="es">Datos y flujos</span></span>
           <h3>NorthBridge Cinderella</h3>
           <p class="blurb">
             <span class="en">For the invisible admin work: invoices, spreadsheets, reports, data that has to be moved from here to there every single day. Cinderella does the housework.</span>
@@ -954,11 +970,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Cinderella">
           <span class="knob"></span>
-          <span class="div-kicker"><span class="en">Data &amp; workflows</span><span class="es">Datos y flujos</span></span>
-          <span class="door-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2.4" stroke="#25d193"/></svg>
-          </span>
-          <h3>Cinderella</h3>
+          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2.4" stroke="#25d193"/></svg></span>Cinderella</h3>
           <p class="door-tease">
             <span class="en">Invoices, reports, paperwork: done while you sleep.</span>
             <span class="es">Facturas, reportes, papeleo: hechos mientras duermes.</span>
@@ -969,7 +981,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
       <div class="door-card rv d1">
         <div class="door-room">
-          <span class="div-kicker"><span class="en">Teaching</span><span class="es">Enseñanza</span></span>
           <h3>NorthBridge Socrates</h3>
           <p class="blurb">
             <span class="en">For teams that bought the AI tools but nobody really uses them. Socrates teaches people to work with AI on their actual daily tasks, in businesses, schools, and events, until it sticks.</span>
@@ -989,11 +1000,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Socrates">
           <span class="knob"></span>
-          <span class="div-kicker"><span class="en">Teaching</span><span class="es">Enseñanza</span></span>
-          <span class="door-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" stroke="#25d193"/></svg>
-          </span>
-          <h3>Socrates</h3>
+          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10.5V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5" stroke="#25d193"/></svg></span>Socrates</h3>
           <p class="door-tease">
             <span class="en">Your team, actually fluent in AI.</span>
             <span class="es">Tu equipo, realmente fluido en IA.</span>
@@ -1004,7 +1011,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
       <div class="door-card rv d2">
         <div class="door-room">
-          <span class="div-kicker"><span class="en">Client communication</span><span class="es">Comunicación con clientes</span></span>
           <h3>NorthBridge Hermes</h3>
           <p class="blurb">
             <span class="en">For businesses losing clients in the gaps: missed calls, slow replies, forgotten follow-ups. Hermes keeps the conversation going, by message and by phone, in your voice.</span>
@@ -1024,11 +1030,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Hermes">
           <span class="knob"></span>
-          <span class="div-kicker"><span class="en">Client communication</span><span class="es">Comunicación con clientes</span></span>
-          <span class="door-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.9-.9L3 20l1-4.1a8.4 8.4 0 1 1 17-4.4Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke="#25d193" stroke-width="2.4"/></svg>
-          </span>
-          <h3>Hermes</h3>
+          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.9-.9L3 20l1-4.1a8.4 8.4 0 1 1 17-4.4Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke="#25d193" stroke-width="2.4"/></svg></span>Hermes</h3>
           <p class="door-tease">
             <span class="en">No missed call or lead ever slips away again.</span>
             <span class="es">Ninguna llamada ni prospecto se escapa otra vez.</span>
@@ -1039,7 +1041,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
       <div class="door-card rv d3">
         <div class="door-room">
-          <span class="div-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></span>
           <h3>PerceptFolio</h3>
           <p class="blurb">
             <span class="en">For people whose decisions move real money. Every position needs a thesis, a stop and a deadline, and every call gets scored against the index. It tells you whether your judgement holds up. It never tells you what to buy.</span>
@@ -1059,11 +1060,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open PerceptFolio">
           <span class="knob"></span>
-          <span class="div-kicker"><span class="en">Quantitative research</span><span class="es">Investigación cuantitativa</span></span>
-          <span class="door-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 3.5-4.5 3 3L20 6" stroke="#25d193"/></svg>
-          </span>
-          <h3>PerceptFolio</h3>
+          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 3.5-4.5 3 3L20 6" stroke="#25d193"/></svg></span>PerceptFolio</h3>
           <p class="door-tease">
             <span class="en">Find out if your judgement is any good.</span>
             <span class="es">Descubre si tu criterio realmente sirve.</span>
@@ -1074,7 +1071,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
       <div class="door-card soon rv d3">
         <div class="door-room">
-          <span class="div-kicker"><span class="en">Real estate</span><span class="es">Bienes raíces</span></span>
           <h3><span class="en">NorthBridge Real Estate</span><span class="es">NorthBridge Bienes Raíces</span></h3>
           <p class="blurb">
             <span class="en">Our next practice, currently being built. If property is your business, tell us what eats your week and it will shape what we open with.</span>
@@ -1089,10 +1085,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Real Estate">
           <span class="knob"></span>
           <span class="door-soon-tag"><span class="en">Opening soon</span><span class="es">Abre pronto</span></span>
-          <span class="door-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/><path d="M9.5 21v-6h5v6" stroke="#25d193"/></svg>
-          </span>
-          <h3><span class="en">Real estate</span><span class="es">Bienes raíces</span></h3>
+          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/><path d="M9.5 21v-6h5v6" stroke="#25d193"/></svg></span><span class="en">Real estate</span><span class="es">Bienes raíces</span></h3>
           <p class="door-tease">
             <span class="en">Being built now. Help us decide what it does.</span>
             <span class="es">En construcción. Ayúdanos a decidir qué hace.</span>
@@ -1115,7 +1108,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   <div class="wrap">
     <div class="pilot-card rv">
       <div>
-        <p class="step-label" style="color:var(--teal-soft)"><span class="en">Do the math</span><span class="es">Haz la cuenta</span></p>
         <h2 class="h2">
           <span class="en">Work out what late invoices are costing you.</span>
           <span class="es">Calcula cuánto te cuestan las facturas atrasadas.</span>
@@ -1174,7 +1166,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= PLANS ======= -->
 <section class="plans" id="plans" data-bill="m">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">Bundles</span><span class="es">Paquetes</span></p>
     <h2 class="h2 rv">
       <span class="en">Three bundles, built from our three practices.</span>
       <span class="es">Tres paquetes, armados con nuestras tres prácticas.</span>
@@ -1348,7 +1339,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= PROCESS ======= -->
 <section class="process" id="process">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">How working with us goes</span><span class="es">Cómo es trabajar con nosotros</span></p>
     <h2 class="h2 rv">
       <span class="en">No mystery. This is the whole road.</span>
       <span class="es">Sin misterio. Este es todo el camino.</span>
@@ -1413,7 +1403,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= FAQ ======= -->
 <section class="faq" id="faq">
   <div class="wrap">
-    <p class="step-label rv"><span class="en">Fair questions</span><span class="es">Preguntas justas</span></p>
     <h2 class="h2 rv"><span class="en">The things you're probably wondering</span><span class="es">Lo que probablemente te estás preguntando</span></h2>
 
     <details class="rv">

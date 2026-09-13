@@ -377,6 +377,21 @@ html[data-theme="dark"] .nb-btn--danger{color:#ff8a80;border-color:#ff8a80}
 html[data-theme="dark"] .nb-btn--danger:hover{background:#ff8a80;color:#1a0f0e}
 html[data-theme="dark"] .pv-delete{border-color:#ff8a80}
 
+
+/* ---------- 2e. BROWSER SURFACES ---------------------------------------
+   The parts nobody draws still carry the design: selection, caret, scrollbar,
+   focus ring, underline offset, tabular numerals. Browser defaults belong to
+   no design system, so they are themed from the palette here. */
+::selection{background:rgba(46,125,79,.22);color:var(--ink)}
+html[data-theme="dark"] ::selection{background:rgba(62,207,142,.30)}
+body{caret-color:var(--teal);accent-color:var(--teal)}
+a{text-underline-offset:.16em;text-decoration-thickness:1px}
+html{scrollbar-color:var(--line) transparent;scrollbar-width:thin}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px;border:3px solid var(--paper)}
+::-webkit-scrollbar-track{background:transparent}
+table,.tprice,.big-num,.pf-ret{font-variant-numeric:tabular-nums}
+
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
   position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);
@@ -433,9 +448,9 @@ html[data-theme="dark"] .nb-icon-btn .nb-sun{display:block}
 html[data-theme="dark"] .nb-icon-btn .nb-moon{display:none}
 
 /* header shrinks on scroll */
-header{transition:box-shadow var(--dur-2) var(--ease),padding var(--dur-2) var(--ease)}
+header{transition:box-shadow var(--dur-2) var(--ease)}
 header.nb-stuck{box-shadow:var(--e-2)}
-header.nb-stuck .nav{padding-top:9px;padding-bottom:9px}
+header.nb-stuck .nav{padding-top:9px;padding-bottom:9px;transition:padding-top var(--dur-2) var(--ease),padding-bottom var(--dur-2) var(--ease)}
 
 /* ---------- 6. MOBILE MENU ---------------------------------------------- */
 .nb-burger{display:none}
@@ -565,9 +580,6 @@ header.nb-stuck .nav{padding-top:9px;padding-bottom:9px}
 }
 .nb-fab:hover{transform:translateY(-2px);box-shadow:var(--e-4)}
 .nb-fab svg{width:16px;height:16px}
-/* pulse once when the page settles, then stop — a nudge, not a nag */
-.nb-fab.nb-nudge{animation:nb-nudge 1.6s var(--ease) 2}
-@keyframes nb-nudge{0%,100%{box-shadow:var(--e-3)}50%{box-shadow:0 0 0 10px rgba(62,207,142,.18),var(--e-3)}}
 @media(max-width:520px){
   .nb-fab span{display:none}
   .nb-fab{padding:13px;border-radius:var(--r-full)}
@@ -709,7 +721,7 @@ html[data-theme="dark"] .nb-alert--err{background:rgba(179,38,30,.18);color:#ff9
 .nb-dots i{width:4px;height:4px;border-radius:50%;background:currentColor;animation:nb-bounce .9s var(--ease) infinite}
 .nb-dots i:nth-child(2){animation-delay:.12s}
 .nb-dots i:nth-child(3){animation-delay:.24s}
-@keyframes nb-bounce{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes nb-bounce{0%,60%,100%{opacity:.3}30%{opacity:1}}
 
 /* ---------- 14. COPY BUTTON ---------------------------------------------- */
 .nb-copy{
