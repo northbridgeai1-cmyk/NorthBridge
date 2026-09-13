@@ -455,6 +455,46 @@ html[data-theme="dark"] .nb-field:focus-within > label{color:var(--teal)}
 .ct-branch{transition:border-color .18s ease,background .18s ease,transform .12s ease}
 .ct-branch:hover{transform:translateY(-1px)}
 
+/* ---- radius scale, final word: neither square nor pill ---- */
+html body .btn,html body .nb-btn,html body .nb-submit,html body .nb-chip,html body .btn.big{border-radius:10px}
+html body .tier,html body .nb-card,html body .pf-feat,html body .fit-card,html body .hook-strip,html body .builder,
+html body .pilot-card,html body .sched-card,html body .ct-panel,html body .ct-side-card,html body .ct-branch,
+html body .expect-item,html body .nb-toc,html body .pv-delete,html body .pf-table-wrap,html body .nb-modal-box,
+html body .nb-search-box,html body .nb-cookie,html body .faq details,html body .nb-alert,html body .phone,
+html body .demo-frame,html body .nb-seq,html body .pos-card{border-radius:14px}
+html body .ytotal,html body .msg,html body .calc-released,html body .nb-field input,html body .nb-field select,
+html body .nb-field textarea{border-radius:10px}
+html body .nb-fab,html body .nb-top{border-radius:12px}
+html body .nb-top{width:44px;height:44px}
+
+
+/* ---------- 2g. SHOWN, NOT DESCRIBED --------------------------------------
+   One section per practice page that shows the work as a sequence in time,
+   set as a ledger down a left rail rather than a row of equal cards. */
+.show{padding:clamp(56px,8vw,104px) 0;background:var(--paper);border-top:1px solid var(--line)}
+.show-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,88px);align-items:start}
+@media(max-width:880px){.show-grid{grid-template-columns:1fr}}
+.show .h2{margin-bottom:12px}
+.nb-seq{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.nb-seq li{display:grid;grid-template-columns:5.5rem 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.nb-seq .t{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.nb-seq .b{color:var(--ink-soft);line-height:1.55;font-size:1rem}
+/* rows arrive down the rail as the section enters view */
+.nb-seq li{opacity:0;transform:translateY(8px);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1)}
+.show.in .nb-seq li{opacity:1;transform:none}
+.show.in .nb-seq li:nth-child(2){transition-delay:.08s}.show.in .nb-seq li:nth-child(3){transition-delay:.16s}
+.show.in .nb-seq li:nth-child(4){transition-delay:.24s}.show.in .nb-seq li:nth-child(5){transition-delay:.32s}
+@media(max-width:520px){.nb-seq li{grid-template-columns:4.2rem 1fr;gap:12px}}
+
+/* PerceptFolio: the position card */
+.pos-card{background:var(--surface);border:1px solid var(--line);padding:6px 0 0}
+.pos-row{display:grid;grid-template-columns:7rem 1fr;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:baseline}
+.pos-row .k{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.pos-row .v{font-family:var(--serif);font-size:1.15rem;color:var(--ink);line-height:1.35}
+.pos-foot{padding:14px 22px 18px;font-size:.82rem;color:var(--ink-soft)}
+html[data-theme="dark"] .pos-card{background:var(--surface)}
+@media (prefers-reduced-motion: reduce){.nb-seq li{opacity:1;transform:none;transition:none}}
+
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
   position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);
