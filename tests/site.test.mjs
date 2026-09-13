@@ -89,8 +89,13 @@ await p.setViewport(1440, 900); await fresh('contact.html');
   await p.clickSel('#ctSubmit');
   const g = await p.eval(`await new Promise(s=>setTimeout(s,250)); return ['f-name','f-email','f-msg'].every(id=>document.getElementById(id).dataset.invalid==='true') && document.getElementById('ctSuccess').dataset.show!=='true';`);
   ok(g, 'Garbage submit: all three rejected, no success');
+  // The endpoint is real now. Stub fetch for this one step so the suite
+  // exercises the success path without sending a message every run.
+  await p.eval(`window.__posted=null; window.fetch=async(u,o)=>{window.__posted={url:String(u),method:o&&o.method}; return {ok:true,status:200,json:async()=>({success:'true'})}}; return 1;`);
   await p.eval(`document.getElementById('ct-name').value='Pierce Test';document.getElementById('ct-email').value='pierce@example.com';document.getElementById('ct-msg').value='A message long enough to pass validation.';return 1;`);
   await p.clickSel('#ctSubmit');
+  const posted = await p.eval(`await new Promise(s=>setTimeout(s,300)); return window.__posted;`);
+  ok(posted && /formsubmit\.co\/ajax\//.test(posted.url) && posted.method==='POST', 'Valid submit POSTs to the FormSubmit endpoint', posted ? posted.url : 'no request');
   const v = await p.eval(`await new Promise(s=>setTimeout(s,900)); return document.getElementById('ctSuccess').dataset.show==='true' && document.getElementById('ctForm').style.display==='none';`);
   ok(v, 'Valid submit: success state replaces the form');
   await fresh('contact.html?branch=perceptfolio');

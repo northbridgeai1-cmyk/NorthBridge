@@ -83,7 +83,7 @@
 <meta name="theme-color" content="#fbfaf6">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
 <link rel="stylesheet" href="nb.css">
 <script>
 /* Theme applied before first paint so dark-mode visitors never see a white flash. */
@@ -260,12 +260,14 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
                submit is dropped silently. -->
           <div class="nb-hp" aria-hidden="true">
             <label for="ct-website">Leave this field empty</label>
-            <input type="text" id="ct-website" name="_gotcha" tabindex="-1" autocomplete="off">
+            <input type="text" id="ct-website" name="_honey" tabindex="-1" autocomplete="off">
           </div>
 
           <!-- Attribution, filled from the UTM captured on landing. -->
           <input type="hidden" name="source" id="ct-source" value="">
           <input type="hidden" name="_subject" id="ct-subject" value="NorthBridge website enquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
 
           <button type="submit" class="nb-btn nb-btn--primary nb-submit" id="ctSubmit">
             <span class="nb-idle"><span class="en">Send message</span><span class="es">Enviar mensaje</span></span>
@@ -387,14 +389,13 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   /* ==================================================================
      WHERE THE FORM SENDS
      ------------------------------------------------------------------
-     1. Create a free form at https://formspree.io (takes about two minutes)
-     2. Paste the endpoint it gives you between the quotes below
-     3. Done — the form posts straight to your inbox.
+     FormSubmit delivers straight to the inbox, no account needed. The
+     FIRST submission triggers a one-time activation email to that inbox;
+     click the link once and every later submission is delivered.
 
-     Left empty, the form still validates fully and then hands off to a
-     pre-filled email instead, so it is never a dead end.
+     Set to '' to fall back to a pre-filled email — never a dead end.
      ================================================================== */
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/northbridgeai1@gmail.com';
 
   var form    = document.getElementById('ctForm');
   var okPanel = document.getElementById('ctSuccess');
@@ -476,7 +477,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     errBox.setAttribute('data-show', 'false');
 
     /* honeypot: a bot filled the hidden field — pretend it worked */
-    if(form.elements._gotcha && form.elements._gotcha.value){
+    if(form.elements._honey && form.elements._honey.value){
       form.style.display = 'none';
       okPanel.setAttribute('data-show', 'true');
       return;
