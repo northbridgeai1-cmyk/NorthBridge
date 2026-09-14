@@ -51,10 +51,10 @@ await p.setViewport(1440, 900); await fresh('index.html');
     document.querySelector('.bill-toggle button[data-bill="y"]').click(); await new Promise(s=>setTimeout(s,700));
     return [...document.querySelectorAll('.tier')].map(t=>{
       const annual=+t.querySelector('.tprice .by').textContent.replace(/\\D/g,''), was=+t.querySelector('.yt-was').textContent.replace(/\\D/g,'');
-      const save=+(t.querySelector('.yt-save .en').textContent.match(/Save \\$([\\d,]+)/)||[0,'0'])[1].replace(/,/g,'');
+      const wr=t.querySelector('.yt-was').getBoundingClientRect(), br=t.querySelector('.by').getBoundingClientRect();
       const unit=getComputedStyle(t.querySelector('.py')).display!=='none' && getComputedStyle(t.querySelector('.pm')).display==='none';
-      return was-save===annual && was>annual && unit; });`);
-  ok(y.every(Boolean), 'Yearly pricing: big number is the annual total, unit reads /year, struck − saving = annual', y.join(','));
+      return was>annual && wr.right<=br.left+1 && Math.abs((wr.top+wr.height/2)-(br.top+br.height/2))<24 && unit && !t.querySelector('.yt-save'); });`);
+  ok(y.every(Boolean), 'Yearly pricing: struck old price first, then the annual total, unit /year, no savings pill', y.join(','));
 
   await p.clickSel('#langBtn');
   ok((await p.eval(`return document.documentElement.dataset.lang;`)) === 'es', 'Language toggle switches to Spanish');

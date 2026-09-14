@@ -146,7 +146,7 @@ section{position:relative}
     html body .tier .tprice{flex-wrap:nowrap;white-space:nowrap;gap:5px}
     html body .tier .tprice .n{font-size:1.55rem}
     html body .tier .tprice .per{font-size:.74rem}
-    html body .tier .tprice .yt-was{font-size:.88rem;margin-left:6px}
+    html body .tier .tprice .yt-was{font-size:.88rem;margin-right:6px}
     html body .tier .badge{font-size:.62rem}
   }
 .tier{
