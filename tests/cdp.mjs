@@ -16,7 +16,11 @@ export async function launch() {
   const proc = spawn(CHROME, [
     `--remote-debugging-port=${PORT}`, `--user-data-dir=${dir}`, '--headless=new',
     '--no-first-run', '--no-default-browser-check', '--disable-extensions',
-    '--disable-background-networking', '--hide-scrollbars', 'about:blank'
+    '--disable-background-networking', '--hide-scrollbars',
+    // Software rendering: headless Chrome on macOS otherwise needs a live
+    // display link and hangs when the screen is asleep or locked.
+    '--use-angle=swiftshader', '--use-gl=angle', '--disable-gpu-compositing',
+    '--ozone-platform=headless', 'about:blank'
   ], { stdio: 'ignore' });
   for (let i = 0; i < 90; i++) {
     try { if ((await fetch(`http://127.0.0.1:${PORT}/json/version`)).ok) break; } catch {}

@@ -139,7 +139,16 @@ section{position:relative}
 .plans{padding:72px 0;background:var(--paper-dark)}
 .plans .sub{margin-bottom:52px}
 .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-@media(max-width:920px){.tiers{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+@media(max-width:879px){.tiers{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+  @media(min-width:880px) and (max-width:1023px){
+    .tiers{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    html body .tier{min-width:0;padding:22px 16px}
+    html body .tier .tprice{flex-wrap:nowrap;white-space:nowrap;gap:5px}
+    html body .tier .tprice .n{font-size:1.55rem}
+    html body .tier .tprice .per{font-size:.74rem}
+    html body .tier .tprice .yt-was{font-size:.88rem;margin-left:6px}
+    html body .tier .badge{font-size:.62rem}
+  }
 .tier{
   background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;
   display:flex;flex-direction:column;position:relative;

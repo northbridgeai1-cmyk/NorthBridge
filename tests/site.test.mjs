@@ -105,7 +105,8 @@ await p.setViewport(1440, 900); await fresh('contact.html');
 }
 
 /* ─── 4. responsive: overflow + overlap, three widths ──────────────── */
-for (const [w, hgt] of [[375, 812], [768, 1024], [1440, 900]]) {
+// 466x678 = iPhone Duo folded · 890x626 = unfolded (landscape) · 445x626 = Split View half
+for (const [w, hgt] of [[375, 812], [466, 678], [445, 626], [768, 1024], [890, 626], [1440, 900]]) {
   await p.setViewport(w, hgt);
   for (const pg of PAGES) {
     await fresh(pg);

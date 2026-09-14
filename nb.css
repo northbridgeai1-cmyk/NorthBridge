@@ -503,6 +503,47 @@ html[data-theme="dark"] .pos-card{background:var(--surface)}
 html body .btn.outline{background:transparent;color:var(--ink);border-color:var(--ink)}
 html body .btn.outline:hover{background:var(--ink);color:var(--paper)}
 
+
+/* ---------- 2h. FOLDABLES + NOTCHES ---------------------------------------
+   iPhone Duo (Sept 2026): folded 466x678, unfolded 890x626 landscape, Split
+   View ~445x626 per app, with a physical hinge down the middle when open.
+   Three things follow: fixed controls respect safe-area insets; short
+   landscape viewports get a shorter hero; and where the browser exposes the
+   hinge (Viewport Segments API), two-column layouts put their gutter on it
+   so nothing is bent in half. All progressive: unsupported = unchanged. */
+
+/* safe areas: never tuck a control under a notch, hinge edge or home bar */
+.nb-float{right:max(clamp(var(--s-md),3vw,var(--s-xl)),env(safe-area-inset-right));bottom:max(clamp(var(--s-md),3vw,var(--s-xl)),env(safe-area-inset-bottom))}
+.nb-cookie{left:max(var(--s-md),env(safe-area-inset-left));right:max(var(--s-md),env(safe-area-inset-right));bottom:max(var(--s-md),env(safe-area-inset-bottom))}
+.nb-toasts{bottom:max(var(--s-lg),env(safe-area-inset-bottom))}
+.nb-drawer-panel{padding-right:max(var(--s-xl),env(safe-area-inset-right));padding-bottom:max(var(--s-2xl),env(safe-area-inset-bottom))}
+.nb-offline{top:max(var(--s-sm),env(safe-area-inset-top))}
+header .nav{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+
+/* short landscape (unfolded Duo, phones on their side): the hero must leave
+   room for the lede and the button above the fold */
+@media (max-height:700px) and (orientation:landscape){
+  .hero{padding-top:clamp(40px,6vh,64px);padding-bottom:clamp(32px,5vh,56px)}
+  .hero h1{font-size:clamp(2.2rem,6.5vh,3.6rem)}
+  .hero p.lede{margin-top:20px;font-size:1rem}
+}
+
+/* the hinge: when the viewport is two side-by-side segments, put the gutter
+   of every two-column layout exactly on it */
+@media (horizontal-viewport-segments: 2){
+  .show-grid,.how-grid,.ct-grid,.note-grid{
+    grid-template-columns:env(viewport-segment-width 0 0) env(viewport-segment-width 1 0);
+    column-gap:calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0));
+  }
+  .tiers{grid-template-columns:1fr 1fr;column-gap:calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0))}
+  /* nothing fixed should sit on the fold */
+  .nb-toasts{left:auto;right:max(var(--s-lg),env(safe-area-inset-right));transform:none}
+}
+/* folded vertically (book posture): stack, and keep the fold clear */
+@media (vertical-viewport-segments: 2){
+  .hero{min-height:env(viewport-segment-height 0 0);padding-bottom:calc(env(viewport-segment-top 0 1) - env(viewport-segment-bottom 0 0))}
+}
+
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
   position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);

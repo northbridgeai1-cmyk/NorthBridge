@@ -7,3 +7,4 @@ node_modules/
 .DS_Store
 tests/shots/
 .claude/settings.local.json
+tests/shots/last-run.log
