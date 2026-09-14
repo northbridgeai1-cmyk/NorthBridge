@@ -154,21 +154,28 @@
 
   /* ---------- hero ---------- */
   .hero{
-    position:relative;color:var(--ink);
-    /* warmth, not a colour blob: the paper is lit from the top-left */
-    background:radial-gradient(120% 80% at 12% -10%, #fffdf6 0%, var(--paper) 55%, #f6f2e8 100%);
+    position:relative;background:var(--deep);color:#fff;overflow:hidden;
     padding:clamp(72px,11vw,148px) 0 clamp(56px,8vw,104px);
-    border-bottom:1px solid var(--line);
   }
+  #net{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
+  .hero::after{ /* aurora */
+    content:"";position:absolute;inset:-40%;pointer-events:none;
+    background:
+      radial-gradient(600px 340px at 22% 30%, rgba(46,125,79,.16), transparent 60%),
+      radial-gradient(700px 420px at 82% 75%, rgba(193,87,47,.14), transparent 60%);
+    animation:drift 16s ease-in-out infinite alternate;
+  }
+  @keyframes drift{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,2%,0)}}
+  @media (prefers-reduced-motion: reduce){.hero::after{animation:none}}
   .hero h1{
-    color:var(--ink);font-size:clamp(2.75rem,7.2vw,6rem);line-height:.98;
+    color:#fff;font-size:clamp(2.75rem,7.2vw,6rem);line-height:.98;
     letter-spacing:-.035em;max-width:14ch;font-weight:600;
   }
   /* selectors match the originals' specificity so the light values win */
-  .hero p.hero-note{color:var(--ink-soft)}
-  .hero p.hero-note strong{color:var(--ink)}
-  .hero .btn.ghost{color:var(--ink);border-color:var(--ink)}
-  .hero .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .hero p.hero-note{color:rgba(255,255,255,.66)}
+  .hero p.hero-note strong{color:#fff}
+  .hero-alt{color:rgba(255,255,255,.78);text-decoration:none;font-weight:600;padding:0 4px;border-bottom:1px solid rgba(255,255,255,.3);transition:color .15s,border-color .15s}
+  .hero-alt:hover{color:#fff;border-color:#fff}
   /* the underline is the page's one authored moment */
   .hero .u svg path{stroke-dasharray:240;stroke-dashoffset:240;animation:nb-underline .9s cubic-bezier(.16,1,.3,1) .55s forwards}
   @keyframes nb-underline{to{stroke-dashoffset:0}}
@@ -186,7 +193,7 @@
   }
   h1 .u{position:relative;white-space:nowrap}
   h1 .u svg{position:absolute;left:0;bottom:-6px;width:100%;height:12px}
-  .hero p.lede{margin:36px 0 8px;font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--ink-soft);max-width:58ch;line-height:1.55}
+  .hero p.lede{margin:36px 0 8px;font-size:clamp(1.05rem,1.4vw,1.25rem);color:rgba(255,255,255,.8);max-width:58ch;line-height:1.55}
   .hero-cta{margin-top:36px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .hero-note{font-size:.88rem;color:rgba(255,255,255,.65)}
   .hero-note strong{color:#fff}
@@ -237,8 +244,10 @@
   /* ---- reactions ---- */
   /* tier: hovering the card fills its button, so the whole card reads as one target */
   .tier .cta .btn{transition:background .18s ease,color .18s ease,border-color .18s ease}
-  .tier:hover .cta .btn.navy{background:var(--teal);border-color:var(--teal);color:#06251a}
-  html[data-theme="dark"] .tier:hover .cta .btn.navy{color:#06251a}
+  .btn.outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn.outline:hover{background:var(--ink);color:var(--paper)}
+  html[data-theme="dark"] .btn.outline{color:var(--ink);border-color:var(--ink)}
+  html[data-theme="dark"] .btn.outline:hover{background:var(--ink);color:var(--paper)}
   /* the PerceptFolio perk line is marked as such */
   .tier li.perk{background:rgba(78,168,255,.07);margin:6px -8px 0;padding-left:38px;padding-right:8px;border-radius:3px;border-bottom:0}
   .tier li.perk::before{left:10px}
@@ -289,6 +298,13 @@
     font-size:clamp(3rem,11vw,9rem);color:var(--ink);opacity:.92;margin:0 0 40px;user-select:none}
   .foot-word em{font-style:normal;color:var(--teal-dark)}
   html[data-theme="dark"] .foot-word em{color:var(--teal)}
+
+  .builder-wrap{margin-top:56px;border-top:1px solid var(--line)}
+  .builder-wrap summary{cursor:pointer;list-style:none;padding:22px 0;font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:space-between}
+  .builder-wrap summary::-webkit-details-marker{display:none}
+  .builder-wrap summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:1.6rem;color:var(--ink-soft);transition:transform .25s}
+  .builder-wrap[open] summary::after{transform:rotate(45deg)}
+  .builder-wrap .builder{margin-top:0}
 
   /* ---------- marquee ---------- */
   .marquee{
@@ -838,6 +854,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
 <!-- ======= HERO ======= -->
 <section class="hero">
+  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
     <h1>
       <span class="en">The work that runs your business shouldn't <span class="u">run you.<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9 C 40 3, 80 11, 120 6 S 180 4, 198 8" stroke="#1f9d78" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span></span>
@@ -851,8 +868,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <a class="btn big" href="contact.html">
         <span class="en">Contact us</span><span class="es">Contáctanos</span>
       </a>
-      <a class="btn big ghost" href="#plans">
-        <span class="en">See the plans</span><span class="es">Ver los planes</span>
+      <a class="hero-alt" href="#plans">
+        <span class="en">or see the plans</span><span class="es">o ver los planes</span> →
       </a>
     </div>
     <p class="hero-note" style="margin-top:18px">
@@ -1250,7 +1267,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Sweep</strong></a>: <span class="en">2 workflows + monthly report</span><span class="es">2 flujos + reporte mensual</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Courier</strong></a>: <span class="en">follow-up sequences on 1 channel</span><span class="es">secuencias de seguimiento en 1 canal</span></li>
         </ul>
-        <a class="btn navy cta book" style="text-align:center" href="book.html?plan=Starter+bundle">
+        <a class="btn outline cta book" style="text-align:center" href="book.html?plan=Starter+bundle">
           <span class="en">Choose Starter</span><span class="es">Elegir Inicial</span>
         </a>
         <p class="value-note">
@@ -1280,7 +1297,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="socrates.html" style="text-decoration:none"><strong>Socrates · Academy</strong></a>: <span class="en">1 team workshop / month</span><span class="es">1 taller de equipo / mes</span></li>
           <li class="perk"><a href="perceptfolio.html" style="text-decoration:none"><strong>PerceptFolio</strong></a>: <span class="en">1 month of the terminal, free</span><span class="es">1 mes de la terminal, gratis</span></li>
         </ul>
-        <a class="btn navy cta book" style="text-align:center" href="book.html?plan=Growth+bundle">
+        <a class="btn outline cta book" style="text-align:center" href="book.html?plan=Growth+bundle">
           <span class="en">Choose Growth</span><span class="es">Elegir Crecimiento</span>
         </a>
         <p class="value-note">
@@ -1341,7 +1358,9 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     </div>
 
     <!-- custom builder -->
-    <div class="builder rv">
+    <details class="builder-wrap rv">
+      <summary><span class="en">None of these fit? Build your own</span><span class="es">¿Ninguno te sirve? Arma el tuyo</span></summary>
+    <div class="builder">
       <div>
         <h3><span class="en">None of these fit? Build your own.</span><span class="es">¿Ninguno te calza? Arma el tuyo.</span></h3>
         <p>
@@ -1381,6 +1400,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
       </div>
     </div>
+    </details>
   </div>
 </section>
 

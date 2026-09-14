@@ -88,7 +88,7 @@ html[data-theme="dark"] .tier.best{
 html[data-theme="dark"] header{background:var(--header-bg);border-bottom-color:var(--line)}
 html[data-theme="dark"] .btn.navy{background:#e8ece9;border-color:#e8ece9;color:#0d100f}
 html[data-theme="dark"] .btn.navy:hover{background:#fff}
-html[data-theme="dark"] .btn:not(.ghost){color:#06251a}
+html[data-theme="dark"] .btn:not(.ghost):not(.outline):not(.pf){color:#06251a}
 html[data-theme="dark"] .btn.ghost{color:#fff}
 html[data-theme="dark"] details,
 html[data-theme="dark"] .faq details{border-color:var(--line)}
@@ -303,7 +303,7 @@ details.rv{
    ------------------------------------------------------------------------ */
 
 /* --- 1. light-mode button labels --- */
-html:not([data-theme="dark"]) .btn:not(.ghost),
+html:not([data-theme="dark"]) .btn:not(.ghost):not(.outline):not(.pf),
 html:not([data-theme="dark"]) .nb-skip,
 html:not([data-theme="dark"]) .nb-fab,
 html:not([data-theme="dark"]) .nb-btn--primary{color:#fff}
@@ -427,7 +427,7 @@ html .tier .badge{background:var(--ink);color:var(--paper);letter-spacing:.08em}
 html[data-theme="dark"] .tier .badge{background:var(--ink);color:var(--paper)}
 
 /* no aurora, no drift, on any hero or band */
-html .hero::after,html .pf-hero::after,html .ct-hero::after,html .pf-cta::after,
+html .pf-hero::after,html .ct-hero::after,html .pf-cta::after,
 html .bundle-strip::after,html .pilot-card::before,html .pilot-card::after{display:none}
 
 /* buttons: flat, decisive, no lift */
@@ -494,6 +494,14 @@ html body .nb-top{width:44px;height:44px}
 .pos-foot{padding:14px 22px 18px;font-size:.82rem;color:var(--ink-soft)}
 html[data-theme="dark"] .pos-card{background:var(--surface)}
 @media (prefers-reduced-motion: reduce){.nb-seq li{opacity:1;transform:none;transition:none}}
+
+/* Hick: one visible Contact per viewport. The header carries it on wide
+   screens; the floating tab exists only where the header hides its CTA. */
+@media(min-width:1025px){html body .nb-fab{display:none}}
+
+/* outline buttons carry ink, in both themes, whatever the rules above say */
+html body .btn.outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+html body .btn.outline:hover{background:var(--ink);color:var(--paper)}
 
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
