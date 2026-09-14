@@ -448,8 +448,8 @@
   .bill-toggle button.on{background:var(--navy);color:#fff}
   .bill-toggle .save-tag{color:var(--teal);font-weight:800}
   .bill-toggle button.on .save-tag{color:var(--teal-soft)}
-  .plans[data-bill="m"] .by, .plans[data-bill="m"] .ytotal{display:none}
-  .plans[data-bill="y"] .bm{display:none}
+  .plans[data-bill="m"] .by, .plans[data-bill="m"] .ytotal, .plans[data-bill="m"] .py{display:none}
+  .plans[data-bill="y"] .bm, .plans[data-bill="y"] .pm{display:none}
   /* ---- annual pricing ----
      The saving is the reason to choose yearly, so it is shown as a real
      price comparison rather than a footnote. The strike is drawn with a
@@ -462,6 +462,7 @@
     border:1px solid var(--teal-soft);
   }
   .yt-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .yt-was{font-size:1.05rem}
   .yt-was{
     position:relative;text-decoration:none;font-size:1rem;font-weight:600;
     color:var(--ink-soft);opacity:.85;
@@ -1252,12 +1253,10 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <div class="tier rv">
         <h3><span class="en">Starter</span><span class="es">Inicial</span></h3>
         <p class="for"><span class="en">Clean data + no lost leads. The essentials.</span><span class="es">Datos ordenados + cero prospectos perdidos. Lo esencial.</span></p>
-        <div class="tprice"><span class="n"><span class="bm">$299</span><span class="by">$249</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
+        <div class="tprice"><span class="n"><span class="bm">$299</span><span class="by">$2,988</span></span><span class="per"><span class="pm"><span class="en">/ month</span><span class="es">/ mes</span></span><span class="py"><span class="en">/ year</span><span class="es">/ año</span></span></span></div>
         <div class="ytotal">
           <span class="yt-row">
             <s class="yt-was" aria-label="was $3,588 per year">$3,588</s>
-            <b class="yt-now">$2,988</b>
-            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
           </span>
           <span class="yt-save">
             <span class="en">Save $600 &middot; 17% off &middot; 2 months free</span>
@@ -1280,12 +1279,10 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <div class="tier rv d1">
         <h3><span class="en">Growth</span><span class="es">Crecimiento</span></h3>
         <p class="for"><span class="en">The full back office, plus communication and monthly training.</span><span class="es">Toda la oficina de atrás, más comunicación y capacitación mensual.</span></p>
-        <div class="tprice"><span class="n"><span class="bm">$649</span><span class="by">$541</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
+        <div class="tprice"><span class="n"><span class="bm">$649</span><span class="by">$6,492</span></span><span class="per"><span class="pm"><span class="en">/ month</span><span class="es">/ mes</span></span><span class="py"><span class="en">/ year</span><span class="es">/ año</span></span></span></div>
         <div class="ytotal">
           <span class="yt-row">
             <s class="yt-was" aria-label="was $7,788 per year">$7,788</s>
-            <b class="yt-now">$6,492</b>
-            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
           </span>
           <span class="yt-save">
             <span class="en">Save $1,296 &middot; 17% off &middot; 2 months free</span>
@@ -1311,12 +1308,10 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <span class="badge"><span class="en">Recommended</span><span class="es">Recomendado</span></span>
         <h3><span class="en">Scale</span><span class="es">Escala</span></h3>
         <p class="for"><span class="en">The top plan of every practice. Automation as your way of working.</span><span class="es">El plan máximo de cada práctica. La automatización como tu forma de trabajar.</span></p>
-        <div class="tprice"><span class="n"><span class="bm">$699</span><span class="by">$583</span></span><span class="per"><span class="en">/ month</span><span class="es">/ mes</span></span></div>
+        <div class="tprice"><span class="n"><span class="bm">$699</span><span class="by">$6,996</span></span><span class="per"><span class="pm"><span class="en">/ month</span><span class="es">/ mes</span></span><span class="py"><span class="en">/ year</span><span class="es">/ año</span></span></span></div>
         <div class="ytotal">
           <span class="yt-row">
             <s class="yt-was" aria-label="was $8,388 per year">$8,388</s>
-            <b class="yt-now">$6,996</b>
-            <span class="yt-per"><span class="en">billed yearly</span><span class="es">facturado al año</span></span>
           </span>
           <span class="yt-save">
             <span class="en">Save $1,392 &middot; 17% off &middot; 2 months free</span>

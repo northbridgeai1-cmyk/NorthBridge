@@ -904,9 +904,9 @@ html[data-theme="dark"] .nb-alert--err{background:rgba(179,38,30,.18);color:#ff9
 .nb-foot-col a{display:block;text-decoration:none;color:var(--ink-soft);font-size:var(--t-sm);padding:3px 0;transition:color var(--dur-1) var(--ease),transform var(--dur-1) var(--ease)}
 .nb-foot-col a:hover{color:var(--teal-dark);transform:translateX(2px)}
 .nb-social{margin-top:10px}
-.nb-social a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink-soft);font-size:var(--t-sm);font-weight:600;transition:color var(--dur-1) var(--ease)}
-.nb-social a:hover{color:var(--teal-dark)}
-.nb-social svg{width:18px;height:18px;flex:0 0 18px}
+.nb-social a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink-soft);font-size:var(--t-caption);font-weight:500;opacity:.85;transition:color var(--dur-1) var(--ease),opacity var(--dur-1) var(--ease)}
+.nb-social a:hover{color:var(--teal-dark);opacity:1}
+.nb-social svg{width:13px;height:13px;flex:0 0 13px}
 .nb-foot-blurb{font-size:var(--t-caption);color:var(--ink-soft);line-height:1.6;max-width:34ch}
 
 /* ---------- 18. OFFLINE BADGE -------------------------------------------- */
