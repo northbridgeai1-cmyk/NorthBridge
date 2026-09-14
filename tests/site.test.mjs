@@ -104,6 +104,20 @@ await p.setViewport(1440, 900); await fresh('contact.html');
   ok((await p.eval(`return document.querySelector('input[name=branch]:checked').value;`)).startsWith('PerceptFolio'), '?branch=perceptfolio preselects the branch');
 }
 
+/* ─── 3b. booking form: on-page, plan prefilled, posts to FormSubmit ─── */
+await fresh('book.html?plan=Scale+bundle');
+{
+  ok((await p.eval(`return document.getElementById('bk-plan').value;`)) === 'Scale bundle', 'Booking form carries the chosen plan');
+  await p.clickSel('#bkSubmit');
+  const e = await p.eval(`await new Promise(s=>setTimeout(s,250)); return document.querySelectorAll('#bkForm .nb-field[data-invalid="true"]').length;`);
+  ok(e === 3, 'Booking form: empty submit flags name, email, times', `${e} flagged`);
+  await p.eval(`window.__posted=null; window.fetch=async(u,o)=>{window.__posted={url:String(u),method:o&&o.method}; return {ok:true,status:200,json:async()=>({success:'true'})}}; return 1;`);
+  await p.eval(`document.getElementById('bk-name').value='Pierce Test';document.getElementById('bk-email').value='pierce@example.com';document.getElementById('bk-times').value='Tue 10:00 or Wed 15:00 (GMT-5)';return 1;`);
+  await p.clickSel('#bkSubmit');
+  const v = await p.eval(`await new Promise(s=>setTimeout(s,900)); return {posted:window.__posted, ok:document.getElementById('bkSuccess').dataset.show==='true' && document.getElementById('bkForm').style.display==='none'};`);
+  ok(v.posted && /formsubmit\.co\/ajax\//.test(v.posted.url) && v.ok, 'Booking form posts to FormSubmit and shows success without leaving the page', v.posted ? v.posted.url : 'no request');
+}
+
 /* ─── 4. responsive: overflow + overlap, three widths ──────────────── */
 // 466x678 = iPhone Duo folded · 890x626 = unfolded (landscape) · 445x626 = Split View half
 for (const [w, hgt] of [[375, 812], [466, 678], [445, 626], [768, 1024], [890, 626], [1440, 900]]) {

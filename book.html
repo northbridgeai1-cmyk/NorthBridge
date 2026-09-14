@@ -50,6 +50,10 @@
   .sched-on{display:none}
   html.sched-live .sched-off{display:none}
   html.sched-live .sched-on{display:revert}
+  .bk-form{margin-top:22px}
+  .bk-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.bk-row{grid-template-columns:1fr}}
+  .sched-card .nb-form-note a{color:var(--teal-dark);font-weight:600}
 </style>
 <!-- nb-shared-layer -->
 <meta name="theme-color" content="#fbfaf6">
@@ -158,7 +162,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     </div>
     <div class="sched-card">
       <h2>
-        <span class="sched-off"><span class="en">Book by email</span><span class="es">Reserva por correo</span></span>
+        <span class="sched-off"><span class="en">Request a time</span><span class="es">Solicita un horario</span></span>
         <span class="sched-on"><span class="en">Choose your slot</span><span class="es">Elige tu horario</span></span>
       </h2>
       <p id="schedReady" style="display:none">
@@ -166,17 +170,61 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <span class="es">Los horarios que ves son los que realmente tenemos libres: el calendario bloquea cruces y deja 15 minutos entre reuniones, así que nunca llegaremos tarde a la tuya.</span>
       </p>
       <p id="schedFallback">
-        <span class="en">Our online calendar is being connected. Meanwhile, booking takes one email: send us two or three times that suit you and whether you prefer Zoom or Google Meet, and we'll confirm one within a business day and send the invite.</span>
-        <span class="es">Estamos conectando nuestro calendario en línea. Mientras tanto, reservar toma un correo: envíanos dos o tres horarios que te sirvan y si prefieres Zoom o Google Meet, y confirmamos uno en un día hábil y te enviamos la invitación.</span>
+        <span class="en">Tell us two or three times that suit you and how you'd like to meet. We confirm one within a business day and send the invite.</span>
+        <span class="es">Dinos dos o tres horarios que te sirvan y cómo prefieres reunirte. Confirmamos uno en un día hábil y te enviamos la invitación.</span>
       </p>
       <iframe id="schedFrame" title="Scheduler"></iframe>
-      <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn big" id="schedOpen" style="display:none" target="_blank" rel="noopener" href="#">
-          <span class="en">Open the scheduler</span><span class="es">Abrir el calendario</span>
-        </a>
-        <a class="btn navy big" id="mailBtn" href="mailto:northbridgeai1@gmail.com">
-          <span class="en">Book by email</span><span class="es">Reservar por correo</span>
-        </a>
+      <div style="margin-top:22px" class="sched-on">
+        <a class="btn big" id="schedOpen" style="display:none" target="_blank" rel="noopener" href="#"><span class="en">Open the scheduler</span><span class="es">Abrir el calendario</span></a>
+      </div>
+      <form class="nb-form bk-form" id="bkForm" novalidate>
+        <div class="nb-alert nb-alert--err" id="bkError" role="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.5M12 16.5h.01"/></svg>
+          <span><strong><span class="en">That didn't send.</span><span class="es">No se pudo enviar.</span></strong> <span class="bk-error-detail"></span></span>
+        </div>
+        <div class="nb-field" id="bf-name">
+          <label for="bk-name"><span class="en">Your name</span><span class="es">Tu nombre</span></label>
+          <input type="text" id="bk-name" name="name" autocomplete="name" maxlength="80" required aria-describedby="be-name">
+          <span class="nb-error" id="be-name" role="alert"><span class="en">Please tell us your name.</span><span class="es">Dinos tu nombre, por favor.</span></span>
+        </div>
+        <div class="nb-field" id="bf-email">
+          <label for="bk-email"><span class="en">Email</span><span class="es">Correo</span></label>
+          <input type="email" id="bk-email" name="email" autocomplete="email" inputmode="email" maxlength="140" required aria-describedby="be-email">
+          <span class="nb-error" id="be-email" role="alert"><span class="en">That doesn't look like a working email address.</span><span class="es">Eso no parece una dirección de correo válida.</span></span>
+        </div>
+        <div class="nb-field" id="bf-times">
+          <label for="bk-times"><span class="en">Two or three times that suit you</span><span class="es">Dos o tres horarios que te sirvan</span></label>
+          <span class="nb-hint"><span class="en">With your timezone. We confirm one within a business day.</span><span class="es">Con tu zona horaria. Confirmamos uno en un día hábil.</span></span>
+          <textarea id="bk-times" name="times" maxlength="600" required aria-describedby="be-times" rows="3"></textarea>
+          <span class="nb-error" id="be-times" role="alert"><span class="en">Give us at least one time that works for you.</span><span class="es">Danos al menos un horario que te funcione.</span></span>
+        </div>
+        <div class="bk-row">
+          <div class="nb-field">
+            <label for="bk-app"><span class="en">Meet on</span><span class="es">Reunión por</span></label>
+            <select id="bk-app" name="meeting_app"><option value="Zoom">Zoom</option><option value="Google Meet">Google Meet</option><option value="Either">Either / Cualquiera</option></select>
+          </div>
+          <div class="nb-field">
+            <label for="bk-lang"><span class="en">In</span><span class="es">En</span></label>
+            <select id="bk-lang" name="language"><option value="English">English</option><option value="Español">Español</option></select>
+          </div>
+        </div>
+        <div class="nb-hp" aria-hidden="true"><label for="bk-website">Leave this field empty</label><input type="text" id="bk-website" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <input type="hidden" name="plan" id="bk-plan" value="">
+        <input type="hidden" name="source" id="bk-source" value="">
+        <input type="hidden" name="_subject" id="bk-subject" value="Meeting request · NorthBridge">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <button type="submit" class="btn big nb-submit" id="bkSubmit">
+          <span class="nb-idle"><span class="en">Request the meeting</span><span class="es">Solicitar la reunión</span></span>
+          <span class="nb-busy"><span class="en">Sending</span><span class="es">Enviando</span><span class="nb-dots"><i></i><i></i><i></i></span></span>
+        </button>
+        <p class="nb-form-note"><span class="en">Prefer email? </span><span class="es">¿Prefieres correo? </span><a id="mailBtn" href="mailto:northbridgeai1@gmail.com">northbridgeai1@gmail.com</a></p>
+      </form>
+      <div class="nb-success" id="bkSuccess" role="status">
+        <div class="nb-success-tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5.2 5.2L20 7"/></svg></div>
+        <h3><span class="en">Request sent.</span><span class="es">Solicitud enviada.</span></h3>
+        <p><span class="en">A person will pick one of your times and send the calendar invite with the meeting link, within one business day.</span><span class="es">Una persona elegirá uno de tus horarios y enviará la invitación con el enlace de la reunión, en un día hábil.</span></p>
+        <a class="nb-btn" href="index.html"><span class="en">Back to the site</span><span class="es">Volver al sitio</span></a>
       </div>
       <ul class="assure">
         <li><span class="en">Free · 30 minutes · no commitment</span><span class="es">Gratis · 30 minutos · sin compromiso</span></li>
@@ -285,6 +333,39 @@ var NB_SCHEDULER_URL = "REPLACE_ME";
     }
   }
 })();
+  /* ---- on-page meeting request (FormSubmit) ---- */
+  (function(){
+    var FORM_ENDPOINT = 'https://formsubmit.co/ajax/northbridgeai1@gmail.com';
+    var form=document.getElementById('bkForm'), okP=document.getElementById('bkSuccess'), err=document.getElementById('bkError'), btn=document.getElementById('bkSubmit');
+    if(!form) return;
+    var plan=null; try{ plan=new URLSearchParams(location.search).get('plan'); }catch(e){}
+    function isES(){ return document.documentElement.getAttribute('data-lang')==='es'; }
+    function t(en,es){ return isES()?es:en; }
+    document.getElementById('bk-plan').value = plan || '';
+    document.getElementById('bk-subject').value = 'Meeting request · ' + (plan || 'NorthBridge');
+    var utm=(window.nbGetUTM&&window.nbGetUTM())||{};
+    document.getElementById('bk-source').value = Object.keys(utm).map(function(k){return k+'='+utm[k];}).join(' | ') || '(direct)';
+    var RULES=[
+      {f:'bf-name', i:'bk-name', test:function(v){return v.length>=2&&v.length<=80;}},
+      {f:'bf-email',i:'bk-email',test:function(v){return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)&&v.length<=140;}},
+      {f:'bf-times',i:'bk-times',test:function(v){return v.length>=4&&v.length<=600;}}
+    ];
+    function check(r,show){ var w=document.getElementById(r.f), inp=document.getElementById(r.i); var ok=r.test((inp.value||'').trim()); if(show) w.setAttribute('data-invalid', ok?'false':'true'); inp.setAttribute('aria-invalid', ok?'false':'true'); return ok; }
+    RULES.forEach(function(r){ var inp=document.getElementById(r.i); inp.addEventListener('blur',function(){check(r,true);}); inp.addEventListener('input',function(){ if(document.getElementById(r.f).getAttribute('data-invalid')==='true') check(r,true); }); });
+    form.addEventListener('submit', function(e){
+      e.preventDefault(); err.setAttribute('data-show','false');
+      if(form.elements._honey && form.elements._honey.value){ form.style.display='none'; okP.setAttribute('data-show','true'); return; }
+      var bad=RULES.filter(function(r){return !check(r,true);});
+      if(bad.length){ var first=document.getElementById(bad[0].i); first.focus(); first.scrollIntoView({behavior:'smooth',block:'center'}); if(window.nbToast) window.nbToast(t('Check the highlighted fields','Revisa los campos marcados')); return; }
+      btn.setAttribute('data-busy','true'); btn.disabled=true;
+      var done=function(){ btn.removeAttribute('data-busy'); btn.disabled=false; };
+      fetch(FORM_ENDPOINT,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+        .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json().catch(function(){return {};}); })
+        .then(function(){ done(); form.style.display='none'; okP.setAttribute('data-show','true'); okP.scrollIntoView({behavior:'smooth',block:'center'}); })
+        .catch(function(){ done(); err.querySelector('.bk-error-detail').textContent=' '+t('Please try again, or email northbridgeai1@gmail.com directly.','Inténtalo de nuevo, o escribe directo a northbridgeai1@gmail.com.'); err.setAttribute('data-show','true'); });
+    });
+  })();
+
 </script>
 </body>
 </html>
