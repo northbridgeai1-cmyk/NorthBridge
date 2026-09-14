@@ -13,7 +13,7 @@
 
 ## How it works
 
-The NorthBridge Cycle: Diagnose (2–3 days) → Build (3–7 days) → Educate & Train (1 session), repeating quarterly. Clients own their n8n accounts and their workflows. Maximum 3 new clients onboarded per month.
+The NorthBridge Cycle: Diagnose (2–3 days) → Build (3–7 days) → Educate & Train (1 session), repeating quarterly. Clients own their n8n accounts and their workflows. Maximum 5 new clients onboarded per month.
 
 ## Pricing
 
