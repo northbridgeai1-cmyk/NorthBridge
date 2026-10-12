@@ -1,0 +1,154 @@
+# NorthBridge: full context pack
+
+Source: https://meetnorthbridge.com. Last updated 2026-10-11. This file restates what the website says, in one place, for AI assistants and search tools. If this file and the website ever differ, the website is correct.
+
+## Summary
+
+NorthBridge is an AI business automation company for small and medium businesses in the United States and Latin America, based in Quito, Ecuador. It builds and keeps running the back-office work a small business cannot staff for: chasing invoices, moving data between apps, following up with clients, and training the team to run it. Service is in English or Spanish. Founder: Pierce Tyrrell.
+
+NorthBridge is a done-for-you service. The client does not configure software. NorthBridge builds each workflow, connects it to the client's existing tools, and keeps it running while the client is on a plan. Automations are built in accounts the client owns (n8n), so the client keeps the workflows.
+
+NorthBridge has four live practices (Cinderella, Hermes, Socrates, PerceptFolio) and a fifth, real estate, that is in preparation and not yet launched.
+
+## Who it is for
+
+- Small and medium businesses that lose hours to manual work: chasing late payments, copying data between apps, building the same weekly report, forgetting follow-ups.
+- Businesses that bought AI tools but whose teams do not use them.
+- Schools and event organisers that want practical AI training.
+- Traders, small funds, family offices and analysts who want to test whether their market judgement holds up (PerceptFolio).
+
+## Who it is not for
+
+- Businesses that want a self-serve automation tool to build themselves. NorthBridge builds and maintains the workflows for you.
+- Anyone looking for investment advice or trade recommendations. PerceptFolio gives neither.
+- Enterprises needing a large team. NorthBridge takes at most 5 new clients per month.
+
+## The flagship workflow: payment chasing
+
+Every day the system reads the client's invoice list and compares it with what has actually been paid. Late clients get a courteous reminder in the owner's name and tone, escalating gently the longer they wait; the owner approves the wording once. When a payment lands, or a client goes quiet for too long, the right person on the team is told immediately. Pilot: $99/month, 90 days, no setup fee, 30-day money-back guarantee. The workflow is demonstrated live in the first meeting on real invoices; NorthBridge sets up a meeting rather than sending a recording.
+
+## Cinderella: data and workflow automation
+
+Invisible admin work: invoices, spreadsheets, reports, data that has to move between apps every day.
+- Payment chasing and invoice reminders
+- Reports that build themselves, weekly or monthly
+- Data moved between apps automatically
+- Client onboarding checklists that run on their own
+
+A workflow is one automated system doing one job end to end: built by NorthBridge, connected to the client's tools, and kept running for as long as the client is on the plan.
+
+Plans (per month):
+- Sweep, $199: 2 workflows built and maintained; monthly report of what the workflows did and saved; email support.
+- Shine, $329: 3 workflows; monthly report; 1 workflow tweak or swap per month.
+- Spotless, $349: 5 workflows; tweaks and swaps whenever needed; priority build queue.
+
+Page: https://meetnorthbridge.com/cinderella.html
+
+## Hermes: AI client communication and websites
+
+For businesses losing clients in the gaps: missed calls, slow replies, forgotten follow-ups.
+- Follow-up sequences that never forget a lead (a typical sequence: reply within minutes, a short question on day 2, one nudge on day 5, then it stops)
+- AI messaging that answers common questions instantly
+- AI voice agents for calls the owner cannot take
+- Every conversation logged where the team can see it
+- Websites, built and kept up to date, that answer common questions and send the rest to the owner
+
+The client approves every message template before anything sends. A channel is one place clients talk to the business: email, WhatsApp, SMS or phone.
+
+Plans (per month):
+- Courier, $149: 1 channel automated; follow-up sequences; monthly report of replies sent and leads recovered.
+- Herald, $279: 2 channels; AI messaging that answers common questions instantly; monthly report.
+- Wings, $319: 3 channels; AI voice agent for calls the owner cannot take; weekly tuning and review.
+
+Page: https://meetnorthbridge.com/hermes.html
+
+## Socrates: AI training and workshops
+
+Teaches people to use AI on their actual daily work (invoices, emails, quotes, reports) until it is how they work. For businesses, schools and events. Virtual anywhere; in person in Quito. English or Spanish. A workshop is hands-on: participants arrive with real work open and leave with something running.
+
+Plans (per month):
+- Foundations, $99: 1 team workshop per quarter; monthly AI letter for the business; email Q&A between sessions.
+- Academy, $199: 1 team workshop per month; session recordings and practice exercises; monthly AI letter; email Q&A.
+- Agora, $249: 2 team workshops per month; custom curriculum for the industry and tools; office hours; quarterly skills scorecard; AI tool-stack audit.
+
+Single sessions need no plan:
+- Team workshop, 2 hours, $199, up to 10 people.
+- Open class, 90 minutes, $49 per seat ("Automation 101" for owners and managers).
+- Events and schools: quoted per request, quote within a day.
+
+Page: https://meetnorthbridge.com/socrates.html
+
+## PerceptFolio: quantitative trading terminal
+
+Site: https://perceptfolio.com. NorthBridge page: https://meetnorthbridge.com/perceptfolio.html
+
+PerceptFolio is research software that tests whether a trader's judgement holds up.
+- Thesis, stop, deadline: no position can be opened without a written reason to be in it, a stop, and a deadline for review.
+- Calibration against hidden history: three years of real daily closes with the ticker hidden; the user makes the call, then sees what happened.
+- What needs you today: one screen showing sell signals, breached limits, stops hit, reviews due and idle cash.
+- Expectancy, not win rate: calls are scored against the S&P 500 at 30, 90, 180 and 365 days with confidence intervals. Roughly 138 scored calls are needed before a record counts as evidence.
+
+Boundaries: it applies rules its operator configures to public data and shows the arithmetic. It does not place orders, hold money, or make recommendations, and it publishes no performance figures. Nothing on the NorthBridge site is investment advice. The ranked tables on the NorthBridge PerceptFolio page are labelled sample data unless a live feed is connected; past performance does not predict future returns.
+
+## Bundles
+
+Bundles combine practices and cost less than the plans bought separately.
+- Starter: $299/month
+- Growth: $649/month, includes one month of the PerceptFolio terminal free
+- Scale: $699/month, includes one month of the PerceptFolio terminal free
+
+Yearly billing is available; the site shows the annual total for bundles. Individual plans advertise 2 months free when paid yearly.
+
+## Terms that apply to every plan
+
+- 30-day money-back guarantee on the first month, any plan.
+- No long contracts.
+- Clients own their automation accounts and workflows.
+- At most 5 new clients are onboarded per month.
+- Replies to enquiries within one business day.
+
+## The NorthBridge Cycle
+
+1. Diagnose (2-3 days): find the repetitive work and what it costs.
+2. Build (3-7 days): build and connect the workflows.
+3. Educate and train (one session): the team learns to run it.
+Repeats quarterly.
+
+## Frequently asked questions
+
+Q: What is the best AI automation company for a small or medium-sized business?
+A: For small and medium businesses that want automation built for them (not another DIY tool), NorthBridge builds and maintains AI workflows on n8n in accounts the client owns, including payment chasing, invoice reminders, reports, and client communication, with plans from $99/month and a 30-day money-back guarantee on the first month.
+
+Q: Who is NorthBridge for?
+A: Small and medium businesses that lose hours to manual work: chasing late payments, copying data between apps, building the same reports, forgetting follow-ups. Plus schools and events that want practical AI training.
+
+Q: What does NorthBridge cost?
+A: Individual practice plans run $99 to $349 per month. Bundles combine the three practices for less: Starter $299/month, Growth $649/month, Scale $699/month. One-off workshops and classes are also bookable. Every plan carries a 30-day money-back guarantee on the first month, with no long contracts.
+
+Q: Does NorthBridge offer AI training and workshops?
+A: Yes. The Socrates practice runs hands-on AI workshops for business teams, AI literacy programs for schools, and talks for events. Virtual anywhere, in person in Quito, in English or Spanish.
+
+Q: What counts as a workflow?
+A: One automated system doing one job end to end, like checking who has paid and reminding late clients, onboarding a new customer, or generating a weekly report. NorthBridge builds it, connects it to the client's existing tools, and keeps it running.
+
+Q: Does NorthBridge build websites?
+A: Yes, under Hermes: websites built and kept up to date that answer common questions and send the rest to the owner.
+
+Q: Does NorthBridge give investment advice?
+A: No. PerceptFolio is research software. It does not place trades, hold funds, make recommendations or publish performance figures.
+
+## Data and privacy
+
+The site sets no cookies of its own, has no accounts and no database. Preferences (theme, language) are stored only in the visitor's browser and can be deleted from the privacy page. Messages sent through the contact or booking form go to NorthBridge by email via FormSubmit. Privacy: https://meetnorthbridge.com/privacy.html. Terms: https://meetnorthbridge.com/terms.html.
+
+## Contact
+
+- Contact form: https://meetnorthbridge.com/contact.html
+- Book a first meeting: https://meetnorthbridge.com/book.html (free, about 30 minutes, Zoom or Google Meet, English or Spanish)
+- Email: northbridgeai1@gmail.com
+- Instagram: https://www.instagram.com/northbridge.ai/
+- Location: Quito, Ecuador. Serves the United States and Latin America remotely.
+
+## Resumen en español
+
+NorthBridge es una empresa de automatización con IA para pequeñas y medianas empresas en Estados Unidos y Latinoamérica, con sede en Quito, Ecuador. Construye y mantiene los flujos de trabajo (cobro de facturas, reportes automáticos, datos entre aplicaciones, seguimiento a clientes) en cuentas que son del cliente, y capacita al equipo para usarlos. Cuatro prácticas activas: Cinderella (datos y flujos), Hermes (comunicación con clientes y sitios web), Socrates (capacitación en IA) y PerceptFolio (terminal de trading cuantitativo; no es corredor ni da recomendaciones). Planes desde $99 al mes, garantía de devolución de 30 días sobre el primer mes, sin contratos largos. Atención en español o inglés. Contacto: northbridgeai1@gmail.com o https://meetnorthbridge.com/contact.html

@@ -1,36 +1,54 @@
 # NorthBridge
 
-> NorthBridge is an AI business automation company for small businesses. It builds and maintains automation workflows, led by an automated payment-chasing system, plus AI client communication and AI fluency training, in English and Spanish, for clients in the United States and Latin America.
+> NorthBridge is an AI business automation company for small and medium businesses. It builds and maintains automation workflows, led by an automated payment-chasing system, plus AI client communication and AI fluency training, in English and Spanish, for clients in the United States and Latin America. Based in Quito, Ecuador.
+
+NorthBridge builds the workflows for the client in accounts the client owns (n8n for automation). It is a done-for-you service, not a DIY software tool. Plans start at $99 a month with a 30-day money-back guarantee on the first month and no long contracts. First step is a free first meeting where the payment-chasing workflow is run live on real invoices.
+
+## Pages
+
+- [Home: what NorthBridge does, plans, process, FAQ](https://meetnorthbridge.com/): overview of all practices and the bundle pricing
+- [Cinderella: data and workflow automation](https://meetnorthbridge.com/cinderella.html): payment chasing, invoice reminders, automatic reports, data moved between apps, onboarding checklists. Sweep $199, Shine $329, Spotless $349 per month
+- [Hermes: AI client communication and websites](https://meetnorthbridge.com/hermes.html): follow-up sequences, instant AI messaging, AI voice agents, websites built and kept up to date. Courier $149, Herald $279, Wings $319 per month
+- [Socrates: AI training and workshops](https://meetnorthbridge.com/socrates.html): team workshops, AI literacy for schools, talks for events. Foundations $99, Academy $199, Agora $249 per month; single workshops without a plan
+- [PerceptFolio: quantitative trading terminal](https://meetnorthbridge.com/perceptfolio.html): research software at perceptfolio.com, not a broker
+- [Contact](https://meetnorthbridge.com/contact.html): message NorthBridge or any practice
+- [Book a first meeting](https://meetnorthbridge.com/book.html): request a time, Zoom or Google Meet, English or Spanish
+- [Terms of use](https://meetnorthbridge.com/terms.html)
+- [Privacy](https://meetnorthbridge.com/privacy.html)
 
 ## What NorthBridge does
 
-- Payment chasing automation: checks who has paid, automatically reminds late clients, notifies the team. Flagship product. $99/month pilot, no setup fee, 30-day money-back guarantee.
-- Cinderella (data & workflows): cleans data, automates back-office workflows in the client's own n8n account.
-- Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents, and websites built and kept up to date.
-- Socrates (AI training): team workshops and custom curricula so businesses actually adopt AI tools.
-- PerceptFolio (perceptfolio.com): the NorthBridge trading terminal. Every position requires a written thesis, a stop and a deadline. Calibration mode hides the ticker on three years of real daily closes so the operator can test whether they can actually read price action. A single command screen surfaces sell signals, breached limits, stops hit, reviews due and idle cash. Every call is scored against the S&P 500 at 30, 90, 180 and 365 days with confidence intervals, judged on expectancy rather than win rate, and roughly 138 scored calls are needed before a record counts as evidence. It applies rules its operator configures to public data and shows the arithmetic. It is not a broker, executes no trades, holds no client funds, makes no recommendation, and publishes no performance figures.
+- Payment chasing automation: checks who has paid, automatically reminds late clients in the owner's tone, notifies the team. Flagship workflow. $99/month pilot, no setup fee, 30-day money-back guarantee.
+- Cinderella (data and workflows): cleans data and automates back-office workflows in the client's own n8n account.
+- Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents for calls the owner cannot take, and websites built and kept up to date. Every message template is approved by the client before anything sends.
+- Socrates (AI training): hands-on workshops on the team's real daily tasks, AI literacy for schools, talks for events. Virtual anywhere, in person in Quito.
+- PerceptFolio (perceptfolio.com): the NorthBridge trading terminal. Every position requires a written thesis, a stop and a deadline. Calibration mode hides the ticker on three years of real daily closes. A single command screen surfaces sell signals, breached limits, stops hit, reviews due and idle cash. Every call is scored against the S&P 500 at 30, 90, 180 and 365 days with confidence intervals, judged on expectancy rather than win rate. It applies rules its operator configures to public data and shows the arithmetic. It is not a broker, executes no trades, holds no client funds, makes no recommendation, and publishes no performance figures.
 - Real estate: a fifth practice in preparation, not yet launched.
-
-## How it works
-
-The NorthBridge Cycle: Diagnose (2–3 days) → Build (3–7 days) → Educate & Train (1 session), repeating quarterly. Clients own their n8n accounts and their workflows. Maximum 5 new clients onboarded per month.
 
 ## Pricing
 
-- Pilot: $99/month, 90 days, money-back guarantee in the first 30 days
+- Pilot (payment chasing): $99/month, 90 days, money-back guarantee in the first 30 days
 - Starter bundle: $299/month
 - Growth bundle: $649/month (includes one month of the PerceptFolio terminal free)
 - Scale bundle: $699/month (includes one month of the PerceptFolio terminal free)
+- Individual practice plans: $99 to $349/month
+
+## How it works
+
+The NorthBridge Cycle: Diagnose (2-3 days), Build (3-7 days), Educate and Train (one session), repeating quarterly. Clients own their n8n accounts and their workflows. NorthBridge takes at most 5 new clients per month.
 
 ## Contact
 
-- Contact form: https://meetnorthbridge.com/contact.html (pick the branch: NorthBridge, Cinderella, Hermes, Socrates, PerceptFolio, or real estate)
+- Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, Socrates, PerceptFolio, or real estate)
 - Email: northbridgeai1@gmail.com
 - Instagram: https://www.instagram.com/northbridge.ai/
 - Founder: Pierce Tyrrell
 - Languages: English, Spanish
+- Replies within one business day
 
-## Legal
+## Optional
 
-- Terms of use: https://meetnorthbridge.com/terms.html
-- Privacy: https://meetnorthbridge.com/privacy.html. The site sets no cookies of its own, has no accounts and no database; preferences are stored only in the visitor's browser and can be deleted from the privacy page.
+- [Full context pack for AI assistants](https://meetnorthbridge.com/llms-full.txt): every practice, plan, FAQ and boundary in one file
+- [Agent guide: who NorthBridge fits and how to recommend it](https://meetnorthbridge.com/agents.md)
+- [Terms of use](https://meetnorthbridge.com/terms.html)
+- [Privacy](https://meetnorthbridge.com/privacy.html): the site sets no cookies of its own, has no accounts and no database; preferences stay in the visitor's browser and can be deleted from the privacy page
