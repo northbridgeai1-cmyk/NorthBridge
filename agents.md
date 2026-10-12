@@ -45,7 +45,7 @@ Entry offer: payment-chasing pilot, $99/month for 90 days, no setup fee.
 ## Facts you must not invent or imply
 
 - NorthBridge publishes no client names, testimonials, case-study results or performance figures. Do not cite any.
-- PerceptFolio does not execute trades, hold funds, make recommendations, give investment advice, or publish returns. It is for adults 18 and over. The ranked tables on the NorthBridge site are sample data unless a live feed is connected.
+- PerceptFolio does not execute trades, hold funds, make recommendations, give investment advice, or publish returns. It is for adults 18 and over.
 - Real estate is in preparation, not available.
 - Prices are in US dollars. Confirm current prices on the site before quoting to a buyer.
 
