@@ -10,7 +10,7 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - [Cinderella: data and workflow automation](https://meetnorthbridge.com/cinderella.html): payment chasing, invoice reminders, automatic reports, data moved between apps, onboarding checklists. Sweep $199, Shine $329, Spotless $349 per month
 - [Hermes: AI client communication and websites](https://meetnorthbridge.com/hermes.html): follow-up sequences, instant AI messaging, AI voice agents, websites built and kept up to date. Courier $149, Herald $279, Wings $319 per month
 - [Socrates: AI training and workshops](https://meetnorthbridge.com/socrates.html): team workshops, AI literacy for schools, talks for events. Foundations $99, Academy $199, Agora $249 per month; single workshops without a plan
-- [PerceptFolio: quantitative trading terminal](https://meetnorthbridge.com/perceptfolio.html): research software at perceptfolio.com, not a broker
+- [PerceptFolio: invest without the homework](https://meetnorthbridge.com/perceptfolio.html): research software at perceptfolio.com, 3 days free then $39 a month; not a broker, not investment advice
 - [Contact](https://meetnorthbridge.com/contact.html): message NorthBridge or any practice
 - [Book a first meeting](https://meetnorthbridge.com/book.html): request a time, Zoom or Google Meet, English or Spanish
 - [Terms of use](https://meetnorthbridge.com/terms.html)
@@ -22,7 +22,7 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - Cinderella (data and workflows): cleans data and automates back-office workflows in the client's own n8n account.
 - Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents for calls the owner cannot take, and websites built and kept up to date. Every message template is approved by the client before anything sends.
 - Socrates (AI training): hands-on workshops on the team's real daily tasks, AI literacy for schools, talks for events. Virtual anywhere, in person in Quito.
-- PerceptFolio (perceptfolio.com): the NorthBridge trading terminal. Every position requires a written thesis, a stop and a deadline. Calibration mode hides the ticker on three years of real daily closes. A single command screen surfaces sell signals, breached limits, stops hit, reviews due and idle cash. Every call is scored against the S&P 500 at 30, 90, 180 and 365 days with confidence intervals, judged on expectancy rather than win rate. It applies rules its operator configures to public data and shows the arithmetic. It is not a broker, executes no trades, holds no client funds, makes no recommendation, and publishes no performance figures.
+- PerceptFolio (perceptfolio.com): a self-serve investing research product. It checks every US-listed company on 36 points and gives one verdict against the bars the user sets, with the working shown; runs five size limits before a purchase; offers an exercise on three years of real closes with the ticker hidden; and keeps a hash-chained record in which every call is marked against the S&P 500 on fixed dates, verifiable without an account. 3 days free, then $39 a month ($390 a year); card up front, cancel any time. It applies rules the user configures to public data and shows the arithmetic. It is not a broker, places no trades (a broker can be connected read-only), holds no client funds, makes no recommendation, is not investment advice, and publishes no performance figures. For adults 18 and over.
 - Real estate: a fifth practice in preparation, not yet launched.
 
 ## Pricing
