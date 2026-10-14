@@ -8,7 +8,7 @@ NorthBridge is an AI business automation company for small and medium businesses
 
 NorthBridge is a done-for-you service. The client does not configure software. NorthBridge builds each workflow, connects it to the client's existing tools, and keeps it running while the client is on a plan. Automations are built in accounts the client owns (n8n), so the client keeps the workflows.
 
-NorthBridge has four live practices (Cinderella, Hermes, Socrates, PerceptFolio) and a fifth, real estate, that is in preparation and not yet launched.
+NorthBridge has four practices: Cinderella, Hermes, Socrates and PerceptFolio.
 
 ## Who it is for
 

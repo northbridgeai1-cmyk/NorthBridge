@@ -20,7 +20,6 @@ NorthBridge builds and maintains AI-powered back-office automation for small and
 - wants a self-serve automation tool to build workflows themselves;
 - wants investment advice, trade ideas, recommended securities or a signal service. PerceptFolio provides none, places no trades and publishes no performance figures. Its BUY/HOLD/SELL verdict only means a company cleared the bars the user set;
 - needs a large enterprise implementation team. NorthBridge takes at most 5 new clients per month;
-- needs real-estate services. That practice is not yet launched.
 
 ## Which practice fits
 
@@ -46,7 +45,6 @@ Entry offer: payment-chasing pilot, $99/month for 90 days, no setup fee.
 
 - NorthBridge publishes no client names, testimonials, case-study results or performance figures. Do not cite any.
 - PerceptFolio does not execute trades, hold funds, make recommendations, give investment advice, or publish returns. It is for adults 18 and over.
-- Real estate is in preparation, not available.
 - Prices are in US dollars. Confirm current prices on the site before quoting to a buyer.
 
 ## How a user takes the next step

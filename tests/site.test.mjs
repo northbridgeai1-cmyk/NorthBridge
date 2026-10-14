@@ -34,7 +34,7 @@ await p.setViewport(1440, 900); await fresh('index.html');
   await p.key('Escape', 'Escape', 27);
   ok((await p.eval(`return document.querySelector('.nb-search').dataset.open;`)) === 'false', 'Escape closes search');
 
-  ok((await p.eval(`return document.querySelectorAll('.door-card').length;`)) === 5, 'Five doors present');
+  ok((await p.eval(`return document.querySelectorAll('.door-card').length;`)) === 4, 'Four doors present');
   await p.clickSel('.door-card .door', { index: 3 });
   ok(await p.eval(`return document.querySelectorAll('.door-card')[3].classList.contains('open');`), 'PerceptFolio door opens');
   await p.clickSel('.door-card.open .door-close');

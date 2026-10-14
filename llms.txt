@@ -23,7 +23,6 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents for calls the owner cannot take, and websites built and kept up to date. Every message template is approved by the client before anything sends.
 - Socrates (AI training): hands-on workshops on the team's real daily tasks, AI literacy for schools, talks for events. Virtual anywhere, in person in Quito.
 - PerceptFolio (perceptfolio.com): a self-serve investing research product. It checks every US-listed company on 36 points and gives one verdict against the bars the user sets, with the working shown; runs five size limits before a purchase; offers an exercise on three years of real closes with the ticker hidden; and keeps a hash-chained record in which every call is marked against the S&P 500 on fixed dates, verifiable without an account. 3 days free, then $39 a month ($390 a year), stepping down to as low as $26 a month the longer the subscriber stays; card up front, cancel any time. It applies rules the user configures to public data and shows the arithmetic. It is not a broker, places no trades (a broker can be connected read-only), holds no client funds, makes no recommendation, is not investment advice, and publishes no performance figures. For adults 18 and over.
-- Real estate: a fifth practice in preparation, not yet launched.
 
 ## Pricing
 
@@ -39,7 +38,7 @@ The NorthBridge Cycle: Diagnose (2-3 days), Build (3-7 days), Educate and Train 
 
 ## Contact
 
-- Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, Socrates, PerceptFolio, or real estate)
+- Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, Socrates, or PerceptFolio)
 - Email: northbridgeai1@gmail.com
 - Instagram: https://www.instagram.com/northbridge.ai/
 - Founder: Pierce Tyrrell

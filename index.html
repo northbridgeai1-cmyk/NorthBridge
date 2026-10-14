@@ -672,8 +672,8 @@
   .divisions{padding:64px 0;background:var(--paper)}
   .divisions .sub{margin-bottom:12px}
   .door-hint{font-size:.9rem;font-weight:700;color:var(--teal-dark);margin-bottom:34px}
-  .div-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:38px;align-items:stretch;padding-top:10px}
-  @media(max-width:1100px){.div-grid{grid-template-columns:repeat(2,1fr);gap:28px}}
+  .div-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:38px;align-items:stretch;padding-top:10px;max-width:1000px;margin-inline:auto}
+  @media(max-width:1100px){.div-grid{gap:28px}}
   @media(max-width:760px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
   /* the branch not yet open reads as a door still under construction */
   .door-card.soon .door{cursor:default;opacity:.92}
@@ -1011,8 +1011,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <section class="divisions" id="brands">
   <div class="wrap">
     <h2 class="h2 rv">
-      <span class="en">Four doors open, one being built. Walk through the one that sounds like your week.</span>
-      <span class="es">Cuatro puertas abiertas, una en construcción. Entra por la que suene a tu semana.</span>
+      <span class="en">Four doors. Walk through the one that sounds like your week.</span>
+      <span class="es">Cuatro puertas. Entra por la que suene a tu semana.</span>
     </h2>
     <p class="sub rv">
       <span class="en">NorthBridge is built of specialized practices, from back-office automation to quantitative research. You don't need to know which one you need (that's our job in the first meeting), but here's the map.</span>
@@ -1139,31 +1139,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
             <span class="es">Descubre si tu criterio realmente sirve.</span>
           </p>
           <span class="door-open-hint"><span class="en">Open</span><span class="es">Abrir</span></span>
-        </div>
-      </div>
-
-      <div class="door-card soon rv d3">
-        <div class="door-room">
-          <h3><span class="en">NorthBridge Real Estate</span><span class="es">NorthBridge Bienes Raíces</span></h3>
-          <p class="blurb">
-            <span class="en">Our next practice, currently being built. If property is your business, tell us what eats your week and it will shape what we open with.</span>
-            <span class="es">Nuestra próxima práctica, actualmente en construcción. Si tu negocio son los inmuebles, cuéntanos qué se come tu semana y eso definirá con qué abrimos.</span>
-          </p>
-          <a class="btn navy" href="contact.html?branch=realestate">
-            <span class="en">Get told when it opens →</span><span class="es">Avísenme cuando abra →</span>
-          </a>
-          <br>
-          <a class="door-close" href="#brands"><span class="en">Close the door</span><span class="es">Cerrar la puerta</span></a>
-        </div>
-        <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open NorthBridge Real Estate">
-          <span class="knob"></span>
-          <span class="door-soon-tag"><span class="en">Opening soon</span><span class="es">Abre pronto</span></span>
-          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/><path d="M9.5 21v-6h5v6" stroke="#25d193"/></svg></span><span class="en">Real estate</span><span class="es">Bienes raíces</span></h3>
-          <p class="door-tease">
-            <span class="en">Being built now. Help us decide what it does.</span>
-            <span class="es">En construcción. Ayúdanos a decidir qué hace.</span>
-          </p>
-          <span class="door-open-hint"><span class="en">Peek in</span><span class="es">Asómate</span></span>
         </div>
       </div>
 
@@ -1573,7 +1548,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <a href="hermes.html">Hermes</a>
         <a href="socrates.html">Socrates</a>
         <a href="perceptfolio.html">PerceptFolio</a>
-        <a href="contact.html?branch=realestate"><span class="en">Real estate (soon)</span><span class="es">Bienes raíces (pronto)</span></a>
       </div>
       <div class="nb-foot-col">
         <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
