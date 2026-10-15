@@ -65,7 +65,7 @@ await p.setViewport(1440, 900); await fresh('index.html');
   await p.clickSel('.nb-top');
   ok((await p.eval(`await new Promise(s=>setTimeout(s,2500)); return window.scrollY;`)) < 50, 'Back-to-top returns to top');
 
-  ok(await p.eval(`return !!document.querySelector('.nb-fab[href="contact.html"]');`), 'Floating contact button links to the form');
+  ok(await p.eval(`return !!document.querySelector('.nb-fab[href="book.html"]');`), 'Floating button links to the booking page');
   await p.clickSel('[data-nb-delete]');
   ok(await p.eval(`return !!document.querySelector('.nb-modal[data-open="true"]');`), 'Delete-my-data asks for confirmation first');
   await p.clickSel('.nb-modal-row .nb-btn:not(.nb-btn--danger)');

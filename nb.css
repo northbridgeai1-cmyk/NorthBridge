@@ -1005,3 +1005,30 @@ html body .faq summary{padding:var(--s-md) 0}
 html body .faq details > .a{padding:0 0 var(--s-md)}
 html body .faq summary::after{content:"+";flex:0 0 auto;width:auto;height:auto;border:0;transform:none;font-family:var(--mono);font-size:1.25rem;font-weight:400;line-height:1;color:var(--ink-soft)}
 html body .faq details[open] summary::after{content:"\2013";transform:none}
+
+/* ===== One action per screen: the quiet second choice ===================== */
+.hero-alt{color:rgba(255,255,255,.8);text-decoration:none;font-weight:600;padding:0 4px;border-bottom:1px solid rgba(255,255,255,.3);transition:color .15s,border-color .15s}
+.hero-alt:hover{color:#fff;border-color:#fff}
+
+/* ===== Calmer motion: headings rise, everything else only fades ========== */
+.rv{transform:none;transition:opacity .55s ease}
+h2.rv,.h2.rv{transform:translateY(14px);transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.in,h2.rv.in,.h2.rv.in{opacity:1;transform:none}
+
+/* ===== Room to breathe: one generous rhythm for every page section ====== */
+html body main > section:not(.hero):not(.final):not(.pf-hero):not(.pf-cta):not(.note){padding-block:clamp(64px,8.5vw,120px)}
+
+/* ===== The end card: the one place every page leads ===================== */
+html body .final{background:#0e2419;color:#fff;padding:clamp(88px,13vw,176px) 0;text-align:center;position:relative;overflow:hidden}
+html body .final::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 50% 0%,rgba(62,207,142,.16),transparent 70%)}
+html body .final .wrap{position:relative}
+html body .final .h2{color:#fff;font-size:clamp(2.4rem,6vw,4.4rem);max-width:16ch;margin:0 auto 20px;line-height:1.02}
+html body .final p{color:rgba(255,255,255,.78);max-width:54ch;margin:0 auto 36px;font-size:1.08rem}
+html body .final .btn{background:#3ecf8e;border-color:#3ecf8e;color:#06251a!important}
+html body .final .btn:hover{background:#6fe0ae;border-color:#6fe0ae;color:#06251a!important}
+html body .final .mail{color:rgba(255,255,255,.62);margin:22px auto 0;font-size:.92rem}
+html body .final .mail a{color:#8fe3bd}
+
+/* the floating action waits its turn */
+.nb-fab{transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1),background .2s ease}
+.nb-fab[data-show="false"]{opacity:0;transform:translateY(14px);pointer-events:none}

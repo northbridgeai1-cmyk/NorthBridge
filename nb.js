@@ -115,6 +115,11 @@
   function buildDrawer() {
     var links = $$('.nav-links a');
     if (!links.length) return;
+    /* The top bar is kept short; the menu is where the practices live. */
+    var PRACTICES = [['cinderella.html', 'Cinderella'], ['hermes.html', 'Hermes'], ['socrates.html', 'Socrates'], ['perceptfolio.html', 'PerceptFolio']];
+    var have = links.map(function (a) { return a.getAttribute('href'); });
+    var extra = PRACTICES.filter(function (p) { return have.indexOf(p[0]) < 0; }).map(function (p) { var a = el('a', { href: p[0] }); a.textContent = p[1]; return a; });
+    links = links.slice(0, 1).concat(extra, links.slice(1));
 
     drawer = el('div', { class: 'nb-drawer', id: 'nb-drawer', 'data-open': 'false', role: 'dialog', 'aria-modal': 'true', 'aria-label': t('Menu', 'Menú') });
     var scrim = el('div', { class: 'nb-drawer-scrim' });
@@ -134,8 +139,8 @@
     });
 
     var foot = el('div', { class: 'nb-drawer-foot' });
-    var cta = el('a', { class: 'nb-btn nb-btn--primary', href: 'contact.html' });
-    cta.textContent = t('Contact us', 'Contáctanos');
+    var cta = el('a', { class: 'nb-btn nb-btn--primary', href: 'book.html' });
+    cta.textContent = t('Set up a meeting', 'Agendar una reunión');
     foot.appendChild(cta);
 
     /* The header language pill is hidden on the narrowest phones, so the
@@ -300,16 +305,24 @@
       if (skip) skip.setAttribute('tabindex', '-1'), skip.focus({ preventScroll: true });
     });
 
-    var fab = el('a', { class: 'nb-fab', href: 'contact.html', 'aria-label': t('Contact NorthBridge', 'Contactar a NorthBridge') });
+    var fab = el('a', { class: 'nb-fab', href: 'book.html', 'aria-label': t('Set up a meeting', 'Agendar una reunión') });
     fab.innerHTML = ICON.mail;
-    var lbl = el('span'); lbl.textContent = t('Contact', 'Contacto');
+    var lbl = el('span'); lbl.textContent = t('Set up a meeting', 'Agendar reunión');
     fab.appendChild(lbl);
 
     wrap.appendChild(top);
     wrap.appendChild(fab);
     document.body.appendChild(wrap);
 
-    var onScroll = function () { top.setAttribute('data-show', window.scrollY > 620 ? 'true' : 'false'); };
+    /* One action per screen: the floating button waits until the page's own
+       button has scrolled out of sight, and never shows on the booking page. */
+    fab.setAttribute('data-show', 'false');
+    if (/\/book(\.html)?$/.test(location.pathname)) fab.setAttribute('hidden', '');
+    var onScroll = function () {
+      var y = window.scrollY;
+      top.setAttribute('data-show', y > 620 ? 'true' : 'false');
+      fab.setAttribute('data-show', y > 760 ? 'true' : 'false');
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
@@ -619,9 +632,9 @@
     b.addEventListener('click', function () {
       setTimeout(function () {
         setTheme(root.getAttribute('data-theme') || 'light', false);
-        var f = $('.nb-fab span'); if (f) f.textContent = t('Contact', 'Contacto');
+        var f = $('.nb-fab span'); if (f) f.textContent = t('Set up a meeting', 'Agendar reunión');
         var d = $('.nb-drawer-title'); if (d) d.textContent = t('Menu', 'Menú');
-        var c = $('.nb-drawer-foot .nb-btn'); if (c) c.textContent = t('Contact us', 'Contáctanos');
+        var c = $('.nb-drawer-foot .nb-btn'); if (c) c.textContent = t('Set up a meeting', 'Agendar una reunión');
         if (searchInput) searchInput.placeholder = t('Search plans, services, FAQ…', 'Busca planes, servicios, preguntas…');
         if (searchUI && searchUI.getAttribute('data-open') === 'true') runSearch(searchInput.value);
       }, 0);

@@ -169,8 +169,8 @@
   @keyframes drift{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,2%,0)}}
   @media (prefers-reduced-motion: reduce){.hero::after{animation:none}}
   .hero h1{
-    color:#fff;font-size:clamp(2.75rem,7.2vw,6rem);line-height:.98;
-    letter-spacing:-.035em;max-width:14ch;font-weight:600;
+    color:#fff;font-size:clamp(2.5rem,4.9vw,4.4rem);line-height:1;
+    letter-spacing:-.03em;max-width:none;font-weight:600;text-wrap:balance;
   }
   /* selectors match the originals' specificity so the light values win */
   .hero p.hero-note{color:rgba(255,255,255,.66)}
@@ -185,6 +185,21 @@
   @keyframes nb-echo{from{color:#fff}to{color:#25d193}}
   @media (prefers-reduced-motion: reduce){.hero h1 .echo{animation:none}}
   .hero .wrap{position:relative;z-index:2}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(32px,6vw,96px);align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+  .hero-visual .phone{transform:rotate(1.4deg);box-shadow:0 44px 90px -30px rgba(0,0,0,.7)}
+  .hero-visual .phone:hover{transform:rotate(0deg)}
+  /* the thread arrives the way it does in life: one message, then the next */
+  .hero-visual .msg{animation:nb-msg .7s cubic-bezier(.16,1,.3,1) backwards}
+  .hero-visual .phone .msg:nth-of-type(1){animation-delay:1.2s}
+  .hero-visual .phone .msg:nth-of-type(2){animation-delay:2.1s}
+  .hero-visual .phone .msg:nth-of-type(3){animation-delay:3s}
+  @keyframes nb-msg{from{opacity:0;transform:translateY(14px)}}
+  @media (prefers-reduced-motion: reduce){.hero-visual .msg{animation:none}}
+  .hero-visual .phone-caption{color:rgba(255,255,255,.62)}
+  .hero-visual .msg{color:#1a1a1a}
+  .hero-visual .msg.internal{color:#0b3d2a}
+  html[data-theme="dark"] .hero-visual .msg,html[data-theme="dark"] .hero-visual .msg.internal{color:var(--ink)}
   .kicker{
     font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
     color:var(--teal-soft);margin-bottom:20px;display:flex;align-items:center;gap:12px;
@@ -338,19 +353,13 @@
   /* ---------- how ---------- */
   .how{padding:64px 0;background:var(--paper-dark)}
   .how .sub{margin-bottom:48px}
-  .how-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
-  @media(max-width:880px){.how-grid{grid-template-columns:1fr}}
-  .how-steps{counter-reset:s}
-  .how-step{border-top:1px solid var(--line);padding:26px 0 26px 58px;position:relative;counter-increment:s}
-  .how-step:last-child{border-bottom:1px solid var(--line)}
-  .how-step::before{
-    content:counter(s, decimal-leading-zero);
-    position:absolute;left:0;top:24px;
-    font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--teal);
-  }
-  .how-step h3{font-size:1.08rem;font-weight:700;margin-bottom:6px}
+  .how-grid{display:block}
+  .how-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,64px);counter-reset:s}
+  @media(max-width:820px){.how-steps{grid-template-columns:1fr}}
+  .how-step{border-top:2px solid var(--ink);padding:18px 0 0;position:relative;counter-increment:s}
+  .how-step::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--mono);font-size:.85rem;color:var(--teal-dark);margin-bottom:10px}
+  .how-step h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
   .how-step p{color:var(--ink-soft);font-size:.97rem}
-
   .phone{
     background:#e5ddd5;border-radius:22px;border:1px solid var(--line);
     box-shadow:0 24px 50px -20px rgba(26,26,26,.45);
@@ -820,15 +829,11 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     <div class="nav-right">
       <div class="nav-links">
         <a href="#brands"><span class="en">What we do</span><span class="es">Qué hacemos</span></a>
-        <a href="cinderella.html">Cinderella</a>
-        <a href="hermes.html">Hermes</a>
-        <a href="socrates.html">Socrates</a>
-        <a href="perceptfolio.html">PerceptFolio</a>
         <a href="#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
       </div>
       <button class="lang-toggle" id="langBtn" aria-label="Cambiar idioma">ES</button>
-      <a class="btn" href="contact.html">
-        <span class="en">Contact us</span><span class="es">Contáctanos</span>
+      <a class="btn" href="book.html">
+        <span class="en">Set up a meeting</span><span class="es">Agendar una reunión</span>
       </a>
     </div>
   </nav>
@@ -839,7 +844,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <!-- ======= HERO ======= -->
 <section class="hero">
   <canvas id="net" aria-hidden="true"></canvas>
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
     <h1>
       <span class="en">The work that <span class="echo a">runs</span> your business shouldn't <span class="echo b">run</span> you.</span>
       <span class="es">El trabajo que mantiene tu negocio no debería <span class="echo b">agotarte</span>.</span>
@@ -849,8 +855,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <span class="es">NorthBridge construye y mantiene funcionando la automatización administrativa que un negocio pequeño no puede contratar: cobrar facturas, mover datos entre aplicaciones, dar seguimiento a clientes, y capacitar a tu equipo para operarla. Para pequeñas y medianas empresas en Estados Unidos y Latinoamérica. En inglés o español, desde <span class="price">$99 al mes</span>.</span>
     </p>
     <div class="hero-cta">
-      <a class="btn big" href="contact.html">
-        <span class="en">Contact us</span><span class="es">Contáctanos</span>
+      <a class="btn big" href="book.html">
+        <span class="en">Set up a meeting</span><span class="es">Agendar una reunión</span>
       </a>
       <a class="hero-alt" href="#plans">
         <span class="en">or see the plans</span><span class="es">o ver los planes</span> →
@@ -860,6 +866,33 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <span class="en"><strong>30-day money-back guarantee</strong> on your first month, any plan. Replies within one business day.</span>
       <span class="es"><strong>Garantía de devolución de 30 días</strong> en tu primer mes, en cualquier plan. Respondemos en un día hábil.</span>
     </p>
+    </div>
+    <div class="hero-visual">
+<div class="hero-phone">
+        <div class="phone">
+          <p class="phone-head"><span class="en">What your client sees</span><span class="es">Lo que ve tu cliente</span></p>
+          <div class="msg">
+            <span class="en">Hi Andrea! Quick note from the team at Fuentes Catering: invoice #142 ($380) was due on Monday. Here's the payment link if it slipped by: pay.link/142. Thanks so much!</span>
+            <span class="es">¡Hola Andrea! Un mensaje rápido del equipo de Fuentes Catering: la factura #142 ($380) venció el lunes. Aquí está el enlace de pago por si se te pasó: pay.link/142. ¡Mil gracias!</span>
+            <span class="time">10:02</span>
+          </div>
+          <div class="msg">
+            <span class="en">Hi Andrea, following up on invoice #142: it's now 8 days past due. Could you let us know when we can expect payment? Happy to help if anything's unclear.</span>
+            <span class="es">Hola Andrea, seguimiento de la factura #142: ya lleva 8 días de vencida. ¿Nos podrías confirmar cuándo podemos esperar el pago? Con gusto te ayudamos si algo no está claro.</span>
+            <span class="time"><span class="en">Day 8</span><span class="es">Día 8</span> · 9:15</span>
+          </div>
+          <div class="msg internal">
+            <span class="en">→ Your team's channel: "Andrea (inv #142, $380) paid ✓, 9 days late. 2 invoices still outstanding this week."</span>
+            <span class="es">→ El canal de tu equipo: "Andrea (fact. #142, $380) pagó ✓, 9 días tarde. Quedan 2 facturas pendientes esta semana."</span>
+            <span class="time"><span class="en">Day 9</span><span class="es">Día 9</span> · 14:40</span>
+          </div>
+        </div>
+        <p class="phone-caption">
+          <span class="en">Example sequence: names invented, workflow real.</span>
+          <span class="es">Secuencia de ejemplo: nombres inventados, flujo real.</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -920,30 +953,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           </p>
         </div>
       </div>
-      <div class="rv d1">
-        <div class="phone">
-          <p class="phone-head"><span class="en">What your client sees</span><span class="es">Lo que ve tu cliente</span></p>
-          <div class="msg">
-            <span class="en">Hi Andrea! Quick note from the team at Fuentes Catering: invoice #142 ($380) was due on Monday. Here's the payment link if it slipped by: pay.link/142. Thanks so much!</span>
-            <span class="es">¡Hola Andrea! Un mensaje rápido del equipo de Fuentes Catering: la factura #142 ($380) venció el lunes. Aquí está el enlace de pago por si se te pasó: pay.link/142. ¡Mil gracias!</span>
-            <span class="time">10:02</span>
-          </div>
-          <div class="msg">
-            <span class="en">Hi Andrea, following up on invoice #142: it's now 8 days past due. Could you let us know when we can expect payment? Happy to help if anything's unclear.</span>
-            <span class="es">Hola Andrea, seguimiento de la factura #142: ya lleva 8 días de vencida. ¿Nos podrías confirmar cuándo podemos esperar el pago? Con gusto te ayudamos si algo no está claro.</span>
-            <span class="time"><span class="en">Day 8</span><span class="es">Día 8</span> · 9:15</span>
-          </div>
-          <div class="msg internal">
-            <span class="en">→ Your team's channel: "Andrea (inv #142, $380) paid ✓, 9 days late. 2 invoices still outstanding this week."</span>
-            <span class="es">→ El canal de tu equipo: "Andrea (fact. #142, $380) pagó ✓, 9 días tarde. Quedan 2 facturas pendientes esta semana."</span>
-            <span class="time"><span class="en">Day 9</span><span class="es">Día 9</span> · 14:40</span>
-          </div>
-        </div>
-        <p class="phone-caption">
-          <span class="en">Example sequence: names invented, workflow real.</span>
-          <span class="es">Secuencia de ejemplo: nombres inventados, flujo real.</span>
-        </p>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -970,7 +980,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <span class="en">We don't send a recording. We set up a meeting and run the payment chaser in front of you, on real invoices, which is more convincing anyway.</span>
           <span class="es">No enviamos una grabación. Agendamos una reunión y ejecutamos el cobrador de facturas frente a ti, con facturas reales, que además convence más.</span>
         </p>
-        <a class="btn big" href="contact.html">
+        <a class="btn big" href="book.html">
           <span class="en">Set up a meeting</span><span class="es">Agendar una reunión</span>
         </a>
       </div>
@@ -1172,7 +1182,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <span class="en">back in your account.</span><span class="es">de vuelta en tu cuenta.</span>
         </div>
         <div style="margin-top:22px">
-          <a class="btn big" href="contact.html">
+          <a class="btn big" href="book.html?plan=Payment+Chaser">
             <span class="en">Get it chased automatically</span><span class="es">Que se cobre automáticamente</span>
           </a>
         </div>
@@ -1268,7 +1278,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
     <div class="hook-strip rv">
       <div>
-        <p class="hook-tag"><span class="en">Not ready for a bundle?</span><span class="es">¿Aún no estás para un paquete?</span></p>
         <h3><span class="en">The Payment Chaser · <span class="hook-price">$99/month</span></span><span class="es">El Cobrador de Facturas · <span class="hook-price">$99/mes</span></span></h3>
         <p>
           <span class="en">One single workflow: it checks who has paid you, politely reminds who hasn't, and tells your team when money lands. It usually pays for itself with the first recovered invoice. If you upgrade later, your first $99 counts toward any bundle's first month.</span>
@@ -1472,15 +1481,15 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <section class="final">
   <div class="wrap">
     <h2 class="h2 rv">
-      <span class="en">Start with a short email.</span>
-      <span class="es">Empieza con un correo corto.</span>
+      <span class="en">Set up a first meeting.</span>
+      <span class="es">Agenda una primera reunión.</span>
     </h2>
     <p class="rv">
-      <span class="en">Send us a short email: what your business does and what eats your hours. We'll reply within a business day to set up a meeting, where you see the payment chaser run and get an honest read on what's worth automating first.</span>
-      <span class="es">Envíanos un correo corto: a qué se dedica tu negocio y qué se come tus horas. Te respondemos en un día hábil para agendar una reunión, donde ves funcionar el cobrador de facturas y recibes una opinión honesta de qué vale la pena automatizar primero.</span>
+      <span class="en">Send us two times that suit you. We confirm within one business day, run the payment chaser in front of you, and tell you honestly what is worth automating first.</span>
+      <span class="es">Envíanos dos horarios que te sirvan. Confirmamos en un día hábil, ejecutamos el cobrador de facturas frente a ti y te decimos con honestidad qué vale la pena automatizar primero.</span>
     </p>
-    <a class="btn navy big rv" href="contact.html">
-      <span class="en">Contact us</span><span class="es">Contáctanos</span>
+    <a class="btn big rv" href="book.html">
+      <span class="en">Set up a meeting</span><span class="es">Agendar una reunión</span>
     </a>
     <p class="mail rv">
       <span class="en">Or write directly: </span><span class="es">O escribe directamente: </span>
