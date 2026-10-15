@@ -1032,3 +1032,8 @@ html body .final .mail a{color:#8fe3bd}
 /* the floating action waits its turn */
 .nb-fab{transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1),background .2s ease}
 .nb-fab[data-show="false"]{opacity:0;transform:translateY(14px);pointer-events:none}
+
+/* ===== Bigger type on bigger screens: everything is in rem, so one root
+   step scales text, buttons and spacing together. Phones stay at 16px. ===== */
+@media (min-width:768px){html{font-size:106.25%}}
+@media (min-width:1200px){html{font-size:112.5%}}

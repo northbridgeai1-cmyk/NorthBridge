@@ -17,6 +17,8 @@ const fresh = async (pg, theme = 'light', lang = 'en') => {
   await p.goto(`${BASE}/${pg}`);
   await p.eval(`localStorage.setItem('nb-theme','${theme}');localStorage.setItem('nb-lang','${lang}');return 1;`);
   await p.goto(`${BASE}/${pg}`); p.clearConsole();
+  // Smooth scrolling is for people; under a loaded machine it outlasts a click.
+  await p.eval(`document.documentElement.style.scrollBehavior='auto'; return 1;`);
 };
 
 /* ─── 1. interactive elements (home, 1440) ─────────────────────────── */

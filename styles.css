@@ -30,7 +30,7 @@ body::before{
 .es{display:none}
 html[data-lang="es"] .es{display:revert}
 html[data-lang="es"] .en{display:none}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
 a{color:inherit}
 
 /* reveal */
@@ -48,7 +48,7 @@ header{
   background:rgba(251,249,244,.92);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:1120px;margin:0 auto}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:1240px;margin:0 auto}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand-name{font-weight:700;font-size:1.08rem;letter-spacing:-.02em;color:var(--ink);line-height:1.05}
 .brand-name em{font-style:normal;color:var(--teal)}

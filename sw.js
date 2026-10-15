@@ -6,7 +6,7 @@
        refresh quietly in the background.
    Bump CACHE when you ship a change you need visitors to see immediately. */
 
-var CACHE = 'nb-v28';
+var CACHE = 'nb-v29';
 
 var PRECACHE = [
   './',
