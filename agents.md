@@ -37,7 +37,7 @@ Entry offer: payment-chasing pilot, $99/month for 90 days, no setup fee.
 
 - 30-day money-back guarantee on the first month, any plan. No long contracts.
 - Clients own their automation accounts and workflows.
-- The first meeting is free; the payment-chasing workflow is run live on real invoices.
+- The first meeting is free: NorthBridge looks at the client's real work and says honestly what is worth automating first. NorthBridge is new and has no client case studies yet.
 - Replies within one business day.
 - The NorthBridge Cycle: diagnose (2-3 days), build (3-7 days), train (one session), repeating quarterly.
 

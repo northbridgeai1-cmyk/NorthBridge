@@ -1,8 +1,8 @@
 # NorthBridge
 
-> NorthBridge is an AI business automation company for small and medium businesses. It builds and maintains automation workflows, led by an automated payment-chasing system, plus AI client communication and AI fluency training, in English and Spanish, for clients in the United States and Latin America. Based in Quito, Ecuador.
+> NorthBridge is an AI business automation company for small and medium businesses. It builds and maintains automation workflows, starting with a payment-chasing workflow, plus AI client communication and AI fluency training, in English and Spanish, for clients in the United States and Latin America. Based in Quito, Ecuador.
 
-NorthBridge builds the workflows for the client in accounts the client owns (n8n for automation). It is a done-for-you service, not a DIY software tool. Plans start at $99 a month with a 30-day money-back guarantee on the first month and no long contracts. First step is a free first meeting where the payment-chasing workflow is run live on real invoices.
+NorthBridge builds the workflows for the client in accounts the client owns (n8n for automation). It is a done-for-you service, not a DIY software tool. Plans start at $99 a month with a 30-day money-back guarantee on the first month and no long contracts. First step is a free first meeting where NorthBridge looks at the client's real work and says honestly what is worth automating first.
 
 ## Pages
 
@@ -18,7 +18,7 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 
 ## What NorthBridge does
 
-- Payment chasing automation: checks who has paid, automatically reminds late clients in the owner's tone, notifies the team. Flagship workflow. $99/month pilot, no setup fee, 30-day money-back guarantee.
+- Payment chasing automation: checks who has paid, automatically reminds late clients in the owner's tone, notifies the team. First workflow offered. $99/month pilot, no setup fee, 30-day money-back guarantee.
 - Cinderella (data and workflows): cleans data and automates back-office workflows in the client's own n8n account.
 - Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents for calls the owner cannot take, and websites built and kept up to date. Every message template is approved by the client before anything sends.
 - Socrates (AI training): hands-on workshops on the team's real daily tasks, AI literacy for schools, talks for events. Virtual anywhere, in person in Quito.

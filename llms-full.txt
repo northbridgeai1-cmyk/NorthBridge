@@ -23,9 +23,9 @@ NorthBridge has four practices: Cinderella, Hermes, Socrates and PerceptFolio.
 - Anyone looking for investment advice, trade recommendations or a signal service. PerceptFolio gives none.
 - Enterprises needing a large team. NorthBridge takes at most 5 new clients per month.
 
-## The flagship workflow: payment chasing
+## The first workflow: payment chasing
 
-Every day the system reads the client's invoice list and compares it with what has actually been paid. Late clients get a courteous reminder in the owner's name and tone, escalating gently the longer they wait; the owner approves the wording once. When a payment lands, or a client goes quiet for too long, the right person on the team is told immediately. Pilot: $99/month, 90 days, no setup fee, 30-day money-back guarantee. The workflow is demonstrated live in the first meeting on real invoices; NorthBridge sets up a meeting rather than sending a recording.
+The first workflow NorthBridge builds for clients who chase invoices by hand. Each day it checks which invoices are unpaid and sends courteous reminders in the owner's name and tone, escalating gently the longer they wait; the owner approves the wording once. When a payment lands, or a client goes quiet for too long, the right person on the team is told. Pilot: $99/month, 90 days, no setup fee, 30-day money-back guarantee. NorthBridge is new and has no client case studies yet. The first meeting is free: NorthBridge looks at the client's real work and says honestly what is worth automating first. NorthBridge sets up a meeting rather than sending a recording.
 
 ## Cinderella: data and workflow automation
 

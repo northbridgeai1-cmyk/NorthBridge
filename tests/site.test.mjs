@@ -113,6 +113,8 @@ await fresh('book.html?plan=Scale+bundle');
   await p.clickSel('#bkSubmit');
   const e = await p.eval(`await new Promise(s=>setTimeout(s,250)); return document.querySelectorAll('#bkForm .nb-field[data-invalid="true"]').length;`);
   ok(e === 3, 'Booking form: empty submit flags name, email, times', `${e} flagged`);
+  // The page scrolls to the first error; let that finish before the next click.
+  await p.eval(`await new Promise(s=>setTimeout(s,1500)); return 1;`);
   await p.eval(`window.__posted=null; window.fetch=async(u,o)=>{window.__posted={url:String(u),method:o&&o.method}; return {ok:true,status:200,json:async()=>({success:'true'})}}; return 1;`);
   await p.eval(`document.getElementById('bk-name').value='Pierce Test';document.getElementById('bk-email').value='pierce@example.com';document.getElementById('bk-times').value='Tue 10:00 or Wed 15:00 (GMT-5)';return 1;`);
   await p.clickSel('#bkSubmit');

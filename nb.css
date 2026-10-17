@@ -827,9 +827,12 @@ html[data-theme="dark"] .nb-sk{
 @keyframes nb-shake{0%,100%{transform:translateX(0)}22%{transform:translateX(-5px)}55%{transform:translateX(4px)}80%{transform:translateX(-2px)}}
 .nb-error{
   font-size:var(--t-caption);color:var(--err);font-weight:600;
-  display:none;align-items:center;gap:5px;
+  display:flex;align-items:center;gap:5px;
+  /* the line is always reserved, so showing or clearing an error never moves
+     the controls below it (a click on Submit used to land on moving ground) */
+  min-height:1.4em;visibility:hidden;
 }
-.nb-field[data-invalid="true"] .nb-error{display:flex}
+.nb-field[data-invalid="true"] .nb-error{visibility:visible}
 .nb-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
 
 .nb-form-note{
