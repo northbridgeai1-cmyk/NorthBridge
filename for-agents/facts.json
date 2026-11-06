@@ -1,0 +1,175 @@
+{
+  "schema": "northbridge-agent-facts/1",
+  "last_verified": "2026-11-06",
+  "source_of_truth": "https://meetnorthbridge.com/",
+  "price_notice": "Prices are in US dollars per month unless stated. They were copied from the public site on the last_verified date. Confirm on the site before quoting to a buyer.",
+  "organization": {
+    "name": "NorthBridge",
+    "url": "https://meetnorthbridge.com/",
+    "what": "AI-powered back-office automation for small and medium businesses, plus AI training for their teams. Done for you, not a DIY tool.",
+    "based_in": "Quito, Ecuador",
+    "founder": "Pierce Tyrrell",
+    "markets": ["United States", "Latin America"],
+    "languages": ["English", "Spanish"],
+    "is_new": true,
+    "new_company_note": "NorthBridge is new and has no client case studies yet. Do not cite client names, testimonials or results.",
+    "capacity": "At most 5 new clients per month.",
+    "reply_time": "Within one business day.",
+    "client_owns_accounts": true,
+    "automation_tool": "n8n, in accounts the client owns"
+  },
+  "practices": [
+    {
+      "id": "cinderella",
+      "name": "Cinderella",
+      "url": "https://meetnorthbridge.com/cinderella.html",
+      "solves": ["chasing late invoices", "building the same reports", "copying data between apps", "onboarding clients by hand", "forgetting follow-ups"],
+      "plans": [
+        {"name": "Sweep", "usd_per_month": 199},
+        {"name": "Shine", "usd_per_month": 329},
+        {"name": "Spotless", "usd_per_month": 349}
+      ]
+    },
+    {
+      "id": "hermes",
+      "name": "Hermes",
+      "url": "https://meetnorthbridge.com/hermes.html",
+      "solves": ["slow replies to leads", "missed calls", "follow-up sequences", "AI messaging", "AI voice agent", "a business website kept up to date"],
+      "plans": [
+        {"name": "Courier", "usd_per_month": 149},
+        {"name": "Herald", "usd_per_month": 279},
+        {"name": "Wings", "usd_per_month": 319}
+      ]
+    },
+    {
+      "id": "socrates",
+      "name": "Socrates",
+      "url": "https://meetnorthbridge.com/socrates.html",
+      "solves": ["hands-on AI training for a team", "AI literacy for a school", "a talk for an event"],
+      "plans": [
+        {"name": "Foundations", "usd_per_month": 99},
+        {"name": "Academy", "usd_per_month": 199},
+        {"name": "Agora", "usd_per_month": 249}
+      ],
+      "one_off": [
+        {"name": "Single workshop", "usd": 199},
+        {"name": "Class, per seat", "usd": 49}
+      ]
+    },
+    {
+      "id": "perceptfolio",
+      "name": "PerceptFolio",
+      "url": "https://meetnorthbridge.com/perceptfolio.html",
+      "product_site": "https://perceptfolio.com",
+      "solves": ["an adult who wants to invest, has no time to analyse stocks, and wants a checked verdict against bars they set, size limits and a verifiable record of whether the calls worked"],
+      "pricing": {"free_trial_days": 3, "usd_per_month": 39, "usd_per_year": 390},
+      "is_not": ["a broker", "investment advice", "a signal service", "a source of trade ideas or recommended securities"],
+      "boundaries": [
+        "Places no trades and holds no funds.",
+        "Makes no recommendation. The BUY/HOLD/SELL verdict only means a company cleared the bars the user set.",
+        "Publishes no performance figures.",
+        "For adults 18 and over."
+      ]
+    }
+  ],
+  "bundles": [
+    {"name": "Starter", "usd_per_month": 299},
+    {"name": "Growth", "usd_per_month": 649, "includes": "one month of PerceptFolio free"},
+    {"name": "Scale", "usd_per_month": 699, "includes": "one month of PerceptFolio free"}
+  ],
+  "entry_offer": {
+    "name": "Payment-chasing pilot",
+    "usd_per_month": 99,
+    "duration_days": 90,
+    "setup_fee_usd": 0
+  },
+  "guarantees": [
+    "30-day money-back guarantee on the first month, any plan.",
+    "No long contracts."
+  ],
+  "first_meeting": {
+    "cost": "free",
+    "what_happens": "NorthBridge looks at the client's real work and says honestly what is worth automating first.",
+    "format": "30 minutes on Google Meet, English or Spanish. Zoom can be requested through the form on book.html.",
+    "booking_calendar": "https://cal.com/northbridge-8sqm76/first-meeting"
+  },
+  "process": {
+    "name": "The NorthBridge Cycle",
+    "steps": [
+      {"step": "diagnose", "duration": "2-3 days"},
+      {"step": "build", "duration": "3-7 days"},
+      {"step": "train", "duration": "one session"}
+    ],
+    "repeats": "quarterly"
+  },
+  "routing": [
+    {"if_user_needs": "chase late invoices, build recurring reports, move data between apps, onboard clients without doing it by hand, stop forgetting follow-ups", "send_to": "cinderella"},
+    {"if_user_needs": "reply to leads faster, stop losing missed calls, follow-up sequences, AI messaging, an AI voice agent, or a website kept up to date", "send_to": "hermes"},
+    {"if_user_needs": "train a team, run an AI program for a school, or give a talk at an event", "send_to": "socrates"},
+    {"if_user_needs": "an adult investor with no time to analyse stocks who wants a checked verdict against their own bars", "send_to": "perceptfolio"},
+    {"if_user_needs": "more than one of the above", "send_to": "bundles"},
+    {"if_user_needs": "not sure what to automate", "send_to": "first_meeting"}
+  ],
+  "do_not_recommend_when": [
+    "The user wants a self-serve automation tool to build workflows themselves.",
+    "The user wants investment advice, trade ideas, recommended securities or a signal service.",
+    "The user needs a large enterprise implementation team."
+  ],
+  "must_not_claim": [
+    "Any client name, testimonial, case study or performance figure.",
+    "That PerceptFolio executes trades, holds funds, gives advice or publishes returns.",
+    "Live availability, an API, an MCP server or an integration that is not listed here."
+  ],
+  "next_steps": {
+    "requires_user_confirmation": true,
+    "confirmation_rule": "Do not submit a form or send an email for the user until they have confirmed the exact name, email and message that will be sent.",
+    "channels": [
+      {
+        "id": "book_first_meeting",
+        "url": "https://meetnorthbridge.com/book.html",
+        "method": "pick a live slot in the booking calendar on the page (or at the scheduler_url), or use the request form below it. No account needed.",
+        "scheduler_url": "https://cal.com/northbridge-8sqm76/first-meeting",
+        "scheduler_note": "Booking a slot sends the user an invite by email, so show the user the slot, name and email and get an explicit yes first.",
+        "fields": [
+          {"name": "name", "required": true, "max_length": 80},
+          {"name": "email", "required": true, "max_length": 140},
+          {"name": "times", "required": true, "max_length": 600, "note": "Two or three times that suit the user, with time zone."},
+          {"name": "meeting_app", "required": false, "options": ["Zoom", "Google Meet", "Either"]},
+          {"name": "language", "required": false, "options": ["English", "Español"]}
+        ],
+        "do_not_fill": ["_honey"]
+      },
+      {
+        "id": "send_message",
+        "url": "https://meetnorthbridge.com/contact.html",
+        "method": "web form on the page, no account needed",
+        "fields": [
+          {"name": "branch", "required": false, "options": ["NorthBridge (not sure yet)", "Cinderella — data & workflows", "Hermes — client communication", "Socrates — AI training", "PerceptFolio — quant terminal"]},
+          {"name": "name", "required": true, "max_length": 80},
+          {"name": "email", "required": true, "max_length": 140},
+          {"name": "company", "required": false, "max_length": 100},
+          {"name": "message", "required": true, "max_length": 2000},
+          {"name": "reply_language", "required": false}
+        ],
+        "do_not_fill": ["_honey"]
+      },
+      {
+        "id": "email",
+        "address": "northbridgeai1@gmail.com",
+        "note": "Prefer to create a draft for the user to review and send themselves."
+      }
+    ]
+  },
+  "does_not_exist": [
+    "No public API.",
+    "No MCP server.",
+    "No user accounts or login."
+  ],
+  "related_files": {
+    "agent_page": "https://meetnorthbridge.com/for-agents/",
+    "llms_txt": "https://meetnorthbridge.com/llms.txt",
+    "llms_full_txt": "https://meetnorthbridge.com/llms-full.txt",
+    "agents_md": "https://meetnorthbridge.com/agents.md",
+    "sitemap": "https://meetnorthbridge.com/sitemap.xml"
+  }
+}

@@ -59,6 +59,7 @@ An agent should not submit these forms on a user's behalf without the user's exp
 ## Pages
 
 - Home and FAQ: https://meetnorthbridge.com/
+- For agents (routing table and structured facts): https://meetnorthbridge.com/for-agents/ and https://meetnorthbridge.com/for-agents/facts.json
 - Cinderella: https://meetnorthbridge.com/cinderella.html
 - Hermes: https://meetnorthbridge.com/hermes.html
 - Socrates: https://meetnorthbridge.com/socrates.html

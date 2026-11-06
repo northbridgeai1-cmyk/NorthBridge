@@ -49,5 +49,6 @@ The NorthBridge Cycle: Diagnose (2-3 days), Build (3-7 days), Educate and Train 
 
 - [Full context pack for AI assistants](https://meetnorthbridge.com/llms-full.txt): every practice, plan, FAQ and boundary in one file
 - [Agent guide: who NorthBridge fits and how to recommend it](https://meetnorthbridge.com/agents.md)
+- [NorthBridge for AI agents](https://meetnorthbridge.com/for-agents/): routing table, what to quote and not claim, and how to hand a user over; the same facts as structured data in [facts.json](https://meetnorthbridge.com/for-agents/facts.json)
 - [Terms of use](https://meetnorthbridge.com/terms.html)
 - [Privacy](https://meetnorthbridge.com/privacy.html): the site sets no cookies of its own, has no accounts and no database; preferences stay in the visitor's browser and can be deleted from the privacy page

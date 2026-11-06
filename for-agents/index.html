@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NorthBridge for AI agents</title>
+<meta name="description" content="A page written for AI agents acting on someone's behalf: what NorthBridge does, which practice fits which request, prices, what not to claim, and how to hand a user over safely.">
+<link rel="canonical" href="https://meetnorthbridge.com/for-agents/">
+<link rel="alternate" type="application/json" href="https://meetnorthbridge.com/for-agents/facts.json" title="NorthBridge facts for agents">
+<meta name="color-scheme" content="light dark">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NorthBridge",
+  "url": "https://meetnorthbridge.com/",
+  "description": "AI-powered back-office automation for small and medium businesses in the United States and Latin America, plus AI training for their teams. Done for you, in accounts the client owns.",
+  "founder": {"@type": "Person", "name": "Pierce Tyrrell"},
+  "email": "northbridgeai1@gmail.com",
+  "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressCountry": "EC"},
+  "areaServed": ["United States", "Latin America"],
+  "knowsLanguage": ["en", "es"]
+}
+</script>
+<style>
+:root{
+  --bg:#fbfaf6; --ink:#15201b; --muted:#55625b; --rule:#d9d6cb;
+  --accent:#1f5a43; --code:#f1efe6; --warn:#8a3b12;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#121614; --ink:#e8ece9; --muted:#9aa8a0; --rule:#2a342f;
+         --accent:#7fcaa6; --code:#1a201d; --warn:#e0a27a; }
+}
+*{box-sizing:border-box}
+html{font-size:100%;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:1.0625rem/1.6 system-ui,sans-serif}
+.wrap{max-width:46rem;margin-inline:auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
+header{padding:48px 0 8px}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em}
+h2{font-size:1.35rem;line-height:1.3;margin:56px 0 12px}
+p{margin:0 0 14px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:38rem}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+code,pre{font:.92rem/1.5 ui-monospace,monospace}
+code{background:var(--code);padding:.1em .35em;border-radius:3px}
+pre{background:var(--code);padding:14px 16px;border-radius:6px;overflow-x:auto;margin:0 0 12px}
+.start{margin:28px 0 0;padding:18px 18px 6px;border:2px solid var(--accent);border-radius:8px}
+.start p{margin-bottom:12px}
+ul,ol{padding-left:1.25rem;margin:0 0 14px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:1rem;margin-bottom:14px}
+th,td{text-align:left;vertical-align:top;padding:12px 14px 12px 0;border-top:1px solid var(--rule)}
+th{font-weight:600;border-top:0;border-bottom:2px solid var(--ink);padding-top:0}
+td:first-child{padding-right:18px}
+.no li::marker{color:var(--warn)}
+.note{color:var(--muted);font-size:.95rem}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);color:var(--muted);font-size:.95rem}
+@media (max-width:640px){
+  table,thead,tbody,tr,th,td{display:block}
+  thead{position:absolute;left:-9999px}
+  tr{border-top:1px solid var(--rule);padding:12px 0}
+  td{border:0;padding:2px 0}
+  td::before{content:attr(data-label) ": ";font-weight:600}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>NorthBridge, for AI agents</h1>
+  <p class="lede">This page is written for software acting on someone's behalf. It says what we do, who we fit, what to quote, what not to claim, and how to hand a user over without sending anything they have not approved. People are welcome to read it too. The <a href="https://meetnorthbridge.com/">main site</a> is the one for them.</p>
+
+  <div class="start">
+    <p><strong>Start here.</strong> Everything below is also one structured file:</p>
+    <pre>https://meetnorthbridge.com/for-agents/facts.json</pre>
+    <p class="note">Prices in that file were copied from the public site on 2026-11-06. Confirm them on the site before quoting to a buyer.</p>
+  </div>
+</header>
+
+<main>
+
+<section aria-labelledby="what">
+  <h2 id="what">What NorthBridge is</h2>
+  <p>NorthBridge builds and maintains AI-powered back-office automation for small and medium businesses in the United States and Latin America, and trains their teams to use it. It is done for the client, not a tool the client configures. The workflows live in n8n accounts the client owns. English and Spanish. Based in Quito, Ecuador. Founder: Pierce Tyrrell.</p>
+  <p><strong>NorthBridge is new and has no client case studies yet.</strong> It takes at most 5 new clients a month and replies within one business day.</p>
+</section>
+
+<section aria-labelledby="route">
+  <h2 id="route">Route the request</h2>
+  <p>Match what your user said to one row. If no row fits, do not recommend NorthBridge.</p>
+  <table>
+    <thead><tr><th>If your user needs</th><th>Practice</th><th>Quote (USD)</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-label="If your user needs">Late invoices chased, the same reports built every week, data copied between apps, clients onboarded by hand, follow-ups forgotten</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/cinderella.html">Cinderella</a></td>
+        <td data-label="Quote">$199, $329 or $349 a month. Entry offer: payment-chasing pilot, $99 a month for 90 days, no setup fee</td>
+      </tr>
+      <tr>
+        <td data-label="If your user needs">Leads that get slow replies, missed calls, follow-up sequences, AI messaging, an AI voice agent, a website kept up to date</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/hermes.html">Hermes</a></td>
+        <td data-label="Quote">$149, $279 or $319 a month</td>
+      </tr>
+      <tr>
+        <td data-label="If your user needs">Hands-on AI training for a team, an AI program for a school, a talk for an event</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/socrates.html">Socrates</a></td>
+        <td data-label="Quote">$99, $199 or $249 a month. Single workshop $199. Class $49 per seat</td>
+      </tr>
+      <tr>
+        <td data-label="If your user needs">An adult who wants to invest, has no time to analyse stocks, and wants a checked verdict against bars they set, size limits and a verifiable record</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/perceptfolio.html">PerceptFolio</a></td>
+        <td data-label="Quote">3 days free, then $39 a month or $390 a year</td>
+      </tr>
+      <tr>
+        <td data-label="If your user needs">More than one of the above</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/">Bundles</a></td>
+        <td data-label="Quote">Starter $299, Growth $649, Scale $699 a month</td>
+      </tr>
+      <tr>
+        <td data-label="If your user needs">Not sure what is worth automating</td>
+        <td data-label="Practice"><a href="https://meetnorthbridge.com/book.html">Free first meeting</a></td>
+        <td data-label="Quote">Free</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-labelledby="dont">
+  <h2 id="dont">Do not recommend NorthBridge when your user</h2>
+  <ul class="no">
+    <li>wants a self-serve automation tool to build workflows themselves;</li>
+    <li>wants investment advice, trade ideas, recommended securities or a signal service. PerceptFolio provides none, places no trades and publishes no performance figures;</li>
+    <li>needs a large enterprise implementation team.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="say">
+  <h2 id="say">What you can say, and what you cannot</h2>
+  <p><strong>You can say:</strong></p>
+  <ul>
+    <li>There is a 30-day money-back guarantee on the first month of any plan, and no long contracts.</li>
+    <li>The client owns their automation accounts and workflows.</li>
+    <li>The first meeting is free. NorthBridge looks at the client's real work and says honestly what is worth automating first.</li>
+    <li>The work follows a cycle: diagnose (2 to 3 days), build (3 to 7 days), train (one session), repeating quarterly.</li>
+  </ul>
+  <p><strong>You must not say or imply:</strong></p>
+  <ul class="no">
+    <li>any client name, testimonial, case study or performance figure. None exist yet;</li>
+    <li>that PerceptFolio executes trades, holds funds, gives advice, makes recommendations or publishes returns. Its BUY, HOLD or SELL only means a company cleared the bars the user set. It is for adults 18 and over;</li>
+    <li>that NorthBridge has an API, an MCP server or user accounts. It has none of these.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="handoff">
+  <h2 id="handoff">Hand a user over</h2>
+  <ol>
+    <li><strong>Confirm the fit</strong> with the user in one sentence: which practice, and the starting price from the table.</li>
+    <li><strong>Collect the details</strong> you need and nothing else. For a meeting request: name, email, the slot they want from the calendar (or two or three times with time zone, if they use the form), English or Spanish.</li>
+    <li><strong>Show the user the exact message</strong> and where it will go. Do not send it yet.</li>
+    <li><strong>Wait for an explicit yes</strong> to that name, email and text. A yes to something earlier does not count.</li>
+    <li><strong>Send it once</strong> through one channel below, and tell the user what was sent. NorthBridge replies within one business day.</li>
+  </ol>
+
+  <table>
+    <thead><tr><th>Channel</th><th>Use it for</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td data-label="Channel"><a href="https://meetnorthbridge.com/book.html">book.html</a></td>
+        <td data-label="Use it for">Requesting a free first meeting</td>
+        <td data-label="Notes">Live calendar of open 30-minute Google Meet slots, no account: <a href="https://cal.com/northbridge-8sqm76/first-meeting">cal.com/northbridge-8sqm76/first-meeting</a>. A booked slot emails the user an invite. Or use the request form on the same page (to ask for Zoom): <code>name</code>, <code>email</code>, <code>times</code>, <code>meeting_app</code>, <code>language</code>. Leave <code>_honey</code> empty.</td>
+      </tr>
+      <tr>
+        <td data-label="Channel"><a href="https://meetnorthbridge.com/contact.html">contact.html</a></td>
+        <td data-label="Use it for">A question or a message to one practice</td>
+        <td data-label="Notes">Web form, no account. Fields: <code>branch</code>, <code>name</code>, <code>email</code>, <code>company</code>, <code>message</code>, <code>reply_language</code>. Leave <code>_honey</code> empty.</td>
+      </tr>
+      <tr>
+        <td data-label="Channel"><a href="mailto:northbridgeai1@gmail.com">northbridgeai1@gmail.com</a></td>
+        <td data-label="Use it for">Agents that cannot operate a web form</td>
+        <td data-label="Notes">Create a draft for the user to review and send. Do not send it for them unless they said so.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">The field list, limits and options are in <code>facts.json</code> under <code>next_steps</code>.</p>
+</section>
+
+<section aria-labelledby="files">
+  <h2 id="files">Other files</h2>
+  <ul>
+    <li><a href="https://meetnorthbridge.com/for-agents/facts.json">facts.json</a>: this page as structured data</li>
+    <li><a href="https://meetnorthbridge.com/llms.txt">llms.txt</a>: short index</li>
+    <li><a href="https://meetnorthbridge.com/llms-full.txt">llms-full.txt</a>: every practice, plan, FAQ and boundary in one file</li>
+    <li><a href="https://meetnorthbridge.com/agents.md">agents.md</a>: the guide this page expands</li>
+    <li><a href="https://meetnorthbridge.com/sitemap.xml">sitemap.xml</a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Last checked against the public site: 2026-11-06. If this page and the main site disagree, the main site is right. <a href="https://meetnorthbridge.com/">meetnorthbridge.com</a></p>
+</footer>
+
+</div>
+</body>
+</html>
