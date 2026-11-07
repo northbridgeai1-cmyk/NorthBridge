@@ -8,19 +8,18 @@ NorthBridge is an AI business automation company for small and medium businesses
 
 NorthBridge is a done-for-you service. The client does not configure software. NorthBridge builds each workflow, connects it to the client's existing tools, and keeps it running while the client is on a plan. Automations are built in accounts the client owns (n8n), so the client keeps the workflows.
 
-NorthBridge has four practices: Cinderella, Hermes, Socrates and PerceptFolio.
+NorthBridge has three practices: Cinderella, Hermes and Socrates.
 
 ## Who it is for
 
 - Small and medium businesses that lose hours to manual work: chasing late payments, copying data between apps, building the same weekly report, forgetting follow-ups.
 - Businesses that bought AI tools but whose teams do not use them.
 - Schools and event organisers that want practical AI training.
-- Adults who want to invest and have no time to analyse stocks, and want a checked verdict, size limits and a verifiable record (PerceptFolio).
 
 ## Who it is not for
 
 - Businesses that want a self-serve automation tool to build themselves. NorthBridge builds and maintains the workflows for you.
-- Anyone looking for investment advice, trade recommendations or a signal service. PerceptFolio gives none.
+- Anyone looking for investment, legal or tax advice. NorthBridge builds automation and trains teams; it does not give advice of that kind.
 - Enterprises needing a large team. NorthBridge takes at most 5 new clients per month.
 
 ## The first workflow: payment chasing
@@ -78,28 +77,12 @@ Single sessions need no plan:
 
 Page: https://meetnorthbridge.com/socrates.html
 
-## PerceptFolio: invest without the homework
-
-Site: https://perceptfolio.com. NorthBridge page: https://meetnorthbridge.com/perceptfolio.html
-
-PerceptFolio is a self-serve investing research product for adults (18 and over), sold by subscription. It is for people who want to invest and have no time to analyse stocks.
-- Thirty-six checks, one verdict: every US-listed company is checked on 36 points and gets one verdict against the bars the user sets. Each check shows what it measured, the bar, and whether it cleared. Four of the 36 are answered by the user, and the user's answer overrides the model's.
-- Five size limits: before a purchase the position meets limits on concentration, cash, market exposure, liquidity and thesis deadline. Any one can say no, and the terminal shows which. The user sets where each limit sits.
-- Today and Find stocks: a hit stop or a sell signal goes to the top of the Today screen. Find stocks shows only the names on a list that clear the user's bars, each with its reasons. Twelve screens in all, including Portfolio, Lists, History, The market, News, Supply chain, Analyze, Risk, Projections and Alerts.
-- Try it on real history: three years of real daily closes with the ticker hidden. The user makes the call, then sees what happened.
-- A record nobody can backdate: every call is marked against the S&P 500 on fixed dates, reported as expectancy with a confidence interval rather than a win rate. Each mark carries the hash of the one before, the chain head is posted daily and stamped with a server clock, and an export can be checked on a verify page without an account. The record starts empty; the first marks land about a quarter in, and roughly 138 calls are needed before the interval means much. Importing broker history grades past trades against the S&P on day one, kept apart from the record.
-- Market data is included for US-listed stocks and ETFs (quotes, fundamentals, news, daily closes).
-
-Subscription model (as listed on perceptfolio.com; check there for current terms): one subscription, 3 days free, then $39 a month or $390 a year (two months free). Card required up front, nothing charged until day four, cancel in one click before then; it renews until cancelled and can be cancelled any time in the billing portal. No demo, no queue and no quote: the user creates an account, adds a card and receives an access code by email within a minute. The price steps down the longer the subscriber stays. Monthly: $39.00 in month 1, $38.50 in month 2, $37.00 in month 6, $35.00 in year 1, $34.00 at 18 months, then $1.00 less every 6 months, never below $26.00 (reached around year 5.5). Yearly: $390.00, then $5.00 less at each renewal, never below $380.00. Data can be exported any time, including after the subscription ends. Growth and Scale NorthBridge bundles include one month free.
-
-Boundaries: it applies rules the user configures to public data and shows the arithmetic. When it says BUY, that means the position cleared the bar the user set; it has no view on anyone's circumstances. It does not place, change or cancel orders (a broker can be connected read-only), takes no custody, makes no recommendation, is not investment advice, and publishes no performance figures. There is no signal service. It promises nothing about returns.
-
 ## Bundles
 
 Bundles combine practices and cost less than the plans bought separately.
 - Starter: $299/month
-- Growth: $649/month, includes one month of the PerceptFolio terminal free
-- Scale: $699/month, includes one month of the PerceptFolio terminal free
+- Growth: $649/month
+- Scale: $699/month
 
 Yearly billing is available; the site shows the annual total for bundles. Individual plans advertise 2 months free when paid yearly.
 
@@ -138,12 +121,6 @@ A: One automated system doing one job end to end, like checking who has paid and
 Q: Does NorthBridge build websites?
 A: Yes, under Hermes: websites built and kept up to date that answer common questions and send the rest to the owner.
 
-Q: Does NorthBridge give investment advice?
-A: No. PerceptFolio is research software. It applies rules the user sets to public data and shows the arithmetic. It does not place trades, hold funds, make recommendations or publish performance figures.
-
-Q: How much does PerceptFolio cost?
-A: 3 days free, then $39 a month or $390 a year, stepping down the longer a subscriber stays. Card up front, nothing charged until day four, cancel any time. Current terms are on perceptfolio.com.
-
 ## Data and privacy
 
 The site sets no cookies of its own, has no accounts and no database. Preferences (theme, language) are stored only in the visitor's browser and can be deleted from the privacy page. Messages sent through the contact or booking form go to NorthBridge by email via FormSubmit. Privacy: https://meetnorthbridge.com/privacy.html. Terms: https://meetnorthbridge.com/terms.html.
@@ -158,4 +135,4 @@ The site sets no cookies of its own, has no accounts and no database. Preference
 
 ## Resumen en español
 
-NorthBridge es una empresa de automatización con IA para pequeñas y medianas empresas en Estados Unidos y Latinoamérica, con sede en Quito, Ecuador. Construye y mantiene los flujos de trabajo (cobro de facturas, reportes automáticos, datos entre aplicaciones, seguimiento a clientes) en cuentas que son del cliente, y capacita al equipo para usarlos. Cuatro prácticas activas: Cinderella (datos y flujos), Hermes (comunicación con clientes y sitios web), Socrates (capacitación en IA) y PerceptFolio (terminal de trading cuantitativo; no es corredor ni da recomendaciones). Planes desde $99 al mes, garantía de devolución de 30 días sobre el primer mes, sin contratos largos. Atención en español o inglés. Contacto: northbridgeai1@gmail.com o https://meetnorthbridge.com/contact.html
+NorthBridge es una empresa de automatización con IA para pequeñas y medianas empresas en Estados Unidos y Latinoamérica, con sede en Quito, Ecuador. Construye y mantiene los flujos de trabajo (cobro de facturas, reportes automáticos, datos entre aplicaciones, seguimiento a clientes) en cuentas que son del cliente, y capacita al equipo para usarlos. Tres prácticas activas: Cinderella (datos y flujos), Hermes (comunicación con clientes y sitios web) y Socrates (capacitación en IA). Planes desde $99 al mes, garantía de devolución de 30 días sobre el primer mes, sin contratos largos. Atención en español o inglés. Contacto: northbridgeai1@gmail.com o https://meetnorthbridge.com/contact.html

@@ -55,27 +55,12 @@
         {"name": "Single workshop", "usd": 199},
         {"name": "Class, per seat", "usd": 49}
       ]
-    },
-    {
-      "id": "perceptfolio",
-      "name": "PerceptFolio",
-      "url": "https://meetnorthbridge.com/perceptfolio.html",
-      "product_site": "https://perceptfolio.com",
-      "solves": ["an adult who wants to invest, has no time to analyse stocks, and wants a checked verdict against bars they set, size limits and a verifiable record of whether the calls worked"],
-      "pricing": {"free_trial_days": 3, "usd_per_month": 39, "usd_per_year": 390},
-      "is_not": ["a broker", "investment advice", "a signal service", "a source of trade ideas or recommended securities"],
-      "boundaries": [
-        "Places no trades and holds no funds.",
-        "Makes no recommendation. The BUY/HOLD/SELL verdict only means a company cleared the bars the user set.",
-        "Publishes no performance figures.",
-        "For adults 18 and over."
-      ]
     }
   ],
   "bundles": [
     {"name": "Starter", "usd_per_month": 299},
-    {"name": "Growth", "usd_per_month": 649, "includes": "one month of PerceptFolio free"},
-    {"name": "Scale", "usd_per_month": 699, "includes": "one month of PerceptFolio free"}
+    {"name": "Growth", "usd_per_month": 649},
+    {"name": "Scale", "usd_per_month": 699}
   ],
   "entry_offer": {
     "name": "Payment-chasing pilot",
@@ -106,7 +91,6 @@
     {"if_user_needs": "chase late invoices, build recurring reports, move data between apps, onboard clients without doing it by hand, stop forgetting follow-ups", "send_to": "cinderella"},
     {"if_user_needs": "reply to leads faster, stop losing missed calls, follow-up sequences, AI messaging, an AI voice agent, or a website kept up to date", "send_to": "hermes"},
     {"if_user_needs": "train a team, run an AI program for a school, or give a talk at an event", "send_to": "socrates"},
-    {"if_user_needs": "an adult investor with no time to analyse stocks who wants a checked verdict against their own bars", "send_to": "perceptfolio"},
     {"if_user_needs": "more than one of the above", "send_to": "bundles"},
     {"if_user_needs": "not sure what to automate", "send_to": "first_meeting"}
   ],
@@ -117,7 +101,6 @@
   ],
   "must_not_claim": [
     "Any client name, testimonial, case study or performance figure.",
-    "That PerceptFolio executes trades, holds funds, gives advice or publishes returns.",
     "Live availability, an API, an MCP server or an integration that is not listed here."
   ],
   "next_steps": {
@@ -144,7 +127,7 @@
         "url": "https://meetnorthbridge.com/contact.html",
         "method": "web form on the page, no account needed",
         "fields": [
-          {"name": "branch", "required": false, "options": ["NorthBridge (not sure yet)", "Cinderella — data & workflows", "Hermes — client communication", "Socrates — AI training", "PerceptFolio — quant terminal"]},
+          {"name": "branch", "required": false, "options": ["NorthBridge (not sure yet)", "Cinderella — data & workflows", "Hermes — client communication", "Socrates — AI training"]},
           {"name": "name", "required": true, "max_length": 80},
           {"name": "email", "required": true, "max_length": 140},
           {"name": "company", "required": false, "max_length": 100},

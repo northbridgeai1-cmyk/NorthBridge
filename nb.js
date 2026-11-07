@@ -116,7 +116,7 @@
     var links = $$('.nav-links a');
     if (!links.length) return;
     /* The top bar is kept short; the menu is where the practices live. */
-    var PRACTICES = [['cinderella.html', 'Cinderella'], ['hermes.html', 'Hermes'], ['socrates.html', 'Socrates'], ['perceptfolio.html', 'PerceptFolio']];
+    var PRACTICES = [['cinderella.html', 'Cinderella'], ['hermes.html', 'Hermes'], ['socrates.html', 'Socrates']];
     var have = links.map(function (a) { return a.getAttribute('href'); });
     var extra = PRACTICES.filter(function (p) { return have.indexOf(p[0]) < 0; }).map(function (p) { var a = el('a', { href: p[0] }); a.textContent = p[1]; return a; });
     links = links.slice(0, 1).concat(extra, links.slice(1));

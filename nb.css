@@ -88,7 +88,7 @@ html[data-theme="dark"] .tier.best{
 html[data-theme="dark"] header{background:var(--header-bg);border-bottom-color:var(--line)}
 html[data-theme="dark"] .btn.navy{background:#e8ece9;border-color:#e8ece9;color:#0d100f}
 html[data-theme="dark"] .btn.navy:hover{background:#fff}
-html[data-theme="dark"] .btn:not(.ghost):not(.outline):not(.pf){color:#06251a}
+html[data-theme="dark"] .btn:not(.ghost):not(.outline){color:#06251a}
 html[data-theme="dark"] .btn.ghost{color:#fff}
 html[data-theme="dark"] details,
 html[data-theme="dark"] .faq details{border-color:var(--line)}
@@ -135,7 +135,6 @@ header{ view-transition-name: nb-header }
    so content animates in from hidden rather than flashing visible first.
    `both` fill means the end state survives even at zero duration. */
 html.nb-anim .hero .wrap > *,
-html.nb-anim .pf-hero .wrap > *,
 html.nb-anim .ct-hero .wrap > *,
 html.nb-anim .lg-hero .wrap > *{
   /* `backwards`, never `both`: the hidden state applies only during the delay
@@ -149,23 +148,18 @@ html.nb-anim .lg-hero .wrap > *{
   to{ opacity:1; transform:none }
 }
 html.nb-anim .hero .wrap > *:nth-child(1),
-html.nb-anim .pf-hero .wrap > *:nth-child(1),
 html.nb-anim .ct-hero .wrap > *:nth-child(1),
 html.nb-anim .lg-hero .wrap > *:nth-child(1){ animation-delay:.04s }
 html.nb-anim .hero .wrap > *:nth-child(2),
-html.nb-anim .pf-hero .wrap > *:nth-child(2),
 html.nb-anim .ct-hero .wrap > *:nth-child(2),
 html.nb-anim .lg-hero .wrap > *:nth-child(2){ animation-delay:.10s }
 html.nb-anim .hero .wrap > *:nth-child(3),
-html.nb-anim .pf-hero .wrap > *:nth-child(3),
 html.nb-anim .ct-hero .wrap > *:nth-child(3),
 html.nb-anim .lg-hero .wrap > *:nth-child(3){ animation-delay:.16s }
 html.nb-anim .hero .wrap > *:nth-child(4),
-html.nb-anim .pf-hero .wrap > *:nth-child(4),
 html.nb-anim .ct-hero .wrap > *:nth-child(4),
 html.nb-anim .lg-hero .wrap > *:nth-child(4){ animation-delay:.22s }
 html.nb-anim .hero .wrap > *:nth-child(n+5),
-html.nb-anim .pf-hero .wrap > *:nth-child(n+5),
 html.nb-anim .ct-hero .wrap > *:nth-child(n+5),
 html.nb-anim .lg-hero .wrap > *:nth-child(n+5){ animation-delay:.28s }
 
@@ -260,7 +254,7 @@ details.rv{
 .tiers .rv:nth-child(5),.div-grid .rv:nth-child(5),.nb-grid .rv:nth-child(5){transition-delay:.36s}
 
 /* ---- hover: cards lift toward the pointer ---- */
-.tier,.pf-feat,.fit-card,.nb-card,.ct-side-card,.expect-item{
+.tier,.fit-card,.nb-card,.ct-side-card,.expect-item{
   transition:transform .28s var(--ease-out), box-shadow .28s var(--ease),
              border-color .28s var(--ease);
 }
@@ -269,7 +263,7 @@ details.rv{
 }
 
 /* ---- counting numbers get tabular figures so they do not jitter ---- */
-.big-num,.tprice .n,.pf-stat b,#calcOut{font-variant-numeric:tabular-nums}
+.big-num,.tprice .n,#calcOut{font-variant-numeric:tabular-nums}
 .big-num.bump{animation:nb-bump .22s var(--ease-out)}
 @keyframes nb-bump{50%{transform:scale(1.045)}}
 
@@ -282,7 +276,6 @@ details.rv{
   ::view-transition-old(*),
   ::view-transition-new(*){ animation:none !important }
   html.nb-anim .hero .wrap > *,
-  html.nb-anim .pf-hero .wrap > *,
   html.nb-anim .ct-hero .wrap > *,
   html.nb-anim .lg-hero .wrap > *{ animation:none !important; opacity:1; transform:none }
   .nav-links a::after,.nb-foot-col a::after,.crumb a::after{transition:none}
@@ -303,7 +296,7 @@ details.rv{
    ------------------------------------------------------------------------ */
 
 /* --- 1. light-mode button labels --- */
-html:not([data-theme="dark"]) .btn:not(.ghost):not(.outline):not(.pf),
+html:not([data-theme="dark"]) .btn:not(.ghost):not(.outline),
 html:not([data-theme="dark"]) .nb-skip,
 html:not([data-theme="dark"]) .nb-fab,
 html:not([data-theme="dark"]) .nb-btn--primary{color:#fff}
@@ -339,12 +332,6 @@ html[data-theme="dark"] .ytotal{
 html:not([data-theme="dark"]) .hook-tag{color:#96691a}
 html[data-theme="dark"] .hook-tag{color:#e2b65c}
 
-/* PerceptFolio's blue CTA: white on #4ea8ff is 2.51:1, a dark label is 7.6:1.
-   Scoped tighter than the generic light-mode button rule above, which would
-   otherwise force white back on. */
-html:not([data-theme="dark"]) .btn.pf,
-html:not([data-theme="dark"]) .btn.pf:hover,
-html[data-theme="dark"] .btn.pf{color:#04101f}
 
 /* --- 2. hardcoded light surfaces, given dark counterparts --- */
 html[data-theme="dark"] .hook-strip,
@@ -390,7 +377,7 @@ html{scrollbar-color:var(--line) transparent;scrollbar-width:thin}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px;border:3px solid var(--paper)}
 ::-webkit-scrollbar-track{background:transparent}
-table,.tprice,.big-num,.pf-ret{font-variant-numeric:tabular-nums}
+table,.tprice,.big-num{font-variant-numeric:tabular-nums}
 
 
 /* ---------- 2f. DE-KIT ----------------------------------------------------
@@ -403,23 +390,23 @@ html .btn,html .nb-btn,html .nb-submit,html .nb-chip{border-radius:7px}
 html .lang-toggle,html .nb-icon-btn{border-radius:999px}
 /* small tags read as tags: a rounded pill is right at this size */
 html .badge,html .tier .badge,html .yt-save,html .ct-soon,html .door-soon-tag,html .nb-updated,html .nb-copy,html .nb-toast{border-radius:999px}
-html .tier,html .nb-card,html .pf-feat,html .fit-card,html .hook-strip,html .builder,
+html .tier,html .nb-card,html .fit-card,html .hook-strip,html .builder,
 html .pilot-card,html .sched-card,html .ct-panel,html .ct-side-card,html .ct-branch,
-html .expect-item,html .nb-toc,html .pv-delete,html .ytotal,html .pf-table-wrap,html .msg,
+html .expect-item,html .nb-toc,html .pv-delete,html .ytotal,html .msg,
 html .nb-modal-box,html .nb-search-box,html .nb-cookie,html .faq details,html .nb-alert,html .pilot-card,
 html .nb-field input,html .nb-field select,html .nb-field textarea{border-radius:8px}
 html .phone,html .demo-frame,html .calc-released{border-radius:14px}
-html .bill-toggle,html .pf-tabs{border-radius:999px}
+html .bill-toggle{border-radius:999px}
 html .bill-toggle button,html .nb-tab{border-radius:999px}
 html .nb-search-item,html .nb-drawer a.nb-drawer-link{border-radius:8px}
 html .nb-toast,html .nb-offline{border-radius:999px}
 
 /* shadows: a hairline and a whisper of depth, never a blur cloud */
-html .tier,html .nb-card,html .pf-feat,html .fit-card,html .ct-panel,html .ct-side-card,
+html .tier,html .nb-card,html .fit-card,html .ct-panel,html .ct-side-card,
 html .sched-card,html .nb-search-box,html .nb-modal-box,html .nb-cookie,html .phone{
   box-shadow:0 1px 0 rgba(16,24,20,.04);
 }
-html .tier:hover,html .nb-card--hover:hover,html .pf-feat:hover,html .fit-card:hover,
+html .tier:hover,html .nb-card--hover:hover,html .fit-card:hover,
 html .ct-side-card:hover,html .expect-item:hover{transform:translateY(-2px);box-shadow:0 10px 22px -16px rgba(16,24,20,.28);border-color:var(--ink)}
 html .tier.best{background:var(--surface);border:2px solid var(--ink);box-shadow:none}
 html[data-theme="dark"] .tier.best{background:var(--surface);border-color:var(--ink);box-shadow:none}
@@ -427,7 +414,7 @@ html .tier .badge{background:var(--ink);color:var(--paper);letter-spacing:.08em}
 html[data-theme="dark"] .tier .badge{background:var(--ink);color:var(--paper)}
 
 /* no aurora, no drift, on any hero or band */
-html .pf-hero::after,html .ct-hero::after,html .pf-cta::after,
+html .ct-hero::after,
 html .bundle-strip::after,html .pilot-card::before,html .pilot-card::after{display:none}
 
 /* buttons: flat, decisive, no lift */
@@ -442,7 +429,7 @@ html .nb-top{border-radius:999px;box-shadow:0 6px 16px -10px rgba(16,24,20,.35)}
 
 /* type: bigger headings, tighter tracking, a real measure on body copy */
 html .h2{font-size:clamp(2rem,4.6vw,3.25rem);letter-spacing:-.03em;line-height:1.02;max-width:20ch}
-html .sub,html .nb-prose p,html .pf-feat p,html .fit-card p{max-width:62ch}
+html .sub,html .nb-prose p,html .fit-card p{max-width:62ch}
 html .problem h2{letter-spacing:-.03em}
 
 /* offline badge: dot is drawn, not a glyph */
@@ -457,11 +444,11 @@ html[data-theme="dark"] .nb-field:focus-within > label{color:var(--teal)}
 
 /* ---- radius scale, final word: neither square nor pill ---- */
 html body .btn,html body .nb-btn,html body .nb-submit,html body .nb-chip,html body .btn.big{border-radius:10px}
-html body .tier,html body .nb-card,html body .pf-feat,html body .fit-card,html body .hook-strip,html body .builder,
+html body .tier,html body .nb-card,html body .fit-card,html body .hook-strip,html body .builder,
 html body .pilot-card,html body .sched-card,html body .ct-panel,html body .ct-side-card,html body .ct-branch,
-html body .expect-item,html body .nb-toc,html body .pv-delete,html body .pf-table-wrap,html body .nb-modal-box,
+html body .expect-item,html body .nb-toc,html body .pv-delete,html body .nb-modal-box,
 html body .nb-search-box,html body .nb-cookie,html body .faq details,html body .nb-alert,html body .phone,
-html body .demo-frame,html body .nb-seq,html body .pos-card{border-radius:14px}
+html body .demo-frame,html body .nb-seq{border-radius:14px}
 html body .ytotal,html body .msg,html body .calc-released,html body .nb-field input,html body .nb-field select,
 html body .nb-field textarea{border-radius:10px}
 html body .nb-fab,html body .nb-top{border-radius:12px}
@@ -486,13 +473,6 @@ html body .nb-top{width:44px;height:44px}
 .show.in .nb-seq li:nth-child(4){transition-delay:.24s}.show.in .nb-seq li:nth-child(5){transition-delay:.32s}
 @media(max-width:520px){.nb-seq li{grid-template-columns:4.2rem 1fr;gap:12px}}
 
-/* PerceptFolio: the position card */
-.pos-card{background:var(--surface);border:1px solid var(--line);padding:6px 0 0}
-.pos-row{display:grid;grid-template-columns:7rem 1fr;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:baseline}
-.pos-row .k{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-.pos-row .v{font-family:var(--serif);font-size:1.15rem;color:var(--ink);line-height:1.35}
-.pos-foot{padding:14px 22px 18px;font-size:.82rem;color:var(--ink-soft)}
-html[data-theme="dark"] .pos-card{background:var(--surface)}
 @media (prefers-reduced-motion: reduce){.nb-seq li{opacity:1;transform:none;transition:none}}
 
 /* Hick: one visible Contact per viewport. The header carries it on wide
@@ -1019,7 +999,7 @@ h2.rv,.h2.rv{transform:translateY(14px);transition:opacity .6s ease,transform .7
 .rv.in,h2.rv.in,.h2.rv.in{opacity:1;transform:none}
 
 /* ===== Room to breathe: one generous rhythm for every page section ====== */
-html body main > section:not(.hero):not(.final):not(.pf-hero):not(.pf-cta):not(.note){padding-block:clamp(64px,8.5vw,120px)}
+html body main > section:not(.hero):not(.final):not(.note){padding-block:clamp(64px,8.5vw,120px)}
 
 /* ===== The end card: the one place every page leads ===================== */
 html body .final{background:#0e2419;color:#fff;padding:clamp(88px,13vw,176px) 0;text-align:center;position:relative;overflow:hidden}

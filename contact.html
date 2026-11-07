@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="canonical" href="https://meetnorthbridge.com/contact.html">
 <title>Contact NorthBridge, or one of its branches</title>
-<meta name="description" content="Contact NorthBridge or a specific branch: Cinderella for data and workflow automation, Hermes for client communication, Socrates for AI training, or PerceptFolio for investing research. Replies within one business day, in English or Spanish.">
+<meta name="description" content="Contact NorthBridge or a specific branch: Cinderella for data and workflow automation, Hermes for client communication, or Socrates for AI training. Replies within one business day, in English or Spanish.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-<link rel="stylesheet" href="nb.css?v=95c51485">
+<link rel="stylesheet" href="nb.css?v=f263ffc8">
 <script>
 /* Theme applied before first paint so dark-mode visitors never see a white flash. */
 (function(){try{var s=localStorage.getItem('nb-theme');
@@ -97,8 +97,8 @@ if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.s
    simply never fires and everything renders in its final state. */
 try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 </script>
-<script defer src="search-index.js?v=b2566279"></script>
-<script defer src="nb.js?v=2468e25d"></script>
+<script defer src="search-index.js?v=fced3321"></script>
+<script defer src="nb.js?v=843a8907"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -190,10 +190,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
               <label class="ct-branch">
                 <input type="radio" name="branch" value="Socrates — AI training">
                 <span><b>Socrates</b><span class="en">Team training, schools, events</span><span class="es">Capacitación, escuelas, eventos</span></span>
-              </label>
-              <label class="ct-branch">
-                <input type="radio" name="branch" value="PerceptFolio — quant terminal">
-                <span><b>PerceptFolio</b><span class="en">Stock checks and a verifiable record</span><span class="es">Revisión de acciones y un registro verificable</span></span>
               </label>
             </div>
           </fieldset>
@@ -331,8 +327,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <div class="nb-foot-col">
         <h4>NorthBridge</h4>
         <p class="nb-foot-blurb">
-          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
-          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+          <span class="en">Automation, communication and training for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación y capacitación para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
         </p>
         <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
@@ -350,7 +346,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <a href="cinderella.html">Cinderella</a>
         <a href="hermes.html">Hermes</a>
         <a href="socrates.html">Socrates</a>
-        <a href="perceptfolio.html">PerceptFolio</a>
       </div>
       <div class="nb-foot-col">
         <h4><span class="en">Company</span><span class="es">Empresa</span></h4>
@@ -407,8 +402,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   var MAP = {
     cinderella:  'Cinderella',
     hermes:      'Hermes',
-    socrates:    'Socrates',
-    perceptfolio:'PerceptFolio'
+    socrates:    'Socrates'
   };
   try{
     var want = (new URLSearchParams(location.search).get('branch') || '').toLowerCase();
@@ -536,10 +530,23 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       if(window.gtag) window.gtag('event', 'generate_lead', {branch: branch});
     }).catch(function(err){
       done();
-      showError(t(
-        'Please try again, or email northbridgeai1@gmail.com directly — that always works.',
-        'Inténtalo de nuevo, o escribe directo a northbridgeai1@gmail.com, eso siempre funciona.'
-      ));
+      /* The form service is unreachable: hand the visitor a ready-to-send email
+         so the message is never lost. */
+      var mailBody =
+        t('Branch: ', 'Rama: ') + branch + '\n' +
+        t('Name: ', 'Nombre: ') + form.elements.name.value + '\n' +
+        t('Email: ', 'Correo: ') + form.elements.email.value + '\n' +
+        (form.elements.company.value ? t('Business: ', 'Negocio: ') + form.elements.company.value + '\n' : '') +
+        t('Reply in: ', 'Responder en: ') + form.elements.reply_language.value + '\n\n' +
+        form.elements.message.value + '\n\n---\n' + src;
+      var d = errBox.querySelector('.ct-error-detail');
+      d.textContent = ' ' + t('Our form service is not answering right now. ', 'El servicio del formulario no responde ahora mismo. ');
+      var a = document.createElement('a');
+      a.href = 'mailto:northbridgeai1@gmail.com?subject=' + encodeURIComponent('Website enquiry · ' + branch) + '&body=' + encodeURIComponent(mailBody);
+      a.textContent = t('Email this message instead', 'Envía este mensaje por correo');
+      d.appendChild(a);
+      errBox.setAttribute('data-show', 'true');
+      errBox.scrollIntoView({behavior:'smooth', block:'center'});
       if(window.console) console.warn('Contact form:', err.message);
     });
   });

@@ -32,8 +32,8 @@
       "slogan": "Automation that pays for itself",
       "makesOffer": [
         {"@type": "Offer", "name": "Starter Bundle", "description": "Cinderella Sweep (2 automation workflows, built and maintained, plus monthly report) and Hermes Courier (follow-up sequences on 1 communication channel). For small businesses starting with automation.", "price": "299", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "299", "priceCurrency": "USD", "unitText": "per month"}},
-        {"@type": "Offer", "name": "Growth Bundle", "description": "Cinderella Spotless (5 workflows with priority builds), Hermes Herald (2 channels with instant AI messaging), Socrates Academy (1 team workshop per month), and one month of the PerceptFolio terminal free.", "price": "649", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "649", "priceCurrency": "USD", "unitText": "per month"}},
-        {"@type": "Offer", "name": "Scale Bundle", "description": "Top plan of all three practices: Cinderella Spotless (5 workflows, priority builds), Hermes Wings (3 channels plus AI voice agent, weekly tuning), Socrates Agora (2 workshops per month with custom curriculum), and one month of the PerceptFolio terminal free.", "price": "699", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "699", "priceCurrency": "USD", "unitText": "per month"}}
+        {"@type": "Offer", "name": "Growth Bundle", "description": "Cinderella Spotless (5 workflows with priority builds), Hermes Herald (2 channels with instant AI messaging), and Socrates Academy (1 team workshop per month).", "price": "649", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "649", "priceCurrency": "USD", "unitText": "per month"}},
+        {"@type": "Offer", "name": "Scale Bundle", "description": "Top plan of all three practices: Cinderella Spotless (5 workflows, priority builds), Hermes Wings (3 channels plus AI voice agent, weekly tuning), and Socrates Agora (2 workshops per month with custom curriculum).", "price": "699", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "699", "priceCurrency": "USD", "unitText": "per month"}}
       ]
     },
     {"@type": "Service", "name": "NorthBridge Cinderella", "serviceType": "Data and workflow automation", "url": "cinderella.html", "provider": {"@id": "#northbridge"}, "description": "AI workflow building on n8n for small businesses: payment chasing, invoice reminders, automatic report generation, data moved between apps, client onboarding. Plans: Sweep $199/mo (2 workflows), Shine $329/mo (3 workflows), Spotless $349/mo (5 workflows, priority builds)."},
@@ -267,10 +267,6 @@
   .btn.outline:hover{background:var(--ink);color:var(--paper)}
   html[data-theme="dark"] .btn.outline{color:var(--ink);border-color:var(--ink)}
   html[data-theme="dark"] .btn.outline:hover{background:var(--ink);color:var(--paper)}
-  /* the PerceptFolio perk line is marked as such */
-  .tier li.perk{background:rgba(78,168,255,.07);margin:6px -8px 0;padding-left:38px;padding-right:8px;border-radius:3px;border-bottom:0}
-  .tier li.perk::before{left:10px}
-  html[data-theme="dark"] .tier li.perk{background:rgba(78,168,255,.10)}
   /* sliders: the thumb grows under the finger */
   .calc-row input[type=range]{cursor:grab}
   .calc-row input[type=range]:active{cursor:grabbing}
@@ -667,6 +663,7 @@
   .door-hint{font-size:.9rem;font-weight:700;color:var(--teal-dark);margin-bottom:34px}
   .div-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:38px;align-items:stretch;padding-top:10px;max-width:1000px;margin-inline:auto}
   @media(max-width:1100px){.div-grid{gap:28px}}
+  @media(min-width:761px){.div-grid>.door-card:last-child:nth-child(odd){grid-column:1/-1;width:calc(50% - 19px);justify-self:center}}
   @media(max-width:760px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
   /* the branch not yet open reads as a door still under construction */
   .door-card.soon .door{cursor:default;opacity:.92}
@@ -786,7 +783,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-<link rel="stylesheet" href="nb.css?v=95c51485">
+<link rel="stylesheet" href="nb.css?v=f263ffc8">
 <script>
 /* Theme applied before first paint so dark-mode visitors never see a white flash. */
 (function(){try{var s=localStorage.getItem('nb-theme');
@@ -799,8 +796,8 @@ if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.s
    simply never fires and everything renders in its final state. */
 try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 </script>
-<script defer src="search-index.js?v=b2566279"></script>
-<script defer src="nb.js?v=2468e25d"></script>
+<script defer src="search-index.js?v=fced3321"></script>
+<script defer src="nb.js?v=843a8907"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -992,12 +989,12 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 <section class="divisions" id="brands">
   <div class="wrap">
     <h2 class="h2 rv">
-      <span class="en">Four practices. Start with the one that sounds like your week.</span>
-      <span class="es">Cuatro prácticas. Empieza por la que suene a tu semana.</span>
+      <span class="en">Three practices. Start with the one that sounds like your week.</span>
+      <span class="es">Tres prácticas. Empieza por la que suene a tu semana.</span>
     </h2>
     <p class="sub rv">
-      <span class="en">NorthBridge is built of specialized practices, from back-office automation to quantitative research. You don't need to know which one you need (that's our job in the first meeting), but here's the map.</span>
-      <span class="es">NorthBridge se compone de prácticas especializadas, desde la automatización administrativa hasta la investigación cuantitativa. No necesitas saber cuál te toca (ese es nuestro trabajo en la primera reunión), pero aquí está el mapa.</span>
+      <span class="en">NorthBridge is built of specialized practices, from back-office automation to team training. You don't need to know which one you need (that's our job in the first meeting), but here's the map.</span>
+      <span class="es">NorthBridge se compone de prácticas especializadas, desde la automatización administrativa hasta la capacitación de equipos. No necesitas saber cuál te toca (ese es nuestro trabajo en la primera reunión), pero aquí está el mapa.</span>
     </p>
     <p class="door-hint rv"><span class="en">Click a door to open it.</span><span class="es">Haz clic en una puerta para abrirla.</span></p>
     <div class="div-grid">
@@ -1088,36 +1085,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <p class="door-tease">
             <span class="en">Replies, follow-ups and calls, answered.</span>
             <span class="es">Respuestas, seguimientos y llamadas, atendidos.</span>
-          </p>
-          <span class="door-open-hint"><span class="en">Open</span><span class="es">Abrir</span></span>
-        </div>
-      </div>
-
-      <div class="door-card rv d3">
-        <div class="door-room">
-          <h3>PerceptFolio</h3>
-          <p class="blurb">
-            <span class="en">For people who want to invest and have no time for the homework. It checks every US-listed company on 36 points, gives one verdict against the bars you set, and keeps a record that shows whether the calls worked. It places no trades and is not investment advice.</span>
-            <span class="es">Para quienes quieren invertir y no tienen tiempo para la tarea. Revisa cada empresa que cotiza en EE. UU. en 36 puntos, da un veredicto según los criterios que fijas, y lleva un registro que muestra si las decisiones funcionaron. No coloca operaciones y no es asesoría de inversión.</span>
-          </p>
-          <ul>
-            <li><span class="en">Thirty-six checks, one verdict, working shown</span><span class="es">Treinta y seis revisiones, un veredicto, procedimiento visible</span></li>
-            <li><span class="en">Try it on real history with the ticker hidden</span><span class="es">Pruébalo con historia real y el ticker oculto</span></li>
-            <li><span class="en">Five size limits before you buy, any one can say no</span><span class="es">Cinco límites de tamaño antes de comprar, cualquiera puede decir que no</span></li>
-            <li><span class="en">A record you can verify, marked against the S&amp;P 500</span><span class="es">Un registro verificable, marcado contra el S&amp;P 500</span></li>
-          </ul>
-          <a class="btn navy" href="perceptfolio.html">
-            <span class="en">Open PerceptFolio →</span><span class="es">Abrir PerceptFolio →</span>
-          </a>
-          <br>
-          <a class="door-close" href="#brands"><span class="en">Close the door</span><span class="es">Cerrar la puerta</span></a>
-        </div>
-        <div class="door" role="button" tabindex="0" aria-expanded="false" aria-label="Open PerceptFolio">
-          <span class="knob"></span>
-          <h3><span class="door-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8fd4bf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 3.5-4.5 3 3L20 6" stroke="#25d193"/></svg></span>PerceptFolio</h3>
-          <p class="door-tease">
-            <span class="en">Check stocks on 36 points, with the working shown.</span>
-            <span class="es">Revisa acciones en 36 puntos, con el procedimiento a la vista.</span>
           </p>
           <span class="door-open-hint"><span class="en">Open</span><span class="es">Abrir</span></span>
         </div>
@@ -1235,7 +1202,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Herald</strong></a>: <span class="en">2 channels + instant AI messaging</span><span class="es">2 canales + mensajería IA instantánea</span></li>
           <li><a href="socrates.html" style="text-decoration:none"><strong>Socrates · Academy</strong></a>: <span class="en">1 team workshop / month</span><span class="es">1 taller de equipo / mes</span></li>
-          <li class="perk"><a href="perceptfolio.html" style="text-decoration:none"><strong>PerceptFolio</strong></a>: <span class="en">1 month of the terminal, free</span><span class="es">1 mes de la terminal, gratis</span></li>
         </ul>
         <a class="btn outline cta book" style="text-align:center" href="book.html?plan=Growth+bundle">
           <span class="en">Choose Growth</span><span class="es">Elegir Crecimiento</span>
@@ -1251,7 +1217,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
           <li><a href="cinderella.html" style="text-decoration:none"><strong>Cinderella · Spotless</strong></a>: <span class="en">5 workflows, priority builds</span><span class="es">5 flujos, construcción prioritaria</span></li>
           <li><a href="hermes.html" style="text-decoration:none"><strong>Hermes · Wings</strong></a>: <span class="en">3 channels + AI voice agent, weekly tuning</span><span class="es">3 canales + agente de voz IA, ajuste semanal</span></li>
           <li><a href="socrates.html" style="text-decoration:none"><strong>Socrates · Agora</strong></a>: <span class="en">2 workshops / month + custom curriculum</span><span class="es">2 talleres / mes + plan de estudios a medida</span></li>
-          <li class="perk"><a href="perceptfolio.html" style="text-decoration:none"><strong>PerceptFolio</strong></a>: <span class="en">1 month of the terminal, free</span><span class="es">1 mes de la terminal, gratis</span></li>
         </ul>
         <a class="btn cta book" style="text-align:center" href="book.html?plan=Scale+bundle">
           <span class="en">Choose Scale</span><span class="es">Elegir Escala</span>
@@ -1488,8 +1453,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <div class="nb-foot-col">
         <h4>NorthBridge</h4>
         <p class="nb-foot-blurb">
-          <span class="en">Automation, communication, training and quantitative research for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
-          <span class="es">Automatización, comunicación, capacitación e investigación cuantitativa para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
+          <span class="en">Automation, communication and training for small and medium businesses. Built in accounts you own, in English or Spanish.</span>
+          <span class="es">Automatización, comunicación y capacitación para pequeñas y medianas empresas. Construido en cuentas tuyas, en inglés o español.</span>
         </p>
         <p style="margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
           <a href="mailto:northbridgeai1@gmail.com" style="color:var(--teal-dark);font-weight:600;font-size:.85rem;text-decoration:none">northbridgeai1@gmail.com</a>
@@ -1507,7 +1472,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <a href="cinderella.html">Cinderella</a>
         <a href="hermes.html">Hermes</a>
         <a href="socrates.html">Socrates</a>
-        <a href="perceptfolio.html">PerceptFolio</a>
       </div>
       <div class="nb-foot-col">
         <h4><span class="en">Company</span><span class="es">Empresa</span></h4>

@@ -10,7 +10,6 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - [Cinderella: data and workflow automation](https://meetnorthbridge.com/cinderella.html): payment chasing, invoice reminders, automatic reports, data moved between apps, onboarding checklists. Sweep $199, Shine $329, Spotless $349 per month
 - [Hermes: AI client communication and websites](https://meetnorthbridge.com/hermes.html): follow-up sequences, instant AI messaging, AI voice agents, websites built and kept up to date. Courier $149, Herald $279, Wings $319 per month
 - [Socrates: AI training and workshops](https://meetnorthbridge.com/socrates.html): team workshops, AI literacy for schools, talks for events. Foundations $99, Academy $199, Agora $249 per month; single workshops without a plan
-- [PerceptFolio: invest without the homework](https://meetnorthbridge.com/perceptfolio.html): research software at perceptfolio.com, 3 days free then $39 a month; not a broker, not investment advice
 - [Contact](https://meetnorthbridge.com/contact.html): message NorthBridge or any practice
 - [Book a first meeting](https://meetnorthbridge.com/book.html): request a time, Zoom or Google Meet, English or Spanish
 - [Terms of use](https://meetnorthbridge.com/terms.html)
@@ -22,14 +21,13 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - Cinderella (data and workflows): cleans data and automates back-office workflows in the client's own n8n account.
 - Hermes (client communication): follow-up sequences, instant AI messaging, AI voice agents for calls the owner cannot take, and websites built and kept up to date. Every message template is approved by the client before anything sends.
 - Socrates (AI training): hands-on workshops on the team's real daily tasks, AI literacy for schools, talks for events. Virtual anywhere, in person in Quito.
-- PerceptFolio (perceptfolio.com): a self-serve investing research product. It checks every US-listed company on 36 points and gives one verdict against the bars the user sets, with the working shown; runs five size limits before a purchase; offers an exercise on three years of real closes with the ticker hidden; and keeps a hash-chained record in which every call is marked against the S&P 500 on fixed dates, verifiable without an account. 3 days free, then $39 a month ($390 a year), stepping down to as low as $26 a month the longer the subscriber stays; card up front, cancel any time. It applies rules the user configures to public data and shows the arithmetic. It is not a broker, places no trades (a broker can be connected read-only), holds no client funds, makes no recommendation, is not investment advice, and publishes no performance figures. For adults 18 and over.
 
 ## Pricing
 
 - Pilot (payment chasing): $99/month, 90 days, money-back guarantee in the first 30 days
 - Starter bundle: $299/month
-- Growth bundle: $649/month (includes one month of the PerceptFolio terminal free)
-- Scale bundle: $699/month (includes one month of the PerceptFolio terminal free)
+- Growth bundle: $649/month
+- Scale bundle: $699/month
 - Individual practice plans: $99 to $349/month
 
 ## How it works
@@ -38,7 +36,7 @@ The NorthBridge Cycle: Diagnose (2-3 days), Build (3-7 days), Educate and Train 
 
 ## Contact
 
-- Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, Socrates, or PerceptFolio)
+- Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, or Socrates)
 - Email: northbridgeai1@gmail.com
 - Instagram: https://www.instagram.com/northbridge.ai/
 - Founder: Pierce Tyrrell

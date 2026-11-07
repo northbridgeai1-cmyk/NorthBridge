@@ -8,7 +8,7 @@ import { mkdirSync } from 'node:fs';
 
 const R = []; const ok = (c, n, d = '') => { R.push([c ? 'PASS' : 'FAIL', n, d]); if (process.env.VERBOSE) console.log(`${c ? '✅' : '❌'} ${n}${d ? '  —  ' + d : ''}`); };
 process.on('uncaughtException', e => { console.log('\n!! aborted:', e.message); const pass=R.filter(r=>r[0]==='PASS').length; console.log(`${pass} passed, ${R.length-pass} failed so far`); process.exit(2); });
-const PAGES = ['index.html','perceptfolio.html','contact.html','terms.html','privacy.html',
+const PAGES = ['index.html','contact.html','terms.html','privacy.html',
                'cinderella.html','hermes.html','socrates.html','book.html','404.html','offline.html'];
 mkdirSync('tests/shots', { recursive: true });
 
@@ -36,9 +36,9 @@ await p.setViewport(1440, 900); await fresh('index.html');
   await p.key('Escape', 'Escape', 27);
   ok((await p.eval(`return document.querySelector('.nb-search').dataset.open;`)) === 'false', 'Escape closes search');
 
-  ok((await p.eval(`return document.querySelectorAll('.door-card').length;`)) === 4, 'Four doors present');
-  await p.clickSel('.door-card .door', { index: 3 });
-  ok(await p.eval(`return document.querySelectorAll('.door-card')[3].classList.contains('open');`), 'PerceptFolio door opens');
+  ok((await p.eval(`return document.querySelectorAll('.door-card').length;`)) === 3, 'Three doors present');
+  await p.clickSel('.door-card .door', { index: 2 });
+  ok(await p.eval(`return document.querySelectorAll('.door-card')[2].classList.contains('open');`), 'Socrates door opens');
   await p.clickSel('.door-card.open .door-close');
   ok(await p.eval(`return !document.querySelector('.door-card.open');`), 'Door closes');
 
@@ -102,8 +102,8 @@ await p.setViewport(1440, 900); await fresh('contact.html');
   ok(posted && /formsubmit\.co\/ajax\//.test(posted.url) && posted.method==='POST', 'Valid submit POSTs to the FormSubmit endpoint', posted ? posted.url : 'no request');
   const v = await p.eval(`await new Promise(s=>setTimeout(s,900)); return document.getElementById('ctSuccess').dataset.show==='true' && document.getElementById('ctForm').style.display==='none';`);
   ok(v, 'Valid submit: success state replaces the form');
-  await fresh('contact.html?branch=perceptfolio');
-  ok((await p.eval(`return document.querySelector('input[name=branch]:checked').value;`)).startsWith('PerceptFolio'), '?branch=perceptfolio preselects the branch');
+  await fresh('contact.html?branch=hermes');
+  ok((await p.eval(`return document.querySelector('input[name=branch]:checked').value;`)).startsWith('Hermes'), '?branch=hermes preselects the branch');
 }
 
 /* ─── 3b. booking form: on-page, plan prefilled, posts to FormSubmit ─── */
@@ -143,7 +143,7 @@ for (const [w, hgt] of [[375, 812], [466, 678], [445, 626], [768, 1024], [890, 6
 
 /* ─── 5. console errors ────────────────────────────────────────────── */
 await p.setViewport(1440, 900);
-for (const pg of ['index.html', 'perceptfolio.html', 'contact.html']) {
+for (const pg of ['index.html', 'hermes.html', 'contact.html']) {
   await fresh(pg); await p.eval(`await new Promise(s=>setTimeout(s,800)); return 1;`);
   const errs = p.consoleLogs.filter(l => l.level !== 'warning');
   ok(errs.length === 0, `Console clean · ${pg}`, errs.map(e => e.text).join(' | ').slice(0, 160) || 'no errors');

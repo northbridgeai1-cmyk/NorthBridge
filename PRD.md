@@ -17,7 +17,7 @@ Everything on the site either moves a visitor toward that action or gets out of 
 
 Primary: **owners of small and medium businesses in the United States and Latin America** who lose hours every week to admin they can't hire for — chasing invoices, moving data between apps, following up with clients — and want it built and kept running for them. Bilingual: English and Spanish are equals, not a translation layer.
 
-Secondary: **schools and event organisers** (Socrates training), and **people who make trading decisions with real money** (PerceptFolio).
+Secondary: **schools and event organisers** (Socrates training).
 
 The visitor is busy, sceptical of agencies, and decides in seconds. They are on a phone as often as a laptop.
 
@@ -30,16 +30,15 @@ The visitor is busy, sceptical of agencies, and decides in seconds. They are on 
 | Hosting | **GitHub Pages behind Cloudflare, unchanged** | Domain, DNS, cert, analytics and CSP already work. A build step does not require leaving. |
 | Backend | **None** | Marketing + contact. Forms go to Formspree. No accounts, admin, or database. |
 | Visual | **New look, same content** | Every page, price, plan and fact carries over. The skin changes; the truth does not. |
-| Automation | **All four** — CI test+deploy, lead handling, scheduled checks, PerceptFolio feed | Section 7. |
+| Automation | **All three** — CI test+deploy, lead handling, scheduled checks | Section 7. |
 | Content honesty | **Nothing invented** | No claim the product can't back, no performance figures, no sample data presented as real. |
 
 ## 4. Pages (content carried over 1:1)
 
 | Route | Purpose | Notes |
 |---|---|---|
-| `/` | The pitch, the four doors, calculator, plans, process, FAQ | Hero states what + who in plain terms (done) |
+| `/` | The pitch, the three doors, calculator, plans, process, FAQ | Hero states what + who in plain terms (done) |
 | `/cinderella` `/hermes` `/socrates` | One practice each, with its plans | Add the yearly toggle these pages lack today |
-| `/perceptfolio` | The trading-terminal branch | Market tab: **DECIDE** (§11) |
 | `/contact` | Branch-picker form — the primary conversion | Formspree endpoint finally set |
 | `/book` | First-meeting scheduler | Scheduler URL finally set, or page removed |
 | `/terms` `/privacy` | Legal | Carry over |
@@ -62,9 +61,9 @@ Three worlds, drawn from the references you gave (godly, refero, aceternity, hai
 
 **B · Workshop** — *warm, tactile, Latin.* Paper texture, terracotta and gold with the green, hand-drawn accents (the underline you already have), organic section dividers (haikei). Feels like a craft business that builds things, not a SaaS. Strongest fit for the audience; most distinctive; most work to keep tasteful.
 
-**C · Instrument** — *cool, precise, dark-first.* Grid lines, monospace numerals, aceternity-style motion. Fits PerceptFolio well and the SMB audience badly. **Not recommended** for the main site; viable for `/perceptfolio` alone.
+**C · Instrument** — *cool, precise, dark-first.* Grid lines, monospace numerals, aceternity-style motion. Fits the SMB audience badly. **Not recommended.**
 
-**Recommendation:** B for the site, with C's restraint applied to `/perceptfolio` only. Say A if you'd rather play it safe.
+**Recommendation:** B for the site. Say A if you'd rather play it safe.
 
 Whatever you pick: one authored motion moment per page, not an entrance on every section; **skeleton loaders** wherever content arrives after first paint (never a spinner, never an empty region); dark mode from day one with contrast verified in both themes.
 
@@ -75,7 +74,6 @@ Whatever you pick: one authored motion moment per page, not an entrance on every
 | **Test + deploy** | GitHub Actions: build, run the check suite (ported to the new stack), deploy to Pages **only if green** | Every push to `main` |
 | **Lead handling** | Formspree → email to the inbox + row appended to a Google Sheet, tagged with branch and UTM; auto-reply to the sender in their language | Each submission |
 | **Scheduled checks** | Cron Action: live site returns 200, internal links resolve, contact form accepts a test post; opens a GitHub issue on failure | Daily |
-| **PerceptFolio feed** | Cron Action fetches a real source, writes `data/market.json`, rebuilds, deploys. **DECIDE:** which source — or drop the Market tab, since the product itself publishes no performance figures. | Weekly |
 
 ## 8. Security — the 20 items, mapped honestly
 
@@ -122,9 +120,8 @@ Static site, no backend. Each item is real work, already done, or not applicable
 ## 11. Open decisions — **DECIDE**
 
 1. **Visual world:** A, B, or C (§6).
-2. **PerceptFolio Market tab:** real feed (which?), or remove it.
-3. **Scheduler:** which service (Cal.com is free and embeds), or drop `/book` and keep the email flow.
-4. **Formspree:** you create the form; I need only the endpoint ID.
+2. **Scheduler:** which service (Cal.com is free and embeds), or drop `/book` and keep the email flow.
+3. **Formspree:** you create the form; I need only the endpoint ID.
 5. **Hermes Wings voice agents:** built, or remove the tier until it is?
 6. **Email:** stay on Gmail, or a domain address before launch.
 
