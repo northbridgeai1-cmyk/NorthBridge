@@ -79,12 +79,12 @@ Page: https://meetnorthbridge.com/socrates.html
 
 ## Bundles
 
-Bundles combine practices and cost less than the plans bought separately.
+Bundles combine practices into one monthly plan.
 - Starter: $299/month
 - Growth: $649/month
 - Scale: $699/month
 
-Yearly billing is available; the site shows the annual total for bundles. Individual plans advertise 2 months free when paid yearly.
+Yearly billing is available; the site shows the annual total for bundles.
 
 ## Terms that apply to every plan
 
@@ -110,7 +110,7 @@ Q: Who is NorthBridge for?
 A: Small and medium businesses that lose hours to manual work: chasing late payments, copying data between apps, building the same reports, forgetting follow-ups. Plus schools and events that want practical AI training.
 
 Q: What does NorthBridge cost?
-A: Individual practice plans run $99 to $349 per month. Bundles combine the three practices for less: Starter $299/month, Growth $649/month, Scale $699/month. One-off workshops and classes are also bookable. Every plan carries a 30-day money-back guarantee on the first month, with no long contracts.
+A: Individual practice plans run $99 to $349 per month. Bundles combine the three practices: Starter $299/month, Growth $649/month, Scale $699/month. One-off workshops and classes are also bookable. Every plan carries a 30-day money-back guarantee on the first month, with no long contracts.
 
 Q: Does NorthBridge offer AI training and workshops?
 A: Yes. The Socrates practice runs hands-on AI workshops for business teams, AI literacy programs for schools, and talks for events. Virtual anywhere, in person in Quito, in English or Spanish.

@@ -52,11 +52,10 @@ await p.setViewport(1440, 900); await fresh('index.html');
   const y = await p.eval(`
     document.querySelector('.bill-toggle button[data-bill="y"]').click(); await new Promise(s=>setTimeout(s,700));
     return [...document.querySelectorAll('.tier')].map(t=>{
-      const annual=+t.querySelector('.tprice .by').textContent.replace(/\\D/g,''), was=+t.querySelector('.yt-was').textContent.replace(/\\D/g,'');
-      const wr=t.querySelector('.yt-was').getBoundingClientRect(), br=t.querySelector('.by').getBoundingClientRect();
+      const annual=+t.querySelector('.tprice .by').textContent.replace(/\\D/g,'');
       const unit=getComputedStyle(t.querySelector('.py')).display!=='none' && getComputedStyle(t.querySelector('.pm')).display==='none';
-      return was>annual && wr.right<=br.left+1 && Math.abs((wr.top+wr.height/2)-(br.top+br.height/2))<24 && unit && !t.querySelector('.yt-save'); });`);
-  ok(y.every(Boolean), 'Yearly pricing: struck old price first, then the annual total, unit /year, no savings pill', y.join(','));
+      return annual>0 && unit && !t.querySelector('.yt-was') && !t.querySelector('.yt-save'); });`);
+  ok(y.every(Boolean), 'Yearly pricing: annual total, unit /year, no struck price, no savings pill', y.join(','));
 
   await p.clickSel('#langBtn');
   ok((await p.eval(`return document.documentElement.dataset.lang;`)) === 'es', 'Language toggle switches to Spanish');

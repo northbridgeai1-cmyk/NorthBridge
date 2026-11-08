@@ -921,7 +921,7 @@ html[data-theme="dark"] .nb-alert--err{background:rgba(179,38,30,.18);color:#ff9
 }
 @media(max-width:820px){.nb-foot-grid{grid-template-columns:1fr 1fr;gap:var(--s-xl)}}
 @media(max-width:480px){.nb-foot-grid{grid-template-columns:1fr}}
-.nb-foot-col h4{
+.nb-foot-col h3,.nb-foot-col h4{
   font-size:var(--t-micro-up);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ink);margin-bottom:var(--s-sm);
 }
