@@ -310,6 +310,18 @@
     var lbl = el('span'); lbl.textContent = t('Free first meeting', 'Primera reunión gratis');
     fab.appendChild(lbl);
 
+    // One dominant action per screen: hide the floating button while an in-page booking button is visible.
+    try {
+      if ('IntersectionObserver' in window) {
+        var seen = new Set();
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+          fab.style.display = seen.size ? 'none' : '';
+        });
+        document.querySelectorAll('a.btn[href^="book.html"]:not(.nb-fab)').forEach(function (b) { io.observe(b); });
+      }
+    } catch (err) {}
+
     wrap.appendChild(top);
     wrap.appendChild(fab);
     document.body.appendChild(wrap);
