@@ -13,6 +13,7 @@
 <meta property="og:description" content="We build and run the back-office work for you: late invoices chased in your name, reports built, leads answered. Free first meeting. 30-day money-back guarantee.">
 <meta property="og:url" content="https://meetnorthbridge.com/">
 <meta property="og:image" content="https://meetnorthbridge.com/og/home.png">
+<meta property="og:image:secure_url" content="https://meetnorthbridge.com/og/home.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -802,6 +803,31 @@
     text-align:center;margin-top:26px;font-size:.9rem;color:var(--ink-soft);
   }
 
+
+/* ---- Why NorthBridge: comparison ---- */
+.why{padding:clamp(56px,8vw,104px) 0}
+.why .cmp-wrap{margin-top:28px}
+.why .cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:1rem;line-height:1.45}
+.why .cmp th,.why .cmp td{padding:16px 18px;text-align:left;vertical-align:top;border-top:1px solid var(--line);color:var(--ink-soft)}
+.why .cmp thead th{border-top:0;font-weight:700;font-size:.95rem;color:var(--ink-soft);padding-bottom:14px;vertical-align:bottom}
+.why .cmp tbody th{font-weight:600;color:var(--ink);width:17%}
+.why .cmp .us{background:var(--surface);color:var(--ink);font-weight:600;border-left:2px solid var(--pop);border-right:2px solid var(--pop)}
+.why .cmp thead .us{background:var(--pop);color:var(--pop-ink);font-weight:800;font-size:1.05rem;border-radius:12px 12px 0 0;border-top:2px solid var(--pop)}
+.why .cmp tbody tr:last-child .us{border-bottom:2px solid var(--pop);border-radius:0 0 12px 12px}
+.why .why-honest{margin:28px 0 0;padding:16px 20px;border:1px solid var(--line);background:var(--surface);border-radius:12px;color:var(--ink);max-width:70ch}
+.why .cmp-note{margin:12px 0 0;font-size:.88rem;color:var(--ink-soft)}
+.why .why-cta{margin-top:32px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:820px){
+  .why .cmp,.why .cmp thead,.why .cmp tbody,.why .cmp tr,.why .cmp th,.why .cmp td{display:block}
+  .why .cmp thead{position:absolute;left:-9999px}
+  .why .cmp tr{border-top:1px solid var(--line);padding:14px 0}
+  .why .cmp tbody th{width:auto;padding:0 0 8px;border:0;font-size:1.05rem}
+  .why .cmp td{border:0;padding:6px 0 6px 12px}
+  .why .cmp td::before{content:attr(data-label) ": ";font-weight:700;color:var(--ink)}
+  .why .cmp .us{border:2px solid var(--pop);border-radius:10px;padding:10px 12px;margin:2px 0 6px}
+  .why .cmp tbody tr:last-child .us{border:2px solid var(--pop);border-radius:10px}
+}
 .hero p.hero-what{font-size:1.02rem;line-height:1.5;color:rgba(255,255,255,.78);margin:14px 0 0;max-width:34rem}
 </style>
 <!-- nb-shared-layer -->
@@ -809,7 +835,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-<link rel="stylesheet" href="nb.css?v=f263ffc8">
+<link rel="stylesheet" href="nb.css?v=d9c34d58">
 <script>
 /* Theme applied before first paint so dark-mode visitors never see a white flash. */
 (function(){try{var s=localStorage.getItem('nb-theme');
@@ -823,7 +849,7 @@ if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.s
 try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 </script>
 <script defer src="search-index.js?v=fced3321"></script>
-<script defer src="nb.js?v=843a8907"></script>
+<script defer src="nb.js?v=1448a60b"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -1185,6 +1211,83 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <p class="g"><span class="en">This is an estimate. Send us your real ageing report and we'll do it properly.</span><span class="es">Es una estimación. Mándanos tu reporte de antigüedad real y lo hacemos bien.</span></p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= WHY NORTHBRIDGE ======= -->
+<section class="why" id="why">
+  <div class="wrap">
+    <h2 class="h2 rv">
+      <span class="en">Why NorthBridge, and not the other options</span>
+      <span class="es">Por qué NorthBridge y no las otras opciones</span>
+    </h2>
+    <p class="sub rv">
+      <span class="en">There are four ways to get this work done. Here is how they compare, in plain terms.</span>
+      <span class="es">Hay cuatro formas de resolver este trabajo. Así se comparan, en palabras simples.</span>
+    </p>
+    <div class="cmp-wrap rv">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only"><span class="en">Question</span><span class="es">Pregunta</span></span></th>
+            <th scope="col" class="us">NorthBridge</th>
+            <th scope="col"><span class="en">Do it yourself with a tool</span><span class="es">Hacerlo tú con una herramienta</span></th>
+            <th scope="col"><span class="en">Hire a freelancer</span><span class="es">Contratar a un freelancer</span></th>
+            <th scope="col"><span class="en">Hire a big agency</span><span class="es">Contratar una agencia grande</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="en">Who does the work</span><span class="es">Quién hace el trabajo</span></th>
+            <td class="us" data-label="NorthBridge"><span class="en">We build it and run it for you.</span><span class="es">Lo construimos y lo operamos por ti.</span></td>
+            <td data-label="DIY"><span class="en">You, on top of running your business.</span><span class="es">Tú, además de dirigir tu negocio.</span></td>
+            <td data-label="Freelancer"><span class="en">One person, when they have time.</span><span class="es">Una persona, cuando tiene tiempo.</span></td>
+            <td data-label="Agency"><span class="en">A team, usually built for larger clients.</span><span class="es">Un equipo, normalmente pensado para clientes más grandes.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="en">Who owns it</span><span class="es">De quién es</span></th>
+            <td class="us" data-label="NorthBridge"><span class="en">You do. It lives in accounts you own.</span><span class="es">Tuyo. Vive en cuentas que son tuyas.</span></td>
+            <td data-label="DIY"><span class="en">You do.</span><span class="es">Tuyo.</span></td>
+            <td data-label="Freelancer"><span class="en">Depends on the contract. Ask.</span><span class="es">Depende del contrato. Pregunta.</span></td>
+            <td data-label="Agency"><span class="en">Depends on the contract. Ask.</span><span class="es">Depende del contrato. Pregunta.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="en">What it costs</span><span class="es">Cuánto cuesta</span></th>
+            <td class="us" data-label="NorthBridge"><span class="en">A flat monthly plan from $99. No long contracts.</span><span class="es">Un plan mensual fijo desde $99. Sin contratos largos.</span></td>
+            <td data-label="DIY"><span class="en">The tool's fee, plus your own hours.</span><span class="es">La cuota de la herramienta, más tus propias horas.</span></td>
+            <td data-label="Freelancer"><span class="en">Usually per project or per hour.</span><span class="es">Normalmente por proyecto o por hora.</span></td>
+            <td data-label="Agency"><span class="en">Usually a custom quote.</span><span class="es">Normalmente una cotización a medida.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="en">When something breaks</span><span class="es">Cuando algo falla</span></th>
+            <td class="us" data-label="NorthBridge"><span class="en">We fix it. Upkeep is part of the plan.</span><span class="es">Lo arreglamos. El mantenimiento está en el plan.</span></td>
+            <td data-label="DIY"><span class="en">You fix it.</span><span class="es">Lo arreglas tú.</span></td>
+            <td data-label="Freelancer"><span class="en">Depends on their availability.</span><span class="es">Depende de su disponibilidad.</span></td>
+            <td data-label="Agency"><span class="en">Depends on the contract.</span><span class="es">Depende del contrato.</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="en">If it isn't right for you</span><span class="es">Si no es para ti</span></th>
+            <td class="us" data-label="NorthBridge"><span class="en">30-day money-back guarantee on your first month.</span><span class="es">Garantía de devolución de 30 días en tu primer mes.</span></td>
+            <td data-label="DIY"><span class="en">You have already spent the time.</span><span class="es">Ya gastaste el tiempo.</span></td>
+            <td data-label="Freelancer"><span class="en">Varies. Ask before you pay.</span><span class="es">Varía. Pregunta antes de pagar.</span></td>
+            <td data-label="Agency"><span class="en">Varies. Ask before you sign.</span><span class="es">Varía. Pregunta antes de firmar.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="why-honest rv">
+      <span class="en"><strong>What we won't pretend:</strong> NorthBridge is new and has no client case studies yet, so the free first meeting is how you check us out. We take at most 5 new clients a month, and we are not the right fit if you want a self-serve tool or a large enterprise team.</span>
+      <span class="es"><strong>Lo que no vamos a aparentar:</strong> NorthBridge es nuevo y aún no tiene casos de clientes, así que la primera reunión gratis es la forma de conocernos. Aceptamos máximo 5 clientes nuevos al mes, y no somos la opción correcta si buscas una herramienta de autoservicio o un gran equipo empresarial.</span>
+    </p>
+    <p class="cmp-note">
+      <span class="en">A general comparison of common options. Details vary by provider, so confirm anything that matters to you.</span>
+      <span class="es">Una comparación general de opciones comunes. Los detalles varían según el proveedor; confirma lo que te importe.</span>
+    </p>
+    <div class="why-cta rv">
+      <a class="btn big" href="book.html">
+        <span class="en">Book your free first meeting</span><span class="es">Reserva tu primera reunión gratis</span>
+      </a>
     </div>
   </div>
 </section>

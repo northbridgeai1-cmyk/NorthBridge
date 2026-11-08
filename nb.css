@@ -1020,3 +1020,21 @@ html body .final .mail a{color:#8fe3bd}
    step scales text, buttons and spacing together. Phones stay at 16px. ===== */
 @media (min-width:768px){html{font-size:106.25%}}
 @media (min-width:1200px){html{font-size:112.5%}}
+
+/* ===== The one memorable accent: sunrise orange ==========================
+   Deep green and mint stay the base. Amber is the pop, and it is spent only
+   on the first step (free first meeting buttons), the highlighted word in the
+   hero, and the NorthBridge column of the comparison. Dark text on amber for
+   contrast; amber text appears only on the dark hero. */
+:root,html[data-theme="dark"]{--pop:#ff8a1f;--pop-hover:#ffa04a;--pop-ink:#2a1200}
+html body a.btn[href^="book.html"]:not(.outline):not(.navy):not([href*="plan="]){
+  background:var(--pop);border-color:var(--pop);color:var(--pop-ink)!important;
+}
+html body a.btn[href^="book.html"]:not(.outline):not(.navy):not([href*="plan="]):hover{
+  background:var(--pop-hover);border-color:var(--pop-hover);color:var(--pop-ink)!important;
+  box-shadow:0 10px 24px -12px rgba(255,138,31,.45);
+}
+html body .hero h1 .echo.a{color:var(--pop)}
+html body .hero .price{color:var(--pop)}
+html body .nb-fab,html body .nb-drawer-foot .nb-btn{background:var(--pop);border-color:var(--pop);color:var(--pop-ink)!important}
+html body .nb-fab:hover,html body .nb-drawer-foot .nb-btn:hover{background:var(--pop-hover);border-color:var(--pop-hover)}

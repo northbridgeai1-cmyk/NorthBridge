@@ -140,7 +140,7 @@
 
     var foot = el('div', { class: 'nb-drawer-foot' });
     var cta = el('a', { class: 'nb-btn nb-btn--primary', href: 'book.html' });
-    cta.textContent = t('Set up a meeting', 'Agendar una reunión');
+    cta.textContent = t('Free first meeting', 'Primera reunión gratis');
     foot.appendChild(cta);
 
     /* The header language pill is hidden on the narrowest phones, so the
@@ -305,9 +305,9 @@
       if (skip) skip.setAttribute('tabindex', '-1'), skip.focus({ preventScroll: true });
     });
 
-    var fab = el('a', { class: 'nb-fab', href: 'book.html', 'aria-label': t('Set up a meeting', 'Agendar una reunión') });
+    var fab = el('a', { class: 'nb-fab', href: 'book.html', 'aria-label': t('Free first meeting', 'Primera reunión gratis') });
     fab.innerHTML = ICON.mail;
-    var lbl = el('span'); lbl.textContent = t('Set up a meeting', 'Agendar reunión');
+    var lbl = el('span'); lbl.textContent = t('Free first meeting', 'Primera reunión gratis');
     fab.appendChild(lbl);
 
     wrap.appendChild(top);
@@ -632,9 +632,9 @@
     b.addEventListener('click', function () {
       setTimeout(function () {
         setTheme(root.getAttribute('data-theme') || 'light', false);
-        var f = $('.nb-fab span'); if (f) f.textContent = t('Set up a meeting', 'Agendar reunión');
+        var f = $('.nb-fab span'); if (f) f.textContent = t('Free first meeting', 'Primera reunión gratis');
         var d = $('.nb-drawer-title'); if (d) d.textContent = t('Menu', 'Menú');
-        var c = $('.nb-drawer-foot .nb-btn'); if (c) c.textContent = t('Set up a meeting', 'Agendar una reunión');
+        var c = $('.nb-drawer-foot .nb-btn'); if (c) c.textContent = t('Free first meeting', 'Primera reunión gratis');
         if (searchInput) searchInput.placeholder = t('Search plans, services, FAQ…', 'Busca planes, servicios, preguntas…');
         if (searchUI && searchUI.getAttribute('data-open') === 'true') runSearch(searchInput.value);
       }, 0);
