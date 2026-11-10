@@ -216,6 +216,30 @@ for (const lang of ['en', 'es']) for (const pg of PAGES) {
   ok(!broken.length, 'All internal links resolve', broken.join(', ') || `${PAGES.length} pages, 0 broken`);
 }
 
+/* ─── 8a. videos: files exist, light to load, one plays at a time ──── */
+{
+  const missing = []; let count = 0;
+  for (const pg of ['index.html', 'cinderella.html', 'hermes.html', 'socrates.html']) {
+    await fresh(pg);
+    const v = await p.eval(`return [...document.querySelectorAll('video.reel-video')].map(v=>({src:v.querySelector('source').getAttribute('src'), poster:v.getAttribute('poster'), pre:v.getAttribute('preload'), txt:!!v.closest('.reel').querySelector('.reel-problem') && !!v.closest('.reel').querySelector('.reel-fix')}));`);
+    if (!v.length) missing.push(`${pg}: no videos`);
+    for (const r of v) {
+      count++;
+      for (const f of [r.src, r.poster]) { const s = await fetch(`${BASE}/${f}`, { method: 'HEAD' }).catch(() => ({ status: 0 })); if (s.status !== 200) missing.push(`${pg} -> ${f}`); }
+      if (r.pre !== 'none') missing.push(`${pg} ${r.src}: preload should be none`);
+      if (!r.txt) missing.push(`${pg} ${r.src}: missing problem or fix text`);
+    }
+  }
+  ok(!missing.length, 'Videos: every file and still exists, loads only on play, has problem + fix text', missing.join(', ') || `${count} videos`);
+
+  await fresh('index.html');
+  const one = await p.eval(`
+    const vs=[...document.querySelectorAll('video.reel-video')]; vs.forEach(v=>v.muted=true);
+    await vs[0].play().catch(()=>{}); await vs[1].play().catch(()=>{}); await new Promise(s=>setTimeout(s,300));
+    const r={first:vs[0].paused, second:vs[1].paused}; vs.forEach(v=>v.pause()); return r;`);
+  ok(one.first === true && one.second === false, 'Starting a second video pauses the first', JSON.stringify(one));
+}
+
 /* ─── 8b. safety: nothing inline can run, and address-bar text stays text ─── */
 {
   const loose = [];

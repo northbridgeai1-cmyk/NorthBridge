@@ -418,6 +418,12 @@
   }
   window.nbGetUTM = getUTM;
 
+  /* Videos: only one plays at a time. Starting one pauses any other. */
+  document.addEventListener('play', function (e) {
+    if (!e.target || e.target.tagName !== 'VIDEO') return;
+    $$('video').forEach(function (v) { if (v !== e.target && !v.paused) v.pause(); });
+  }, true);
+
   /* "Try again" buttons (offline page). Done here rather than with an inline
      onclick="" so the security policy can forbid inline scripts everywhere. */
   document.addEventListener('click', function (e) {

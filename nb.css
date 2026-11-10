@@ -1050,3 +1050,33 @@ html body .why .why-honest{overflow-wrap:anywhere;word-break:normal;hyphens:auto
 /* The floating "Free first meeting" button is switched off on the booking page
    itself (nb.js sets `hidden`); without this line the rules above re-show it. */
 html body .nb-fab[hidden]{display:none!important}
+
+/* ==========================================================================
+   Videos ("Six problems. Twenty seconds each.")
+   Used on index, cinderella, hermes and socrates. Markup: <section class="reels">.
+   Phones: a row you swipe sideways. Wider screens: a grid.
+   ========================================================================== */
+html body section.reels{background:var(--paper-dark,var(--surface-2))}
+.reels .sub{margin-bottom:32px}
+.reel-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.reel{margin:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.reel-video{display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:72vh;object-fit:cover;background:#0f2d24}
+.reel-text{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px}
+.reel-text p{margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-soft)}
+.reel-text strong{display:block;font-size:.74rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px;color:var(--ink)}
+.reel-fix{border-top:1px solid var(--line);padding-top:10px}
+.reel-fix strong{color:var(--teal-dark,#1f5c39)}
+html[data-theme="dark"] .reel-fix strong{color:#8fe3bd}
+.reel-follow{margin-top:24px;font-size:.9rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:6px 12px}
+.reel-follow a{color:var(--teal-dark,#1f5c39);font-weight:600}
+html[data-theme="dark"] .reel-follow a{color:#8fe3bd}
+@media(max-width:900px){
+  .reel-row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;
+    margin-inline:-24px;padding-inline:24px;scroll-padding-inline:24px;overscroll-behavior-x:contain}
+  .reel{flex:0 0 min(78%,320px);scroll-snap-align:start}
+}
+
+/* "We solve it for you" line inside the problem cards on the practice pages */
+.fit-card .fit-fix{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);color:var(--ink)}
+.fit-card .fit-fix strong{display:block;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-dark,#1f5c39);margin-bottom:2px}
+html[data-theme="dark"] .fit-card .fit-fix strong{color:#8fe3bd}

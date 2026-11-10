@@ -6,7 +6,7 @@
        refresh quietly in the background.
    Bump CACHE when you ship a change you need visitors to see immediately. */
 
-var CACHE = 'nb-30463f7e';
+var CACHE = 'nb-c3612bf4';
 
 var PRECACHE = [
   './',
@@ -20,9 +20,9 @@ var PRECACHE = [
   'privacy.html',
   'offline.html',
   'styles.css?v=9ac8364d',
-  'nb.css?v=a962c135',
+  'nb.css?v=1736e46a',
   'site.js?v=928990a3',
-  'nb.js?v=155d2883',
+  'nb.js?v=fa0a5282',
   'search-index.js?v=fced3321',
   'home.css?v=5571ec2d',
   'boot.js?v=03cfc8ae',
@@ -61,6 +61,10 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(req.url);
   var sameOrigin = url.origin === self.location.origin;
   var isFont = /fonts\.(googleapis|gstatic)\.com/.test(url.hostname);
+
+  /* Videos stream in pieces (range requests); caching them here breaks
+     playback in Safari, so leave them to the browser. */
+  if (sameOrigin && /\.(mp4|webm)$/i.test(url.pathname)) return;
 
   /* Never touch anything else cross-origin (analytics, form posts). */
   if (!sameOrigin && !isFont) return;

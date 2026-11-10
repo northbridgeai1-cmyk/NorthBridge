@@ -55,10 +55,10 @@
 <meta name="color-scheme" content="light dark">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://cal.com https://*.cal.com; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="nb.css?v=a962c135">
+<link rel="stylesheet" href="nb.css?v=1736e46a">
 <script src="boot.js?v=03cfc8ae"></script>
 <script defer src="search-index.js?v=fced3321"></script>
-<script defer src="nb.js?v=155d2883"></script>
+<script defer src="nb.js?v=fa0a5282"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -145,25 +145,73 @@
 <section class="fit">
   <div class="wrap">
     <h2 class="h2 rv">
-      <span class="en">You need this if any of these sound familiar</span>
-      <span class="es">Te sirve si algo de esto te suena</span>
+      <span class="en">Sound familiar? Here is the problem, and how we solve it for you</span>
+      <span class="es">¿Te suena? Este es el problema, y cómo lo resolvemos por ti</span>
     </h2>
     <div class="fit-grid">
       <div class="fit-card rv">
         <h3><span class="en">"Did they pay us yet?"</span><span class="es">"¿Ya nos pagaron?"</span></h3>
         <p><span class="en">You check bank statements against invoices by hand, and late payers get chased whenever someone remembers.</span><span class="es">Cruzas estados de cuenta contra facturas a mano, y a los morosos se les cobra cuando alguien se acuerda.</span></p>
+        <p class="fit-fix"><strong><span class="en">We solve it for you:</span><span class="es">Lo resolvemos por ti:</span></strong> <span class="en">We check who has paid every day and send polite reminders in your name. You approve the wording once.</span><span class="es">Revisamos cada día quién pagó y enviamos recordatorios corteses a tu nombre. Apruebas los textos una vez.</span></p>
       </div>
       <div class="fit-card rv d1">
         <h3><span class="en">"Give me a minute, I'll build the report."</span><span class="es">"Dame un minuto, armo el reporte."</span></h3>
         <p><span class="en">The weekly numbers exist, scattered across four tools, and every week someone spends hours assembling them.</span><span class="es">Los números de la semana existen, regados en cuatro herramientas, y cada semana alguien pasa horas juntándolos.</span></p>
+        <p class="fit-fix"><strong><span class="en">We solve it for you:</span><span class="es">Lo resolvemos por ti:</span></strong> <span class="en">We connect your tools so the report builds itself on schedule and lands in your inbox.</span><span class="es">Conectamos tus herramientas para que el reporte se arme solo a tiempo y llegue a tu correo.</span></p>
       </div>
       <div class="fit-card rv d2">
         <h3><span class="en">"I copy it here, then paste it there."</span><span class="es">"Lo copio aquí, y lo pego allá."</span></h3>
         <p><span class="en">Orders, contacts, or hours get typed twice into different systems. Twice the typing, twice the mistakes.</span><span class="es">Pedidos, contactos u horas se escriben dos veces en sistemas distintos. El doble de tipeo, el doble de errores.</span></p>
+        <p class="fit-fix"><strong><span class="en">We solve it for you:</span><span class="es">Lo resolvemos por ti:</span></strong> <span class="en">We connect your apps so the data is typed once and moves on its own.</span><span class="es">Conectamos tus aplicaciones para que los datos se escriban una vez y se muevan solos.</span></p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ======= VIDEOS (from our Instagram, @northbridge.ai) =======
+     Files live in media/reels/: NAME.mp4 is the video, NAME.jpg its still.
+     To add one: export it from reels/content, shrink it (see GUIDE.md), then
+     copy a <figure class="reel"> block below and change NAME and the words. -->
+<section class="reels" id="videos">
+  <div class="wrap">
+    <h2 class="h2 rv"><span class="en">Three of these problems, in twenty seconds each</span><span class="es">Tres de estos problemas, en veinte segundos cada uno</span></h2>
+    <p class="sub rv"><span class="en">Each one shows a problem small businesses live with every week, and what we set up to solve it for you.</span><span class="es">Cada uno muestra un problema que los negocios pequeños viven cada semana, y lo que configuramos para resolverlo por ti.</span></p>
+    <div class="reel-row">
+      <figure class="reel">
+        <video class="reel-video" controls playsinline preload="none" width="540" height="960" poster="media/reels/payment-chaser.jpg" aria-label="Video: An invoice is three weeks late, and nobody has chased it.">
+          <source src="media/reels/payment-chaser.mp4" type="video/mp4">
+        </video>
+        <figcaption class="reel-text">
+          <p class="reel-problem"><strong><span class="en">The problem</span><span class="es">El problema</span></strong><span class="en">An invoice is three weeks late, and nobody has chased it.</span><span class="es">Una factura lleva tres semanas atrasada y nadie la ha cobrado.</span></p>
+          <p class="reel-fix"><strong><span class="en">We solve it for you</span><span class="es">Lo resolvemos por ti</span></strong><span class="en">We send polite reminders in your name. Nothing goes out until you approve it.</span><span class="es">Enviamos recordatorios corteses a tu nombre. Nada sale sin tu aprobación.</span></p>
+        </figcaption>
+      </figure>
+      <figure class="reel">
+        <video class="reel-video" controls playsinline preload="none" width="540" height="960" poster="media/reels/friday-copy-paste.jpg" aria-label="Video: Every Friday, orders get typed from one app into another, line by line.">
+          <source src="media/reels/friday-copy-paste.mp4" type="video/mp4">
+        </video>
+        <figcaption class="reel-text">
+          <p class="reel-problem"><strong><span class="en">The problem</span><span class="es">El problema</span></strong><span class="en">Every Friday, orders get typed from one app into another, line by line.</span><span class="es">Cada viernes, los pedidos se copian de una aplicación a otra, línea por línea.</span></p>
+          <p class="reel-fix"><strong><span class="en">We solve it for you</span><span class="es">Lo resolvemos por ti</span></strong><span class="en">We connect your apps so the data moves on its own and the report builds itself.</span><span class="es">Conectamos tus aplicaciones para que los datos se muevan solos y el reporte se arme solo.</span></p>
+        </figcaption>
+      </figure>
+      <figure class="reel">
+        <video class="reel-video" controls playsinline preload="none" width="540" height="960" poster="media/reels/new-client-paperwork.jpg" aria-label="Video: You won a new client. Now: send the form, chase the form, find the form.">
+          <source src="media/reels/new-client-paperwork.mp4" type="video/mp4">
+        </video>
+        <figcaption class="reel-text">
+          <p class="reel-problem"><strong><span class="en">The problem</span><span class="es">El problema</span></strong><span class="en">You won a new client. Now: send the form, chase the form, find the form.</span><span class="es">Ganaste un cliente nuevo. Ahora: enviar el formulario, perseguirlo, encontrarlo.</span></p>
+          <p class="reel-fix"><strong><span class="en">We solve it for you</span><span class="es">Lo resolvemos por ti</span></strong><span class="en">We set up onboarding so every new client gets the welcome, forms and reminders automatically.</span><span class="es">Configuramos el alta para que cada cliente nuevo reciba la bienvenida, los formularios y los recordatorios solos.</span></p>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="reel-follow rv">
+      <span class="en">Videos are in English.</span><span class="es">Los videos están en inglés.</span>
+      <a href="https://www.instagram.com/northbridge.ai/" rel="me noopener noreferrer" target="_blank"><span class="en">More on Instagram, @northbridge.ai</span><span class="es">Más en Instagram, @northbridge.ai</span> →</a>
+    </p>
+  </div>
+</section>
+
 
 <section class="plans" id="plans">
   <div class="wrap">
