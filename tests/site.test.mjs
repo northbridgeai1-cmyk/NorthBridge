@@ -42,6 +42,21 @@ await p.setViewport(1440, 900); await fresh('index.html');
   await p.clickSel('.door-card.open .door-close');
   ok(await p.eval(`return !document.querySelector('.door-card.open');`), 'Door closes');
 
+  // Needs picker: ticks choose ONE suggestion and travel to the booking link.
+  const np = await p.eval(`
+    const tick=v=>{const b=document.querySelector('#needsGrid input[value="'+v+'"]');b.checked=!b.checked;b.dispatchEvent(new Event('change',{bubbles:true}))};
+    const shown=()=>[...document.querySelectorAll('.needs-fit')].filter(e=>!e.hidden).map(e=>e.dataset.fit).join(',');
+    const href=()=>document.getElementById('needsCta').getAttribute('href');
+    const out={empty:shown()===''&&href()==='book.html'&&!document.getElementById('needsEmpty').hidden};
+    tick('invoices'); out.one=shown(); out.oneHref=href();
+    tick('replies');  out.two=shown();
+    tick('training'); out.three=shown(); out.threeHref=href();
+    tick('invoices'); tick('replies'); tick('training'); out.cleared=shown()===''&&href()==='book.html';
+    return out;`);
+  ok(np.empty && np.cleared, 'Needs picker: nothing ticked shows the plain booking link');
+  ok(np.one === 'chaser' && /plan=Payment%20Chaser&needs=Chasing%20late%20invoices/.test(np.oneHref), 'Needs picker: late invoices alone suggests the Payment Chaser', np.oneHref);
+  ok(np.two === 'starter' && np.three === 'growth' && /plan=Growth%20bundle/.test(np.threeHref), 'Needs picker: two practices suggest Starter, three suggest Growth', `${np.two} / ${np.three}`);
+
   const c = await p.eval(`
     const s=(id,v)=>{const e=document.getElementById(id);e.value=v;e.dispatchEvent(new Event('input'))};
     s('invIn',30);s('valIn',400);s('lateIn',21);s('cutIn',10);
@@ -106,9 +121,20 @@ await p.setViewport(1440, 900); await fresh('contact.html');
 }
 
 /* ─── 3b. booking form: on-page, plan prefilled, posts to FormSubmit ─── */
-await fresh('book.html?plan=Scale+bundle');
+await fresh('book.html?plan=Scale+bundle&needs=Chasing+late+invoices%2C+Missed+calls');
 {
   ok((await p.eval(`return document.getElementById('bk-plan').value;`)) === 'Scale bundle', 'Booking form carries the chosen plan');
+  const bk = await p.eval(`
+    const f=document.getElementById('schedFrame'), alt=document.getElementById('bkAlt');
+    return {src:f.getAttribute('src')||'', frameShown:getComputedStyle(f).display!=='none',
+      frameFirst:f.getBoundingClientRect().top < alt.getBoundingClientRect().top,
+      folded:!alt.open, needs:document.getElementById('bk-needs').value,
+      chips:!document.getElementById('planChip').hidden && document.getElementById('needsName').textContent==='Chasing late invoices, Missed calls',
+      fab:(()=>{const b=document.querySelector('.nb-fab');return !b||getComputedStyle(b).display==='none'})()};`);
+  ok(/^https:\/\/cal\.com\//.test(bk.src) && /notes=Plan/.test(bk.src) && bk.frameShown && bk.frameFirst && bk.folded, 'Booking page: calendar shows first, written form folded beneath it', bk.src.slice(0, 80));
+  ok(bk.needs === 'Chasing late invoices, Missed calls' && bk.chips, 'Booking page shows and carries the ticked needs');
+  ok(bk.fab, 'No floating booking button on the booking page itself');
+  await p.eval(`document.getElementById('bkAlt').open=true; await new Promise(s=>setTimeout(s,200)); return 1;`);
   await p.clickSel('#bkSubmit');
   const e = await p.eval(`await new Promise(s=>setTimeout(s,250)); return document.querySelectorAll('#bkForm .nb-field[data-invalid="true"]').length;`);
   ok(e === 3, 'Booking form: empty submit flags name, email, times', `${e} flagged`);
@@ -188,6 +214,27 @@ for (const lang of ['en', 'es']) for (const pg of PAGES) {
     for (const href of hrefs) { const r = await fetch(`${BASE}/${href.split('#')[0]}`, { method: 'HEAD' }).catch(() => ({ status: 0 })); if (r.status !== 200) broken.push(`${pg} -> ${href}`); }
   }
   ok(!broken.length, 'All internal links resolve', broken.join(', ') || `${PAGES.length} pages, 0 broken`);
+}
+
+/* ─── 8b. safety: nothing inline can run, and address-bar text stays text ─── */
+{
+  const loose = [];
+  for (const pg of PAGES) {
+    await fresh(pg);
+    const r = await p.eval(`
+      const csp=(document.querySelector('meta[http-equiv="Content-Security-Policy"]')||{}).content||'';
+      const scriptSrc=(csp.match(/script-src[^;]*/)||[''])[0];
+      const inline=[...document.querySelectorAll('script:not([src])')].filter(s=>s.type!=='application/ld+json').length;
+      const handlers=[...document.querySelectorAll('*')].filter(e=>[...e.attributes].some(a=>/^on/i.test(a.name))).length;
+      const blank=[...document.querySelectorAll('a[target="_blank"]')].filter(a=>!/noopener/.test(a.rel)).length;
+      return {csp:!!csp, unsafe:/unsafe-inline|unsafe-eval/.test(scriptSrc), inline, handlers, blank};`);
+    if (!r.csp || r.unsafe || r.inline || r.handlers || r.blank) loose.push(`${pg} ${JSON.stringify(r)}`);
+  }
+  ok(!loose.length, 'Every page: security policy set, no inline scripts or handlers, new-tab links isolated', loose.join(' | ') || `${PAGES.length} pages`);
+
+  await fresh('book.html?plan=' + encodeURIComponent('<img src=x onerror=window.__xss=1>') + '&needs=' + encodeURIComponent('<script>window.__xss=1</script>'));
+  const x = await p.eval(`await new Promise(s=>setTimeout(s,400)); return {xss:window.__xss===1, imgs:document.querySelectorAll('.book-chips img, .book-chips script').length, text:document.getElementById('planName').textContent};`);
+  ok(!x.xss && x.imgs === 0 && x.text.startsWith('<img'), 'Booking page treats address-bar text as text, never as code', x.text.slice(0, 40));
 }
 
 /* ─── 9. screenshots for the eye ───────────────────────────────────── */

@@ -1,0 +1,90 @@
+# How this website works
+
+A plain-English map of meetnorthbridge.com for whoever opens this folder next. No build step, no framework: what is in this folder is what visitors get.
+
+## The 30-second version
+
+- Each page is one `.html` file. Open it, change the words, save.
+- Looks live in `.css` files, behaviour in `.js` files. HTML files contain no code of their own, only words and structure.
+- Every sentence appears twice, once in `<span class="en">` and once in `<span class="es">`. Change both.
+- After changing any `.css` or `.js` file, run `python3 version-assets.py` so visitors get the new file instead of a saved old copy.
+- Pushing to `main` on GitHub publishes the site a minute or two later.
+
+## Which file is which
+
+| File | What it is |
+| --- | --- |
+| `index.html` | Home page: words and structure only |
+| `home.css` | How the home page looks |
+| `home.js` | What the home page does (picker, calculator, doors, price toggle). The top of the file lists each part |
+| `book.html` + `book.js` | Booking page. The calendar link and the form's destination are the first two settings in `book.js` |
+| `contact.html` + `contact.js` | Contact form |
+| `cinderella.html`, `hermes.html`, `socrates.html` | One page per practice |
+| `terms.html`, `privacy.html` | Legal pages |
+| `404.html`, `offline.html` | Shown when a page is missing or the visitor has no connection |
+| `styles.css` | Base look for every page except home |
+| `nb.css` | Shared look on every page: buttons, forms, footer, dark mode, the orange accent. Loads last, so it wins |
+| `boot.js` | Tiny script that sets light or dark mode before the page appears |
+| `site.js` | EN/ES switch and fade-in for every page except home |
+| `nb.js` | Shared extras on every page: search, dark-mode button, mobile menu, floating button, pop-up messages |
+| `search-index.js` | The list of things site search can find. Update it if you add a page or section |
+| `sw.js` | Lets the site open offline. `version-assets.py` keeps it current; you rarely touch it |
+| `llms.txt`, `llms-full.txt`, `agents.md`, `for-agents/` | Facts written for AI assistants. If a price or fact changes on the site, change it here too |
+| `sitemap.xml`, `robots.txt` | For search engines |
+| `_config.yml` | Tells GitHub which working files not to publish |
+| `tests/` | Automatic checks (see below) |
+
+## Common jobs
+
+**Change a price.** Search the whole folder for the old price (for example `$199`). It appears on the home page, the practice page, the hidden data block at the top of `index.html` (the part that starts `application/ld+json`, which Google reads), `llms.txt`, `llms-full.txt`, `agents.md` and `for-agents/facts.json`. Change every one.
+
+**Change wording.** Find the sentence in the `.html` file and edit both the `en` and `es` versions.
+
+**Change the calendar link.** First setting in `book.js`. Set it to `""` to switch the calendar off; the page then shows only the written request form and its wording changes to match.
+
+**Change where forms are delivered.** `NB_FORM_ENDPOINT` in `book.js`, and `FORM_ENDPOINT` in `contact.js`.
+
+**Add or reword a tick box in "Bring the work that eats your week".** In `index.html`, find `class="need"` and copy a line. `data-practice` must be `cinderella`, `hermes` or `socrates`. The suggestions it can show are the `needs-fit` blocks just below; the rule for choosing one is in `home.js` under "needs picker".
+
+**Change the accent colour.** `--pop` near the bottom of `nb.css`.
+
+## Before you publish
+
+1. Start a local copy of the site: `python3 -m http.server 8899 --bind 127.0.0.1`
+2. Open http://127.0.0.1:8899 and look at what you changed, on a narrow window too.
+3. In a second terminal, run the checks: `node tests/site.test.mjs` (needs Google Chrome installed). It clicks through the site like a visitor: forms, picker, calculator, both languages, both colour modes, six screen sizes, text contrast, broken links and the safety rules below. It should end with `0 failed`.
+4. If you changed a `.css` or `.js` file: `python3 version-assets.py`
+5. Commit and push.
+
+## How the site is kept safe
+
+There is no login, database or server of our own, so there is very little to attack. What exists:
+
+- **Security policy.** Near the top of every `.html` file is a line starting `<meta http-equiv="Content-Security-Policy"`. It is a list of the only places the browser may load things from. Scripts may come only from this site and Cloudflare's visitor counter; forms may post only to FormSubmit; only Cal.com may appear in a frame. A script written directly into a page will not run, which is why all code lives in `.js` files. **If you add a new outside service (analytics, another calendar, a chat widget) it will silently not work until you add its address to this line on every page.** For Google Analytics that means adding `https://www.googletagmanager.com` to `script-src` and `https://www.google-analytics.com https://*.analytics.google.com` to `connect-src`.
+- **Forms.** Each form checks its fields, has a hidden trap field that catches spam bots, and limits how much can be typed. Nothing a visitor types is ever shown back as page code.
+- **Text from links.** The booking page reads the plan name from its own web address. It is treated strictly as text and cut to a fixed length.
+- **Working files stay off the website.** `_config.yml` stops planning notes and tests being served. The GitHub repository itself is still public, so never put passwords or keys in this folder.
+- **The checks enforce it.** `tests/site.test.mjs` fails if any page gains an inline script, loses its policy, or opens a new tab unsafely.
+
+### Three things only you can do (Cloudflare dashboard, about ten minutes)
+
+The policy above travels inside the page. Stronger protections have to be sent by Cloudflare, and they are not switched on yet:
+
+1. **SSL/TLS → Edge Certificates:** turn on "Always Use HTTPS" and "HTTP Strict Transport Security (HSTS)".
+2. **Rules → Transform Rules → Modify Response Header**, add:
+   - `X-Content-Type-Options: nosniff`
+   - `X-Frame-Options: DENY` (stops other sites wrapping yours in a frame)
+   - `Referrer-Policy: strict-origin-when-cross-origin`
+   - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+3. Leave **Rocket Loader off**. It rewrites scripts in a way the security policy blocks, and the site would break.
+
+## Why the pages are laid out this way
+
+Decisions from the November 2026 redesign, so they are not undone by accident:
+
+- **The calendar is the first thing on the booking page**, on phones too. It used to sit under two screens of text. The written form is folded beneath it for people who want Zoom or prefer to send times.
+- **One orange button per screen, always "free first meeting".** Pages with one clear action convert better than pages with several competing ones.
+- **The four ticks under the hero button** (free meeting, you approve the wording, money-back guarantee, accounts you own). Surveys of small-business owners in 2026 show most do not trust AI to act without oversight, and are least comfortable where a mistake reaches a customer. So approval and ownership are stated before anything about AI.
+- **Prices are shown early.** Done-for-you automation is usually quoted at $500 to $2,500 a month; a visible $99 starting point is an advantage.
+- **The tick-box picker** replaced an empty video frame. It gives the visitor something to do, shows a plan that fits, and passes their ticks to the booking page so the meeting starts from their list.
+- **No testimonials, client names or result figures** anywhere, because there are none yet. The calculator uses only the visitor's own numbers.

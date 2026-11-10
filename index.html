@@ -97,759 +97,17 @@
   ]
 }
 </script>
-<style>
-  :root{
-    --ink:#1d2521;
-    --ink-soft:#4c5651;
-    --paper:#fbfaf6;
-    --paper-dark:#f2efe6;
-    --navy:#232323;
-    --deep:#1a1a1a;
-    --deep-2:#222222;
-    --teal:#2e7d4f;
-    --teal-dark:#1f5c39;
-    --teal-soft:#a8d9bb;
-    --gold:#d9a344;
-    --line:#e4ddcc;
-    --line-dark:rgba(255,255,255,.12);
-    --serif:"Fraunces", Georgia, serif;
-    --sans:"Public Sans", -apple-system, "Segoe UI", sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:var(--sans);
-    background:var(--paper);
-    color:var(--ink);
-    line-height:1.6;
-    font-size:17px;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.35;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .es{display:none}
-  html[data-lang="es"] .es{display:revert}
-  html[data-lang="es"] .en{display:none}
-
-  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
-  a{color:inherit}
-
-  /* scroll reveal */
-  .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
-  .rv.in{opacity:1;transform:none}
-  .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
-  @media (prefers-reduced-motion: reduce){
-    .rv{opacity:1;transform:none;transition:none}
-    html{scroll-behavior:auto}
-  }
-
-  /* ---------- nav ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(251,249,244,.92);backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:1240px;margin:0 auto}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-  .brand-name{font-weight:700;font-size:1.08rem;letter-spacing:-.02em;color:var(--ink);line-height:1.05}
-  .brand-name em{font-style:normal;color:var(--teal)}
-  .nav-right{display:flex;align-items:center;gap:16px}
-  .nav-links{display:flex;gap:18px;font-size:.9rem;font-weight:500}
-  .nav-links a{text-decoration:none;color:var(--ink-soft)}
-  .nav-links a:hover{color:var(--ink)}
-  .lang-toggle{
-    border:1px solid var(--line);background:transparent;border-radius:999px;
-    font:inherit;font-size:.78rem;font-weight:700;padding:5px 12px;cursor:pointer;color:var(--ink-soft);
-  }
-  .lang-toggle:hover{border-color:var(--teal);color:var(--ink)}
-  .btn{
-    display:inline-block;background:var(--teal);color:#06251a;text-decoration:none;
-    padding:11px 22px;border-radius:9px;font-weight:700;font-size:.95rem;
-    border:1px solid var(--teal);transition:transform .15s, box-shadow .15s, background .15s;
-  }
-  .btn:hover{background:#22cf8e;transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(46,125,79,.55)}
-  .btn.big{padding:15px 30px;font-size:1.05rem}
-  .btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
-  .btn.navy:hover{background:#0f2d24;box-shadow:0 10px 24px -12px rgba(16,45,36,.6)}
-  .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
-  .btn.ghost:hover{border-color:#fff;box-shadow:none;background:rgba(255,255,255,.06)}
-  @media(max-width:1024px){.nav-links{display:none}}
-
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;background:var(--deep);color:#fff;overflow:hidden;
-    padding:clamp(72px,11vw,148px) 0 clamp(56px,8vw,104px);
-  }
-  #net{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
-  .hero::after{ /* aurora */
-    content:"";position:absolute;inset:-40%;pointer-events:none;
-    background:
-      radial-gradient(600px 340px at 22% 30%, rgba(46,125,79,.16), transparent 60%),
-      radial-gradient(700px 420px at 82% 75%, rgba(193,87,47,.14), transparent 60%);
-    animation:drift 16s ease-in-out infinite alternate;
-  }
-  @keyframes drift{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,2%,0)}}
-  @media (prefers-reduced-motion: reduce){.hero::after{animation:none}}
-  .hero h1{
-    color:#fff;font-size:clamp(2.5rem,4.9vw,4.4rem);line-height:1;
-    letter-spacing:-.03em;max-width:none;font-weight:600;text-wrap:balance;
-  }
-  /* selectors match the originals' specificity so the light values win */
-  .hero p.hero-note{color:rgba(255,255,255,.66)}
-  .hero p.hero-note strong{color:#fff}
-  .hero-alt{color:rgba(255,255,255,.78);text-decoration:none;font-weight:600;padding:0 4px;border-bottom:1px solid rgba(255,255,255,.3);transition:color .15s,border-color .15s}
-  .hero-alt:hover{color:#fff;border-color:#fff}
-  /* the headline's one authored moment: the work runs the business, and
-     shouldn't run you. Both "run"s take the brand colour, one after the other. */
-  .hero h1 .echo{color:#25d193;animation:nb-echo .7s cubic-bezier(.16,1,.3,1) backwards}
-  .hero h1 .echo.a{animation-delay:.9s}
-  .hero h1 .echo.b{animation-delay:1.55s}
-  @keyframes nb-echo{from{color:#fff}to{color:#25d193}}
-  @media (prefers-reduced-motion: reduce){.hero h1 .echo{animation:none}}
-  .hero .wrap{position:relative;z-index:2}
-  .hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(32px,6vw,96px);align-items:center}
-  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
-  .hero-visual .phone{transform:rotate(1.4deg);box-shadow:0 44px 90px -30px rgba(0,0,0,.7)}
-  .hero-visual .phone:hover{transform:rotate(0deg)}
-  /* the thread arrives the way it does in life: one message, then the next */
-  .hero-visual .msg{animation:nb-msg .7s cubic-bezier(.16,1,.3,1) backwards}
-  .hero-visual .phone .msg:nth-of-type(1){animation-delay:1.2s}
-  .hero-visual .phone .msg:nth-of-type(2){animation-delay:2.1s}
-  .hero-visual .phone .msg:nth-of-type(3){animation-delay:3s}
-  @keyframes nb-msg{from{opacity:0;transform:translateY(14px)}}
-  @media (prefers-reduced-motion: reduce){.hero-visual .msg{animation:none}}
-  .hero-visual .phone-caption{color:rgba(255,255,255,.62)}
-  .hero-visual .msg{color:#1a1a1a}
-  .hero-visual .msg.internal{color:#0b3d2a}
-  html[data-theme="dark"] .hero-visual .msg,html[data-theme="dark"] .hero-visual .msg.internal{color:var(--ink)}
-  .kicker{
-    font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--teal-soft);margin-bottom:20px;display:flex;align-items:center;gap:12px;
-  }
-  .kicker::before{content:"";width:34px;height:1px;background:var(--teal);display:inline-block}
-  h1{
-    font-family:var(--serif);font-weight:600;letter-spacing:-.01em;
-    font-size:clamp(2.3rem, 5.6vw, 4.2rem);line-height:1.07;color:#fff;
-    max-width:17ch;
-  }
-  h1 .u{position:relative;white-space:nowrap}
-  h1 .u svg{position:absolute;left:0;bottom:-6px;width:100%;height:12px}
-  .hero p.lede{margin:36px 0 8px;font-size:clamp(1.05rem,1.4vw,1.25rem);color:rgba(255,255,255,.8);max-width:58ch;line-height:1.55}
-  .hero-cta{margin-top:36px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-  .hero-note{font-size:.88rem;color:rgba(255,255,255,.65)}
-  .hero-note strong{color:#fff}
-
-  .calc-formula{
-    margin-top:18px;font-size:.8rem;line-height:1.6;color:rgba(255,255,255,.62);
-    border-left:2px solid rgba(255,255,255,.2);padding-left:13px;max-width:60ch;
-  }
-  .calc-formula strong{color:rgba(255,255,255,.9)}
-  .calc-released{
-    margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);
-    font-size:.87rem;line-height:1.55;color:rgba(255,255,255,.72);
-  }
-  .calc-released strong{color:var(--teal-soft);font-weight:700}
-
-
-  /* ---- reshape: icon sits with the heading; no tile, no eyebrow ---- */
-  .door h3{display:flex;align-items:center;gap:10px;justify-content:center}
-  /* specificity must beat the original `.door .door-icon` tile rule below */
-  .door h3 .door-icon,.door-card .door h3 .door-icon{width:auto;height:auto;background:none;border:0;padding:0;margin:0;border-radius:0;box-shadow:none;display:inline-flex;flex:0 0 auto}
-  .door h3 .door-icon svg{width:22px;height:22px}
-  .door-room h3{display:flex;align-items:center;gap:10px;justify-content:center}
-  .door-room .door-icon{display:none}
-  /* the sub-heading above each section now leads; give it room above, less below */
-  .h2{margin-top:0;margin-bottom:12px}
-  .sub{margin-bottom:0}
-  /* ---- spacing rhythm: tight where the section is a punch, generous where it asks the reader to stay ---- */
-  .problem{padding:56px 0}
-  .how{padding:104px 0 96px}
-  .demo{padding:72px 0}
-  .divisions{padding:112px 0 104px}
-  .pilot{padding:64px 0}
-  .plans{padding:112px 0 96px}
-  .process{padding:88px 0}
-  .faq{padding:72px 0}
-  .final{padding:112px 0 120px}
-  @media(max-width:760px){
-    .how,.divisions,.plans,.final{padding-top:72px;padding-bottom:64px}
-    .process{padding:64px 0}
-  }
-
-
-
-  /* ---- problem: three statements land one after another ---- */
-  .problem .rv:nth-child(2){transition-delay:.14s}
-  .problem .rv:nth-child(3){transition-delay:.28s}
-
-  /* ---- reactions ---- */
-  /* tier: hovering the card fills its button, so the whole card reads as one target */
-  .tier .cta .btn{transition:background .18s ease,color .18s ease,border-color .18s ease}
-  .btn.outline{background:transparent;color:var(--ink);border-color:var(--ink)}
-  .btn.outline:hover{background:var(--ink);color:var(--paper)}
-  html[data-theme="dark"] .btn.outline{color:var(--ink);border-color:var(--ink)}
-  html[data-theme="dark"] .btn.outline:hover{background:var(--ink);color:var(--paper)}
-  /* sliders: the thumb grows under the finger */
-  .calc-row input[type=range]{cursor:grab}
-  .calc-row input[type=range]:active{cursor:grabbing}
-  .calc-row input[type=range]::-webkit-slider-thumb{transition:transform .15s ease,box-shadow .15s ease}
-  .calc-row input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.18)}
-  .calc-row input[type=range]:active::-webkit-slider-thumb{transform:scale(1.32);box-shadow:0 0 0 6px rgba(62,207,142,.18)}
-  .calc-row .calc-lbl strong{transition:color .15s ease}
-  .calc-row:hover .calc-lbl strong{color:var(--teal-soft)}
-  @media (prefers-reduced-motion: reduce){
-    .calc-row input[type=range]::-webkit-slider-thumb{transition:none;transform:none!important}
-  }
-
-
-  /* ---- life: one organic divider, sunlit paper ---- */
-  .hero .price{color:#e6b45f;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
-  .wave{line-height:0;margin-top:-1px;background:var(--paper)}
-  .wave svg{display:block;width:100%;height:clamp(36px,6vw,90px)}
-  .wave svg path{fill:var(--paper-dark)}
-  .problem{background:var(--paper-dark)}
-
-
-  /* ---- founder note: a person, not a logo wall ---- */
-  .note{padding:clamp(64px,9vw,120px) 0;background:var(--paper-dark);border-top:1px solid var(--line)}
-  .note-grid{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:clamp(24px,5vw,64px);align-items:start;max-width:960px}
-  @media(max-width:640px){.note-grid{grid-template-columns:1fr}}
-  .note-who{display:flex;flex-direction:column;gap:4px;padding-top:.35em;border-top:2px solid var(--ink);padding-top:14px}
-  .note-text{font-family:var(--serif);font-size:clamp(1.25rem,2.1vw,1.7rem);line-height:1.42;color:var(--ink);letter-spacing:-.005em;font-weight:500;margin:0 0 28px}
-  .note-sig{margin-top:var(--s-md);font-size:.95rem}
-  .note-name{font-family:var(--serif);font-weight:600;font-size:1.2rem;color:var(--ink)}
-  .note-role{color:var(--ink-soft);font-size:.92rem}
-  .note-mail{color:var(--teal-dark);font-weight:600;text-decoration:none}
-  html[data-theme="dark"] .note-mail{color:var(--teal)}
-
-  /* ---- footer: a wordmark line, then the columns ---- */
-  .foot-word{font-family:var(--serif);font-weight:600;letter-spacing:-.035em;line-height:.9;
-    font-size:clamp(3rem,11vw,9rem);color:var(--ink);opacity:.92;margin:0 0 40px;user-select:none}
-  .foot-word em{font-style:normal;color:var(--teal-dark)}
-  html[data-theme="dark"] .foot-word em{color:var(--teal)}
-
-  .builder-wrap{margin-top:56px;border-top:1px solid var(--line)}
-  .builder-wrap summary{cursor:pointer;list-style:none;padding:22px 0;font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ink);display:flex;align-items:center;justify-content:space-between}
-  .builder-wrap summary::-webkit-details-marker{display:none}
-  .builder-wrap summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:1.6rem;color:var(--ink-soft);transition:transform .25s}
-  .builder-wrap[open] summary::after{transform:rotate(45deg)}
-  .builder-wrap .builder{margin-top:0}
-
-  /* ---------- marquee ---------- */
-  .marquee{
-    background:var(--paper-dark);color:var(--ink-soft);
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-    overflow:hidden;white-space:nowrap;padding:13px 0;font-size:.92rem;font-weight:600;
-  }
-  .marquee-track{display:inline-block;animation:scrollx 36s linear infinite}
-  .marquee span.item{margin:0 22px}
-  .marquee span.dot{color:var(--teal)}
-  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  @media (prefers-reduced-motion: reduce){.marquee-track{animation:none}}
-
-  /* ---------- shared section bits ---------- */
-  section{position:relative}
-  .step-label{
-    font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--teal-dark);margin-bottom:16px;display:flex;align-items:center;gap:12px;
-  }
-  .step-label::after{content:"";height:1px;width:64px;background:currentColor;opacity:.4}
-  .h2{
-    font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.5rem);
-    letter-spacing:-.01em;line-height:1.15;margin-bottom:14px;
-  }
-  .sub{color:var(--ink-soft);max-width:62ch}
-
-  /* ---------- problem ---------- */
-  .problem{background:var(--paper);padding:64px 0}
-  .problem h2{
-    font-family:var(--serif);font-weight:500;font-size:clamp(1.45rem,3.2vw,2.2rem);
-    line-height:1.35;max-width:28ch;margin-bottom:32px;color:var(--ink);
-  }
-  .problem h2 strong{color:var(--teal-dark);font-weight:600}
-
-  /* ---------- how ---------- */
-  .how{padding:64px 0;background:var(--paper-dark)}
-  .how .sub{margin-bottom:48px}
-  .how-grid{display:block}
-  .how-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,64px);counter-reset:s}
-  @media(max-width:820px){.how-steps{grid-template-columns:1fr}}
-  .how-step{border-top:2px solid var(--ink);padding:18px 0 0;position:relative;counter-increment:s}
-  .how-step::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--mono);font-size:.85rem;color:var(--teal-dark);margin-bottom:10px}
-  .how-step h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
-  .how-step p{color:var(--ink-soft);font-size:.97rem}
-  .phone{
-    background:#e5ddd5;border-radius:22px;border:1px solid var(--line);
-    box-shadow:0 24px 50px -20px rgba(26,26,26,.45);
-    padding:18px 16px 22px;transform:rotate(1.2deg);max-width:400px;margin:0 auto;
-    transition:transform .3s ease;
-  }
-  .phone:hover{transform:rotate(0deg) scale(1.01)}
-  .phone-head{font-size:.78rem;font-weight:700;color:var(--ink-soft);letter-spacing:.08em;text-transform:uppercase;text-align:center;margin-bottom:14px}
-  .msg{
-    background:#fff;border-radius:10px;border-top-left-radius:2px;
-    padding:10px 13px;font-size:.9rem;line-height:1.5;max-width:88%;
-    margin-bottom:10px;box-shadow:0 1px 1px rgba(0,0,0,.08);
-  }
-  .msg .time{display:block;text-align:right;font-size:.68rem;color:#9aa0a6;margin-top:3px}
-  .msg.internal{
-    background:#dcf3ea;border:1px dashed var(--teal);border-radius:10px;
-    margin-left:auto;border-top-right-radius:2px;
-  }
-  .phone-caption{text-align:center;font-size:.82rem;color:var(--ink-soft);margin-top:16px;font-style:italic}
-
-  /* ---------- pilot hook ---------- */
-  .pilot{padding:64px 0;background:var(--paper)}
-  .pilot-card{
-    display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;
-    background:var(--deep);color:#fff;border-radius:20px;padding:52px;
-    position:relative;overflow:hidden;
-  }
-  .pilot-card::after{
-    content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;
-    background:radial-gradient(circle, rgba(46,125,79,.25), transparent 65%);
-  }
-  @media(max-width:860px){.pilot-card{grid-template-columns:1fr;padding:36px 28px}}
-  .pilot-card .h2{color:#fff}
-  .pilot-card p{color:rgba(255,255,255,.75)}
-  .pilot-price{text-align:center;position:relative;z-index:2}
-  .pilot-price .big-num{font-family:var(--serif);font-size:4rem;font-weight:700;color:var(--teal);line-height:1}
-  .pilot-price .per{color:rgba(255,255,255,.7);font-weight:600}
-  .pilot-price .g{margin-top:12px;font-size:.85rem;color:rgba(255,255,255,.6)}
-
-  /* ---------- pricing ---------- */
-  .plans{padding:72px 0;background:var(--paper-dark)}
-  .plans .sub{margin-bottom:52px}
-  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
-  @media(max-width:879px){.tiers{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
-  @media(min-width:880px) and (max-width:1023px){
-    .tiers{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-    html body .tier{min-width:0;padding:22px 16px}
-    html body .tier .tprice{flex-wrap:nowrap;white-space:nowrap;gap:5px}
-    html body .tier .tprice .n{font-size:1.55rem}
-    html body .tier .tprice .per{font-size:.74rem}
-    html body .tier .tprice .yt-was{font-size:.88rem;margin-right:6px}
-    html body .tier .badge{font-size:.62rem}
-  }
-  .tier{
-    background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;
-    display:flex;flex-direction:column;position:relative;
-    transition:transform .25s ease, box-shadow .25s ease;
-  }
-  .tier:hover{transform:translateY(-6px);box-shadow:0 24px 48px -22px rgba(26,26,26,.35)}
-  .tier.best{
-    border:2px solid var(--teal);
-    box-shadow:0 26px 56px -22px rgba(46,125,79,.4);
-    background:linear-gradient(180deg, #ffffff 0%, #f1faf4 100%);
-  }
-  .tier .badge{
-    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    background:var(--teal);color:#06251a;font-size:.72rem;font-weight:800;
-    letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:999px;white-space:nowrap;
-  }
-  .tier h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:4px}
-  .tier .for{font-size:.85rem;color:var(--ink-soft);min-height:2.6em}
-  .tier .tprice{display:flex;align-items:baseline;gap:6px;margin:16px 0 4px}
-  .tier .tprice .n{font-family:var(--serif);font-size:2.7rem;font-weight:700;color:var(--navy);letter-spacing:-.02em}
-  .tier .tprice .per{color:var(--ink-soft);font-weight:600;font-size:.9rem}
-  .tier ul{list-style:none;margin:18px 0 24px;border-top:1px solid var(--line);flex:1}
-  .tier li{padding:11px 0 11px 30px;border-bottom:1px solid var(--line);font-size:.95rem;position:relative}
-  .tier li::before{
-    content:"";position:absolute;left:2px;top:17px;width:14px;height:9px;
-    border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg);
-  }
-  .tier li strong{color:var(--navy)}
-  .tier .cta{margin-top:auto}
-  .tier .value-note{
-    margin-top:14px;font-size:.83rem;color:var(--teal-dark);font-weight:600;
-    padding-left:0;font-style:italic;
-  }
-
-  /* billing toggle */
-  .bill-toggle{
-    display:inline-flex;gap:0;border:1px solid var(--line);border-radius:999px;
-    background:#fff;padding:4px;margin-bottom:34px;box-shadow:var(--e-1);
-  }
-  .bill-toggle button{position:relative;overflow:hidden}
-  .bill-toggle button{
-    border:0;background:transparent;border-radius:999px;cursor:pointer;
-    font:inherit;font-size:.88rem;font-weight:700;padding:8px 18px;color:var(--ink-soft);
-    transition:background .2s, color .2s;
-  }
-  .bill-toggle button.on{background:var(--navy);color:#fff}
-  .bill-toggle .save-tag{color:var(--teal);font-weight:800}
-  .bill-toggle button.on .save-tag{color:var(--teal-soft)}
-  .plans[data-bill="m"] .by, .plans[data-bill="m"] .ytotal, .plans[data-bill="m"] .py, .plans[data-bill="m"] .tprice .yt-was{display:none}
-  .plans[data-bill="y"] .bm, .plans[data-bill="y"] .pm{display:none}
-  /* ---- annual pricing ----
-     The saving is the reason to choose yearly, so it is shown as a real
-     price comparison rather than a footnote. The strike is drawn with a
-     pseudo-element so it can animate across the old figure when the visitor
-     switches to yearly, instead of just appearing. */
-  .ytotal{
-    display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-    margin:12px 0 2px;padding:13px 15px;border-radius:14px;
-    background:linear-gradient(135deg, rgba(46,125,79,.09), rgba(217,163,68,.07));
-    border:1px solid var(--teal-soft);
-  }
-  .yt-was{
-    position:relative;text-decoration:none;font-weight:600;color:var(--ink-soft);opacity:.85;
-    font-family:var(--serif);font-size:1.35rem;margin-right:12px;align-self:baseline;letter-spacing:-.01em;
-  }
-  .yt-was::after{
-    content:"";position:absolute;left:-3px;right:-3px;top:52%;height:2px;
-    background:var(--down-strike, #b3261e);border-radius:2px;
-    transform:scaleX(0);transform-origin:left;
-  }
-  .plans[data-bill="y"] .yt-was::after{animation:nb-strike .5s var(--ease-out) .18s forwards}
-  @keyframes nb-strike{to{transform:scaleX(1)}}
-  .yt-now{
-    font-family:var(--serif);font-size:1.5rem;font-weight:700;
-    color:var(--navy);letter-spacing:-.02em;line-height:1;
-  }
-  .yt-per{font-size:.78rem;color:var(--ink-soft);font-weight:600}
-  .yt-save{
-    display:inline-flex;align-items:center;gap:6px;
-    background:var(--teal);color:#fff;border-radius:999px;
-    padding:4px 12px;font-size:.72rem;font-weight:800;letter-spacing:.02em;
-  }
-  /* the whole block arrives when yearly is selected */
-  .plans[data-bill="y"] .ytotal{animation:nb-yt-in .42s var(--ease-out) backwards}
-  @keyframes nb-yt-in{from{opacity:0;transform:translateY(-6px)}}
-  @media (prefers-reduced-motion: reduce){
-    .yt-was::after{animation:none!important;transform:scaleX(1)}
-    .plans[data-bill="y"] .ytotal{animation:none}
-  }
-
-  /* hook strip: the $99 foot in the door */
-  .hook-strip{
-    margin-top:34px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    background:#fff;border:1px solid var(--line);
-    border-radius:14px;padding:26px 30px;
-  }
-  .hook-strip .hook-tag{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-  .hook-strip h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:6px}
-  .hook-strip p{font-size:.92rem;color:var(--ink-soft);max-width:56ch}
-  .hook-strip .hook-price{font-family:var(--serif);font-weight:700;color:var(--navy)}
-
-  /* custom builder */
-  .builder{
-    margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:18px;
-    padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
-  }
-  @media(max-width:880px){.builder{grid-template-columns:1fr;padding:28px 22px}}
-  .builder h3{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:10px}
-  .builder p{color:var(--ink-soft);font-size:.95rem}
-  .counters{display:flex;flex-direction:column;gap:16px}
-  .counter{
-    display:flex;align-items:center;justify-content:space-between;
-    border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:var(--paper);
-  }
-  .counter .lbl{font-weight:600;font-size:.95rem}
-  .counter .ctrl{display:flex;align-items:center;gap:14px}
-  .counter button{
-    width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
-    background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer;color:var(--navy);
-    line-height:1;transition:border-color .15s, background .15s;
-  }
-  .counter button:hover{border-color:var(--teal);background:#f1faf4}
-  .counter .val{font-family:var(--serif);font-size:1.4rem;font-weight:700;min-width:2ch;text-align:center;color:var(--navy)}
-  .builder .cta-row{margin-top:22px}
-
-  /* ---------- workshops ---------- */
-  .events{padding:96px 0;background:var(--deep);color:#fff}
-  .events .step-label{color:var(--teal-soft)}
-  .events .h2{color:#fff}
-  .events .sub{color:rgba(255,255,255,.72);margin-bottom:48px}
-  .event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  @media(max-width:920px){.event-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
-  .event-card{
-    background:var(--deep-2);border:1px solid var(--line-dark);border-radius:16px;padding:30px 26px;
-    display:flex;flex-direction:column;transition:transform .25s ease, border-color .25s ease;
-  }
-  .event-card:hover{transform:translateY(-5px);border-color:rgba(46,125,79,.6)}
-  .event-card .tag{
-    align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--teal-soft);border:1px solid rgba(46,125,79,.5);border-radius:999px;padding:4px 12px;margin-bottom:16px;
-  }
-  .event-card h3{font-family:var(--serif);font-size:1.28rem;font-weight:600;margin-bottom:8px}
-  .event-card p{font-size:.93rem;color:rgba(255,255,255,.7);flex:1}
-  .event-card .meta{margin:18px 0;font-size:.85rem;color:rgba(255,255,255,.6);border-top:1px solid var(--line-dark);padding-top:14px}
-  .event-card .meta strong{color:#fff}
-  .event-card .eprice{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--teal);margin-bottom:16px}
-  .event-card .eprice small{font-family:var(--sans);font-size:.8rem;color:rgba(255,255,255,.6);font-weight:500}
-
-  /* ---------- faq ---------- */
-  .faq{background:var(--paper);padding:64px 0}
-  .faq .h2{margin-bottom:40px}
-  .faq details{border-top:1px solid var(--line);padding:4px 0}
-  .faq details:last-of-type{border-bottom:1px solid var(--line)}
-  .faq summary{
-    cursor:pointer;font-weight:600;font-size:1.03rem;padding:18px 40px 18px 0;
-    list-style:none;position:relative;
-  }
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{
-    content:"+";position:absolute;right:4px;top:14px;
-    font-family:var(--serif);font-size:1.5rem;color:var(--teal);font-weight:500;
-  }
-  .faq details[open] summary::after{content:"–"}
-  .faq .a{padding:0 0 20px;color:var(--ink-soft);max-width:66ch;font-size:.97rem}
-
-  /* ---------- final ---------- */
-  .final{padding:80px 0;text-align:center;background:var(--paper-dark)}
-  .final .h2{
-    font-size:clamp(1.8rem,4vw,2.8rem);max-width:24ch;margin:0 auto 18px;
-  }
-  .final p{color:var(--ink-soft);max-width:52ch;margin:0 auto 34px}
-  .final .mail{margin-top:18px;font-size:.9rem;color:var(--ink-soft)}
-  .final .mail a{color:var(--teal-dark);font-weight:600}
-
-  footer{border-top:1px solid var(--line);padding:34px 0;font-size:.85rem;color:var(--ink-soft);background:var(--paper-dark)}
-  .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-
-  /* ---------- scroll progress ---------- */
-  #progress{
-    position:fixed;top:0;left:0;height:3px;width:0%;z-index:1000;
-    background:linear-gradient(90deg, var(--teal), var(--gold));
-    transition:width .1s linear;
-  }
-
-  /* ---------- hero rotator ---------- */
-  .rotator-line{
-    margin-top:20px;font-size:1.02rem;color:rgba(255,255,255,.7);font-weight:500;
-    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
-  }
-  .rotator{
-    display:inline-block;min-width:15ch;
-    font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--teal);
-    border-bottom:2px solid rgba(46,125,79,.4);padding-bottom:2px;
-  }
-  #rotWord{display:inline-block}
-  #rotWord.swap{animation:wordout .45s ease forwards}
-  @keyframes wordout{
-    0%{opacity:1;transform:translateY(0)}
-    49%{opacity:0;transform:translateY(-10px)}
-    51%{opacity:0;transform:translateY(12px)}
-    100%{opacity:1;transform:translateY(0)}
-  }
-  @media (prefers-reduced-motion: reduce){#rotWord.swap{animation:none}}
-
-  /* ---------- button shine ---------- */
-  .btn{position:relative;overflow:hidden}
-
-  /* ---------- badge float ---------- */
-  .tier .badge{animation:none}
-  @keyframes floaty{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
-  @media (prefers-reduced-motion: reduce){.tier .badge{animation:none}}
-
-  /* ---------- calculator ---------- */
-  .calc-controls{margin-top:26px;display:flex;flex-direction:column;gap:18px;position:relative;z-index:2}
-  .calc-row{display:flex;flex-direction:column;gap:8px}
-  .calc-lbl{font-size:.92rem;color:rgba(255,255,255,.75)}
-  .calc-lbl strong{color:#fff;font-size:1.02rem}
-  input[type=range]{
-    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;
-    background:rgba(255,255,255,.18);outline:none;cursor:pointer;
-  }
-  input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
-    background:var(--teal);border:3px solid #06251a;box-shadow:0 0 0 2px var(--teal);
-  }
-  input[type=range]::-moz-range-thumb{
-    width:20px;height:20px;border-radius:50%;
-    background:var(--teal);border:3px solid #06251a;box-shadow:0 0 0 2px var(--teal);
-  }
-  .calc-cap{
-    font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(255,255,255,.6);margin-bottom:10px;
-  }
-  #calcOut{transition:transform .2s ease}
-  #calcOut.bump{transform:scale(1.06)}
-
-  /* ---------- demo video ---------- */
-  .demo{background:var(--deep);color:#fff;padding:64px 0}
-  /* a plain block, not a faux app window: there is no recording to frame */
-  .demo-frame{max-width:860px;margin:0}
-  .demo-frame.has-video{border:1px solid var(--line-dark);border-radius:var(--r-lg);overflow:hidden}
-  .demo-frame video{width:100%;display:none;background:#000}
-  .demo-frame.has-video video{display:block}
-  .demo-placeholder{padding:0;text-align:left}
-  .demo-frame.has-video .demo-placeholder{display:none}
-  .demo-placeholder .ph-big{font-family:var(--serif);font-size:1.6rem;font-weight:600;margin-bottom:10px}
-  .demo-placeholder .ph-sub{color:rgba(255,255,255,.7);max-width:52ch;margin:0 0 26px;font-size:1rem}
-
-  /* ---------- sub-brands: the three doors ---------- */
-  .divisions{padding:64px 0;background:var(--paper)}
-  .divisions .sub{margin-bottom:12px}
-  .door-hint{font-size:.9rem;font-weight:700;color:var(--teal-dark);margin-bottom:34px}
-  .div-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:38px;align-items:stretch;padding-top:10px;max-width:1000px;margin-inline:auto}
-  @media(max-width:1100px){.div-grid{gap:28px}}
-  @media(min-width:761px){.div-grid>.door-card:last-child:nth-child(odd){grid-column:1/-1;width:calc(50% - 19px);justify-self:center}}
-  @media(max-width:760px){.div-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
-  /* the branch not yet open reads as a door still under construction */
-  .door-card.soon .door{cursor:default;opacity:.92}
-  .door-soon-tag{
-    display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:2px 9px;margin-bottom:10px;
-  }
-  .door-card{position:relative;perspective:1600px}
-  /* wooden door frame around the arch */
-  .door-card::after{
-    content:"";position:absolute;inset:-10px;z-index:0;pointer-events:none;
-    border:7px solid #cfc2a8;
-    border-radius:190px 190px 12px 12px;
-    box-shadow:0 10px 24px -14px rgba(26,26,26,.35), inset 0 0 0 1px rgba(26,26,26,.12);
-  }
-  /* the room behind the door */
-  .door-room{
-    position:relative;min-height:560px;border-radius:172px 172px 6px 6px;
-    background:linear-gradient(180deg, #fffdf8 0%, #f6efe2 100%);
-    border:1px solid var(--line);padding:82px 22px 26px;
-    box-shadow:none;
-    overflow:hidden;
-  }
-  .door-room .div-kicker{display:block;text-align:center;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dark)}
-  .door-room h3{text-align:center;font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--navy);margin:4px 0 12px}
-  .door-room .blurb{font-size:.9rem;color:var(--ink-soft)}
-  .door-room ul{list-style:none;margin:14px 0 18px}
-  .door-room li{padding:7px 0 7px 24px;font-size:.88rem;color:var(--ink-soft);position:relative}
-  .door-room li::before{
-    content:"";position:absolute;left:2px;top:13px;width:11px;height:7px;
-    border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg);
-  }
-  .door-room .btn{padding:9px 16px;font-size:.86rem}
-  .door-close{
-    display:inline-block;margin-top:14px;font-size:.82rem;font-weight:700;cursor:pointer;
-    color:var(--ink-soft);text-decoration:none;border-bottom:1px dashed var(--ink-soft);
-  }
-  .door-close:hover{color:var(--navy)}
-  /* the door itself */
-  .door{
-    position:absolute;inset:0;z-index:2;cursor:pointer;
-    transform-origin:left center;
-    transition:transform .9s cubic-bezier(.25,.8,.3,1), box-shadow .9s ease;
-    background:linear-gradient(100deg, #3a3a3a 0%, #262626 45%, #1a1a1a 100%);
-    border:1px solid rgba(255,255,255,.08);border-radius:172px 172px 6px 6px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:44px 26px 30px;
-    box-shadow:0 18px 40px -18px rgba(26,26,26,.5);
-    backface-visibility:hidden;
-    overflow:hidden;
-  }
-  .door::before, .door::after{
-    content:"";position:absolute;left:15%;right:15%;border:2px solid rgba(255,255,255,.08);pointer-events:none;
-  }
-  .door::before{top:4.5%;height:30%;border-radius:130px 130px 10px 10px}
-  .door::after{bottom:5%;height:22%;border-radius:10px}
-  .door .knob{
-    position:absolute;right:16px;top:55%;transform:translateY(-50%);
-    width:14px;height:14px;border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #ffe9ae, var(--gold) 60%, #a97e1e);
-    box-shadow:0 2px 6px rgba(0,0,0,.5);
-  }
-  .door .div-kicker{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-soft)}
-  .door .door-icon{
-    width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
-    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);margin:16px 0 14px;
-  }
-  .door h3{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:#fff;letter-spacing:.01em}
-  .door .door-tease{font-size:.86rem;color:rgba(255,255,255,.62);max-width:24ch;margin-top:8px}
-  .door .door-open-hint{
-    margin-top:22px;font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--teal);display:inline-flex;align-items:center;gap:8px;
-  }
-  .door .door-open-hint::after{content:"→";transition:transform .3s ease}
-  .door-card:not(.open) .door:hover, .door-card:not(.open) .door:focus-visible{
-    transform:rotateY(-16deg);
-    box-shadow:24px 14px 44px -18px rgba(26,26,26,.55);
-  }
-  .door-card:not(.open) .door:hover .door-open-hint::after{transform:translateX(4px)}
-  .door-card.open .door{
-    transform:rotateY(-112deg);
-    box-shadow:60px 10px 60px -30px rgba(26,26,26,.35);
-    pointer-events:none;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .door{transition:none}
-    .door-card.open .door{display:none}
-  }
-
-  /* ---------- process timeline ---------- */
-  .process{padding:64px 0;background:var(--paper)}
-  .process .sub{margin-bottom:56px}
-  .timeline{position:relative;max-width:760px;margin:0 auto}
-  .t-step{position:relative;padding:22px 0 24px 84px;border-top:1px solid var(--line)}
-  .t-step:last-child{border-bottom:1px solid var(--line)}
-  .t-step .t-num{
-    position:absolute;left:0;top:22px;
-    font-family:var(--mono);font-size:.9rem;font-weight:500;color:var(--teal-dark);letter-spacing:.04em;
-  }
-  .t-step .t-num::before{content:"0"}
-  .t-step h3{font-size:1.1rem;font-weight:700;margin-bottom:6px;color:var(--navy)}
-  .t-step p{color:var(--ink-soft);font-size:.96rem;max-width:56ch}
-  .t-step .t-tag{margin-left:10px;font-size:.85rem;font-weight:600;color:var(--teal-dark)}
-  .t-step .t-tag::before{content:"\00b7\00a0"}
-
-  /* ---------- scarcity + tier note ---------- */
-  .scarcity{
-    margin-top:18px;padding-left:0;font-size:.95rem;
-  }
-  .scarcity strong{color:var(--navy)}
-  .tiers-note{
-    text-align:center;margin-top:26px;font-size:.9rem;color:var(--ink-soft);
-  }
-
-
-/* ---- Why NorthBridge: comparison ---- */
-.why{padding:clamp(56px,8vw,104px) 0}
-.why .cmp-wrap{margin-top:28px}
-.why .cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:1rem;line-height:1.45}
-.why .cmp th,.why .cmp td{padding:16px 18px;text-align:left;vertical-align:top;border-top:1px solid var(--line);color:var(--ink-soft)}
-.why .cmp thead th{border-top:0;font-weight:700;font-size:.95rem;color:var(--ink-soft);padding-bottom:14px;vertical-align:bottom}
-.why .cmp tbody th{font-weight:600;color:var(--ink);width:17%}
-.why .cmp .us{background:var(--surface);color:var(--ink);font-weight:600;border-left:2px solid var(--pop);border-right:2px solid var(--pop)}
-.why .cmp thead .us{background:var(--pop);color:var(--pop-ink);font-weight:800;font-size:1.05rem;border-radius:12px 12px 0 0;border-top:2px solid var(--pop)}
-.why .cmp tbody tr:last-child .us{border-bottom:2px solid var(--pop);border-radius:0 0 12px 12px}
-.why .why-honest{margin:28px 0 0;padding:16px 20px;border:1px solid var(--line);background:var(--surface);border-radius:12px;color:var(--ink);max-width:70ch}
-.why .cmp-note{margin:12px 0 0;font-size:.88rem;color:var(--ink-soft)}
-.why .why-cta{margin-top:32px}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:820px){
-  .why .cmp,.why .cmp thead,.why .cmp tbody,.why .cmp tr,.why .cmp th,.why .cmp td{display:block}
-  .why .cmp thead{position:absolute;left:-9999px}
-  .why .cmp tr{border-top:1px solid var(--line);padding:14px 0}
-  .why .cmp tbody th{width:auto;padding:0 0 8px;border:0;font-size:1.05rem}
-  .why .cmp td{border:0;padding:6px 0 6px 12px}
-  .why .cmp td::before{content:attr(data-label) ": ";font-weight:700;color:var(--ink)}
-  .why .cmp .us{border:2px solid var(--pop);border-radius:10px;padding:10px 12px;margin:2px 0 6px}
-  .why .cmp tbody tr:last-child .us{border:2px solid var(--pop);border-radius:10px}
-}
-.hero p.hero-what{font-size:1.02rem;line-height:1.5;color:rgba(255,255,255,.78);margin:14px 0 0;max-width:34rem}
-</style>
+<link rel="stylesheet" href="home.css?v=5571ec2d">
 <!-- nb-shared-layer -->
 <meta name="theme-color" content="#fbfaf6">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-<link rel="stylesheet" href="nb.css?v=aa5da90d">
-<script>
-/* Theme applied before first paint so dark-mode visitors never see a white flash. */
-(function(){try{var s=localStorage.getItem('nb-theme');
-var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
-document.documentElement.setAttribute('data-theme',m);
-if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
-}catch(e){}
-/* Set before first paint so hero content animates in from hidden instead of
-   flashing visible and then moving. Purely additive: without it the CSS
-   simply never fires and everything renders in its final state. */
-try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://cal.com https://*.cal.com; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="nb.css?v=a962c135">
+<script src="boot.js?v=03cfc8ae"></script>
 <script defer src="search-index.js?v=fced3321"></script>
-<script defer src="nb.js?v=cdb28b2d"></script>
+<script defer src="nb.js?v=155d2883"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -915,9 +173,15 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <span class="en">or see the plans</span><span class="es">o ver los planes</span> →
       </a>
     </div>
-    <p class="hero-note" style="margin-top:18px">
-      <span class="en">Free, 30 minutes, no commitment. <strong>30-day money-back guarantee</strong> on your first month, any plan. Plans from <span class="price">$99 a month</span>. Replies within one business day.</span>
-      <span class="es">Gratis, 30 minutos, sin compromiso. <strong>Garantía de devolución de 30 días</strong> en tu primer mes, en cualquier plan. Planes desde <span class="price">$99 al mes</span>. Respondemos en un día hábil.</span>
+    <ul class="hero-proof" aria-label="What you can count on">
+      <li><span class="en">Free 30-minute first meeting, no commitment</span><span class="es">Primera reunión gratis de 30 minutos, sin compromiso</span></li>
+      <li><span class="en">You approve the wording before anything sends</span><span class="es">Apruebas los textos antes de que se envíe algo</span></li>
+      <li><span class="en">30-day money-back guarantee on your first month</span><span class="es">Garantía de devolución de 30 días en tu primer mes</span></li>
+      <li><span class="en">Built in accounts you own</span><span class="es">Construido en cuentas que son tuyas</span></li>
+    </ul>
+    <p class="hero-note">
+      <span class="en">Plans from <span class="price">$99 a month</span>. Replies within one business day.</span>
+      <span class="es">Planes desde <span class="price">$99 al mes</span>. Respondemos en un día hábil.</span>
     </p>
     </div>
     <div class="hero-visual">
@@ -1011,31 +275,82 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   </div>
 </section>
 
-<!-- ======= DEMO VIDEO ======= -->
-<section class="demo" id="demo">
+<!-- ======= WHAT EATS YOUR WEEK (interactive picker) ======= -->
+<!-- The visitor ticks the jobs they recognise; home.js shows the plan that
+     matches and carries the ticks into the booking page, so the first meeting
+     starts from their list. To add or reword an option, edit a <label class="need">
+     line below: data-practice says which practice it belongs to, data-label is
+     the short English name passed to the booking form. -->
+<section class="demo needs" id="demo">
   <div class="wrap">
-    <h2 class="h2 rv" style="color:#fff">
+    <h2 class="h2 rv needs-title">
       <span class="en">Bring the work that eats your week</span>
       <span class="es">Trae el trabajo que se come tu semana</span>
     </h2>
-    <p class="sub rv" style="color:rgba(255,255,255,.72);margin-bottom:44px">
-      <span class="en">In the first meeting we look at your unpaid invoices and the other work that eats your hours, and show you how we would automate it.</span>
-      <span class="es">En la primera reunión revisamos tus facturas sin cobrar y el otro trabajo que se come tus horas, y te mostramos cómo lo automatizaríamos.</span>
+    <p class="sub rv needs-sub">
+      <span class="en">Tick what sounds familiar. We show you where we would start, and you bring the list to the free first meeting.</span>
+      <span class="es">Marca lo que te suene conocido. Te mostramos por dónde empezaríamos, y llevas la lista a la primera reunión gratis.</span>
     </p>
-    <div class="demo-frame rv">
-      <!-- The src is attached by script only once a video actually exists,
-           so an unrecorded demo costs no failed request and no console error.
-           To publish the walkthrough: drop demo.mp4 in the repo root and set
-           NB_DEMO_SRC in the page script below. -->
-      <video id="demoVid" controls preload="metadata" playsinline></video>
-      <div class="demo-placeholder" id="demoPh">
-        <p class="ph-sub">
-          <span class="en">We don't send a recording. We set up a meeting, look at your real work together, and tell you honestly what is worth automating first.</span>
-          <span class="es">No enviamos una grabación. Agendamos una reunión, miramos juntos tu trabajo real y te decimos con honestidad qué vale la pena automatizar primero.</span>
+    <div class="needs-layout rv">
+      <fieldset class="needs-grid" id="needsGrid">
+        <legend class="sr-only"><span class="en">Work that takes your time</span><span class="es">Trabajo que te quita tiempo</span></legend>
+      <label class="need"><input type="checkbox" name="need" value="invoices" data-practice="cinderella" data-label="Chasing late invoices"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Chasing late invoices</span><span class="es">Perseguir facturas atrasadas</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="reports" data-practice="cinderella" data-label="Building the same reports"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Building the same reports</span><span class="es">Armar los mismos reportes</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="data" data-practice="cinderella" data-label="Copying data between apps"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Copying data between apps</span><span class="es">Copiar datos entre aplicaciones</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="onboarding" data-practice="cinderella" data-label="Onboarding clients by hand"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Onboarding clients by hand</span><span class="es">Dar de alta clientes a mano</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="replies" data-practice="hermes" data-label="Slow replies to new leads"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Slow replies to new leads</span><span class="es">Respuestas lentas a prospectos</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="calls" data-practice="hermes" data-label="Missed calls"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Missed calls</span><span class="es">Llamadas perdidas</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="followups" data-practice="hermes" data-label="Forgotten follow-ups"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">Forgotten follow-ups</span><span class="es">Seguimientos olvidados</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="website" data-practice="hermes" data-label="A website that is out of date"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">A website that is out of date</span><span class="es">Un sitio web desactualizado</span></span></label>
+      <label class="need"><input type="checkbox" name="need" value="training" data-practice="socrates" data-label="A team that is not using AI yet"><span class="need-box" aria-hidden="true"></span><span class="need-text"><span class="en">A team that is not using AI yet</span><span class="es">Un equipo que aún no usa IA</span></span></label>
+      </fieldset>
+      <div class="needs-result" id="needsResult" aria-live="polite">
+        <p class="needs-kicker"><span class="en">Where we would start</span><span class="es">Por dónde empezaríamos</span></p>
+        <p class="needs-empty" id="needsEmpty">
+          <span class="en">Nothing ticked yet. Not sure what fits? That is what the first meeting is for: we look at your real work together and tell you honestly what is worth automating first.</span>
+          <span class="es">Aún no marcas nada. ¿No sabes qué te sirve? Para eso es la primera reunión: miramos juntos tu trabajo real y te decimos con honestidad qué vale la pena automatizar primero.</span>
         </p>
-        <a class="btn big" href="book.html">
-          <span class="en">Free first meeting</span><span class="es">Primera reunión gratis</span>
+        <div class="needs-fit" data-fit="chaser" hidden>
+          <p class="needs-fit-name"><span class="en">The Payment Chaser · $99/month</span><span class="es">El Cobrador de Facturas · $99/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">One workflow: it checks who has paid, politely reminds who has not, and tells your team when money lands.</span><span class="es">Un solo flujo: revisa quién pagó, recuerda con cortesía a quien no, y avisa a tu equipo cuando entra el dinero.</span></p>
+          <a class="needs-fit-more" href="#plans"><span class="en">See all plans</span><span class="es">Ver todos los planes</span> →</a>
+        </div>
+        <div class="needs-fit" data-fit="cinderella" hidden>
+          <p class="needs-fit-name"><span class="en">Cinderella · plans from $199/month</span><span class="es">Cinderella · planes desde $199/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">Our back-office practice: invoices, reports, data moved between your apps, and client onboarding, built and kept running for you.</span><span class="es">Nuestra práctica administrativa: facturas, reportes, datos movidos entre tus aplicaciones y altas de clientes, construidos y mantenidos por nosotros.</span></p>
+          <a class="needs-fit-more" href="cinderella.html"><span class="en">See Cinderella</span><span class="es">Ver Cinderella</span> →</a>
+        </div>
+        <div class="needs-fit" data-fit="hermes" hidden>
+          <p class="needs-fit-name"><span class="en">Hermes · plans from $149/month</span><span class="es">Hermes · planes desde $149/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">Our client-communication practice: follow-up sequences, instant AI messaging, AI voice agents, and websites kept up to date.</span><span class="es">Nuestra práctica de comunicación con clientes: secuencias de seguimiento, mensajería con IA al instante, agentes de voz con IA y sitios web al día.</span></p>
+          <a class="needs-fit-more" href="hermes.html"><span class="en">See Hermes</span><span class="es">Ver Hermes</span> →</a>
+        </div>
+        <div class="needs-fit" data-fit="socrates" hidden>
+          <p class="needs-fit-name"><span class="en">Socrates · plans from $99/month</span><span class="es">Socrates · planes desde $99/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">Our training practice: hands-on AI workshops for your team on their real daily work, in English or Spanish.</span><span class="es">Nuestra práctica de capacitación: talleres prácticos de IA para tu equipo con su trabajo diario real, en inglés o español.</span></p>
+          <a class="needs-fit-more" href="socrates.html"><span class="en">See Socrates</span><span class="es">Ver Socrates</span> →</a>
+        </div>
+        <div class="needs-fit" data-fit="starter" hidden>
+          <p class="needs-fit-name"><span class="en">Starter bundle · $299/month</span><span class="es">Paquete Inicial · $299/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">Cinderella and Hermes together: 2 workflows with a monthly report, plus follow-up sequences on 1 channel.</span><span class="es">Cinderella y Hermes juntos: 2 flujos con reporte mensual, más secuencias de seguimiento en 1 canal.</span></p>
+          <a class="needs-fit-more" href="#plans"><span class="en">Compare the bundles</span><span class="es">Comparar los paquetes</span> →</a>
+        </div>
+        <div class="needs-fit" data-fit="growth" hidden>
+          <p class="needs-fit-name"><span class="en">Growth bundle · $649/month</span><span class="es">Paquete Crecimiento · $649/mes</span></p>
+          <p class="needs-fit-desc"><span class="en">All three practices: 5 workflows with priority builds, 2 channels with instant AI messaging, and 1 team workshop a month.</span><span class="es">Las tres prácticas: 5 flujos con construcción prioritaria, 2 canales con mensajería IA instantánea y 1 taller de equipo al mes.</span></p>
+          <a class="needs-fit-more" href="#plans"><span class="en">Compare the bundles</span><span class="es">Comparar los paquetes</span> →</a>
+        </div>
+        <p class="needs-caveat" id="needsCaveat" hidden>
+          <span class="en">A starting point, not a quote. We confirm the fit in the meeting, and sometimes the honest answer is "not yet".</span>
+          <span class="es">Un punto de partida, no una cotización. Confirmamos en la reunión, y a veces la respuesta honesta es "todavía no".</span>
+        </p>
+        <a class="btn big" id="needsCta" href="book.html">
+          <span class="en">Book your free first meeting</span><span class="es">Reserva tu primera reunión gratis</span>
         </a>
+        <p class="needs-carry" id="needsCarry" hidden>
+          <span class="en">Your ticks come with you to the booking page.</span>
+          <span class="es">Lo que marcaste te acompaña a la página de reserva.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -1358,8 +673,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
     </div>
 
     <p class="tiers-note rv">
-      <span class="en">Choosing a plan books your <strong>free first meeting</strong>. Tell us a couple of times that suit you and we confirm within one business day. Every plan: 30-day money-back guarantee on your first month, no long contracts, and we check in instead of disappearing.</span>
-      <span class="es">Elegir un plan agenda tu <strong>primera reunión gratuita</strong>. Dinos un par de horarios que te sirvan y confirmamos en un día hábil. Todos los planes: garantía de devolución de 30 días en tu primer mes, sin contratos largos, y hacemos seguimiento en vez de desaparecer.</span>
+      <span class="en">Choosing a plan takes you to the calendar for your <strong>free first meeting</strong>. Pick a time and the invite arrives by email. Every plan: 30-day money-back guarantee on your first month, no long contracts, and we check in instead of disappearing.</span>
+      <span class="es">Elegir un plan te lleva al calendario de tu <strong>primera reunión gratuita</strong>. Elige un horario y la invitación llega por correo. Todos los planes: garantía de devolución de 30 días en tu primer mes, sin contratos largos, y hacemos seguimiento en vez de desaparecer.</span>
     </p>
 
     <div class="hook-strip rv">
@@ -1564,8 +879,8 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <span class="es">Agenda una primera reunión.</span>
     </h2>
     <p class="rv">
-      <span class="en">Send us two times that suit you. We confirm within one business day, look at your real work together, and tell you honestly what is worth automating first.</span>
-      <span class="es">Envíanos dos horarios que te sirvan. Confirmamos en un día hábil, miramos juntos tu trabajo real y te decimos con honestidad qué vale la pena automatizar primero.</span>
+      <span class="en">Pick a time on the calendar and the invite arrives by email. We look at your real work together and tell you honestly what is worth automating first.</span>
+      <span class="es">Elige un horario en el calendario y la invitación llega por correo. Miramos juntos tu trabajo real y te decimos con honestidad qué vale la pena automatizar primero.</span>
     </p>
     <a class="btn big rv" href="book.html">
       <span class="en">Free first meeting</span><span class="es">Primera reunión gratis</span>
@@ -1632,303 +947,6 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   </div>
 </footer>
 
-<script>
-(function(){
-  /* ---- language ---- */
-  var btn = document.getElementById('langBtn');
-  var root = document.documentElement;
-  function apply(lang){
-    root.setAttribute('data-lang', lang);
-    root.setAttribute('lang', lang);
-    btn.textContent = lang === 'es' ? 'EN' : 'ES';
-    try{ localStorage.setItem('nb-lang', lang); }catch(e){}
-  }
-  var saved = null;
-  try{ saved = localStorage.getItem('nb-lang'); }catch(e){}
-  if(!saved){
-    saved = (navigator.language || '').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
-  }
-  apply(saved);
-  btn.addEventListener('click', function(){
-    apply(root.getAttribute('data-lang') === 'es' ? 'en' : 'es');
-  });
-
-  /* ---- marquee: duplicate track for seamless loop ---- */
-  var track = document.getElementById('mtrack');
-  if(track){ track.innerHTML += track.innerHTML; }
-
-  /* ---- scroll reveal ---- */
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, {threshold:.12});
-    document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
-  } else {
-    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
-  }
-
-  /* ---- custom plan builder ---- */
-  var counts = {workflows:2, channels:1, workshops:1};
-  var limits = {min:0, max:10};
-  var cta = document.getElementById('customCta');
-  function refresh(){
-    Object.keys(counts).forEach(function(k){
-      var el = document.getElementById('v-'+k);
-      if(el) el.textContent = counts[k];
-    });
-    var es = root.getAttribute('data-lang') === 'es';
-    var subject = es ? 'Plan personalizado' : 'Custom plan';
-    var body = es
-      ? 'Hola NorthBridge,\n\nQuiero un plan personalizado con:\n- ' + counts.workflows + ' flujos de trabajo\n- ' + counts.channels + ' canales de comunicación automatizados\n- ' + counts.workshops + ' talleres por trimestre\n\nMi negocio: '
-      : 'Hi NorthBridge,\n\nI want a custom plan with:\n- ' + counts.workflows + ' workflows\n- ' + counts.channels + ' communication channels automated\n- ' + counts.workshops + ' workshops per quarter\n\nMy business: ';
-    if(cta) cta.href = 'mailto:northbridgeai1@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  }
-  document.querySelectorAll('.counter button').forEach(function(b){
-    b.addEventListener('click', function(){
-      var k = b.getAttribute('data-k');
-      var d = parseInt(b.getAttribute('data-d'), 10);
-      counts[k] = Math.min(limits.max, Math.max(limits.min, counts[k] + d));
-      refresh();
-    });
-  });
-  btn.addEventListener('click', refresh);
-  refresh();
-
-  /* ---- billing toggle ---- */
-  var plansSec = document.querySelector('.plans');
-  document.querySelectorAll('.bill-toggle button').forEach(function(b){
-    b.addEventListener('click', function(){
-      document.querySelectorAll('.bill-toggle button').forEach(function(x){ x.classList.remove('on'); });
-      b.classList.add('on');
-      if(plansSec) plansSec.setAttribute('data-bill', b.getAttribute('data-bill'));
-    });
-  });
-
-  /* ---- the three doors ---- */
-  document.querySelectorAll('.door-card .door').forEach(function(d){
-    function openDoor(){
-      var c = d.closest('.door-card');
-      c.classList.add('open');
-      d.setAttribute('aria-expanded', 'true');
-    }
-    d.addEventListener('click', openDoor);
-    d.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openDoor(); }
-    });
-  });
-  document.querySelectorAll('.door-close').forEach(function(b){
-    b.addEventListener('click', function(e){
-      e.preventDefault();
-      var c = b.closest('.door-card');
-      c.classList.remove('open');
-      var d = c.querySelector('.door');
-      if(d) d.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  /* ---- demo video ----
-     Set NB_DEMO_SRC to the filename once the walkthrough is recorded; the
-     player then appears in place of the "book a live demo" panel. Empty means
-     no request is made at all. */
-  var NB_DEMO_SRC = '';
-  var dv = document.getElementById('demoVid');
-  if(dv && NB_DEMO_SRC){
-    dv.addEventListener('loadedmetadata', function(){
-      var frame = dv.closest('.demo-frame');
-      if(frame && dv.duration > 0) frame.classList.add('has-video');
-    });
-    dv.src = NB_DEMO_SRC;
-  }
-
-  /* ---- scroll progress bar ---- */
-  var bar = document.createElement('div');
-  bar.id = 'progress';
-  document.body.appendChild(bar);
-  window.addEventListener('scroll', function(){
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
-  }, {passive:true});
-
-  /* ---- hero word rotator ---- */
-  var rotWords = {
-    en: ['payment chasing','data entry','report building','follow-up emails','client onboarding'],
-    es: ['el cobro de facturas','la entrada de datos','los reportes manuales','los correos de seguimiento','el alta de clientes']
-  };
-  var rotEl = document.getElementById('rotWord');
-  var rotI = 0;
-  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(rotEl){
-    var syncRot = function(){
-      var lang = root.getAttribute('data-lang') === 'es' ? 'es' : 'en';
-      rotEl.textContent = rotWords[lang][rotI];
-    };
-    syncRot();
-    btn.addEventListener('click', syncRot);
-    setInterval(function(){
-      rotI = (rotI + 1) % rotWords.en.length;
-      var lang = root.getAttribute('data-lang') === 'es' ? 'es' : 'en';
-      if(reducedMotion){
-        rotEl.textContent = rotWords[lang][rotI];
-      } else {
-        rotEl.classList.remove('swap');
-        void rotEl.offsetWidth;
-        rotEl.classList.add('swap');
-        setTimeout(function(){ rotEl.textContent = rotWords[lang][rotI]; }, 220);
-      }
-    }, 2600);
-  }
-
-  /* ---- receivables calculator ----
-     Computes cash the visitor already has trapped in unpaid invoices, from
-     their own three inputs. The "released" figure only appears once the
-     visitor moves the recovery slider themselves, and it is their number,
-     not a NorthBridge promise. */
-  var invIn  = document.getElementById('invIn');
-  var valIn  = document.getElementById('valIn');
-  var lateIn = document.getElementById('lateIn');
-  var cutIn  = document.getElementById('cutIn');
-  var calcOut = document.getElementById('calcOut');
-  var releasedWrap = document.getElementById('releasedWrap');
-  var releasedOut  = document.getElementById('releasedOut');
-  var shownVal = 0;
-  var calcRAF = null;
-
-  function fmt(n){
-    var es = root.getAttribute('data-lang') === 'es';
-    return '$' + Math.round(n).toLocaleString(es ? 'es-ES' : 'en-US');
-  }
-
-  function trapped(){
-    var monthly = parseInt(invIn.value, 10) * parseInt(valIn.value, 10);
-    return monthly * (parseInt(lateIn.value, 10) / 30);
-  }
-
-  function calc(animate){
-    if(!invIn || !valIn || !lateIn || !calcOut) return;
-
-    document.getElementById('invOut').textContent  = invIn.value;
-    document.getElementById('valOut').textContent  = parseInt(valIn.value,10).toLocaleString('en-US');
-    document.getElementById('lateOut').textContent = lateIn.value;
-
-    /* recovery can never exceed the lateness it is recovering from */
-    if(parseInt(cutIn.value,10) > parseInt(lateIn.value,10)) cutIn.value = lateIn.value;
-    cutIn.max = lateIn.value;
-    var cut = parseInt(cutIn.value, 10);
-    document.getElementById('cutOut').textContent = cut;
-
-    var target = trapped();
-
-    if(cut > 0){
-      var monthly = parseInt(invIn.value,10) * parseInt(valIn.value,10);
-      var released = monthly * (cut / 30);
-      releasedWrap.hidden = false;
-      document.getElementById('cutEcho').textContent = cut;
-      var esEcho = document.querySelector('.cut-echo-es');
-      if(esEcho) esEcho.textContent = cut;
-      releasedOut.textContent = fmt(released);
-    } else {
-      releasedWrap.hidden = true;
-    }
-
-    if(calcRAF){ cancelAnimationFrame(calcRAF); calcRAF = null; }
-    if(!animate || reducedMotion){
-      shownVal = target;
-      calcOut.textContent = fmt(target);
-      return;
-    }
-    var start = shownVal, t0 = null;
-    calcOut.classList.add('bump');
-    setTimeout(function(){ calcOut.classList.remove('bump'); }, 220);
-    function step(ts){
-      if(t0 === null) t0 = ts;
-      var p = Math.min(1, (ts - t0) / 350);
-      var eased = 1 - Math.pow(1 - p, 3);
-      shownVal = start + (target - start) * eased;
-      calcOut.textContent = fmt(shownVal);
-      if(p < 1){ calcRAF = requestAnimationFrame(step); }
-      else { calcRAF = null; shownVal = target; calcOut.textContent = fmt(target); }
-    }
-    calcRAF = requestAnimationFrame(step);
-  }
-
-  if(invIn && valIn && lateIn && cutIn){
-    [invIn, valIn, lateIn, cutIn].forEach(function(el){
-      el.addEventListener('input', function(){ calc(true); });
-    });
-    btn.addEventListener('click', function(){ setTimeout(function(){ calc(false); }, 0); });
-    calc(false);
-
-    /* Count the figure in the first time the section is seen. Driven through
-       the same calc() as everything else, so there is only ever one animator
-       writing to this node. */
-    /* Observe the figure itself, not the section: the section is taller than
-       a laptop viewport, so a 40% threshold on it never fires. */
-    var pilot = calcOut;
-    if(pilot && 'IntersectionObserver' in window && !reducedMotion){
-      var pio = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if(!e.isIntersecting) return;
-          pio.disconnect();
-          shownVal = 0;
-          calc(true);
-        });
-      }, {threshold:.85});
-      pio.observe(pilot);
-    }
-  }
-
-  /* ---- hero network canvas ---- */
-  var cv = document.getElementById('net');
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(cv && cv.getContext && !reduced){
-    var ctx = cv.getContext('2d');
-    var pts = [], W, H, N;
-    function size(){
-      W = cv.width = cv.offsetWidth;
-      H = cv.height = cv.offsetHeight;
-      N = Math.max(28, Math.min(70, Math.floor(W / 22)));
-      pts = [];
-      for(var i=0;i<N;i++){
-        pts.push({
-          x: Math.random()*W, y: Math.random()*H,
-          vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35,
-          r: 1.2 + Math.random()*1.8
-        });
-      }
-    }
-    function tick(){
-      ctx.clearRect(0,0,W,H);
-      for(var i=0;i<N;i++){
-        var p = pts[i];
-        p.x += p.vx; p.y += p.vy;
-        if(p.x < 0 || p.x > W) p.vx *= -1;
-        if(p.y < 0 || p.y > H) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fillStyle = 'rgba(130,210,160,.7)';
-        ctx.fill();
-        for(var j=i+1;j<N;j++){
-          var q = pts[j];
-          var dx = p.x-q.x, dy = p.y-q.y, d2 = dx*dx+dy*dy;
-          if(d2 < 130*130){
-            ctx.beginPath();
-            ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-            ctx.strokeStyle = 'rgba(46,125,79,' + (0.16 * (1 - d2/(130*130))).toFixed(3) + ')';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(tick);
-    }
-    size();
-    window.addEventListener('resize', size);
-    tick();
-  }
-})();
-</script>
+<script src="home.js?v=ffe9ebd0"></script>
 </body>
 </html>

@@ -33,14 +33,62 @@
 <link rel="stylesheet" href="styles.css?v=9ac8364d">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <style>
+  /* Booking page only. Shared form styles (.nb-form, .nb-field ...) are in nb.css. */
+
+  /* --- top band: title and what the visitor already chose --- */
+  .book-hero{padding:44px 0 40px}
+  .book-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;max-width:24ch}
+  .book-hero .lede{max-width:58ch}
+  .book-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .book-chips:empty{display:none}
   .plan-chip{
-    display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
-    background:rgba(31,182,140,.14);border:1px solid rgba(31,182,140,.5);border-radius:999px;
-    padding:7px 16px;font-size:.85rem;font-weight:700;color:var(--teal-soft);
+    display:inline-flex;align-items:baseline;gap:8px;margin:0;max-width:100%;
+    background:rgba(31,182,140,.14);border:1px solid rgba(31,182,140,.5);border-radius:14px;
+    padding:7px 14px;font-size:.85rem;font-weight:700;color:var(--teal-soft);line-height:1.4;
   }
-  .plan-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--teal)}
-  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;padding:80px 0}
-  @media(max-width:880px){.book-grid{grid-template-columns:1fr;padding:56px 0}}
+  .plan-chip[hidden]{display:none}
+  .plan-chip .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--teal);align-self:center}
+
+  /* --- two columns: calendar first (also first on a phone), then what to expect --- */
+  /* padding-block only: the side gutters come from .wrap and must survive */
+  .book-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start;padding-block:0}
+  @media(max-width:880px){.book-grid{grid-template-columns:1fr;gap:36px}}
+  html body main > section.book-main{padding-block:clamp(28px,4vw,56px) clamp(56px,8vw,96px)}
+
+  .sched-card{
+    background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;
+    box-shadow:0 24px 48px -22px rgba(19,26,48,.3);min-width:0;
+  }
+  @media(max-width:520px){.sched-card{padding:20px 16px}}
+  .sched-card h2{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+  .sched-card p{font-size:.94rem;color:var(--ink-soft)}
+  #schedFrame{width:100%;height:720px;border:1px solid var(--line);border-radius:12px;margin-top:18px;display:none;background:#fff}
+  .sched-open{margin-top:12px;font-size:.88rem}
+  .sched-open a{color:var(--teal-dark);font-weight:600}
+
+  /* --- the written request form, tucked under the calendar --- */
+  .bk-alt{margin-top:22px;border-top:1px solid var(--line);padding-top:6px}
+  .bk-alt summary{cursor:pointer;padding:14px 0;font-weight:700;color:var(--navy);font-size:.98rem;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .bk-alt summary::-webkit-details-marker{display:none}
+  .bk-alt summary::after{content:"+";font-size:1.3rem;font-weight:500;line-height:1;color:var(--ink-soft)}
+  .bk-alt[open] summary::after{content:"\2212"}
+  /* no calendar connected: the form is the page, so no fold */
+  html:not(.sched-live) .bk-alt{border-top:0;padding-top:0}
+  html:not(.sched-live) .bk-alt summary{display:none}
+  .bk-form{margin-top:8px}
+  .bk-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.bk-row{grid-template-columns:1fr}}
+  .sched-card .nb-form-note a{color:var(--teal-dark);font-weight:600}
+
+  .assure{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .assure li{list-style:none;position:relative;padding-left:28px;font-size:.88rem;color:var(--ink-soft)}
+  .assure li::before{
+    content:"";position:absolute;left:2px;top:6px;width:13px;height:8px;
+    border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg);
+  }
+
+  /* --- "what happens next", numbered 1-2-3 --- */
+  .expect-title{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--navy);margin-bottom:14px}
   .expect{counter-reset:e}
   .expect-item{border-top:1px solid var(--line);padding:20px 0 20px 54px;position:relative;counter-increment:e}
   .expect-item:last-child{border-bottom:1px solid var(--line)}
@@ -49,55 +97,28 @@
     background:#fff;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;
     font-family:var(--serif);font-weight:700;color:var(--navy);
   }
-  .expect-item h2{font-family:var(--sans,inherit);font-size:1rem;font-weight:700;line-height:1.35;color:var(--navy);margin-bottom:4px}
-  .book-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;max-width:24ch}
-  .book-hero .plan-chip{margin:22px 0 0}
+  .expect-item h3{font-family:var(--sans,inherit);font-size:1rem;font-weight:700;line-height:1.35;color:var(--navy);margin-bottom:4px}
   .expect-item p{font-size:.92rem;color:var(--ink-soft)}
-  .sched-card{
-    background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px;
-    box-shadow:0 24px 48px -22px rgba(19,26,48,.3);
-  }
-  .sched-card h2{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:10px}
-  .sched-card p{font-size:.94rem;color:var(--ink-soft)}
-  #schedFrame{width:100%;height:640px;border:1px solid var(--line);border-radius:12px;margin-top:20px;display:none}
-  .assure{margin-top:22px;display:flex;flex-direction:column;gap:10px}
-  .assure li{list-style:none;position:relative;padding-left:28px;font-size:.88rem;color:var(--ink-soft)}
-  .assure li::before{
-    content:"";position:absolute;left:2px;top:6px;width:13px;height:8px;
-    border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg);
-  }
+
   /* The page describes the flow that is actually connected. `.sched-on`
-     copy stays hidden until NB_SCHEDULER_URL is set, at which point the
-     script flips one class and every promise on the page becomes true.
-     Defaulting to the email flow means the page can never over-promise. */
+     copy stays hidden until NB_SCHEDULER_URL is set (top of book.js), at
+     which point the script flips one class and every promise on the page
+     becomes true. Defaulting to the email flow means the page can never
+     over-promise. */
   .sched-on{display:none}
   html.sched-live .sched-off{display:none}
   html.sched-live .sched-on{display:revert}
-  .bk-form{margin-top:22px}
-  .bk-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  @media(max-width:520px){.bk-row{grid-template-columns:1fr}}
-  .sched-card .nb-form-note a{color:var(--teal-dark);font-weight:600}
 </style>
 <!-- nb-shared-layer -->
 <meta name="theme-color" content="#fbfaf6">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="color-scheme" content="light dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://formspree.io https://cloudflareinsights.com https://static.cloudflareinsights.com https://www.google-analytics.com https://*.analytics.google.com https://region1.google-analytics.com; frame-src https://cal.com https://*.cal.com https://calendar.google.com https://*.google.com; form-action 'self' https://formsubmit.co https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-<link rel="stylesheet" href="nb.css?v=aa5da90d">
-<script>
-/* Theme applied before first paint so dark-mode visitors never see a white flash. */
-(function(){try{var s=localStorage.getItem('nb-theme');
-var m=s||((window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
-document.documentElement.setAttribute('data-theme',m);
-if(m==='dark'){var t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute('content','#121614');}
-}catch(e){}
-/* Set before first paint so hero content animates in from hidden instead of
-   flashing visible and then moving. Purely additive: without it the CSS
-   simply never fires and everything renders in its final state. */
-try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
-</script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://cal.com https://*.cal.com; form-action 'self' https://formsubmit.co; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="nb.css?v=a962c135">
+<script src="boot.js?v=03cfc8ae"></script>
 <script defer src="search-index.js?v=fced3321"></script>
-<script defer src="nb.js?v=cdb28b2d"></script>
+<script defer src="nb.js?v=155d2883"></script>
 </head>
 <body>
 <a class="nb-skip" href="#top"><span class="en">Skip to content</span><span class="es">Saltar al contenido</span></a>
@@ -134,7 +155,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
 
 <main id="top">
 
-<section class="hero book-hero" style="padding:56px 0 48px">
+<section class="hero book-hero">
   <div class="wrap">
     <p class="crumb"><a href="index.html#plans">← <span class="en">Back to plans</span><span class="es">Volver a planes</span></a></p>
     <h1>
@@ -142,43 +163,20 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
       <span class="es">Elige un horario para tu primera reunión</span>
     </h1>
     <p class="lede">
-      <span class="en">The first meeting is free, 30 minutes, and commits you to nothing. You'll see exactly how we'd work, and we'll find the problems worth solving in your business, including what they're costing you.</span>
-      <span class="es">La primera reunión es gratuita, de 30 minutos, y no te compromete a nada. Verás exactamente cómo trabajaríamos, y encontraremos los problemas que vale la pena resolver en tu negocio, incluido lo que te están costando.</span>
+      <span class="en">Free, 30 minutes, and it commits you to nothing. We look at your real work together and tell you honestly what is worth automating first.</span>
+      <span class="es">Gratis, 30 minutos, y no te compromete a nada. Miramos juntos tu trabajo real y te decimos con honestidad qué vale la pena automatizar primero.</span>
     </p>
-    <p class="plan-chip"><span class="dot"></span><span class="en">You picked:</span><span class="es">Elegiste:</span>&nbsp;<span id="planName">...</span></p>
+    <!-- Filled in by book.js from the link the visitor arrived on
+         (book.html?plan=...&needs=...). Each chip stays hidden if empty. -->
+    <div class="book-chips">
+      <p class="plan-chip" id="planChip" hidden><span class="dot"></span><span><span class="en">You picked:</span><span class="es">Elegiste:</span> <span id="planName"></span></span></p>
+      <p class="plan-chip" id="needsChip" hidden><span class="dot"></span><span><span class="en">To talk about:</span><span class="es">Para conversar:</span> <span id="needsName"></span></span></p>
+    </div>
   </div>
 </section>
 
-<section style="background:var(--paper)">
+<section class="book-main" style="background:var(--paper)">
   <div class="wrap book-grid">
-    <div>
-      <div class="expect">
-        <div class="expect-item">
-          <h2>
-            <span class="sched-off"><span class="en">Send two or three times</span><span class="es">Envía dos o tres horarios</span></span>
-            <span class="sched-on"><span class="en">Pick your time</span><span class="es">Elige tu hora</span></span>
-          </h2>
-          <p>
-            <span class="sched-off"><span class="en">Tell us a few slots that suit you and whether you prefer Zoom or Google Meet. One short email, no form to fill in.</span><span class="es">Dinos algunos horarios que te sirvan y si prefieres Zoom o Google Meet. Un correo corto, sin formularios.</span></span>
-            <span class="sched-on"><span class="en">Choose a slot that suits you. We meet on Google Meet. Add your name and email and you're booked. Need Zoom instead? Use the request form below.</span><span class="es">Elige el horario que te convenga. Nos vemos por Google Meet. Escribe tu nombre y correo y queda agendado. ¿Prefieres Zoom? Usa el formulario de abajo.</span></span>
-          </p>
-        </div>
-        <div class="expect-item">
-          <h2>
-            <span class="sched-off"><span class="en">We confirm within a business day</span><span class="es">Confirmamos en un día hábil</span></span>
-            <span class="sched-on"><span class="en">The invite arrives instantly</span><span class="es">La invitación llega al instante</span></span>
-          </h2>
-          <p>
-            <span class="sched-off"><span class="en">A person picks one of your times, sends the calendar invite with the meeting link, and that is the booking done.</span><span class="es">Una persona elige uno de tus horarios, envía la invitación con el enlace de la reunión, y con eso queda agendado.</span></span>
-            <span class="sched-on"><span class="en">You get an email with the meeting link, and the event lands on your calendar and ours automatically, with reminders before we start.</span><span class="es">Recibes un correo con el enlace de la reunión, y el evento aparece en tu calendario y en el nuestro automáticamente, con recordatorios antes de empezar.</span></span>
-          </p>
-        </div>
-        <div class="expect-item">
-          <h2><span class="en">We come prepared</span><span class="es">Llegamos preparados</span></h2>
-          <p><span class="en">We'll have looked at the plan you picked and arrive with questions about your business, not a canned pitch. Within days you get a written report and a fixed quote, yours to keep either way.</span><span class="es">Habremos revisado el plan que elegiste y llegamos con preguntas sobre tu negocio, no con un discurso enlatado. En pocos días recibes un informe escrito y una cotización fija, tuyos de cualquier forma.</span></p>
-        </div>
-      </div>
-    </div>
     <div class="sched-card">
       <h2>
         <span class="sched-off"><span class="en">Request a time</span><span class="es">Solicita un horario</span></span>
@@ -193,9 +191,14 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <span class="es">Dinos dos o tres horarios que te sirvan y cómo prefieres reunirte. Confirmamos uno en un día hábil y te enviamos la invitación.</span>
       </p>
       <iframe id="schedFrame" title="Scheduler"></iframe>
-      <div style="margin-top:22px" class="sched-on">
-        <a class="btn big" id="schedOpen" style="display:none" target="_blank" rel="noopener" href="#"><span class="en">Open the scheduler</span><span class="es">Abrir el calendario</span></a>
-      </div>
+      <p class="sched-open sched-on">
+        <span class="en">Calendar not loading?</span><span class="es">¿No carga el calendario?</span>
+        <a id="schedOpen" target="_blank" rel="noopener noreferrer" href="#"><span class="en">Open it in a new tab</span><span class="es">Ábrelo en una pestaña nueva</span></a>
+      </p>
+      <!-- Written request. Folded away while the calendar is live; shown
+           open by itself if the calendar is ever switched off in book.js. -->
+      <details class="bk-alt" id="bkAlt">
+      <summary><span class="en">Prefer to send us times, or need Zoom?</span><span class="es">¿Prefieres enviarnos horarios, o necesitas Zoom?</span></summary>
       <form class="nb-form bk-form" id="bkForm" novalidate>
         <div class="nb-alert nb-alert--err" id="bkError" role="alert">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5.5M12 16.5h.01"/></svg>
@@ -229,6 +232,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         </div>
         <div class="nb-hp" aria-hidden="true"><label for="bk-website">Leave this field empty</label><input type="text" id="bk-website" name="_honey" tabindex="-1" autocomplete="off"></div>
         <input type="hidden" name="plan" id="bk-plan" value="">
+        <input type="hidden" name="needs" id="bk-needs" value="">
         <input type="hidden" name="source" id="bk-source" value="">
         <input type="hidden" name="_subject" id="bk-subject" value="Meeting request · NorthBridge">
         <input type="hidden" name="_template" value="table">
@@ -245,11 +249,41 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
         <p><span class="en">A person will pick one of your times and send the calendar invite with the meeting link, within one business day.</span><span class="es">Una persona elegirá uno de tus horarios y enviará la invitación con el enlace de la reunión, en un día hábil.</span></p>
         <a class="nb-btn" href="index.html"><span class="en">Back to the site</span><span class="es">Volver al sitio</span></a>
       </div>
+      </details>
       <ul class="assure">
         <li><span class="en">Free · 30 minutes · no commitment</span><span class="es">Gratis · 30 minutos · sin compromiso</span></li>
         <li><span class="en">Zoom or Google Meet, your pick</span><span class="es">Zoom o Google Meet, tú eliges</span></li>
         <li><span class="en">English or Spanish</span><span class="es">En inglés o español</span></li>
       </ul>
+    </div>
+    <div>
+      <h2 class="expect-title"><span class="en">What happens next</span><span class="es">Qué pasa después</span></h2>
+      <div class="expect">
+        <div class="expect-item">
+          <h3>
+            <span class="sched-off"><span class="en">Send two or three times</span><span class="es">Envía dos o tres horarios</span></span>
+            <span class="sched-on"><span class="en">Pick your time</span><span class="es">Elige tu hora</span></span>
+          </h3>
+          <p>
+            <span class="sched-off"><span class="en">Tell us a few slots that suit you and whether you prefer Zoom or Google Meet. One short email, no form to fill in.</span><span class="es">Dinos algunos horarios que te sirvan y si prefieres Zoom o Google Meet. Un correo corto, sin formularios.</span></span>
+            <span class="sched-on"><span class="en">Choose a slot that suits you. We meet on Google Meet. Add your name and email and you're booked. Need Zoom instead? Use the written request under the calendar.</span><span class="es">Elige el horario que te convenga. Nos vemos por Google Meet. Escribe tu nombre y correo y queda agendado. ¿Prefieres Zoom? Usa la solicitud escrita debajo del calendario.</span></span>
+          </p>
+        </div>
+        <div class="expect-item">
+          <h3>
+            <span class="sched-off"><span class="en">We confirm within a business day</span><span class="es">Confirmamos en un día hábil</span></span>
+            <span class="sched-on"><span class="en">The invite arrives instantly</span><span class="es">La invitación llega al instante</span></span>
+          </h3>
+          <p>
+            <span class="sched-off"><span class="en">A person picks one of your times, sends the calendar invite with the meeting link, and that is the booking done.</span><span class="es">Una persona elige uno de tus horarios, envía la invitación con el enlace de la reunión, y con eso queda agendado.</span></span>
+            <span class="sched-on"><span class="en">You get an email with the meeting link, and the event lands on your calendar and ours automatically, with reminders before we start.</span><span class="es">Recibes un correo con el enlace de la reunión, y el evento aparece en tu calendario y en el nuestro automáticamente, con recordatorios antes de empezar.</span></span>
+          </p>
+        </div>
+        <div class="expect-item">
+          <h3><span class="en">We come prepared</span><span class="es">Llegamos preparados</span></h3>
+          <p><span class="en">We'll have looked at the plan you picked and arrive with questions about your business, not a canned pitch. Within days you get a written report and a fixed quote, yours to keep either way.</span><span class="es">Habremos revisado el plan que elegiste y llegamos con preguntas sobre tu negocio, no con un discurso enlatado. En pocos días recibes un informe escrito y una cotización fija, tuyos de cualquier forma.</span></p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -308,92 +342,7 @@ try{document.documentElement.classList.add('nb-anim');}catch(e){}})();
   </div>
 </footer>
 
-<script src="site.js?v=84d41f4e"></script>
-<script>
-/* ▼▼ PASTE YOUR SCHEDULER LINK BETWEEN THE QUOTES (this is the ONLY place) ▼▼
-   Recommended: Cal.com event link (lets visitors choose Zoom OR Google Meet,
-   supports 15-min buffers and blocks overlapping bookings against your Google Calendar).
-   A Google Calendar appointment-schedule link also works (Google Meet only). */
-var NB_SCHEDULER_URL = "https://cal.com/northbridge-8sqm76/first-meeting";
-
-(function(){
-  /* show which plan was picked, carry it into the email fallback */
-  var plan = null;
-  try{ plan = new URLSearchParams(location.search).get('plan'); }catch(e){}
-  var isEs = document.documentElement.getAttribute('data-lang') === 'es';
-  var planEl = document.getElementById('planName');
-  if(planEl) planEl.textContent = plan || (isEs ? 'tu plan' : 'your plan');
-
-  var mail = document.getElementById('mailBtn');
-  if(mail){
-    var subj = (plan ? plan + ': ' : '') + 'First meeting';
-    var body = 'Hi NorthBridge,\n\nI picked: ' + (plan || '(not sure yet)') +
-      '\nTimes that work for me (with timezone):\n1.\n2.\n3.\n\nI prefer: Zoom / Google Meet\n\nMy business: ';
-    mail.href = 'mailto:northbridgeai1@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
-  }
-
-  /* activate the scheduler once the URL is set */
-  if(NB_SCHEDULER_URL && NB_SCHEDULER_URL.indexOf('REPLACE_ME') === -1){
-    /* one flag switches the mechanism AND the copy describing it */
-    document.documentElement.classList.add('sched-live');
-    var open = document.getElementById('schedOpen');
-    var frame = document.getElementById('schedFrame');
-    var ready = document.getElementById('schedReady');
-    var fallback = document.getElementById('schedFallback');
-    if(open){ open.href = NB_SCHEDULER_URL; open.style.display = 'inline-block'; }
-    if(ready) ready.style.display = 'block';
-    if(fallback) fallback.style.display = 'none';
-    /* embed inline when the provider allows iframes (Cal.com and Google's gv=true embed do) */
-    if(frame && (NB_SCHEDULER_URL.indexOf('cal.com') > -1 || NB_SCHEDULER_URL.indexOf('gv=true') > -1)){
-      frame.src = NB_SCHEDULER_URL;
-      frame.style.display = 'block';
-    }
-  }
-})();
-  /* ---- on-page meeting request (FormSubmit) ---- */
-  (function(){
-    var FORM_ENDPOINT = 'https://formsubmit.co/ajax/northbridgeai1@gmail.com';
-    var form=document.getElementById('bkForm'), okP=document.getElementById('bkSuccess'), err=document.getElementById('bkError'), btn=document.getElementById('bkSubmit');
-    if(!form) return;
-    var plan=null; try{ plan=new URLSearchParams(location.search).get('plan'); }catch(e){}
-    function isES(){ return document.documentElement.getAttribute('data-lang')==='es'; }
-    function t(en,es){ return isES()?es:en; }
-    document.getElementById('bk-plan').value = plan || '';
-    document.getElementById('bk-subject').value = 'Meeting request · ' + (plan || 'NorthBridge');
-    var utm=(window.nbGetUTM&&window.nbGetUTM())||{};
-    document.getElementById('bk-source').value = Object.keys(utm).map(function(k){return k+'='+utm[k];}).join(' | ') || '(direct)';
-    var RULES=[
-      {f:'bf-name', i:'bk-name', test:function(v){return v.length>=2&&v.length<=80;}},
-      {f:'bf-email',i:'bk-email',test:function(v){return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)&&v.length<=140;}},
-      {f:'bf-times',i:'bk-times',test:function(v){return v.length>=4&&v.length<=600;}}
-    ];
-    function check(r,show){ var w=document.getElementById(r.f), inp=document.getElementById(r.i); var ok=r.test((inp.value||'').trim()); if(show) w.setAttribute('data-invalid', ok?'false':'true'); inp.setAttribute('aria-invalid', ok?'false':'true'); return ok; }
-    RULES.forEach(function(r){ var inp=document.getElementById(r.i); inp.addEventListener('blur',function(){check(r,true);}); inp.addEventListener('input',function(){ if(document.getElementById(r.f).getAttribute('data-invalid')==='true') check(r,true); }); });
-    form.addEventListener('submit', function(e){
-      e.preventDefault(); err.setAttribute('data-show','false');
-      if(form.elements._honey && form.elements._honey.value){ form.style.display='none'; okP.setAttribute('data-show','true'); return; }
-      var bad=RULES.filter(function(r){return !check(r,true);});
-      if(bad.length){ var first=document.getElementById(bad[0].i); first.focus(); first.scrollIntoView({behavior:'smooth',block:'center'}); if(window.nbToast) window.nbToast(t('Check the highlighted fields','Revisa los campos marcados')); return; }
-      btn.setAttribute('data-busy','true'); btn.disabled=true;
-      var done=function(){ btn.removeAttribute('data-busy'); btn.disabled=false; };
-      fetch(FORM_ENDPOINT,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-        .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json().catch(function(){return {};}); })
-        .then(function(){ done(); form.style.display='none'; okP.setAttribute('data-show','true'); okP.scrollIntoView({behavior:'smooth',block:'center'}); })
-        .catch(function(){
-          done();
-          var d=err.querySelector('.bk-error-detail');
-          function val(n){ return form.elements[n] ? (form.elements[n].value||'').trim() : ''; }
-          var body=[t('Name','Nombre')+': '+val('name'), 'Email: '+val('email'), t('Times that suit me','Horarios que me sirven')+': '+val('times'), t('Meet on','Reunión en')+': '+val('meeting_app'), t('Language','Idioma')+': '+val('language')].join('\n');
-          d.textContent=' '+t('Our form service is not answering right now. ','El servicio del formulario no responde ahora mismo. ');
-          var a=document.createElement('a');
-          a.href='mailto:northbridgeai1@gmail.com?subject='+encodeURIComponent('Meeting request · '+(plan||'NorthBridge'))+'&body='+encodeURIComponent(body);
-          a.textContent=t('Email this request instead','Envía esta solicitud por correo');
-          d.appendChild(a);
-          err.setAttribute('data-show','true');
-        });
-    });
-  })();
-
-</script>
+<script src="site.js?v=928990a3"></script>
+<script defer src="book.js?v=61d84989"></script>
 </body>
 </html>

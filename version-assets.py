@@ -13,7 +13,8 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
-ASSETS = ["styles.css", "nb.css", "site.js", "nb.js", "search-index.js"]
+ASSETS = ["styles.css", "nb.css", "home.css", "boot.js", "site.js", "nb.js",
+          "home.js", "book.js", "contact.js", "search-index.js"]
 
 hashes = {a: hashlib.sha1((ROOT / a).read_bytes()).hexdigest()[:8] for a in ASSETS}
 

@@ -6,7 +6,7 @@
        refresh quietly in the background.
    Bump CACHE when you ship a change you need visitors to see immediately. */
 
-var CACHE = 'nb-ec512e3d';
+var CACHE = 'nb-30463f7e';
 
 var PRECACHE = [
   './',
@@ -20,10 +20,15 @@ var PRECACHE = [
   'privacy.html',
   'offline.html',
   'styles.css?v=9ac8364d',
-  'nb.css?v=aa5da90d',
-  'site.js?v=84d41f4e',
-  'nb.js?v=cdb28b2d',
+  'nb.css?v=a962c135',
+  'site.js?v=928990a3',
+  'nb.js?v=155d2883',
   'search-index.js?v=fced3321',
+  'home.css?v=5571ec2d',
+  'boot.js?v=03cfc8ae',
+  'home.js?v=ffe9ebd0',
+  'book.js?v=61d84989',
+  'contact.js?v=56843555',
   'icon.svg'
 ];
 

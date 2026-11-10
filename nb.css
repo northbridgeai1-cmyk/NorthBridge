@@ -1046,3 +1046,7 @@ html body .final .btn,html body .nb-btn--primary,html[data-theme="dark"] .bill-t
 html body .final .btn:hover,html body .nb-btn--primary:hover{background:var(--pop-hover);border-color:var(--pop-hover)}
 html body .hero .rotator,html body .rotator #rotWord{color:var(--pop)}
 html body .why .why-honest{overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+
+/* The floating "Free first meeting" button is switched off on the booking page
+   itself (nb.js sets `hidden`); without this line the rules above re-show it. */
+html body .nb-fab[hidden]{display:none!important}

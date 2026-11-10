@@ -1,5 +1,7 @@
-/* OffDesk shared page script
-   (The scheduler link lives in ONE place: the inline script in book.html) */
+/* NorthBridge  ·  site.js
+   Language switch (EN/ES) and scroll-reveal for every page except the home
+   page, which has its own copy of both in home.js.
+   (The scheduler link lives in ONE place: the top of book.js) */
 (function(){
   var btn = document.getElementById('langBtn');
   var root = document.documentElement;

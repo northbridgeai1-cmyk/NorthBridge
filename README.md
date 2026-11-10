@@ -1,6 +1,8 @@
 # northbridge-website
 NorthBridge marketing website: AI automation, communication, and training for small businesses.
 
+**New here? Read [GUIDE.md](GUIDE.md) first.** It explains which file is which, how to change prices and wording, how to test, and how the site is kept safe.
+
 ## Shipping a change
 
 After editing any `.css` or `.js` file, run:

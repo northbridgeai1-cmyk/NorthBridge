@@ -9,7 +9,10 @@
 
   /* ====== CONFIG ========================================================= */
   /* Paste a GA4 measurement ID here to switch analytics on. Left empty,
-     nothing is loaded and no consent banner appears at all. */
+     nothing is loaded and no consent banner appears at all.
+     If you do switch it on, the security policy (the Content-Security-Policy
+     line near the top of every .html file) must also allow Google's hosts,
+     or the browser will silently block it. GUIDE.md explains how. */
   var NB_GA4_ID = '';
 
   var EMAIL = 'northbridgeai1@gmail.com';
@@ -414,6 +417,13 @@
     try { return JSON.parse(sessionStorage.getItem('nb-utm') || '{}'); } catch (e) { return {}; }
   }
   window.nbGetUTM = getUTM;
+
+  /* "Try again" buttons (offline page). Done here rather than with an inline
+     onclick="" so the security policy can forbid inline scripts everywhere. */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-nb-reload]');
+    if (b) location.reload();
+  });
 
   /* ====== 8. COPY BUTTONS ============================================== */
   function wireCopy() {

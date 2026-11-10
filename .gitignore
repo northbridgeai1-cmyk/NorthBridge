@@ -9,3 +9,7 @@ tests/shots/
 .claude/settings.local.json
 tests/shots/last-run.log
 founder/
+
+# Reel generator: source, dependencies and rendered MP4s.
+# GitHub Pages would otherwise serve all of it at meetnorthbridge.com/reels/
+reels/
