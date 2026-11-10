@@ -63,20 +63,37 @@ There is no login, database or server of our own, so there is very little to att
 - **Security policy.** Near the top of every `.html` file is a line starting `<meta http-equiv="Content-Security-Policy"`. It is a list of the only places the browser may load things from. Scripts may come only from this site and Cloudflare's visitor counter; forms may post only to FormSubmit; only Cal.com may appear in a frame. A script written directly into a page will not run, which is why all code lives in `.js` files. **If you add a new outside service (analytics, another calendar, a chat widget) it will silently not work until you add its address to this line on every page.** For Google Analytics that means adding `https://www.googletagmanager.com` to `script-src` and `https://www.google-analytics.com https://*.analytics.google.com` to `connect-src`.
 - **Forms.** Each form checks its fields, has a hidden trap field that catches spam bots, and limits how much can be typed. Nothing a visitor types is ever shown back as page code.
 - **Text from links.** The booking page reads the plan name from its own web address. It is treated strictly as text and cut to a fixed length.
-- **Working files stay off the website.** `_config.yml` stops planning notes and tests being served. The GitHub repository itself is still public, so never put passwords or keys in this folder.
+- **Working files stay off the website.** `build.sh` copies only the public pages, styles, scripts, images and videos into `dist/`, and only `dist/` is published. Planning notes, tests and this guide never are. A new kind of file stays private until you add it to the lists at the top of `build.sh`. (`_config.yml` does the same job for GitHub Pages, the old host.)
+- **Security headers.** `_headers` tells Cloudflare to send extra protections with every page: HTTPS only, no framing by other sites, no file-type guessing, a minimal referrer, and no camera, microphone or location access. The comments in the file say what each line does.
 - **The checks enforce it.** `tests/site.test.mjs` fails if any page gains an inline script, loses its policy, or opens a new tab unsafely.
 
-### Three things only you can do (Cloudflare dashboard, about ten minutes)
+### Where the site lives
 
-The policy above travels inside the page. Stronger protections have to be sent by Cloudflare, and they are not switched on yet:
+The site is served by **Cloudflare Pages** from the GitHub repository, which is **private**: only you can see the code. Every push to `main` makes Cloudflare run `bash build.sh` and publish `dist/` within about a minute. Cloudflare → Workers & Pages → the project shows each deploy, and any old deploy can be restored with one click ("Rollback").
 
-1. **SSL/TLS → Edge Certificates:** turn on "Always Use HTTPS" and "HTTP Strict Transport Security (HSTS)".
-2. **Rules → Transform Rules → Modify Response Header**, add:
-   - `X-Content-Type-Options: nosniff`
-   - `X-Frame-Options: DENY` (stops other sites wrapping yours in a frame)
-   - `Referrer-Policy: strict-origin-when-cross-origin`
-   - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
-3. Leave **Rocket Loader off**. It rewrites scripts in a way the security policy blocks, and the site would break.
+To check what will be published before you push, run `bash build.sh` and look in `dist/`. To test it like the live site: `python3 -m http.server 8897 --directory dist`, then open http://localhost:8897.
+
+### Moving from GitHub Pages to Cloudflare Pages (one time, about fifteen minutes)
+
+Do these in order, so the site never goes offline.
+
+1. **Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git.** Sign in to GitHub when asked and give Cloudflare access to the **NorthBridge** repository only.
+2. Pick the repository, then set:
+   - Production branch: `main`
+   - Framework preset: `None`
+   - Build command: `bash build.sh`
+   - Build output directory: `dist`
+
+   Press **Save and Deploy**. When it finishes you get a test address ending in `.pages.dev`. Open it and click through a few pages and a video.
+3. In the new project → **Custom domains → Set up a custom domain**, add `meetnorthbridge.com`, then again for `www.meetnorthbridge.com`. Because the domain is already on Cloudflare, it offers to replace the old records that point to GitHub. Accept. Within a few minutes the live site is served by Cloudflare Pages.
+4. Check it switched: open https://meetnorthbridge.com/GUIDE.md. It should say the page is not found.
+5. **GitHub → the NorthBridge repository → Settings → Pages:** set the source to **None** (stops the old copy).
+6. **GitHub → Settings → General → Danger Zone → Change visibility → Make private.** Cloudflare keeps its access; the public can no longer see the code.
+7. Optional: in Cloudflare **SSL/TLS → Edge Certificates**, turn on "Always Use HTTPS".
+
+Leave **Rocket Loader off** (Cloudflare → Speed). It rewrites scripts in a way the security policy blocks, and the site would break.
+
+Note: anyone who copied the repository while it was public keeps that copy. There are no passwords or keys in it, so nothing needs changing, but never put any in this folder.
 
 ## Why the pages are laid out this way
 

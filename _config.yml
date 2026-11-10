@@ -15,3 +15,5 @@ exclude:
   - founder
   - reels
   - node_modules
+  - build.sh
+  - dist

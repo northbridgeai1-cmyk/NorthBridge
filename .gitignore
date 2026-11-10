@@ -13,3 +13,6 @@ founder/
 # Reel generator: source, dependencies and rendered MP4s.
 # GitHub Pages would otherwise serve all of it at meetnorthbridge.com/reels/
 reels/
+
+# Cloudflare Pages build output (made by build.sh)
+dist/

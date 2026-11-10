@@ -1,0 +1,29 @@
+# Security and caching headers, sent by Cloudflare Pages with every file.
+# (GitHub Pages ignores this file; it only works once the site is on
+# Cloudflare Pages. GUIDE.md explains the switch.)
+#
+# The main security policy (where scripts, fonts and frames may come from)
+# lives in a <meta> line at the top of every page. The lines here add the
+# protections a <meta> line cannot give.
+
+/*
+  # Browsers must always use HTTPS for this site, for one year.
+  Strict-Transport-Security: max-age=31536000
+  # No other website may show these pages inside a frame (stops clickjacking).
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  # Browsers must not guess file types (stops disguised files running as code).
+  X-Content-Type-Options: nosniff
+  # Other sites see only "meetnorthbridge.com", never the full page address.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # The site never uses the camera, microphone, location or payments.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# The service worker must always be fresh, or updates get stuck.
+/sw.js
+  Cache-Control: no-cache
+
+# Videos and their still images rarely change; let browsers keep them a week.
+/media/*
+  Cache-Control: public, max-age=604800
