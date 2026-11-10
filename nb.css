@@ -60,10 +60,10 @@ html[data-theme="dark"]{
   --navy:#e8ece9;
   --deep:#0d100f;
   --deep-2:#141917;
-  --teal:#3ecf8e;
-  --teal-dark:#7fdcb0;
-  --teal-soft:#a8d9bb;
-  --gold:#e2b65c;
+  --teal:#25d193;
+  --teal-dark:#7fe0c9;
+  --teal-soft:#a6e0d3;
+  --gold:#f08a5d;
   --line:#28322d;
   --surface:#171d1a;
   --surface-2:#121614;
@@ -83,12 +83,12 @@ html[data-theme="dark"] .nb-card,
 html[data-theme="dark"] .plan{background:var(--surface);border-color:var(--line)}
 html[data-theme="dark"] .tier.best{
   background:linear-gradient(180deg,#1a2320 0%,#141d19 100%);
-  box-shadow:0 26px 56px -22px rgba(62,207,142,.25);
+  box-shadow:0 26px 56px -22px rgba(37,209,147,.25);
 }
 html[data-theme="dark"] header{background:var(--header-bg);border-bottom-color:var(--line)}
 html[data-theme="dark"] .btn.navy{background:#e8ece9;border-color:#e8ece9;color:#0d100f}
 html[data-theme="dark"] .btn.navy:hover{background:#fff}
-html[data-theme="dark"] .btn:not(.ghost):not(.outline){color:#06251a}
+html[data-theme="dark"] .btn:not(.ghost):not(.outline){color:#04231f}
 html[data-theme="dark"] .btn.ghost{color:#fff}
 html[data-theme="dark"] details,
 html[data-theme="dark"] .faq details{border-color:var(--line)}
@@ -307,12 +307,12 @@ html:not([data-theme="dark"]) .tier .badge{color:#fff}
 /* "Soon" pill: brand gold is only 2.17:1 on paper, so light mode gets a
    deeper gold of the same hue and dark mode keeps the bright one. */
 html:not([data-theme="dark"]) .ct-soon,
-html:not([data-theme="dark"]) .door-soon-tag{color:#96691a;border-color:#96691a}
+html:not([data-theme="dark"]) .door-soon-tag{color:#a8461f;border-color:#a8461f}
 html[data-theme="dark"] .ct-soon,
-html[data-theme="dark"] .door-soon-tag{color:#e2b65c;border-color:#e2b65c}
+html[data-theme="dark"] .door-soon-tag{color:#f08a5d;border-color:#f08a5d}
 /* The rotating hero word is brand teal on the near-black hero: 3.45:1.
    The hero is dark in both themes, so it always wants the bright green. */
-.hero .rotator, .rotator #rotWord{color:#3ecf8e}
+.hero .rotator, .rotator #rotWord{color:#25d193}
 /* Chat timestamps were mid-grey on white and on the mint reply bubble. */
 .msg .time{color:#5f6672}
 html[data-theme="dark"] .msg .time{color:#8b968f}
@@ -323,14 +323,14 @@ html[data-theme="dark"] .msg .time{color:#8b968f}
    each ground. */
 :root{ --down-strike:#b3261e }
 html[data-theme="dark"]{ --down-strike:#ff8a80 }
-html[data-theme="dark"] .yt-save{color:#06251a}
+html[data-theme="dark"] .yt-save{color:#04231f}
 html[data-theme="dark"] .ytotal{
-  background:linear-gradient(135deg, rgba(62,207,142,.10), rgba(226,182,92,.07));
-  border-color:rgba(62,207,142,.34);
+  background:linear-gradient(135deg, rgba(37,209,147,.10), rgba(240,138,93,.07));
+  border-color:rgba(37,209,147,.34);
 }
 
-html:not([data-theme="dark"]) .hook-tag{color:#96691a}
-html[data-theme="dark"] .hook-tag{color:#e2b65c}
+html:not([data-theme="dark"]) .hook-tag{color:#a8461f}
+html[data-theme="dark"] .hook-tag{color:#f08a5d}
 
 
 /* --- 2. hardcoded light surfaces, given dark counterparts --- */
@@ -345,7 +345,7 @@ html[data-theme="dark"] .expect-item{
 }
 html[data-theme="dark"] .counter button{color:var(--ink)}
 html[data-theme="dark"] .bill-toggle button{color:var(--ink-soft)}
-html[data-theme="dark"] .bill-toggle button.on{background:var(--teal);color:#06251a}
+html[data-theme="dark"] .bill-toggle button.on{background:var(--teal);color:#04231f}
 
 /* the "doors" interior */
 html[data-theme="dark"] .door-room{
@@ -369,8 +369,8 @@ html[data-theme="dark"] .pv-delete{border-color:#ff8a80}
    The parts nobody draws still carry the design: selection, caret, scrollbar,
    focus ring, underline offset, tabular numerals. Browser defaults belong to
    no design system, so they are themed from the palette here. */
-::selection{background:rgba(46,125,79,.22);color:var(--ink)}
-html[data-theme="dark"] ::selection{background:rgba(62,207,142,.30)}
+::selection{background:rgba(23,122,108,.22);color:var(--ink)}
+html[data-theme="dark"] ::selection{background:rgba(37,209,147,.30)}
 body{caret-color:var(--teal);accent-color:var(--teal)}
 a{text-underline-offset:.16em;text-decoration-thickness:1px}
 html{scrollbar-color:var(--line) transparent;scrollbar-width:thin}
@@ -527,7 +527,7 @@ header .nav{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(2
 /* ---------- 3. ACCESSIBILITY -------------------------------------------- */
 .nb-skip{
   position:absolute;left:var(--s-sm);top:-100px;z-index:calc(var(--z-toast) + 1);
-  background:var(--teal);color:#06251a;font-weight:700;font-size:var(--t-sm);
+  background:var(--teal);color:#04231f;font-weight:700;font-size:var(--t-sm);
   padding:var(--s-sm) var(--s-lg);border-radius:var(--r-md);text-decoration:none;
   transition:top var(--dur-2) var(--ease-out);
 }
@@ -683,7 +683,7 @@ header.nb-stuck .nav{padding-top:9px;padding-bottom:9px;transition:padding-top v
 }
 .nb-search-item:hover,.nb-search-item[data-active="true"]{background:var(--paper-dark)}
 .nb-search-item strong{display:block;font-size:.98rem;font-weight:650;margin-bottom:2px}
-.nb-search-item mark{background:rgba(62,207,142,.28);color:inherit;border-radius:2px;padding:0 1px}
+.nb-search-item mark{background:rgba(37,209,147,.28);color:inherit;border-radius:2px;padding:0 1px}
 .nb-search-item span{display:block;font-size:var(--t-caption);color:var(--ink-soft);line-height:1.45}
 .nb-search-item em{font-style:normal;font-size:var(--t-micro-up);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dark)}
 .nb-search-empty{padding:var(--s-2xl) var(--s-md);text-align:center;color:var(--ink-soft);font-size:var(--t-sm)}
@@ -705,7 +705,7 @@ header.nb-stuck .nav{padding-top:9px;padding-bottom:9px;transition:padding-top v
 
 .nb-fab{
   display:inline-flex;align-items:center;gap:var(--s-xs);text-decoration:none;
-  background:var(--teal);color:#06251a;font-weight:700;font-size:var(--t-sm);
+  background:var(--teal);color:#04231f;font-weight:700;font-size:var(--t-sm);
   padding:12px 18px;border-radius:var(--r-full);box-shadow:var(--e-3);
   border:1px solid var(--teal);
   transition:transform var(--dur-2) var(--ease-out),box-shadow var(--dur-2) var(--ease);
@@ -738,8 +738,8 @@ header.nb-stuck .nav{padding-top:9px;padding-bottom:9px;transition:padding-top v
   text-decoration:none;display:inline-flex;align-items:center;gap:var(--s-xs);
 }
 .nb-btn:hover{border-color:var(--ink-soft)}
-.nb-btn--primary{background:var(--teal);border-color:var(--teal);color:#06251a}
-.nb-btn--primary:hover{background:#22cf8e;border-color:#22cf8e}
+.nb-btn--primary{background:var(--teal);border-color:var(--teal);color:#04231f}
+.nb-btn--primary:hover{background:#25d193;border-color:#25d193}
 .nb-btn--danger{background:transparent;border-color:var(--err);color:var(--err)}
 .nb-btn--danger:hover{background:var(--err);color:#fff}
 .nb-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
@@ -796,7 +796,7 @@ html[data-theme="dark"] .nb-sk{
 }
 .nb-field textarea{min-height:130px;resize:vertical}
 .nb-field input:focus,.nb-field select:focus,.nb-field textarea:focus{
-  outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(62,207,142,.18);
+  outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(37,209,147,.18);
 }
 .nb-field[data-invalid="true"] input,
 .nb-field[data-invalid="true"] select,
@@ -827,9 +827,9 @@ html[data-theme="dark"] .nb-sk{
   animation:nb-rise var(--dur-2) var(--ease-out);
 }
 .nb-alert[data-show="true"]{display:flex}
-.nb-alert--ok{background:var(--ok-bg);color:var(--ok);border:1px solid rgba(31,122,77,.28)}
+.nb-alert--ok{background:var(--ok-bg);color:var(--ok);border:1px solid rgba(23,122,108,.28)}
 .nb-alert--err{background:var(--err-bg);color:var(--err);border:1px solid rgba(179,38,30,.24)}
-html[data-theme="dark"] .nb-alert--ok{background:rgba(31,122,77,.16);color:#7fdcb0}
+html[data-theme="dark"] .nb-alert--ok{background:rgba(23,122,108,.16);color:#7fe0c9}
 html[data-theme="dark"] .nb-alert--err{background:rgba(179,38,30,.18);color:#ff9a92}
 .nb-alert svg{flex:0 0 18px;width:18px;height:18px;margin-top:1px}
 .nb-alert strong{display:block;margin-bottom:2px}
@@ -1003,14 +1003,14 @@ html body main > section:not(.hero):not(.final):not(.note){padding-block:clamp(6
 
 /* ===== The end card: the one place every page leads ===================== */
 html body .final{background:#0e2419;color:#fff;padding:clamp(88px,13vw,176px) 0;text-align:center;position:relative;overflow:hidden}
-html body .final::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 50% 0%,rgba(62,207,142,.16),transparent 70%)}
+html body .final::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 50% 0%,rgba(37,209,147,.16),transparent 70%)}
 html body .final .wrap{position:relative}
 html body .final .h2{color:#fff;font-size:clamp(2.4rem,6vw,4.4rem);max-width:16ch;margin:0 auto 20px;line-height:1.02}
 html body .final p{color:rgba(255,255,255,.78);max-width:54ch;margin:0 auto 36px;font-size:1.08rem}
-html body .final .btn{background:#3ecf8e;border-color:#3ecf8e;color:#06251a!important}
-html body .final .btn:hover{background:#6fe0ae;border-color:#6fe0ae;color:#06251a!important}
+html body .final .btn{background:#25d193;border-color:#25d193;color:#04231f!important}
+html body .final .btn:hover{background:#5fe0bd;border-color:#5fe0bd;color:#04231f!important}
 html body .final .mail{color:rgba(255,255,255,.62);margin:22px auto 0;font-size:.92rem}
-html body .final .mail a{color:#8fe3bd}
+html body .final .mail a{color:#8ee6d3}
 
 /* the floating action waits its turn */
 .nb-fab{transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1),background .2s ease}
@@ -1021,27 +1021,27 @@ html body .final .mail a{color:#8fe3bd}
 @media (min-width:768px){html{font-size:106.25%}}
 @media (min-width:1200px){html{font-size:112.5%}}
 
-/* ===== The one memorable accent: sunrise orange ==========================
+/* ===== The one memorable accent: logo terracotta ==========================
    Deep green and mint stay the base. Amber is the pop, and it is spent only
    on the first step (free first meeting buttons), the highlighted word in the
    hero, and the NorthBridge column of the comparison. Dark text on amber for
    contrast; amber text appears only on the dark hero. */
-:root,html[data-theme="dark"]{--pop:#ff8a1f;--pop-hover:#ffa04a;--pop-ink:#2a1200}
+:root,html[data-theme="dark"]{--pop:#e2774c;--pop-hover:#ec8a62;--pop-ink:#2a0f04}
 html body a.btn[href^="book.html"]:not(.outline):not(.navy):not([href*="plan="]){
   background:var(--pop);border-color:var(--pop);color:var(--pop-ink)!important;
 }
 html body a.btn[href^="book.html"]:not(.outline):not(.navy):not([href*="plan="]):hover{
   background:var(--pop-hover);border-color:var(--pop-hover);color:var(--pop-ink)!important;
-  box-shadow:0 10px 24px -12px rgba(255,138,31,.45);
+  box-shadow:0 10px 24px -12px rgba(226,119,76,.45);
 }
 html body .hero h1 .echo.a{color:var(--pop)}
 html body .hero .price{color:var(--pop)}
 html body .nb-fab,html body .nb-drawer-foot .nb-btn{background:var(--pop);border-color:var(--pop);color:var(--pop-ink)!important}
 html body .nb-fab:hover,html body .nb-drawer-foot .nb-btn:hover{background:var(--pop-hover);border-color:var(--pop-hover)}
 
-/* ===== Palette: Midnight Pine (#0f2d24) + Warm Bone (#fbfaf6) + Sunrise Orange (#ff8a1f) =====
+/* ===== Palette taken from the logo: Deep Teal (#0c2a27) + Warm Bone (#fbfaf6) + Terracotta (#e2774c) =====
    Mint is demoted to small marks only (focus rings, ticks). Large controls use the one accent. */
-:root,html[data-theme="dark"]{--pine:#0f2d24;--bone:#fbfaf6}
+:root,html[data-theme="dark"]{--pine:#0c2a27;--bone:#fbfaf6}
 html body .final .btn,html body .nb-btn--primary,html[data-theme="dark"] .bill-toggle button.on{background:var(--pop);border-color:var(--pop);color:var(--pop-ink)!important}
 html body .final .btn:hover,html body .nb-btn--primary:hover{background:var(--pop-hover);border-color:var(--pop-hover)}
 html body .hero .rotator,html body .rotator #rotWord{color:var(--pop)}
@@ -1060,16 +1060,16 @@ html body section.reels{background:var(--paper-dark,var(--surface-2))}
 .reels .sub{margin-bottom:32px}
 .reel-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .reel{margin:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.reel-video{display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:72vh;object-fit:cover;background:#0f2d24}
+.reel-video{display:block;width:100%;height:auto;aspect-ratio:9/16;max-height:72vh;object-fit:cover;background:#0c2a27}
 .reel-text{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px}
 .reel-text p{margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-soft)}
 .reel-text strong{display:block;font-size:.74rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px;color:var(--ink)}
 .reel-fix{border-top:1px solid var(--line);padding-top:10px}
-.reel-fix strong{color:var(--teal-dark,#1f5c39)}
-html[data-theme="dark"] .reel-fix strong{color:#8fe3bd}
+.reel-fix strong{color:var(--teal-dark,#115c52)}
+html[data-theme="dark"] .reel-fix strong{color:#8ee6d3}
 .reel-follow{margin-top:24px;font-size:.9rem;color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:6px 12px}
-.reel-follow a{color:var(--teal-dark,#1f5c39);font-weight:600}
-html[data-theme="dark"] .reel-follow a{color:#8fe3bd}
+.reel-follow a{color:var(--teal-dark,#115c52);font-weight:600}
+html[data-theme="dark"] .reel-follow a{color:#8ee6d3}
 @media(max-width:900px){
   .reel-row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;
     margin-inline:-24px;padding-inline:24px;scroll-padding-inline:24px;overscroll-behavior-x:contain}
@@ -1078,5 +1078,5 @@ html[data-theme="dark"] .reel-follow a{color:#8fe3bd}
 
 /* "We solve it for you" line inside the problem cards on the practice pages */
 .fit-card .fit-fix{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);color:var(--ink)}
-.fit-card .fit-fix strong{display:block;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-dark,#1f5c39);margin-bottom:2px}
-html[data-theme="dark"] .fit-card .fit-fix strong{color:#8fe3bd}
+.fit-card .fit-fix strong{display:block;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--teal-dark,#115c52);margin-bottom:2px}
+html[data-theme="dark"] .fit-card .fit-fix strong{color:#8ee6d3}

@@ -8,10 +8,10 @@
   --navy:#232323;
   --deep:#1a1a1a;
   --deep-2:#222222;
-  --teal:#2e7d4f;
-  --teal-dark:#1f5c39;
-  --teal-soft:#a8d9bb;
-  --gold:#d9a344;
+  --teal:#177a6c;
+  --teal-dark:#115c52;
+  --teal-soft:#a6e0d3;
+  --gold:#c1572f;
   --line:#e4ddcc;
   --line-dark:rgba(255,255,255,.12);
   --serif:"Fraunces", Georgia, serif;
@@ -65,15 +65,15 @@ header{
 
 /* buttons */
 .btn{
-  display:inline-block;background:var(--teal);color:#06251a;text-decoration:none;
+  display:inline-block;background:var(--teal);color:#04231f;text-decoration:none;
   padding:11px 22px;border-radius:9px;font-weight:700;font-size:.95rem;
   border:1px solid var(--teal);transition:transform .15s, box-shadow .15s, background .15s;
   position:relative;overflow:hidden;
 }
-.btn:hover{background:#22cf8e;transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(46,125,79,.55)}
+.btn:hover{background:#25d193;transform:translateY(-1px);box-shadow:0 10px 24px -10px rgba(23,122,108,.55)}
 .btn.big{padding:15px 30px;font-size:1.05rem}
 .btn.navy{background:var(--navy);border-color:var(--navy);color:#fff}
-.btn.navy:hover{background:#0f2d24;box-shadow:0 10px 24px -12px rgba(16,45,36,.6)}
+.btn.navy:hover{background:#0c2a27;box-shadow:0 10px 24px -12px rgba(12,42,39,.6)}
 .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
 .btn.ghost:hover{border-color:#fff;box-shadow:none;background:rgba(255,255,255,.06)}
 .btn::after{
@@ -89,7 +89,7 @@ header{
 .hero::after{
   content:"";position:absolute;inset:-40%;pointer-events:none;
   background:
-    radial-gradient(600px 340px at 22% 30%, rgba(46,125,79,.16), transparent 60%),
+    radial-gradient(600px 340px at 22% 30%, rgba(23,122,108,.16), transparent 60%),
     radial-gradient(700px 420px at 82% 75%, rgba(193,87,47,.14), transparent 60%);
   animation:drift 16s ease-in-out infinite alternate;
 }
@@ -157,12 +157,12 @@ section{position:relative}
 .tier:hover{transform:translateY(-6px);box-shadow:0 24px 48px -22px rgba(26,26,26,.35)}
 .tier.best{
   border:2px solid var(--teal);
-  box-shadow:0 26px 56px -22px rgba(46,125,79,.4);
-  background:linear-gradient(180deg, #ffffff 0%, #f1faf4 100%);
+  box-shadow:0 26px 56px -22px rgba(23,122,108,.4);
+  background:linear-gradient(180deg, #ffffff 0%, #eef9f6 100%);
 }
 .tier .badge{
   position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-  background:var(--teal);color:#06251a;font-size:.72rem;font-weight:800;
+  background:var(--teal);color:#04231f;font-size:.72rem;font-weight:800;
   letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:999px;white-space:nowrap;
   animation:floaty 3.2s ease-in-out infinite;
 }
@@ -195,7 +195,7 @@ section{position:relative}
 }
 .bundle-strip::after{
   content:"";position:absolute;right:-100px;top:-100px;width:280px;height:280px;border-radius:50%;
-  background:radial-gradient(circle, rgba(46,125,79,.25), transparent 65%);
+  background:radial-gradient(circle, rgba(23,122,108,.25), transparent 65%);
 }
 .bundle-strip h3{font-family:var(--serif);font-size:1.4rem;font-weight:600;margin-bottom:6px}
 .bundle-strip p{color:rgba(255,255,255,.72);font-size:.95rem;max-width:52ch}

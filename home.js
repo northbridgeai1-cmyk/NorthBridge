@@ -296,7 +296,7 @@
         if(p.y < 0 || p.y > H) p.vy *= -1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fillStyle = 'rgba(130,210,160,.7)';
+        ctx.fillStyle = 'rgba(130,214,196,.7)';
         ctx.fill();
         for(var j=i+1;j<N;j++){
           var q = pts[j];
@@ -304,7 +304,7 @@
           if(d2 < 130*130){
             ctx.beginPath();
             ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-            ctx.strokeStyle = 'rgba(46,125,79,' + (0.16 * (1 - d2/(130*130))).toFixed(3) + ')';
+            ctx.strokeStyle = 'rgba(23,122,108,' + (0.16 * (1 - d2/(130*130))).toFixed(3) + ')';
             ctx.lineWidth = 1;
             ctx.stroke();
           }
