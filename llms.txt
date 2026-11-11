@@ -10,6 +10,7 @@ NorthBridge builds the workflows for the client in accounts the client owns (n8n
 - [Cinderella: data and workflow automation](https://meetnorthbridge.com/cinderella.html): payment chasing, invoice reminders, automatic reports, data moved between apps, onboarding checklists. Sweep $199, Shine $329, Spotless $349 per month
 - [Hermes: AI client communication and websites](https://meetnorthbridge.com/hermes.html): follow-up sequences, instant AI messaging, AI voice agents, websites built and kept up to date. Courier $149, Herald $279, Wings $319 per month
 - [Socrates: AI training and workshops](https://meetnorthbridge.com/socrates.html): team workshops, AI literacy for schools, talks for events. Foundations $99, Academy $199, Agora $249 per month; single workshops without a plan
+- [Pierce Tyrrell, founder](https://meetnorthbridge.com/pierce-tyrrell.html): who founded NorthBridge and how to reach him
 - [Contact](https://meetnorthbridge.com/contact.html): message NorthBridge or any practice
 - [Book a first meeting](https://meetnorthbridge.com/book.html): request a time, Zoom or Google Meet, English or Spanish
 - [Terms of use](https://meetnorthbridge.com/terms.html)
@@ -39,7 +40,7 @@ The NorthBridge Cycle: Diagnose (2-3 days), Build (3-7 days), Educate and Train 
 - Contact form: https://meetnorthbridge.com/contact.html (pick the practice: NorthBridge, Cinderella, Hermes, or Socrates)
 - Email: northbridgeai1@gmail.com
 - Instagram: https://www.instagram.com/northbridge.ai/
-- Founder: Pierce Tyrrell
+- Founder: Pierce Tyrrell (https://meetnorthbridge.com/pierce-tyrrell.html)
 - Languages: English, Spanish
 - Replies within one business day
 

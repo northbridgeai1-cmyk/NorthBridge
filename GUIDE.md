@@ -105,3 +105,24 @@ Decisions from the November 2026 redesign, so they are not undone by accident:
 - **Prices are shown early.** Done-for-you automation is usually quoted at $500 to $2,500 a month; a visible $99 starting point is an advantage.
 - **The tick-box picker** replaced an empty video frame. It gives the visitor something to do, shows a plan that fits, and passes their ticks to the booking page so the meeting starts from their list.
 - **No testimonials, client names or result figures** anywhere, because there are none yet. The calculator uses only the visitor's own numbers.
+
+## Being found: Google, ChatGPT, Gemini and the rest
+
+What the site already does:
+
+- **Every search engine and AI crawler is allowed in** (`robots.txt`), and `sitemap.xml` lists every page. When you add a page, add it to `sitemap.xml`.
+- **Files written for AI assistants:** `llms.txt` (short), `llms-full.txt` (everything), `agents.md` and `for-agents/`. They state what NorthBridge does, the prices, and who it suits. When a price or plan changes, change it there too.
+- **Hidden labels for search engines** ("structured data", the `application/ld+json` block near the top of a page). They say NorthBridge is a company, what it sells, and that Pierce Tyrrell founded it.
+- **`pierce-tyrrell.html`** is the founder page, so a search for the name has a page that answers it.
+
+No one can promise a ranking or a mention. Search engines and AI assistants decide for themselves, mostly from what *other* websites say about you. These steps are yours, and they matter more than anything else on the site:
+
+1. **Google Search Console** (search.google.com/search-console): add `meetnorthbridge.com`, submit `sitemap.xml`, then use "URL inspection" → "Request indexing" on the home page and `pierce-tyrrell.html`.
+2. **Bing Webmaster Tools** (bing.com/webmasters): same again. ChatGPT and Copilot search through Bing, so this is how they find you.
+3. **LinkedIn:** a personal profile titled "Founder, NorthBridge" linking to the site, and a NorthBridge company page. For a person's name, LinkedIn usually ranks first. Then add both links to the `sameAs` lists in `index.html` and `pierce-tyrrell.html`.
+4. **Make the Instagram account public.** It is restricted, so search engines and AI assistants cannot read it. Put "Founder: Pierce Tyrrell" and the site link in the bio.
+5. **Google Business Profile** (business.google.com) for NorthBridge, so the name shows a company panel.
+6. **Get listed and mentioned elsewhere:** Crunchbase, Clutch, the n8n partner and community directories, local Quito business directories, guest posts, podcasts. Each real mention with a link is what moves you up for "AI automation" and "AI training" searches, and what AI assistants quote.
+7. **Later, real client results** (with permission). Nothing persuades people or AI assistants more. Until then the site states plainly that there are none.
+
+Expect days for the name searches to update and months for the broad ones.

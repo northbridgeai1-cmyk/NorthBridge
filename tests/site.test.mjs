@@ -8,7 +8,7 @@ import { mkdirSync } from 'node:fs';
 
 const R = []; const ok = (c, n, d = '') => { R.push([c ? 'PASS' : 'FAIL', n, d]); if (process.env.VERBOSE) console.log(`${c ? '✅' : '❌'} ${n}${d ? '  —  ' + d : ''}`); };
 process.on('uncaughtException', e => { console.log('\n!! aborted:', e.message); const pass=R.filter(r=>r[0]==='PASS').length; console.log(`${pass} passed, ${R.length-pass} failed so far`); process.exit(2); });
-const PAGES = ['index.html','contact.html','terms.html','privacy.html',
+const PAGES = ['index.html','contact.html','terms.html','privacy.html','pierce-tyrrell.html',
                'cinderella.html','hermes.html','socrates.html','book.html','404.html','offline.html'];
 mkdirSync('tests/shots', { recursive: true });
 

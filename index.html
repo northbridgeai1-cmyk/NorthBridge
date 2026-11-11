@@ -39,7 +39,7 @@
     {"@type": "WebSite", "@id": "https://meetnorthbridge.com/#website", "url": "https://meetnorthbridge.com/", "name": "NorthBridge", "alternateName": ["North Bridge", "NorthBridge AI", "meetnorthbridge.com"], "inLanguage": ["en", "es"]},
     {
       "@type": "ProfessionalService",
-      "@id": "#northbridge",
+      "@id": "https://meetnorthbridge.com/#northbridge",
       "name": "NorthBridge",
       "url": "https://meetnorthbridge.com/",
       "logo": "https://meetnorthbridge.com/apple-touch-icon.png",
@@ -48,7 +48,7 @@
       "description": "NorthBridge is an AI workflow builder and AI automation company for small and medium-sized businesses. Three practices: Cinderella builds and maintains data and workflow automation on n8n (payment chasing, invoice reminders, automatic reports, data entry between apps, client onboarding). Hermes automates client communication (follow-up sequences, instant AI messaging, AI voice agents for missed calls). Socrates delivers hands-on AI training for business teams, schools, and events. Everything is built in accounts the client owns, in English or Spanish, with a 30-day money-back guarantee on the first month of any plan.",
       "email": "northbridgeai1@gmail.com",
       "sameAs": ["https://www.instagram.com/northbridge.ai/"],
-      "founder": {"@type": "Person", "name": "Pierce Tyrrell"},
+      "founder": {"@type": "Person", "@id": "https://meetnorthbridge.com/pierce-tyrrell.html#pierce", "name": "Pierce Tyrrell", "jobTitle": "Founder", "url": "https://meetnorthbridge.com/pierce-tyrrell.html"},
       "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressCountry": "EC"},
       "areaServed": ["United States", "Ecuador", "Latin America", "Worldwide (virtual)"],
       "availableLanguage": ["English", "Spanish"],
@@ -61,9 +61,9 @@
         {"@type": "Offer", "name": "Scale Bundle", "description": "Top plan of all three practices: Cinderella Spotless (5 workflows, priority builds), Hermes Wings (3 channels plus AI voice agent, weekly tuning), and Socrates Agora (2 workshops per month with custom curriculum).", "price": "699", "priceCurrency": "USD", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "699", "priceCurrency": "USD", "unitText": "per month"}}
       ]
     },
-    {"@type": "Service", "name": "NorthBridge Cinderella", "serviceType": "Data and workflow automation", "url": "cinderella.html", "provider": {"@id": "#northbridge"}, "description": "AI workflow building on n8n for small businesses: payment chasing, invoice reminders, automatic report generation, data moved between apps, client onboarding. Plans: Sweep $199/mo (2 workflows), Shine $329/mo (3 workflows), Spotless $349/mo (5 workflows, priority builds)."},
-    {"@type": "Service", "name": "NorthBridge Hermes", "serviceType": "AI client communication automation", "url": "hermes.html", "provider": {"@id": "#northbridge"}, "description": "AI-powered client communication: follow-up sequences that never forget a lead, instant AI messaging for common questions, AI voice agents for calls you can't take, and websites built and kept up to date. Plans: Courier $149/mo, Herald $279/mo, Wings $319/mo."},
-    {"@type": "Service", "name": "NorthBridge Socrates", "serviceType": "AI training and education", "url": "socrates.html", "provider": {"@id": "#northbridge"}, "description": "Hands-on AI fluency training for business teams, AI literacy programs for schools, and AI talks for events. Virtual anywhere, in person in Quito, in English or Spanish. Plans: Foundations $99/mo, Academy $199/mo, Agora $249/mo. One-off workshops from $49/seat."},
+    {"@type": "Service", "name": "NorthBridge Cinderella", "serviceType": "Data and workflow automation", "url": "cinderella.html", "provider": {"@id": "https://meetnorthbridge.com/#northbridge"}, "description": "AI workflow building on n8n for small businesses: payment chasing, invoice reminders, automatic report generation, data moved between apps, client onboarding. Plans: Sweep $199/mo (2 workflows), Shine $329/mo (3 workflows), Spotless $349/mo (5 workflows, priority builds)."},
+    {"@type": "Service", "name": "NorthBridge Hermes", "serviceType": "AI client communication automation", "url": "hermes.html", "provider": {"@id": "https://meetnorthbridge.com/#northbridge"}, "description": "AI-powered client communication: follow-up sequences that never forget a lead, instant AI messaging for common questions, AI voice agents for calls you can't take, and websites built and kept up to date. Plans: Courier $149/mo, Herald $279/mo, Wings $319/mo."},
+    {"@type": "Service", "name": "NorthBridge Socrates", "serviceType": "AI training and education", "url": "socrates.html", "provider": {"@id": "https://meetnorthbridge.com/#northbridge"}, "description": "Hands-on AI fluency training for business teams, AI literacy programs for schools, and AI talks for events. Virtual anywhere, in person in Quito, in English or Spanish. Plans: Foundations $99/mo, Academy $199/mo, Agora $249/mo. One-off workshops from $49/seat."},
     {
       "@type": "FAQPage",
       "mainEntity": [
@@ -106,7 +106,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="stylesheet" href="nb.css?v=23a73db9">
 <script src="boot.js?v=03cfc8ae"></script>
-<script defer src="search-index.js?v=fced3321"></script>
+<script defer src="search-index.js?v=be7ad673"></script>
 <script defer src="nb.js?v=fa0a5282"></script>
 </head>
 <body>
@@ -878,7 +878,7 @@
 <section class="note rv" id="note">
   <div class="wrap note-grid">
     <div class="note-who">
-      <span class="note-name">Pierce Tyrrell</span>
+      <span class="note-name"><a href="pierce-tyrrell.html" style="color:inherit;text-decoration:none">Pierce Tyrrell</a></span>
       <span class="note-role"><span class="en">Founder, NorthBridge</span><span class="es">Fundador, NorthBridge</span></span>
     </div>
     <div class="note-body">
@@ -998,6 +998,7 @@
         <a href="index.html#plans"><span class="en">Plans</span><span class="es">Planes</span></a>
         <a href="index.html#process"><span class="en">Process</span><span class="es">Proceso</span></a>
         <a href="index.html#faq">FAQ</a>
+        <a href="pierce-tyrrell.html"><span class="en">Founder</span><span class="es">Fundador</span></a>
         <a href="book.html"><span class="en">Book a meeting</span><span class="es">Agendar reunión</span></a>
       </div>
       <div class="nb-foot-col">
