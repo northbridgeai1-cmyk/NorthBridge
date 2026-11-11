@@ -8,8 +8,10 @@
     "url": "https://meetnorthbridge.com/",
     "what": "AI-powered back-office automation for small and medium businesses, plus AI training for their teams. Done for you, not a DIY tool.",
     "based_in": "Quito, Ecuador",
-    "founder": "Pierce Tyrrell",
-    "founder_url": "https://meetnorthbridge.com/pierce-tyrrell.html",
+    "founders": [
+      {"name": "Pierce Tyrrell", "role": "Co-founder", "url": "https://meetnorthbridge.com/pierce-tyrrell.html"},
+      {"name": "Martin Rosero", "role": "Co-founder", "url": "https://meetnorthbridge.com/martin-rosero.html"}
+    ],
     "markets": ["United States", "Latin America"],
     "languages": ["English", "Spanish"],
     "is_new": true,
